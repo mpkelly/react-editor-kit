@@ -2,3 +2,4 @@ node_modules
 .awcache
 packages/editor-kit/dist/index.js.LICENSE
 packages/editor-kit/System.ts
+lerna-debug.log

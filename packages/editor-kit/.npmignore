@@ -1,6 +1,8 @@
 src
+!dist/src
 test
 cypress
 tsconfig
 webpack
 .awcache
+lerna-debug.log
