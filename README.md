@@ -6,7 +6,7 @@ A suite of plugins for composing react-based text editors. Editor Kit is built u
 
 1. **Install the package**
 
-`npm i react-editor-kit`
+`npm i @mpkelly/react-editor-kit`
 
 2. **Create an editor.**
 
@@ -134,6 +134,7 @@ const MyBoldButton = () => {
 **NOTE** As Action passes the props to the child element below you will need to ensure these props are passed down to the root JSX tag of your component.
 
 **NOTE: THIS DOES NOT WORK**
+
 ```
 const BoldSvgIcon = () => {
   return (

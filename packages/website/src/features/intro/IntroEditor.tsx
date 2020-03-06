@@ -286,7 +286,7 @@ const initialValue: Node[] = [
         type: "list-item",
         children: [
           { text: "Install the NPM Package:\n\n" },
-          { text: "npm i react-editor-kit\n", "inline-code": true }
+          { text: "npm i @mpkelly/react-editor-kit\n", "inline-code": true }
         ]
       },
       {

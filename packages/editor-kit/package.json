@@ -59,5 +59,6 @@
     "clean": "find dist -name '*.d.ts' -delete",
     "typings": "npm run clean && tsc -d --emitDeclarationOnly --allowJs false",
     "test": "webpack -w --config ./test/webpack.config.js --mode=development"
-  }
+  },
+  "gitHead": "bb3fcf705399ff70fcd79a8e82936af0e359d2a8"
 }
