@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "sourceMap": false,
+    "allowJs": false,
+    "strict": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es2017",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "jsx": "react",
+    "typeRoots": ["./node_modules/@types"],
+    "outDir": "dist",
+    "plugins": [
+      {
+        "name": "typescript-styled-plugin"
+      }
+    ]
+  },
+  "awesomeTypescriptLoaderOptions": {
+    "useBabel": true,
+    "useCache": true,
+    "babelCore": "@babel/core"
+  },
+  "exclude": ["node_modules", "./test"]
+}

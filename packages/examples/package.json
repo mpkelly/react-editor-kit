@@ -1,0 +1,50 @@
+{
+  "name": "examples",
+  "version": "0.0.0",
+  "description": "A collection of examples showing how to use react-editor-kit",
+  "author": "mkelly <kikemelly@gmail.com>",
+  "homepage": "https://github.com/mpkelly/react-editor-kit#readme",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mpkelly/react-editor-kit.git"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-transform-async-to-generator": "^7.7.0",
+    "@babel/plugin-transform-runtime": "^7.6.0",
+    "@babel/polyfill": "^7.7.0",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "@babel/runtime": "^7.7.2",
+    "@mpkelly/react-editor-kit": "*",
+    "@types/is-url": "^1.2.28",
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "16.8.3",
+    "awesome-typescript-loader": "^5.2.1",
+    "clean-webpack-plugin": "*",
+    "hard-source-webpack-plugin": "^0.13.1",
+    "image-extensions": "^1.1.0",
+    "react": "16.8.5",
+    "react-dom": "^16.8.5",
+    "slate": "^0.57.1",
+    "source-map-loader": "^0.2.4",
+    "styled-components": "^4.4.1",
+    "terser-webpack-plugin": "^2.2.1",
+    "typescript": "^3.8.0-dev.20191216",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-glob": "^2.0.2"
+  },
+  "scripts": {
+    "watch": "webpack -w --mode=development",
+    "dist": "webpack --mode=production"
+  },
+  "bugs": {
+    "url": "https://github.com/mpkelly/react-editor-kit/issues"
+  },
+  "dependencies": {
+    "slate-react": "^0.57.1"
+  }
+}
