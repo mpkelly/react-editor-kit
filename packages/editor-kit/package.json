@@ -1,6 +1,6 @@
 {
   "name": "@mpkelly/react-editor-kit",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "> TODO: description",
   "author": "mkelly <kikemelly@gmail.com>",
   "homepage": "",
@@ -41,17 +41,17 @@
   },
   "dependencies": {
     "is-url": "^1.2.4",
-    "slate": "^0.57.1",
-    "slate-react": "^0.57.1",
-    "styled-components": "^5.0.1",
-    "terser-webpack-plugin": "^2.2.1",
     "prismjs": "^1.19.0",
     "react": "16.8.5",
     "react-color": "^2.18.0",
     "react-dom": "^16.8.5",
     "react-player": "^1.14.2",
     "react-resize-detector": "^4.2.1",
-    "slate-history": "^0.57.1"
+    "slate": "^0.57.1",
+    "slate-history": "^0.57.1",
+    "slate-react": "^0.57.1",
+    "styled-components": "^5.0.1",
+    "terser-webpack-plugin": "^2.2.1"
   },
   "scripts": {
     "watch": "webpack -w --mode=development",
