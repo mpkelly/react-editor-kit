@@ -1,5 +1,6 @@
 {
   "name": "examples",
+  "private": true,
   "version": "0.0.0",
   "description": "A collection of examples showing how to use react-editor-kit",
   "author": "mkelly <kikemelly@gmail.com>",
