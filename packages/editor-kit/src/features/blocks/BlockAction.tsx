@@ -12,15 +12,15 @@ export interface BlockActionProps {
 export const BlockAction = (props: BlockActionProps) => {
   const { type, children } = props;
   const { editor } = useEditorKit();
-  const enabled = editor.isNodeSupported();
+  const isActive = () => isNodeActive(editor, type);
+  const enabled = editor.isNodeSupported() || isActive();
   const onMouseDown = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     block(event);
-    if (enabled || isActive()) {
+    if (enabled) {
       toggleBlock(editor, type);
     }
   };
 
-  const isActive = () => isNodeActive(editor, type);
   return (
     <Action isActive={isActive} onMouseDown={onMouseDown} disabled={!enabled}>
       {children}

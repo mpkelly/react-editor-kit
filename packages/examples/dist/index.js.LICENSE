@@ -1,69 +1,8 @@
-/*!***********************************!*\
-  !*** ../editor-kit/dist/index.js ***!
-  \***********************************/
-
-/*! no static exports found */
-
-/*!*******************************************************************************************!*\
-  !*** ../editor-kit/node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js ***!
-  \*******************************************************************************************/
-
-/*! exports provided: default */
-
-/*!*******************************************************************************!*\
-  !*** ../editor-kit/node_modules/@emotion/memoize/dist/memoize.browser.esm.js ***!
-  \*******************************************************************************/
-
-/*!*****************************************************************************!*\
-  !*** ../editor-kit/node_modules/@emotion/stylis/dist/stylis.browser.esm.js ***!
-  \*****************************************************************************/
-
-/*!*********************************************************************************!*\
-  !*** ../editor-kit/node_modules/@emotion/unitless/dist/unitless.browser.esm.js ***!
-  \*********************************************************************************/
-
-/*!**********************************************************************************************!*\
-  !*** ../editor-kit/node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js ***!
-  \**********************************************************************************************/
-
-/*!***********************************************************************!*\
-  !*** ../editor-kit/node_modules/react-is/cjs/react-is.development.js ***!
-  \***********************************************************************/
-
-/*!****************************************************!*\
-  !*** ../editor-kit/node_modules/react-is/index.js ***!
-  \****************************************************/
-
-/*!********************************************************!*\
-  !*** ../editor-kit/node_modules/shallowequal/index.js ***!
-  \********************************************************/
-
-/*!******************************************************************************************!*\
-  !*** ../editor-kit/node_modules/styled-components/dist/styled-components.browser.esm.js ***!
-  \******************************************************************************************/
-
-/*! exports provided: default, ServerStyleSheet, StyleSheetConsumer, StyleSheetContext, StyleSheetManager, ThemeConsumer, ThemeContext, ThemeProvider, __PRIVATE__, createGlobalStyle, css, isStyledComponent, keyframes, useTheme, version, withTheme */
-
-/*!*****************************************!*\
-  !*** ./node_modules/process/browser.js ***!
-  \*****************************************/
-
-/*!***********************!*\
-  !*** ./src/Index.tsx ***!
-  \***********************/
-
-/*!*************************!*\
-  !*** ./src/Mentions.ts ***!
-  \*************************/
-
-/*!*********************************************!*\
-  !*** ./src/googledocs/GoogleDocsEditor.tsx ***!
-  \*********************************************/
-
-/*!************************!*\
-  !*** external "React" ***!
-  \************************/
-
-/*!***************************!*\
-  !*** external "ReactDOM" ***!
-  \***************************/
+/** @license React v16.12.0
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */

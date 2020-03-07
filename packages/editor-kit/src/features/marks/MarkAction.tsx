@@ -12,13 +12,13 @@ export interface MarkActionProps {
 export const MarkAction = (props: MarkActionProps) => {
   const { type, children, value } = props;
   const { editor } = useEditorKit();
-  const enabled = editor.isNodeSupported(type);
+  const isActive = () => isMarkActive(editor, type);
+  const enabled = editor.isNodeSupported(type) || isActive();
   const onMouseDown = (event: ReactMouseEvent<HTMLElement, MouseEvent>) => {
     event.preventDefault();
     toggleMark(editor, type, value);
   };
 
-  const isActive = () => isMarkActive(editor, type);
   return (
     <Action isActive={isActive} onMouseDown={onMouseDown} disabled={!enabled}>
       {children}
