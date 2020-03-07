@@ -26,7 +26,6 @@ import {
   UnderlinePlugin,
   StrikethroughPlugin,
   findMatches,
-  lineBefore,
   EditorRange,
   useEditorKit
 } from "@mpkelly/react-editor-kit";
@@ -129,7 +128,7 @@ export const MatchingExample = () => {
             }));
           return filtered;
         },
-        renderLeaf: props => {
+        renderLeaf: (props: RenderLeafProps) => {
           const { attributes, children, leaf } = props;
           if (leaf.type === "highlight") {
             return (

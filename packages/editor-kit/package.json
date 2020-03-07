@@ -6,7 +6,7 @@
   "homepage": "",
   "license": "ISC",
   "main": "dist/index.js",
-  "typings": "dist/src/Index.d.ts",
+  "typings": "dist/Index.d.ts",
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/plugin-transform-async-to-generator": "^7.7.0",
@@ -43,7 +43,6 @@
     "is-url": "^1.2.4",
     "prismjs": "^1.19.0",
     "react": "16.8.5",
-    "react-color": "^2.18.0",
     "react-dom": "^16.8.5",
     "react-player": "^1.14.2",
     "react-resize-detector": "^4.2.1",

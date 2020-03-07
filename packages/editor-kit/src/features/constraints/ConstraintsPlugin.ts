@@ -26,7 +26,7 @@ export const DefaultConstraints = {
   },
   //Accept only links
   quote: {
-    nodes: ["link"]
+    nodes: ["link", "quote"]
   },
   //Accept everything except for tables
   "table-cell": {

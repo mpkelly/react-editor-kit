@@ -183,7 +183,7 @@ const MyBoldButton = () => {
 
 ### Buttons and other controls
 
-Toolbar buttons and select boxes are provided. The button classes, such as [BoldButton](https://github.com/mpkelly/react-editor-kit/blob/master/packages/editor-kit/src/features/bold/BoldButton.tsx), accept properties for the CSS className for your icon font icon and optional a ligature. Here's how you would declare you buttons with and without ligatures:
+Toolbar buttons and select boxes are provided. The button components, such as [BoldButton](https://github.com/mpkelly/react-editor-kit/blob/master/packages/editor-kit/src/features/bold/BoldButton.tsx), accept properties for the CSS className for your icon font icon and optional a ligature. Here's how you would declare you buttons with and without ligatures:
 
 **Font Awesome - no ligature**
 

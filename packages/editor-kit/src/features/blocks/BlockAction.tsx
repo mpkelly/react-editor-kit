@@ -15,7 +15,7 @@ export const BlockAction = (props: BlockActionProps) => {
   const enabled = editor.isNodeSupported();
   const onMouseDown = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     block(event);
-    if (enabled) {
+    if (enabled || isActive()) {
       toggleBlock(editor, type);
     }
   };
