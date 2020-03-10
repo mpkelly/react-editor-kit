@@ -1,16 +1,14 @@
-import React, { CSSProperties } from "react";
+import { CSSProperties } from "react";
 import { Range, Node } from "slate";
 import { ReactEditor } from "slate-react";
 export interface EditorProps {
     value: Node[];
     onChange(nodes: Node[]): void;
-    spellCheck?: boolean;
-    readOnly?: boolean;
     autoFocus?: boolean;
     className?: string;
     style?: CSSProperties;
 }
-export declare const Editor: React.MemoExoticComponent<(props: EditorProps) => JSX.Element>;
+export declare const Editor: (props: EditorProps) => JSX.Element;
 export declare const getNextBlock: (editor: ReactEditor) => import("slate").Element | null;
 export declare const getPreviousBlock: (editor: ReactEditor) => import("slate").Element | null;
 export declare const isNavigatingInto: (editor: ReactEditor, type: string) => boolean | null;

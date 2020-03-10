@@ -24,6 +24,7 @@ import { ConstraintsPlugin } from "../features/constraints/ConstraintsPlugin";
 import { createGlobalStyle } from "styled-components";
 import { deleteBackward } from "./Editor";
 import { LabelsPlugin } from "../features/i18n/LabelsPlugin";
+import { useSpellcheck } from "../features/spellcheck/SpellCheck";
 
 const InternalPlugins: Plugin[] = [
   DefaultThemePlugin,
@@ -36,7 +37,14 @@ const InternalPlugins: Plugin[] = [
 export interface EditorKitValue {
   editor: ReactEditor;
   plugins: Plugin[];
+  spellCheck: boolean;
+  readOnly: boolean;
+  disableReadOnly(): void;
+  enableReadOnly(): void;
   render(): void;
+  disableSpellCheck(): void;
+  enableSpellCheck(): void;
+  delaySpellCheck(): void;
 }
 const Context = createContext<EditorKitValue>({} as EditorKitValue);
 
@@ -47,6 +55,8 @@ export const useEditorKit = () => {
 export interface EditorKitProps {
   children?: JSX.Element | JSX.Element[];
   plugins: Plugin[];
+  spellCheck?: boolean;
+  readOnly?: boolean;
   onEditor?(editor: ReactEditor): void;
 }
 
@@ -55,13 +65,29 @@ export const EditorKit = memo((props: EditorKitProps) => {
   const plugins = getPlugins(props.plugins);
   const editor: ReactEditor = createEditor(plugins);
   const [, forceUpdate] = useState({});
+  const [readOnly, setReadOnly] = useState(Boolean(props.readOnly));
   maybeConfigureTesting(editor, forceUpdate);
   const Style = useRef(generateStyle(plugins));
   onEditor && onEditor(editor);
 
+  const disableReadOnly = () => {
+    setReadOnly(false);
+  };
+
+  const enableReadOnly = () => {
+    setReadOnly(true);
+  };
+
   const render = useCallback(() => {
     forceUpdate({});
   }, []);
+
+  const {
+    spellCheck,
+    disableSpellCheck,
+    enableSpellCheck,
+    delaySpellCheck
+  } = useSpellcheck(Boolean(props.spellCheck), render);
 
   useEffect(() => {
     const { onChange } = editor;
@@ -74,7 +100,14 @@ export const EditorKit = memo((props: EditorKitProps) => {
   const context = {
     editor,
     plugins,
-    render
+    render,
+    readOnly,
+    disableReadOnly,
+    enableReadOnly,
+    spellCheck,
+    disableSpellCheck,
+    enableSpellCheck,
+    delaySpellCheck
   };
 
   return (

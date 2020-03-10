@@ -23,16 +23,20 @@ import { findMatches } from "./Matching";
 export interface EditorProps {
   value: Node[];
   onChange(nodes: Node[]): void;
-  spellCheck?: boolean;
-  readOnly?: boolean;
   autoFocus?: boolean;
   className?: string;
   style?: CSSProperties;
 }
 
-export const Editor = memo((props: EditorProps) => {
+export const Editor = (props: EditorProps) => {
   const { value, onChange, className, style, ...rest } = props;
-  const { editor, plugins } = useEditorKit();
+  const {
+    editor,
+    plugins,
+    spellCheck,
+    delaySpellCheck,
+    readOnly
+  } = useEditorKit();
   const renderElement = useCallback(
     (props: RenderElementProps) => handleRenderElement(props, plugins),
     []
@@ -47,9 +51,13 @@ export const Editor = memo((props: EditorProps) => {
     []
   );
 
-  const keyDown = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
-    handleKeyDown(event, plugins, editor);
-  }, []);
+  const keyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      delaySpellCheck();
+      handleKeyDown(event, plugins, editor);
+    },
+    [spellCheck]
+  );
 
   const keyUp = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
     handleKeyUp(event, plugins, editor);
@@ -81,11 +89,13 @@ export const Editor = memo((props: EditorProps) => {
         onKeyUp={keyUp}
         onClick={click}
         style={style}
+        spellCheck={spellCheck}
+        readOnly={readOnly}
         {...rest}
       />
     </Slate>
   );
-});
+};
 
 const handleRenderElement = (props: RenderElementProps, plugins: Plugin[]) => {
   let style: CSSProperties = {};

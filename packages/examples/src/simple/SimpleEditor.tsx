@@ -58,13 +58,7 @@ export const SimpleEditor = () => {
         <UnderlineButton className="uil uil-underline" />
         <StrikethroughButton className="uil uil-text-strike-through" />
       </div>
-      <Editor
-        value={value}
-        onChange={setValue}
-        style={editorStyle}
-        spellCheck
-        autoFocus
-      />
+      <Editor value={value} onChange={setValue} style={editorStyle} autoFocus />
     </EditorKit>
   );
 };

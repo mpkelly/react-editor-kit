@@ -148,13 +148,7 @@ export const PositioningEditor = () => {
   const [value, setValue] = useState(initialValue);
   return (
     <div style={containerStyle}>
-      <Editor
-        value={value}
-        onChange={setValue}
-        style={editorStyle}
-        spellCheck
-        autoFocus
-      />
+      <Editor value={value} onChange={setValue} style={editorStyle} autoFocus />
     </div>
   );
 };

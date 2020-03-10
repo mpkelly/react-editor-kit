@@ -165,7 +165,6 @@ export const MatchingEditor = () => {
           value={value}
           onChange={setValue}
           style={editorStyle}
-          spellCheck
           autoFocus
         />
       </div>

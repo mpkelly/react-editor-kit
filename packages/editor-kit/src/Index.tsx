@@ -107,3 +107,8 @@ export * from "./features/toolbar/EditorToolbar";
 export * from "./features/toolbar/EditorToolbarPlugin";
 export * from "./features/toolbar/SelectionToolbar";
 export * from "./features/toolbar/SelectionToolbarPlugin";
+export * from "./features/spellcheck/SpellCheckButton";
+export * from "./features/spellcheck/SpellCheckAction";
+export * from "./features/spellcheck/SpellCheck";
+export * from "./features/readonly/ReadOnlyAction";
+export * from "./features/readonly/ReadOnlyButton";

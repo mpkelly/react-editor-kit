@@ -57,7 +57,9 @@ import {
   EditorToolbar,
   EditorToolbarPlugin,
   createStaticMentions,
-  TextAlignPlugin
+  TextAlignPlugin,
+  SpellCheckButton,
+  ReadOnlyButton
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 
@@ -220,6 +222,16 @@ export const GoogleDocsEditor = () => {
             className="material-icons-round"
             ligature="format_clear"
           />
+          <SpellCheckButton
+            className="material-icons-round"
+            ligature="spellcheck"
+          />
+          <ReadOnlyButton
+            className="material-icons-round"
+            ligature="lock_open"
+            readOnlyClassName="material-icons-round"
+            readOnlyLigature="lock"
+          />
         </EditorToolbar>
         <SelectionToolbar>
           <BoldButton className="material-icons-round" ligature="format_bold" />
@@ -238,7 +250,6 @@ export const GoogleDocsEditor = () => {
             value={value}
             onChange={setValue}
             style={editorStyle}
-            spellCheck
             autoFocus
           />
         </div>

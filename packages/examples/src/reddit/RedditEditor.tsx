@@ -135,13 +135,7 @@ export const RedditEditor = () => {
         <TableButton className="material-icons-round" ligature="grid_on" />
         <VideoButton className="material-icons-round" ligature="videocam" />
       </div>
-      <Editor
-        value={value}
-        onChange={setValue}
-        style={editorStyle}
-        spellCheck
-        autoFocus
-      />
+      <Editor value={value} onChange={setValue} style={editorStyle} autoFocus />
     </EditorKit>
   );
 };
