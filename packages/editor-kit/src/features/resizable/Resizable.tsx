@@ -12,10 +12,11 @@ import { Show } from "../../ui/Show";
 export interface ResizableProps {
   children: JSX.Element;
   initialWidth: string | number;
+  onChange?(width: number): void;
 }
 
 export const Resizable = (props: ResizableProps) => {
-  const { initialWidth, children } = props;
+  const { initialWidth, children, onChange } = props;
   const [state, setState] = useState({ width: initialWidth, down: -1 });
   const element = useRef<HTMLElement | null>(null);
   const multiplier = useRef(1);
@@ -38,6 +39,7 @@ export const Resizable = (props: ResizableProps) => {
           const current = element.current?.getBoundingClientRect()
             .width as number;
           const width = current + delta * multiplier.current;
+          onChange && onChange(width);
           setState({ width, down: event.clientX });
         }
       }

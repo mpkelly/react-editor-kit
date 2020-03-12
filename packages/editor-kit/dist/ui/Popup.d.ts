@@ -10,8 +10,4 @@ export interface PopupProps {
     className?: string;
 }
 export declare const Popup: (props: PopupProps) => JSX.Element;
-export interface OverlayProps {
-    children: JSX.Element;
-    onClick?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
-}
-export declare const Overlay: import("styled-components").StyledComponent<"div", any, OverlayProps, never>;
+export declare const Overlay: import("styled-components").StyledComponent<"div", any, {}, never>;
