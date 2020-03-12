@@ -59,7 +59,10 @@ import {
   createStaticMentions,
   TextAlignPlugin,
   SpellCheckButton,
-  ReadOnlyButton
+  ReadOnlyButton,
+  Rule,
+  RulePlugin,
+  Resizable
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 
@@ -106,6 +109,7 @@ const plugins: Plugin[] = [
   SelectionToolbarPlugin,
   EditorToolbarPlugin,
   TextAlignPlugin,
+  RulePlugin,
   createStaticMentions({
     mentions: MentionsItems
   })
@@ -128,7 +132,6 @@ const wrapperStyle: CSSProperties = {
 
 const editorStyle: CSSProperties = {
   width: "100%",
-  maxWidth: 826,
   height: 1066,
   padding: 8,
   border: "1px solid rgba(0,0,0,.1)",
@@ -233,6 +236,7 @@ export const GoogleDocsEditor = () => {
             readOnlyLigature="lock"
           />
         </EditorToolbar>
+        <Rule />
         <SelectionToolbar>
           <BoldButton className="material-icons-round" ligature="format_bold" />
           <ItalicButton
@@ -246,12 +250,14 @@ export const GoogleDocsEditor = () => {
           />
         </SelectionToolbar>
         <div style={editorWrapperStyle}>
-          <Editor
-            value={value}
-            onChange={setValue}
-            style={editorStyle}
-            autoFocus
-          />
+          <Resizable initialWidth={826}>
+            <Editor
+              value={value}
+              onChange={setValue}
+              style={editorStyle}
+              autoFocus
+            />
+          </Resizable>
         </div>
       </div>
     </EditorKit>

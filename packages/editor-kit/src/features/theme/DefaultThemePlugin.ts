@@ -250,6 +250,28 @@ input[type=number] {
   to { -webkit-transform: rotate(360deg); }
 }
 
+.rek-resizable {
+  position:relative;    
+}
+
+.rek-resize-handle-start {
+  position:absolute;  
+  left:0;
+  margin-left:-10px;
+  width:20px;  
+  cursor:ew-resize;
+  height:100%;
+}
+
+.rek-resize-handle-end {
+  position:absolute;    
+  right:-10px;
+  margin-left:-10px;
+  width:20px;
+  cursor:ew-resize;
+  height:100%;
+}
+
 `;
 
 const EditorStyle = `  

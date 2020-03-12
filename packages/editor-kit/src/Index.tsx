@@ -112,3 +112,6 @@ export * from "./features/spellcheck/SpellCheckAction";
 export * from "./features/spellcheck/SpellCheck";
 export * from "./features/readonly/ReadOnlyAction";
 export * from "./features/readonly/ReadOnlyButton";
+export * from "./features/rule/Rule";
+export * from "./features/rule/RulePlugin";
+export * from "./features/resizable/Resizable";

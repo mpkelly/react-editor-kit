@@ -25,12 +25,7 @@ export const Popup = (props: PopupProps) => {
   );
 };
 
-export interface OverlayProps {
-  children: JSX.Element;
-  onClick?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
-}
-
-export const Overlay = styled.div<OverlayProps>`
+export const Overlay = styled.div`
   position: fixed;
   z-index: ${OverlayLayer};
   top: 0;
