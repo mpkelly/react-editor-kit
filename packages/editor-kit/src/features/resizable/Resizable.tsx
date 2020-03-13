@@ -1,22 +1,23 @@
 import React, {
   useState,
   useRef,
-  useEffect,
   Fragment,
-  useCallback
+  useCallback,
+  CSSProperties
 } from "react";
-import { OverlayLayer } from "../../ui/Layers";
 import { Overlay } from "../../ui/Popup";
 import { Show } from "../../ui/Show";
+import ReactDOM from "react-dom";
 
 export interface ResizableProps {
   children: JSX.Element;
+  style?: CSSProperties;
   initialWidth: string | number;
   onChange?(width: number): void;
 }
 
 export const Resizable = (props: ResizableProps) => {
-  const { initialWidth, children, onChange } = props;
+  const { initialWidth, children, onChange, style } = props;
   const [state, setState] = useState({ width: initialWidth, down: -1 });
   const element = useRef<HTMLElement | null>(null);
   const multiplier = useRef(1);
@@ -31,8 +32,8 @@ export const Resizable = (props: ResizableProps) => {
     }
   }, [state]);
 
-  useEffect(() => {
-    const handleMove = (event: MouseEvent) => {
+  const handleMove = useCallback(
+    (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
       if (state.down > -1) {
         const delta = event.clientX - state.down;
         if (delta !== 0) {
@@ -43,10 +44,9 @@ export const Resizable = (props: ResizableProps) => {
           setState({ width, down: event.clientX });
         }
       }
-    };
-    window.addEventListener("mousemove", handleMove);
-    return () => window.removeEventListener("mousemove", handleMove);
-  }, [state]);
+    },
+    [state]
+  );
 
   const handleDown = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const element = event.target as HTMLElement;
@@ -59,19 +59,20 @@ export const Resizable = (props: ResizableProps) => {
     setState(current => ({ ...current, down }));
   };
 
+  const allStyle = { ...(style || {}), ...{ width: state.width } };
+
   return (
     <Fragment>
-      <div
-        className="rek-resizable"
-        style={{ width: state.width }}
-        ref={handleRef}
-      >
+      <div className="rek-resizable" style={allStyle} ref={handleRef}>
         <div className="rek-resize-handle-start" onMouseDown={handleDown} />
         <div className="rek-resize-handle-end" onMouseDown={handleDown} />
         {children}
       </div>
       <Show when={state.down > -1}>
-        <Overlay onMouseUp={handleUp} />
+        {ReactDOM.createPortal(
+          <Overlay onMouseUp={handleUp} onMouseMove={handleMove} />,
+          document.body
+        )}
       </Show>
     </Fragment>
   );
