@@ -7,9 +7,9 @@ export interface ColorPickerButtonProps extends IconProps {
 }
 
 export const ColorPickerButton = (props: ColorPickerButtonProps) => {
-  const { className, ligature } = props;
+  const { className, ligature, colors } = props;
   return (
-    <ColorPickerAction>
+    <ColorPickerAction colors={colors}>
       <IconButton className={className} ligature={ligature} />
     </ColorPickerAction>
   );
