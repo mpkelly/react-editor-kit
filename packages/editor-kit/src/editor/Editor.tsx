@@ -25,7 +25,10 @@ export interface EditorProps {
   onChange(nodes: Node[]): void;
   autoFocus?: boolean;
   className?: string;
+  placeholder?: string;
   style?: CSSProperties;
+  role?: string;
+  as?: React.ElementType;
 }
 
 export const Editor = (props: EditorProps) => {

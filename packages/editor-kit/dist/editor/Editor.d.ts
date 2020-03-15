@@ -1,4 +1,4 @@
-import { CSSProperties } from "react";
+import React, { CSSProperties } from "react";
 import { Range, Node } from "slate";
 import { ReactEditor } from "slate-react";
 export interface EditorProps {
@@ -6,7 +6,10 @@ export interface EditorProps {
     onChange(nodes: Node[]): void;
     autoFocus?: boolean;
     className?: string;
+    placeholder?: string;
     style?: CSSProperties;
+    role?: string;
+    as?: React.ElementType;
 }
 export declare const Editor: (props: EditorProps) => JSX.Element;
 export declare const getNextBlock: (editor: ReactEditor) => import("slate").Element | null;
