@@ -4,6 +4,7 @@ import { RenderElementProps, ReactEditor } from "slate-react";
 import { Transforms } from "slate";
 import { MatchResult } from "../../editor/Matching";
 import { deleteBackward } from "../../editor/Editor";
+import { DeletableBlock } from "../blocks/DeletableBlock";
 
 export const DividerPlugin: Plugin = {
   withPlugin: editor => {
@@ -13,7 +14,7 @@ export const DividerPlugin: Plugin = {
     };
     return editor;
   },
-  triggers: [{ pattern: /\n-{3,}\s/, range: "line-before" }],
+  triggers: [{ pattern: /^\s?-{3,}\s/, range: "block" }],
   onTrigger: (editor: ReactEditor, match: MatchResult[]) => {
     let size = 1;
     if (match[0].regexMatch) {
@@ -39,11 +40,13 @@ export const DividerPlugin: Plugin = {
 
 const Divider = (props: RenderElementProps) => {
   const { attributes, element, children } = props;
-  const className = element.size == 2 ? "double" : "single";
+  const dividerClass = element.size == 2 ? "double" : "single";
   return (
-    <div className={`rek-divider-${className}`} {...attributes}>
-      {...children}
-    </div>
+    <DeletableBlock {...props}>
+      <div className={`rek-divider-${dividerClass}`} {...attributes}>
+        {...children}
+      </div>
+    </DeletableBlock>
   );
 };
 
@@ -52,11 +55,17 @@ const EditorStyle = `
     width:100%;
     height:1px;
     border-top:1px solid var(--divider-color);
+    .focused {
+      border: 2px solid var(--focus-color);
+    }
   }
 
   .rek-divider-double {
     width:100%;
     height:2px;
     border-top:2px solid var(--divider-color);
+    .focused {
+      border: 2px solid var(--focus-color);
+    }
   }
 `;

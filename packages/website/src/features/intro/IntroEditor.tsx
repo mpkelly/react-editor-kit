@@ -122,12 +122,7 @@ export const IntroEditor = () => {
               ligature="format_quote"
             />
           </EditorToolbar>
-          <Editor
-            value={value}
-            onChange={setValue}
-            spellCheck={false}
-            autoFocus
-          />
+          <Editor value={value} onChange={setValue} autoFocus />
         </div>
       </EditorKit>
     </IntroEditorContent>

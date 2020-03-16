@@ -8,7 +8,7 @@ import { deleteBackward } from "../../editor/Editor";
 export const QuotePlugin: Plugin = {
   triggers: [
     { pattern: `:quote`, range: "line-before" },
-    { pattern: /^>\s$/, range: "line-before" }
+    { pattern: /^\s?>$/, range: "block" }
   ],
   onTrigger: (editor: ReactEditor, matches: MatchResult[]) => {
     if (matches[0]) {

@@ -5,6 +5,9 @@ import { IconProvider } from "../icons/IconProviderPlugin";
 import { usePlugin } from "../../plugins/usePlugin";
 import { Icon } from "../icons/Icon";
 import { useEdit } from "../../editor/Edit";
+import { Transforms } from "slate";
+import { useEditorKit } from "../../editor/EditorKit";
+import { Resizable } from "../resizable/Resizable";
 
 export interface DeletableBlockProps extends RenderElementProps {
   className?: string;
@@ -12,17 +15,30 @@ export interface DeletableBlockProps extends RenderElementProps {
 }
 
 export const DeletableBlock = (props: DeletableBlockProps) => {
-  const className = props.className || "";
+  let { children, element, className, ...rest } = props;
+  className = className || "";
   const { deleteNode } = useEdit();
+  const { editor } = useEditorKit();
   const handleDelete = useCallback(() => {
     deleteNode(props.element);
   }, []);
+  const handleWidthChange = (width: number) => {
+    Transforms.setNodes(editor, { width }, { match: node => node === element });
+  };
   return (
     <BlockWrapper
       className={`deletable ${className}`}
       focusToolbar={<Toolbar onDelete={handleDelete} />}
-      {...props}
-    />
+      element={element}
+      {...rest}
+    >
+      <Resizable
+        initialWidth={element.width || "100%"}
+        onChange={handleWidthChange}
+      >
+        {children}
+      </Resizable>
+    </BlockWrapper>
   );
 };
 

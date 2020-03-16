@@ -62,7 +62,8 @@ import {
   ReadOnlyButton,
   Rule,
   RulePlugin,
-  Resizable
+  Resizable,
+  ImagePlugin
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 
@@ -112,7 +113,8 @@ const plugins: Plugin[] = [
   RulePlugin,
   createStaticMentions({
     mentions: MentionsItems
-  })
+  }),
+  ImagePlugin
 ];
 
 const initialValue = [
