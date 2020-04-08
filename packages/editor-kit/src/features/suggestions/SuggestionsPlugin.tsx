@@ -20,10 +20,10 @@ export const createSuggestionsPlugin = (
   return {
     withPlugin: (editor: ReactEditor) => {
       const { isVoid, isInline } = editor;
-      editor.isVoid = element => {
+      editor.isVoid = (element) => {
         return element.type === options.type ? true : isVoid(element);
       };
-      editor.isInline = element => {
+      editor.isInline = (element) => {
         return element.type === options.type ? true : isInline(element);
       };
       return editor;
@@ -35,10 +35,11 @@ export const createSuggestionsPlugin = (
     renderLeaf: (props: RenderLeafProps, editor: ReactEditor) => {
       const { leaf } = props;
       const handleChoice = (choice?: any, displayText?: string) => {
+        ReactEditor.focus(editor);
         Transforms.setNodes(
           editor,
           { "suggestion-marker": undefined },
-          { match: node => node["suggestion-marker"] }
+          { match: (node) => node["suggestion-marker"] }
         );
         if (choice) {
           deleteBackward(editor, Node.string(leaf).length);
@@ -47,7 +48,7 @@ export const createSuggestionsPlugin = (
             type: options.type,
             children: [{ text: "" }],
             displayText,
-            suggestion: choice
+            suggestion: choice,
           });
           Editor.insertText(editor, " ");
         }
@@ -70,7 +71,7 @@ export const createSuggestionsPlugin = (
       }
     },
     globalStyles: () => `${GlobalStyle}${options.globalStyle || ""}`,
-    editorStyles: () => options.editorStyle || ""
+    editorStyles: () => options.editorStyle || "",
   };
 };
 

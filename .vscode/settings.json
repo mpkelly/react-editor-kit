@@ -2,5 +2,5 @@
   "git.ignoreLimitWarning": true,
   "typescript.tsdk": "packages/editor/node_modules/typescript/lib",
   "liveServer.settings.useLocalIp": true,
-  "liveServer.settings.port": 8090
+  "liveServer.settings.port": 8091
 }

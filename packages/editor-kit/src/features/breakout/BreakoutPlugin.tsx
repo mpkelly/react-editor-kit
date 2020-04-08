@@ -9,7 +9,7 @@ export interface BreakoutPluginOptions {
 }
 
 export const DefaultOptions: BreakoutPluginOptions = {
-  blocks: ["code-block", "quote"]
+  blocks: ["code-block", "quote"],
 };
 
 export const createBreakoutPlugin = (options = DefaultOptions): Plugin => {
@@ -30,7 +30,7 @@ export const createBreakoutPlugin = (options = DefaultOptions): Plugin => {
               editor,
               { type: "paragraph", children: [{ text: "" }] },
               {
-                at: after
+                at: after,
               }
             );
           }
@@ -48,13 +48,13 @@ export const createBreakoutPlugin = (options = DefaultOptions): Plugin => {
               { type: "paragraph", children: [{ text: "" }] },
               {
                 at: before || path,
-                mode: "highest"
+                mode: "highest",
               }
             );
           }
         }
       }
       return false;
-    }
+    },
   };
 };

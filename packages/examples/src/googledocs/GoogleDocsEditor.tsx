@@ -63,7 +63,7 @@ import {
   Rule,
   RulePlugin,
   Resizable,
-  ImagePlugin
+  ImagePlugin,
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 
@@ -73,7 +73,7 @@ const GoogleDocsStylePlugin: Plugin = {
       color: rgba(0,0,0,.6);
     }
 
-  `
+  `,
 };
 
 const plugins: Plugin[] = [
@@ -100,6 +100,9 @@ const plugins: Plugin[] = [
   CodeHighlighterPlugin,
   LabelsPlugin,
   EnterKeyHandler,
+  createStaticMentions({
+    mentions: MentionsItems,
+  }),
   StylePlugin,
   GoogleDocsStylePlugin,
   CodeHighlighterPlugin,
@@ -111,17 +114,14 @@ const plugins: Plugin[] = [
   EditorToolbarPlugin,
   TextAlignPlugin,
   RulePlugin,
-  createStaticMentions({
-    mentions: MentionsItems
-  }),
-  ImagePlugin
+  ImagePlugin,
 ];
 
 const initialValue = [
   {
     type: "paragraph",
-    children: [{ text: "" }]
-  }
+    children: [{ text: "" }],
+  },
 ];
 
 const wrapperStyle: CSSProperties = {
@@ -129,7 +129,7 @@ const wrapperStyle: CSSProperties = {
   alignItems: "center",
   flexDirection: "column",
   width: "100%",
-  height: "100%"
+  height: "100%",
 };
 
 const editorStyle: CSSProperties = {
@@ -139,7 +139,7 @@ const editorStyle: CSSProperties = {
   border: "1px solid rgba(0,0,0,.1)",
   boxShadow: "rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
   borderRadius: 3,
-  backgroundColor: "white"
+  backgroundColor: "white",
 };
 
 const editorWrapperStyle: CSSProperties = {
@@ -149,7 +149,7 @@ const editorWrapperStyle: CSSProperties = {
   display: "flex",
   justifyContent: "center",
   overflow: "hidden",
-  padding: 8
+  padding: 8,
 };
 
 export const GoogleDocsEditor = () => {

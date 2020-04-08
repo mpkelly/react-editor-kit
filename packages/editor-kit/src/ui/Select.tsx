@@ -35,14 +35,15 @@ export const Select = (props: SelectProps) => {
     handleRef,
     handleValueChange,
     hideChoices,
-    handleFocus
+    handleFocus,
   } = useSelect(props);
-  const disabled = !items.find(item => !item.disabled);
+  const disabled = !items.find((item) => !item.disabled);
   const { data: icons } = usePlugin("icon-provider") as IconProvider;
   const focusClass = show ? "focus" : "";
   const disabledClass = disabled ? "rek-disabled" : "";
-  const className = `${props.className ||
-    ""} rek-select ${focusClass} ${disabledClass}`;
+  const className = `${
+    props.className || ""
+  } rek-select ${focusClass} ${disabledClass}`;
 
   return (
     <div
@@ -89,7 +90,7 @@ export const useSelect = (props: SelectProps) => {
     }
   }, [props.value]);
 
-  const items: ListItem[] = props.items.map(item => {
+  const items: ListItem[] = props.items.map((item) => {
     return {
       text: item.text,
       style: item.style,
@@ -98,13 +99,13 @@ export const useSelect = (props: SelectProps) => {
         props.onItemSelected(item);
       },
       value: item.value,
-      disabled: item.disabled
+      disabled: item.disabled,
     };
   });
 
   const filteredItems = filterItems(value, items);
   const selected = filteredItems.findIndex(
-    item => (item as any).value == props.selected
+    (item) => (item as any).value == props.selected
   );
   const activeItemIndex = selected > -1 ? selected : 0;
 
@@ -125,7 +126,7 @@ export const useSelect = (props: SelectProps) => {
 
   const handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.currentTarget.value;
-    const index = items.findIndex(item => item.text === value);
+    const index = items.findIndex((item) => item.text === value);
     setActive(Math.max(index, 0));
     props.onInputChange && props.onInputChange(value);
     setValue(value);
@@ -152,16 +153,18 @@ export const useSelect = (props: SelectProps) => {
     handleFocus,
     items: filteredItems,
     hideChoices,
-    element: element.current
+    element: element.current,
   };
 };
 
 const filterItems = (filter: string | number, items: ListItem[]) => {
   const lower = String(filter).toLowerCase();
-  if (!filter || items.find(item => item.text?.toLowerCase() === lower)) {
+  if (!filter || items.find((item) => item.text?.toLowerCase() === lower)) {
     return items;
   }
-  const result = items.filter(item => item.text!.toLowerCase().includes(lower));
+  const result = items.filter((item) =>
+    item.text!.toLowerCase().includes(lower)
+  );
   return result.length ? result : items;
 };
 

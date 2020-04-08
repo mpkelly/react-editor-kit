@@ -22,8 +22,8 @@ export const block = (
     | React.KeyboardEvent
     | KeyboardEvent
 ) => {
-  event.stopPropagation();
   event.preventDefault();
+  event.stopPropagation();
 };
 
 export const noOp = (...args: any[]) => {};

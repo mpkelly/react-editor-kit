@@ -5,18 +5,13 @@ export const EnterKeyHandler: Plugin = {
   onKeyDown: (event: React.KeyboardEvent<HTMLDivElement>, editor: Editor) => {
     if (event.keyCode === 13) {
       //Enter key
-      event.preventDefault();
       if (event.shiftKey) {
         editor.insertText("\n");
-      } else {
-        Transforms.insertNodes(editor, {
-          type: "paragraph",
-          children: [{ text: "\n" }]
-        });
+        event.preventDefault();
+        return true;
       }
-      return true;
     }
 
     return false;
-  }
+  },
 };

@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useKeyPress } from "./KeyPress";
 import { block } from "./Utils";
 
@@ -43,19 +43,19 @@ export const useKeyNavigation = (
   useKeyPress({
     targetKeys: ["ArrowDown"],
     handler: handleNext,
-    deps: [enabled, total, active]
+    deps: [enabled, total, active],
   });
 
   useKeyPress({
     targetKeys: ["ArrowUp"],
     handler: handlePrevious,
-    deps: [enabled, total, active]
+    deps: [enabled, total, active],
   });
 
   useKeyPress({
     targetKeys: ["Enter", "Tab"],
     handler: _handleSelect,
-    deps: [active, enabled, total, handleSelect]
+    deps: [active, enabled, total, handleSelect],
   });
 
   return { activeIndex: active, setActive };
