@@ -23,18 +23,19 @@ export const LinkPlugin: Links = {
   withPlugin: (editor: ReactEditor) => {
     const { isInline } = editor;
 
-    editor.isInline = element => {
+    editor.isInline = (element) => {
       return element.type === "link" ? true : isInline(element);
     };
     return editor;
   },
-  globalStyles: () => GlobalStyle
+  globalStyles: () => GlobalStyle,
 };
 
 const GlobalStyle = `
   .rek-link-toolbar  {
     display:flex;
     align-items:center;
+    margin-top:16px;
   }
 
   .rek-link-toolbar span {
@@ -52,6 +53,7 @@ const GlobalStyle = `
     flex-direction:column;
     z-index: ${PopupContentLayer};
     padding:4px 0;
+    margin-top:16px;
     background-color:var(--content-background);    
   }
 

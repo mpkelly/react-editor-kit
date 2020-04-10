@@ -19,26 +19,22 @@ export const LinkEditor = (props: LinkEditorProps) => {
     props
   );
   return (
-    <div
-      className="rek-link-editor rek-panel"
-      contentEditable={false}
-      onClick={stop}
-      onKeyDown={stop}
-    >
+    <div className="rek-link-editor rek-panel" onClick={stop} onKeyDown={stop}>
       <input
         type="text"
-        contentEditable={true}
         className="rek-input"
         placeholder={labels.enterUrl}
         value={link.url}
+        autoFocus
+        onMouseDown={stop}
         onChange={handleUrlChange}
       />
       <input
         type="text"
-        contentEditable={true}
         className="rek-input"
         placeholder={labels.enterDisplayText}
         value={link.displayName}
+        onMouseDown={stop}
         onChange={handleDisplayNameChange}
       />
     </div>
