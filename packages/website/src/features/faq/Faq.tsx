@@ -40,11 +40,11 @@ export const Faq = () => {
         title={"Can I use SVG icons or my own custom buttons?"}
         description={
           <span>
-            Yes. React Editor Kit is flexible and provides Actions for common
-            operations, such as making some text bold. These Actions are
-            flexible and can work with most React components. However, if you're
-            usign an icon font then there are also ready made Buttons that just
-            require CSS class names as shown{" "}
+            Yes. React Editor Kit provides Actions for common operations, such
+            as making some text bold. These Actions are flexible and can accept
+            most React components as children. However, if you're usign an icon
+            font then there are also ready made Buttons that just require CSS
+            class names as shown{" "}
             <a href="https://github.com/mpkelly/react-editor-kit#buttons-and-other-controls">
               here
             </a>
@@ -62,7 +62,7 @@ export const Faq = () => {
       <FaqBlock
         title={"What is the state of development?"}
         description={
-          "The project is in alpha. It's usable and supports a lot of common features found in rich-text editors. There might be some changes but nothing major and there's certainly many more plugins to follow. "
+          "The project is in alpha. It's usable and supports a lot of common features found in rich-text editors but has some rough edges and might contain a few bugs. There might be some changes but nothing major and there's certainly many more plugins to follow. "
         }
       />
     </FaqSection>
