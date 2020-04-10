@@ -1,7 +1,7 @@
 {
   "name": "@mpkelly/react-editor-kit",
   "version": "0.0.18",
-  "description": "> TODO: description",
+  "description": "React library for building editors of all kinds.",
   "author": "mkelly <kikemelly@gmail.com>",
   "homepage": "",
   "license": "ISC",
