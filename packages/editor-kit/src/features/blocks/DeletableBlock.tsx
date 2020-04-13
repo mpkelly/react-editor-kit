@@ -15,7 +15,7 @@ export interface DeletableBlockProps extends RenderElementProps {
 }
 
 export const DeletableBlock = (props: DeletableBlockProps) => {
-  let { children, element, className, ...rest } = props;
+  let { children, element, className, toolbarContent, ...rest } = props;
   className = className || "";
   const { deleteNode } = useEdit();
   const { editor } = useEditorKit();
@@ -23,12 +23,16 @@ export const DeletableBlock = (props: DeletableBlockProps) => {
     deleteNode(props.element);
   }, []);
   const handleWidthChange = (width: number) => {
-    Transforms.setNodes(editor, { width }, { match: node => node === element });
+    Transforms.setNodes(
+      editor,
+      { width },
+      { match: (node) => node === element }
+    );
   };
   return (
     <BlockWrapper
       className={`deletable ${className}`}
-      focusToolbar={<Toolbar onDelete={handleDelete} />}
+      focusToolbar={toolbarContent || <Toolbar onDelete={handleDelete} />}
       element={element}
       {...rest}
     >

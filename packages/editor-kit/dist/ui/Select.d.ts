@@ -28,4 +28,5 @@ export declare const useSelect: (props: SelectProps) => {
     items: ListItem[];
     hideChoices: () => void;
     element: HTMLElement | null;
+    handleBlur: () => void;
 };

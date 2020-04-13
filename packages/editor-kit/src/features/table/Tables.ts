@@ -5,6 +5,7 @@ import { useEditorKit } from "../../editor/EditorKit";
 import { ListItem } from "../../ui/List";
 import { usePlugin } from "../../plugins/usePlugin";
 import { Labels } from "../i18n/LabelsPlugin";
+import { block } from "../../ui/Utils";
 
 export const useTables = (props: RenderElementProps) => {
   const { element } = props;
@@ -31,13 +32,12 @@ export const useTables = (props: RenderElementProps) => {
 
   const handleClick = useCallback(
     (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-      event.preventDefault();
-      event.stopPropagation();
+      block(event);
       position.current = {
         top: event.clientY,
-        left: event.clientX
+        left: event.clientX,
       };
-      setShowMenu(show => !show);
+      setShowMenu((show) => !show);
     },
     []
   );
@@ -45,24 +45,24 @@ export const useTables = (props: RenderElementProps) => {
   const listItems = useRef<ListItem[]>([
     {
       text: labels.addColumn,
-      onClick: handleAddColumn
+      onClick: handleAddColumn,
     },
     {
       text: labels.deleteColumn,
-      onClick: handleDeleteColumn
+      onClick: handleDeleteColumn,
     },
     {
       text: labels.addRow,
-      onClick: handleAddRow
+      onClick: handleAddRow,
     },
     {
       text: labels.deleteRow,
-      onClick: handleDeleteRow
-    }
+      onClick: handleDeleteRow,
+    },
   ]);
 
   const [cell] = Editor.nodes(editor, {
-    match: n => n.type === "table-cell"
+    match: (n) => n.type === "table-cell",
   });
   const active = cell && cell[0] === element;
 
@@ -73,14 +73,14 @@ const addColumn = (editor: ReactEditor, element: Element) => {
   const [row, rowPath] = findRow(editor, element);
   const index = row.children.indexOf(element);
   const [table] = Editor.parent(editor, rowPath);
-  table.children.forEach(row => {
+  table.children.forEach((row) => {
     const path = ReactEditor.findPath(editor, row.children[index]);
     path[path.length - 1]++;
     Transforms.insertNodes(
       editor,
       {
         type: "table-cell",
-        children: [{ text: "" }]
+        children: [{ text: "" }],
       },
       { at: path }
     );
@@ -91,7 +91,7 @@ const deleteColumn = (editor: ReactEditor, element: Element) => {
   const [row, rowPath] = findRow(editor, element);
   const index = row.children.indexOf(element);
   const [table] = Editor.parent(editor, rowPath);
-  table.children.forEach(row => {
+  table.children.forEach((row) => {
     const path = ReactEditor.findPath(editor, row.children[index]);
     path[path.length - 1];
     Transforms.delete(editor, { at: path });
@@ -103,11 +103,12 @@ const addRow = (editor: ReactEditor, element: Element) => {
   rowPath[rowPath.length - 1]++;
   const children = Array.from({ length: row.children.length }).map(() => ({
     type: "table-cell",
-    children: [{ text: "" }]
+    children: [{ text: "" }],
   }));
+
   const newRow = {
     type: "table-row",
-    children
+    children,
   };
   Transforms.insertNodes(editor, newRow, { at: rowPath });
 };

@@ -2,11 +2,11 @@ import React from "react";
 import { Editor, Transforms, Node } from "slate";
 import { RenderElementProps, ReactEditor } from "slate-react";
 import { TableCell } from "./TableCell";
-import { DeletableBlock } from "../blocks/DeletableBlock";
 import { Plugin, Trigger } from "../../plugins/Plugin";
 import { clone, isDeleting } from "../../ui/Utils";
 import { MatchResult } from "../../editor/Matching";
 import { deleteBackward } from "../../editor/Editor";
+import { Table } from "./Table";
 
 export interface TablePluginOptions {
   defaultTable: Node[];
@@ -15,7 +15,7 @@ export interface TablePluginOptions {
 export const createTablePlugin = (options: TablePluginOptions): Plugin => {
   return {
     name: "table",
-    withPlugin: editor => {
+    withPlugin: (editor) => {
       const { normalizeNode } = editor;
       editor.normalizeNode = ([node, path]) => {
         if (node.type === "table-row") {
@@ -23,7 +23,7 @@ export const createTablePlugin = (options: TablePluginOptions): Plugin => {
             if (child.type !== "table-cell") {
               Transforms.removeNodes(editor, { at: childPath });
               Transforms.insertNodes(editor, wrapInCell(child), {
-                at: childPath
+                at: childPath,
               });
             }
           }
@@ -53,7 +53,7 @@ export const createTablePlugin = (options: TablePluginOptions): Plugin => {
       editor: ReactEditor
     ) => {
       const [cell] = Editor.nodes(editor, {
-        match: n => n.type === "table-cell"
+        match: (n) => n.type === "table-cell",
       });
       if (!cell) {
         return;
@@ -69,49 +69,50 @@ export const createTablePlugin = (options: TablePluginOptions): Plugin => {
       }
     },
     globalStyles: () => GlobalStyle,
-    editorStyles: () => EditorStyle
+    editorStyles: () => EditorStyle,
   };
 };
 
 const wrapInCell = (node: Node) => {
   return {
     type: "table-cell",
-    children: [node]
+    children: [node],
   };
 };
 
 export const DefaultTable = [
   {
     type: "table",
+    headerRow: "true",
     children: [
       {
         type: "table-row",
         children: [
           {
             type: "table-cell",
-            children: [{ text: "" }]
+            children: [{ text: "" }],
           },
           {
             type: "table-cell",
-            children: [{ text: "" }]
-          }
-        ]
+            children: [{ text: "" }],
+          },
+        ],
       },
       {
         type: "table-row",
         children: [
           {
             type: "table-cell",
-            children: [{ text: "" }]
+            children: [{ text: "" }],
           },
           {
             type: "table-cell",
-            children: [{ text: "" }]
-          }
-        ]
-      }
-    ]
-  }
+            children: [{ text: "" }],
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 export const TablePlugin = createTablePlugin({ defaultTable: DefaultTable });
@@ -120,13 +121,7 @@ export const renderTable = (props: RenderElementProps) => {
   const { element, attributes, children } = props;
   switch (element.type) {
     case "table":
-      return (
-        <DeletableBlock {...props}>
-          <table tabIndex={1} className="rek-table">
-            <tbody {...attributes}>{children}</tbody>
-          </table>
-        </DeletableBlock>
-      );
+      return <Table {...props} />;
     case "table-row":
       return (
         <tr {...attributes} className="rek-tr">
@@ -156,6 +151,16 @@ const GlobalStyle = `
   .rek-table-cell-menu.dropdown-icon.svg-icon {
     transform:scale(.8);
   }
+
+  .rek-table-settings {
+    display:flex;
+    flex-direction:column;
+    padding:8px;
+    > *  {
+      margin-top:4px;
+      margin-bottom:4px;
+    }
+  }
 `;
 
 const EditorStyle = `
@@ -171,8 +176,18 @@ const EditorStyle = `
     border: 1px solid var(--divider-color);
   }
 
-  .rek-tr:first-child {
-    background-color: var(--divider-color);
+  .rek-header-row  .rek-tr:first-child {
+    background-color: #f3f5f7;
+  }
+
+  .rek-header-column  .rek-td:first-child {
+    background-color: #f3f5f7;
+  }
+
+  .rek-table.rek-borderless,
+  .rek-table.rek-borderless tr,
+  .rek-table.rek-borderless td {
+    border-color: transparent;
   }
 
   .rek-td {

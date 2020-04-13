@@ -9,6 +9,9 @@ export interface EditorLabels {
     editLink: string;
     textColor: string;
     backgroundColor: string;
+    headerRow: string;
+    headerColumn: string;
+    numberedColumn: string;
 }
 export declare const EnglishLabels: EditorLabels;
 export interface Labels extends Plugin {

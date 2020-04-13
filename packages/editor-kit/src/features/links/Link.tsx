@@ -19,7 +19,7 @@ export const Link = (props: LinkProps) => {
   const displayName = Node.string(element);
   const [link, setLink] = useState<LinkModel>({
     url: element.url,
-    displayName
+    displayName,
   });
 
   const handleLinkChange = useCallback((link: LinkModel) => {
@@ -66,7 +66,7 @@ const updateLink = (editor: ReactEditor, element: Node, link: LinkModel) => {
   const node = {
     type: "link",
     url: link.url,
-    children: [{ text: link.displayName }]
+    children: [{ text: link.displayName }],
   };
   editor.replaceNode(element, node);
 };
@@ -74,7 +74,7 @@ const updateLink = (editor: ReactEditor, element: Node, link: LinkModel) => {
 export const createLink = (editor: ReactEditor) => {
   if (isNodeActive(editor, "link")) {
     const [link] = Editor.nodes(editor, {
-      match: n => n.type === "link"
+      match: (n) => n.type === "link",
     });
     editor.replaceNode(link[0], { ...link[0], editing: true });
   } else {
@@ -84,15 +84,16 @@ export const createLink = (editor: ReactEditor) => {
       type: "link",
       url: "",
       editing: true,
-      children: isCollapsed ? [{ text: "" }] : []
+      children: isCollapsed ? [{ text: "" }] : [],
     };
     if (isCollapsed) {
       Transforms.insertNodes(editor, link);
     } else {
       //Track bug https://github.com/ianstormtaylor/slate/issues/3454
-      Transforms.wrapNodes(editor, link, {
+      (Transforms.wrapNodes as any)(editor, link, {
         at: selection as Range,
-        split: true
+        split: true,
+        hanging: false,
       });
       Transforms.collapse(editor, { edge: "end" });
     }

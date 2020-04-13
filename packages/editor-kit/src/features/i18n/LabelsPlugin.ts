@@ -10,6 +10,10 @@ export interface EditorLabels {
   editLink: string;
   textColor: string;
   backgroundColor: string;
+  headerRow: string;
+  headerColumn: string;
+  numberedColumn: string;
+  borderless: string;
 }
 
 export const EnglishLabels: EditorLabels = {
@@ -21,7 +25,11 @@ export const EnglishLabels: EditorLabels = {
   enterDisplayText: "Enter display text",
   editLink: "Edit link",
   textColor: "Text Color",
-  backgroundColor: "Background Color"
+  backgroundColor: "Background Color",
+  headerRow: "Header row",
+  headerColumn: "Header column",
+  numberedColumn: "Numbered column",
+  borderless: "Borderless",
 };
 
 export interface Labels extends Plugin {
@@ -31,7 +39,7 @@ export interface Labels extends Plugin {
 
 export const createLabelsPlugin = (labels = EnglishLabels): Labels => ({
   data: labels,
-  name: "labels"
+  name: "labels",
 });
 
 export const LabelsPlugin = createLabelsPlugin();

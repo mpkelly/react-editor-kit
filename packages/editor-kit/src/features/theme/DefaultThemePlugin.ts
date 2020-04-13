@@ -274,6 +274,68 @@ input[type=number] {
   height:100%;
 }
 
+.rek-check-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.rek-check-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+
+.rek-checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  margin-right:4px;
+  background-color: var(--input-background-color);
+}
+
+.rek-check-container:hover input ~ .rek-checkmark {
+  background-color: var(--focus-color);
+}
+
+.rek-check-container input:checked ~ .rek-checkmark {
+  background-color: var(--action-color);
+}
+
+.rek-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.rek-check-container input:checked ~ .rek-checkmark:after {
+  display: block;
+}
+
+.rek-check-container .rek-checkmark:after {
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
 `;
 
 const EditorStyle = `  
@@ -294,6 +356,12 @@ const EditorStyle = `
     .rek-toolbar {
       position:absolute;
       bottom:-40px;
+      .rek-svg-icon {
+        fill:var(--secondary-text-color);        
+        :hover {
+          fill:var(--action-color);     
+        }
+      }
     }
   }
 

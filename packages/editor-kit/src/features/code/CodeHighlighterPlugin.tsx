@@ -7,15 +7,15 @@ import { CodeBlock } from "./CodeBlock";
 import {
   isAtStartOfNode,
   isNodeFocused,
-  deleteBackward
+  deleteBackward,
 } from "../../editor/Editor";
 import { isDeleting } from "../../ui/Utils";
 import { MatchResult } from "../../editor/Matching";
 
 export const CodeHighlighterPlugin: Plugin = {
-  withPlugin: editor => {
+  withPlugin: (editor) => {
     const { insertData } = editor;
-    editor.insertData = data => {
+    editor.insertData = (data) => {
       const text = data.getData("text/plain");
       if (text) {
         editor.insertText(text);
@@ -27,7 +27,7 @@ export const CodeHighlighterPlugin: Plugin = {
   },
   triggers: [
     { pattern: "```", range: "word-before" },
-    { pattern: ":code", range: "line-before" }
+    { pattern: ":code", range: "line-before" },
   ],
   onTrigger: (editor: ReactEditor, matches: MatchResult[]) => {
     if (!editor.isNodeSupported("code-block")) {
@@ -40,7 +40,7 @@ export const CodeHighlighterPlugin: Plugin = {
       editor.insertNode({
         type: "code-block",
         children: [{ text: "" }],
-        lang: "JavaScript"
+        lang: "JavaScript",
       });
     }
   },
@@ -73,7 +73,7 @@ export const CodeHighlighterPlugin: Plugin = {
     return [];
   },
   editorStyles: () => EditorStyle,
-  globalStyles: () => GlobalStyle
+  globalStyles: () => GlobalStyle,
 };
 
 const handleKeyDown = (event: React.KeyboardEvent, editor: ReactEditor) => {
@@ -125,12 +125,7 @@ const GlobalStyle = `
 const EditorStyle = `
   .rek-code-block {
     background-color:var(--input-background-color);
-    padding:8px;   
-
-    pre {
-      white-space: pre-wrap;
-      overflow-wrap: break-word;     
-    }
+    padding:8px;     
   }  
 
  .rek-code-block.sql,
