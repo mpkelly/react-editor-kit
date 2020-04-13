@@ -46,9 +46,9 @@
     "react-dom": "^16.8.5",
     "react-player": "^1.14.2",
     "react-resize-detector": "^4.2.1",
-    "slate": "^0.57.1",
+    "slate": "github:mpkelly/slate#slate-v0.57.1-gitpkg",
     "slate-history": "^0.57.1",
-    "slate-react": "^0.57.1",
+    "slate-react": "github:mpkelly/slate#slate-react-v0.57.1-gitpkg",
     "styled-components": "^5.0.1",
     "terser-webpack-plugin": "^2.2.1"
   },

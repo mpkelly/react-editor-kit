@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Transforms, Range } from "slate";
+import { Range } from "slate";
 import { Select, SelectItem } from "../../../ui/Select";
 import { useEditorKit } from "../../../editor/EditorKit";
 import { ReactEditor } from "slate-react";
@@ -25,11 +25,11 @@ export const FontSelect = (props: FontSelectProps) => {
     editor.addSelectionMark("fontFamily", item.value.fontFamily);
   };
 
-  const items: SelectItem[] = fonts.map(font => ({
+  const items: SelectItem[] = fonts.map((font) => ({
     text: font.name,
     value: font,
     style: { fontFamily: font.fontFamily },
-    disabled: !editor.isMarkSupported("fontFamily", node)
+    disabled: !editor.isMarkSupported("fontFamily", node),
   }));
 
   const { selected, current } = getFonts(editor, items);
@@ -51,7 +51,8 @@ const getFonts = (editor: ReactEditor, items: SelectItem[]) => {
   let selected = items[0];
   if (current) {
     const currentName = current.replace(/['"]+/g, "");
-    const currentItem = items.find(choice => {
+
+    const currentItem = items.find((choice) => {
       const choiceName = choice.value.fontFamily.replace(/['"]+/g, "");
       return choiceName === currentName;
     });
@@ -60,9 +61,13 @@ const getFonts = (editor: ReactEditor, items: SelectItem[]) => {
       current = currentItem.value.name;
     }
   }
-  return { selected, current };
+  return { selected, current: current ? shortName(current) : undefined };
 };
 
+const shortName = (fontFamily: string) => {
+  const parts = fontFamily.split(",");
+  return parts[0].replace(/['"]+/g, "").trim();
+};
 export interface EditorFont {
   name: string;
   fontFamily: string;
@@ -78,5 +83,5 @@ export const DefaultFonts: EditorFont[] = [
   { name: "Times", fontFamily: "Times, serif" },
   { name: "Times New Roman", fontFamily: "'Times New Roman', Times, serif" },
   { name: "Courier", fontFamily: "Courier, monsospace" },
-  { name: "Courier New", fontFamily: "'Courier New', monsospace" }
+  { name: "Courier New", fontFamily: "'Courier New', monsospace" },
 ];

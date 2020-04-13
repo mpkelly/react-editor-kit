@@ -1,22 +1,24 @@
 import React from "react";
-import { Range, Transforms, NodeEntry } from "slate";
+import { Range, Transforms } from "slate";
 import { Plugin } from "../../plugins/Plugin";
 import { clone } from "../../ui/Utils";
 import { RenderLeafProps, ReactEditor } from "slate-react";
 
 export const SelectionExtensionsPlugin: Plugin = {
-  withPlugin: editor => {
+  withPlugin: (editor) => {
     editor.markSelection = () => {
       const { selection } = editor;
       if (selection && Range.isExpanded(selection)) {
         editor.lastSelection = clone(selection);
       }
     };
-    editor.addSelectionMark = (type: string, value: any) => {
+    editor.addSelectionMark = (key: string, value: any) => {
       if (editor.lastSelection) {
         Transforms.select(editor, editor.lastSelection);
         editor.lastSelection = null;
-        editor.addMark(type, value);
+        editor.addMark(key, value);
+      } else {
+        editor.nextMark = { key, value };
       }
     };
     return editor;
@@ -35,7 +37,15 @@ export const SelectionExtensionsPlugin: Plugin = {
     }
     return undefined;
   },
-  editorStyles: () => EditorStyles
+  onKeyDown: (event: React.KeyboardEvent<HTMLElement>, editor: ReactEditor) => {
+    if (editor.nextMark) {
+      const { key, value } = editor.nextMark;
+      editor.addMark(key, value);
+      editor.nextMark = undefined;
+    }
+    return undefined;
+  },
+  editorStyles: () => EditorStyles,
 };
 
 const EditorStyles = `

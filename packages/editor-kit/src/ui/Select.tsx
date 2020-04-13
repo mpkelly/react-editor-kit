@@ -1,4 +1,10 @@
-import React, { useState, CSSProperties, useRef, useEffect } from "react";
+import React, {
+  useState,
+  CSSProperties,
+  useRef,
+  useEffect,
+  useCallback,
+} from "react";
 import { List, ListItem } from "./List";
 import { ModalPopup } from "../features/popup/HtmlElementModalPopup";
 import { usePlugin } from "../plugins/usePlugin";
@@ -36,6 +42,7 @@ export const Select = (props: SelectProps) => {
     handleValueChange,
     hideChoices,
     handleFocus,
+    handleBlur,
   } = useSelect(props);
   const disabled = !items.find((item) => !item.disabled);
   const { data: icons } = usePlugin("icon-provider") as IconProvider;
@@ -57,9 +64,12 @@ export const Select = (props: SelectProps) => {
         className="rek-input"
         value={value}
         onChange={handleValueChange}
+        onBlur={handleBlur}
+        onFocus={props.onFocus}
         ref={handleRef}
         disabled={disabled || !props.editable}
         type={props.type}
+        onClick={handleFocus}
       />
       {icons.dropdownIcon}
       <ModalPopup
@@ -83,6 +93,7 @@ export const useSelect = (props: SelectProps) => {
   const hideChoices = () => setShow(false);
   const [value, setValue] = useState(props.value || "");
   const element = useRef<HTMLElement | null>(null);
+  const clicked = useRef(false);
 
   useEffect(() => {
     if (props.value) {
@@ -95,6 +106,7 @@ export const useSelect = (props: SelectProps) => {
       text: item.text,
       style: item.style,
       onClick: () => {
+        clicked.current = false;
         setShow(false);
         props.onItemSelected(item);
       },
@@ -112,6 +124,7 @@ export const useSelect = (props: SelectProps) => {
   const handleSelect = (index: number) => {
     const item = filteredItems[index] as any;
     const value = item.value.value;
+    clicked.current = false;
     setValue(value);
     setShow(false);
     props.onItemSelected(item as SelectItem);
@@ -128,10 +141,13 @@ export const useSelect = (props: SelectProps) => {
     const value = event.currentTarget.value;
     const index = items.findIndex((item) => item.text === value);
     setActive(Math.max(index, 0));
-    props.onInputChange && props.onInputChange(value);
     setValue(value);
     setShow(true);
   };
+
+  const handleBlur = useCallback(() => {
+    props.onInputChange && props.onInputChange(value as any);
+  }, [value]);
 
   const handleRef = (ref: HTMLInputElement | null) => {
     element.current = ref;
@@ -141,7 +157,10 @@ export const useSelect = (props: SelectProps) => {
     block(event);
     props.onFocus && props.onFocus();
     setShow(true);
-    ((element.current as HTMLElement).firstChild as HTMLInputElement).focus();
+    if (clicked.current) {
+      ((element.current as HTMLElement).firstChild as HTMLInputElement).focus();
+    }
+    clicked.current = !clicked.current;
   };
 
   return {
@@ -154,6 +173,7 @@ export const useSelect = (props: SelectProps) => {
     items: filteredItems,
     hideChoices,
     element: element.current,
+    handleBlur,
   };
 };
 

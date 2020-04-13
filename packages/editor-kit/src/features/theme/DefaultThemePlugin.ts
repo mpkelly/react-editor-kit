@@ -2,12 +2,12 @@ import { Plugin } from "../../plugins/Plugin";
 import {
   FocusedLayer,
   PopupMarkerLayer,
-  PopupContentLayer
+  PopupContentLayer,
 } from "../../ui/Layers";
 
 export const DefaultThemePlugin: Plugin = {
   editorStyles: () => EditorStyle,
-  globalStyles: () => GlobalStyle
+  globalStyles: () => GlobalStyle,
 };
 
 const GlobalStyle = `
@@ -88,6 +88,7 @@ const GlobalStyle = `
 
 .rek-select input {
   cursor:pointer;
+  border-radius:3px;
   width:100%;
 }
 
@@ -147,6 +148,7 @@ const GlobalStyle = `
   border:none;
   outline:none;
   font-size:inherit;
+  border-radius:3px;
 }
 
 .rek-input:focus {

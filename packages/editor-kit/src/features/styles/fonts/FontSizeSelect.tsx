@@ -1,7 +1,8 @@
 import React from "react";
+import { Range } from "slate";
+import { ReactEditor } from "slate-react";
 import { Select, SelectItem } from "../../../ui/Select";
 import { useEditorKit } from "../../../editor/EditorKit";
-import { ReactEditor } from "slate-react";
 import { getPropertyValueAtCursor } from "../../../editor/Editor";
 import { useLastFocused } from "../../../editor/LastFocusedNode";
 
@@ -18,20 +19,21 @@ export const FontSizeSelect = (props: FontSizeSelectProps) => {
   };
 
   const handleChoice = (item: SelectItem) => {
+    console.log("Choice", item);
     changeValue(item.value);
   };
 
   const handleChange = (value: string) => {
     changeValue(Number(value));
   };
-  const items: SelectItem[] = fontSizes.map(size => ({
+  const items: SelectItem[] = fontSizes.map((size) => ({
     text: String(size),
     value: size,
-    disabled: !editor.isMarkSupported("fontSize", node)
+    disabled: !editor.isMarkSupported("fontSize", node),
   }));
 
   const currentSize = getFontSize(editor);
-  const selected = items.find(item => item.value === currentSize);
+  const selected = items.find((item) => item.value === currentSize);
 
   return (
     <Select
@@ -69,5 +71,5 @@ export const DefaultFontSizes = [
   36,
   48,
   60,
-  72
+  72,
 ];
