@@ -8,6 +8,7 @@ export interface TablePluginOptions {
 export declare const createTablePlugin: (options: TablePluginOptions) => Plugin;
 export declare const DefaultTable: {
     type: string;
+    headerRow: string;
     children: {
         type: string;
         children: {

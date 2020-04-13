@@ -7,17 +7,17 @@ var path = require("path");
 
 var config = {
   entry: {
-    app: "./src/Index.tsx"
+    app: "./src/Index.tsx",
   },
   output: {
     path: path.join(__dirname, "dist"),
     filename: "index.js",
     publicPath: "./dist",
     libraryTarget: "umd",
-    umdNamedDefine: true
+    umdNamedDefine: true,
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx", ".json"]
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
   },
   optimization: {
     minimize: true,
@@ -27,26 +27,41 @@ var config = {
         terserOptions: {
           ecma: 6,
           output: {
-            ascii_only: true
-          }
-        }
-      })
-    ]
+            ascii_only: true,
+          },
+        },
+      }),
+    ],
   },
   module: {
-    rules: [{ test: /\.tsx?$/, loader: "awesome-typescript-loader" }]
+    rules: [{ test: /\.tsx?$/, loader: "awesome-typescript-loader" }],
   },
   plugins: [
     new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ["**/bundle*.*js"]
+      cleanOnceBeforeBuildPatterns: ["**/bundle*.*js"],
     }),
-    new HardSourceWebpackPlugin()
+    new HardSourceWebpackPlugin(),
   ],
   externals: {
-    react: "react",
-    "react-dom": "react-dom",
-    "styled-components": "styled-components"
-  }
+    "react-dom": {
+      commonjs: "react-dom",
+      commonjs2: "react-dom",
+      amd: "react-dom",
+      root: "ReactDOM",
+    },
+    react: {
+      commonjs2: "react",
+      commonjs: "react",
+      amd: "react",
+      root: "React",
+    },
+    "styled-components": {
+      commonjs2: "styled-components",
+      commonjs: "styled-components",
+      amd: "styled-components",
+      root: "styled-components",
+    },
+  },
 };
 
 module.exports = (env, argv) => {
