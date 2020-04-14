@@ -128,7 +128,7 @@ const handleEnter = (
   event: React.KeyboardEvent<HTMLElement>
 ) => {
   event.preventDefault();
-  //1. Current list item has content to add a new one
+  //1. Current list item has content, so add a new one
   if (!isBlockEmpty(editor)) {
     Editor.withoutNormalizing(editor, () => {
       Transforms.insertNodes(editor, {
@@ -151,7 +151,7 @@ const handleEnter = (
         split: true,
       });
     } else {
-      //3. At top level, insert new paragraph
+      //3. At top level so cannot unwrap, insert new paragraph and break from list
       toggleList(editor, list.type);
     }
   }
@@ -168,14 +168,14 @@ const handleTab = (
 
   if (event.shiftKey) {
     let ancestor = getAncestor(editor, active as Element, 2);
+    // 1. tab+shift = move left to grandparent list if nested
     if (ancestor?.children.find((child) => child.type === "list-item")) {
-      // 1. tab+shift = move left to granparent list if nested
       Transforms.liftNodes(editor);
     } else {
       const options = {
         at: ReactEditor.findPath(editor, active as Element),
       };
-      // 2. tab+shift = unwrap and move to below parent if no granparent list
+      // 2. tab+shift = unwrap and move to below parent if no grandparent list
       if (active?.children.length == 1) {
         Transforms.setNodes(editor, { type: "paragraph" }, options);
       } else {
@@ -195,7 +195,7 @@ const handleTab = (
     event.preventDefault();
     const index = ancestor?.children.indexOf(active as Node) - 1;
     if (ancestor.children[index].type !== "list-item") {
-      // 3a. tab = move right. If the node above is a list then append.
+      // 3a. tab = move right. If the node above is a list then append to it.
       const otherList = ancestor.children[index];
       const destination = ReactEditor.findPath(
         editor,
