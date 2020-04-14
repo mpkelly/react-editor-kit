@@ -7,14 +7,14 @@ import {
   NodeEntry,
   Path,
   Text,
-  Node
+  Node,
 } from "slate";
 import {
   Editable,
   Slate,
   RenderElementProps,
   RenderLeafProps,
-  ReactEditor
+  ReactEditor,
 } from "slate-react";
 import { Plugin } from "../plugins/Plugin";
 import { useEditorKit } from "./EditorKit";
@@ -38,7 +38,7 @@ export const Editor = (props: EditorProps) => {
     plugins,
     spellCheck,
     delaySpellCheck,
-    readOnly
+    readOnly,
   } = useEditorKit();
   const renderElement = useCallback(
     (props: RenderElementProps) => handleRenderElement(props, plugins),
@@ -72,7 +72,7 @@ export const Editor = (props: EditorProps) => {
     []
   );
 
-  const paste = useCallback(event => {
+  const paste = useCallback((event) => {
     const clipboardData = event.clipboardData;
     const pastedData = clipboardData.getData("Text");
     if (!pastedData) {
@@ -202,7 +202,7 @@ const handleClick = (
   plugins: Plugin[],
   editor: SlateEditor
 ) => {
-  plugins.forEach(plugin => {
+  plugins.forEach((plugin) => {
     if (plugin.onClick) {
       plugin.onClick(event, editor);
     }
@@ -321,7 +321,7 @@ export const moveToEndOfBlock = (editor: ReactEditor) => {
     const offset = text.length;
     const range = {
       anchor: { ...anchor, offset },
-      focus: { ...focus, offset }
+      focus: { ...focus, offset },
     };
     Transforms.select(editor, range);
   }
@@ -353,7 +353,7 @@ export const deleteBackward = (
   length: number,
   unit: "character" | "word" | "line" | "block" = "character"
 ) => {
-  Array.from({ length }).forEach(count => {
+  Array.from({ length }).forEach((count) => {
     editor.deleteBackward({ unit } as any);
   });
 };
@@ -379,13 +379,13 @@ export const getSelectionRootNodes = (
   const focus = selection.focus.path.slice(0, anchor.length);
   const nodes: Node[] = [];
   for (let [node, path] of SlateEditor.nodes(editor, {
-    at: selection
+    at: selection,
   })) {
     //Ignore text nodes, the editor node and nodes below the selection
     if (!node.type || !path.length || !(path.length <= focus.length)) {
       continue;
     }
-    const hasParent = nodes.find(_node =>
+    const hasParent = nodes.find((_node) =>
       Path.isParent(ReactEditor.findPath(editor, _node), path)
     );
     //Don't add a node if it's parent (root) has been added already
@@ -400,4 +400,19 @@ export const getSelectionRootNodes = (
     }
   }
   return nodes;
+};
+
+export const getAncestor = (editor: ReactEditor, node: Node, level = 1) => {
+  let parent: Node | null = null;
+  let count = 0;
+  while (count !== level) {
+    count++;
+    const path = ReactEditor.findPath(editor, node);
+    parent = SlateEditor.parent(editor, path)[0];
+    if (parent === editor) {
+      return null;
+    }
+    node = parent;
+  }
+  return parent;
 };

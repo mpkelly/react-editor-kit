@@ -5,6 +5,7 @@ import { CursorPopup } from "../popup/CursorPopup";
 import { Location, Offsets } from "../popup/Popups";
 import { Range } from "slate";
 import { ReactEditor } from "slate-react";
+import { stop } from "../../ui/Utils";
 
 export interface SelectionToolbarProps {
   children: JSX.Element[];
@@ -51,7 +52,9 @@ export const SelectionToolbar = (props: SelectionToolbarProps) => {
       fixed
       delay={delay || 1000}
     >
-      <div className="rek-selection-toolbar">{children}</div>
+      <div className="rek-selection-toolbar" onMouseDown={stop}>
+        {children}
+      </div>
     </CursorPopup>
   );
 };

@@ -24,11 +24,14 @@ export const DefaultConstraints = {
     marks: [],
     nodes: [],
   },
+  "list-item": {
+    nodes: ["link", "unordered-list", "ordered-list", "aligned-block"],
+  },
   //Accept only links
   quote: {
     nodes: ["link"],
   },
-  //Accept everything except for tables
+  //Accept everything except for tables and videos
   "table-cell": {
     nodes: ["!table", "!video"],
   },
@@ -39,7 +42,7 @@ export const createConstrainsPlugin = (constraints: EditorConstrains) => {
     name: "constraints",
     withPlugin: (editor: ReactEditor) => {
       editor.isMarkSupported = (mark: string, target?: Node) => {
-        if (!getActiveNode(editor)) {
+        if (!target && !getActiveNode(editor)) {
           return false;
         }
         const markConstraints = getConstraints(editor, constraints, target);
@@ -51,7 +54,7 @@ export const createConstrainsPlugin = (constraints: EditorConstrains) => {
 
       editor.isNodeSupported = (node: string, target?: Node) => {
         const nodeConstraints = getConstraints(editor, constraints, target);
-        if (!getActiveNode(editor)) {
+        if (!target && !getActiveNode(editor)) {
           return false;
         }
         if (!nodeConstraints || !nodeConstraints.nodes) {

@@ -148,6 +148,12 @@ const GlobalStyle = `
     cursor:pointer;    
   }
 
+  .rek-table-cell-menu {
+    position:absolute;
+    top:2px;
+    right:2px;
+  }
+
   .rek-table-cell-menu.dropdown-icon.svg-icon {
     transform:scale(.8);
   }
@@ -170,6 +176,9 @@ const EditorStyle = `
     table-layout: fixed;
     border-collapse: collapse;
     border: 1px solid var(--divider-color);
+    :focus {
+      outline:none;
+    }
   }
             
   .rek-tr {

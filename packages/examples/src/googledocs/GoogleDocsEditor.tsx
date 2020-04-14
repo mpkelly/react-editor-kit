@@ -83,8 +83,6 @@ const plugins: Plugin[] = [
   StrikethroughPlugin,
   InlineCodePlugin,
   UnderlinePlugin,
-  OrderedListPlugin,
-  UnorderedListPlugin,
   QuotePlugin,
   H1Plugin,
   H2Plugin,

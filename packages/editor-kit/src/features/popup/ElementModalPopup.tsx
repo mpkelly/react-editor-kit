@@ -6,6 +6,7 @@ import { ReactEditor } from "slate-react";
 import { useEditorKit } from "../../editor/EditorKit";
 import { getPosition, Location, Offsets } from "./Popups";
 import { Portal } from "./Portal";
+import { block } from "../../ui/Utils";
 
 export interface ModalPopupProps {
   element: Element;
@@ -39,7 +40,7 @@ export const ModalPopup = (props: ModalPopupProps) => {
   return (
     <Portal>
       <Overlay onClick={onClickOutside}>
-        <PopupContent ref={handleRef} style={style}>
+        <PopupContent ref={handleRef} style={style} onMouseDown={block}>
           {children}
         </PopupContent>
       </Overlay>

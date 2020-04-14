@@ -91,7 +91,7 @@ export const createLink = (editor: ReactEditor) => {
     } else {
       //Track bug https://github.com/ianstormtaylor/slate/issues/3454
       (Transforms.wrapNodes as any)(editor, link, {
-        at: selection as Range,
+        at: (selection as Range).focus,
         split: true,
         hanging: false,
       });

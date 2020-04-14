@@ -3,6 +3,7 @@ import { useEditorKit } from "../../editor/EditorKit";
 import { Action } from "../actions/Action";
 import { isNodeActive } from "../blocks/Blocks";
 import { usePlugin } from "../../plugins/usePlugin";
+import { useLastFocused } from "../../editor/LastFocusedNode";
 
 export interface TableActionProps {
   children: JSX.Element;
@@ -17,8 +18,9 @@ export const TableAction = (props: TableActionProps) => {
       plugin.onTrigger(editor);
     }
   };
+  const { node } = useLastFocused(editor);
   const isActive = () => isNodeActive(editor, "table");
-  const enabled = editor.isNodeSupported("table");
+  const enabled = editor.isNodeSupported("table", node);
   return (
     <Action isActive={isActive} onMouseDown={onMouseDown} disabled={!enabled}>
       {children}

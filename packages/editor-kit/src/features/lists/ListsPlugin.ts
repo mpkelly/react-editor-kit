@@ -1,10 +1,14 @@
-import { Transforms, Editor, Point } from "slate";
+import { Transforms, Editor, Point, Node, Element } from "slate";
 import { Plugin, Trigger } from "../../plugins/Plugin";
 import { RenderElementProps, ReactEditor } from "slate-react";
 import { renderElement } from "../elements/ElementRenderer";
 import { isNodeActive, isBlockEmpty } from "../blocks/Blocks";
 import { MatchResult } from "../../editor/Matching";
-import { deleteBackward, getActiveNode } from "../../editor/Editor";
+import {
+  deleteBackward,
+  getActiveNode,
+  getAncestor,
+} from "../../editor/Editor";
 
 const createPlugin = (
   type: string,
@@ -13,23 +17,10 @@ const createPlugin = (
 ): Plugin => {
   return {
     triggers,
-    withPlugin: editor => {
+    withPlugin: (editor) => {
       const { normalizeNode } = editor;
       editor.normalizeNode = ([node, path]) => {
-        if (path.length > 1) {
-          const parent = Editor.parent(editor, path);
-          if (parent) {
-            const parentType = parent[0].type;
-            if (
-              parentType == type &&
-              node.type !== "list-item" &&
-              node.type !== type
-            ) {
-              Transforms.liftNodes(editor, {
-                at: path
-              });
-            }
-          }
+        if (node.type == type) {
         }
         return normalizeNode([node, path]);
       };
@@ -47,12 +38,12 @@ const createPlugin = (
       }
 
       Transforms.unwrapNodes(editor, {
-        match: n => n.type === type,
-        split: true
+        match: (n) => n.type === type,
+        split: true,
       });
 
       Transforms.setNodes(editor, {
-        type: "list-item"
+        type: "list-item",
       });
       const block = { type, children: [] };
       Transforms.wrapNodes(editor, block);
@@ -70,10 +61,13 @@ const createPlugin = (
       event: React.KeyboardEvent<HTMLElement>,
       editor: ReactEditor
     ) => {
-      if (!isNodeActive(editor, type)) {
+      if (!isNodeActive(editor, "list-item")) {
         return false;
       }
-      if (!isNodeActive(editor, "list-item")) {
+      const active = getActiveNode(editor);
+      let ancestor = getAncestor(editor, active as Element, 1);
+
+      if (ancestor!.type !== type) {
         return false;
       }
       if (event.keyCode === 13) {
@@ -89,24 +83,44 @@ const createPlugin = (
       }
       return false;
     },
-    editorStyles: () => EditorStyle
+    editorStyles: () => EditorStyle,
   };
 };
 
 export const OrderedListPlugin = createPlugin("ordered-list", "ol", [
-  { pattern: /^\s?[0-9]+\.\s/, range: "block" }
+  { pattern: /^\s?[0-9]+\.\s/, range: "block" },
 ]);
 
 export const UnorderedListPlugin = createPlugin("unordered-list", "ul", [
-  { pattern: /^\s?\*\s/g, range: "block" }
+  { pattern: /^\s?\*\s/g, range: "block" },
 ]);
 
 export const toggleOrderedList = (editor: ReactEditor) => {
-  return toggleList(editor, "ordered-list");
+  const active = getActiveNode(editor);
+  const parent = getAncestor(editor, active as Element, 1);
+  if (parent && parent.type == "unordered-list") {
+    Transforms.setNodes(
+      editor,
+      { type: "ordered-list", children: [] },
+      { at: ReactEditor.findPath(editor, parent) }
+    );
+  } else {
+    return toggleList(editor, "ordered-list");
+  }
 };
 
 export const toggleUnorderedList = (editor: ReactEditor) => {
-  return toggleList(editor, "unordered-list");
+  const active = getActiveNode(editor);
+  const parent = getAncestor(editor, active as Element, 1);
+  if (parent && parent.type == "ordered-list") {
+    Transforms.setNodes(
+      editor,
+      { type: "unordered-list", children: [] },
+      { at: ReactEditor.findPath(editor, parent) }
+    );
+  } else {
+    return toggleList(editor, "unordered-list");
+  }
 };
 
 const handleEnter = (
@@ -114,27 +128,30 @@ const handleEnter = (
   event: React.KeyboardEvent<HTMLElement>
 ) => {
   event.preventDefault();
+  //1. Current list item has content to add a new one
   if (!isBlockEmpty(editor)) {
     Editor.withoutNormalizing(editor, () => {
       Transforms.insertNodes(editor, {
         type: "list-item",
-        children: [{ text: "" }]
+        children: [{ text: "" }],
       });
     });
   } else {
-    const [, path] = Editor.node(editor, editor.selection?.focus as Point, {
-      edge: "end"
-    });
-    let [, parentPath] = Editor.parent(editor, path);
-    const [, listItemPath] = Editor.parent(editor, parentPath);
-    const [list, listPath] = Editor.node(editor, listItemPath);
-    const [listParent] = Editor.parent(editor, listPath);
+    const active = getActiveNode(editor);
+    if (!active) {
+      return false;
+    }
+    const list = getAncestor(editor, active, 1) as Element;
+    const listParent = getAncestor(editor, active, 2);
+
     if (listParent && listParent.children[0].type === "list-item") {
+      //2. If nested then unwrap and move left
       Transforms.unwrapNodes(editor, {
-        match: n => n.type === list.type,
-        split: true
+        match: (n) => n.type === list.type,
+        split: true,
       });
     } else {
+      //3. At top level, insert new paragraph
       toggleList(editor, list.type);
     }
   }
@@ -146,40 +163,51 @@ const handleTab = (
   event: React.KeyboardEvent<HTMLElement>,
   type: string
 ) => {
-  if (isBlockEmpty(editor)) {
+  //Handle
+  const active = getActiveNode(editor);
+
+  if (event.shiftKey) {
+    let ancestor = getAncestor(editor, active as Element, 2);
+    if (ancestor?.children.find((child) => child.type === "list-item")) {
+      // 1. tab+shift = move left to granparent list if nested
+      Transforms.liftNodes(editor);
+    } else {
+      const options = {
+        at: ReactEditor.findPath(editor, active as Element),
+      };
+      // 2. tab+shift = unwrap and move to below parent if no granparent list
+      if (active?.children.length == 1) {
+        Transforms.setNodes(editor, { type: "paragraph" }, options);
+      } else {
+        Transforms.unwrapNodes(editor, options);
+      }
+    }
     event.preventDefault();
-    if (event.shiftKey) {
-      Transforms.unwrapNodes(editor, {
-        match: n => n.type === type,
-        split: true
+    return true;
+  }
+
+  const ancestor = getAncestor(editor, active as Element, 1);
+  if (!ancestor) {
+    return false;
+  }
+
+  if (ancestor.children.length > 1) {
+    event.preventDefault();
+    const index = ancestor?.children.indexOf(active as Node) - 1;
+    if (ancestor.children[index].type !== "list-item") {
+      // 3a. tab = move right. If the node above is a list then append.
+      const otherList = ancestor.children[index];
+      const destination = ReactEditor.findPath(
+        editor,
+        otherList.children[otherList.children.length - 1]
+      );
+      destination[destination.length - 1]++;
+      Transforms.moveNodes(editor, {
+        to: destination,
       });
     } else {
-      const active = getActiveNode(editor);
-      if (active) {
-        const parent = Editor.parent(
-          editor,
-          ReactEditor.findPath(editor, active)
-        );
-        if (parent && parent[0].children.length > 1) {
-          const node = parent[0];
-          if (
-            node.children.length > 2 &&
-            node.children[node.children.length - 2].type === type
-          ) {
-            const at = ReactEditor.findPath(editor, active);
-            const children = node.children[node.children.length - 2].children;
-            const lastChildPath = ReactEditor.findPath(
-              editor,
-              children[children.length - 1]
-            );
-            lastChildPath[lastChildPath.length - 1]++;
-            Transforms.moveNodes(editor, { at, to: lastChildPath });
-          } else {
-            const block = { type, children: [] };
-            Transforms.wrapNodes(editor, block);
-          }
-        }
-      }
+      // 3b. otherwise, wrap the item in a new list and nest in parent
+      Transforms.wrapNodes(editor, { type, children: [] });
     }
     return true;
   }
@@ -190,26 +218,23 @@ const toggleList = (editor: ReactEditor, type: string) => {
   const isActive = isNodeActive(editor, type);
 
   Transforms.unwrapNodes(editor, {
-    match: n => n.type === type,
-    split: true
+    match: (n) => n.type === type,
+    split: true,
   });
 
   Editor.withoutNormalizing(editor, () => {
     Transforms.setNodes(editor, {
-      type: isActive ? "paragraph" : "list-item"
+      type: isActive ? "paragraph" : "list-item",
     });
 
     if (!isActive) {
-      const block = { type, children: [] };
-      Transforms.wrapNodes(editor, block);
+      const list = { type, children: [] };
+      Transforms.wrapNodes(editor, list);
     }
   });
 };
 
 const EditorStyle = `
-  ul, ol {
-    display:inline-block;
-  }
   ul ul ul ul,
   ul {
     list-style: square outside none;

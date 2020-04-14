@@ -1,12 +1,14 @@
 import { Editor, Transforms, Node, Path } from "slate";
-import { ReactEditor } from "slate-react";
-import { getActiveNode } from "../../editor/Editor";
 
 export const toggleBlock = (editor: Editor, type: string) => {
   const isActive = isNodeActive(editor, type);
-
+  const { selection } = editor;
+  if (!selection) {
+    return;
+  }
   Transforms.setNodes(editor, {
-    type: isActive ? "paragraph" : type
+    type: isActive ? "paragraph" : type,
+    at: selection.focus,
   });
 };
 
@@ -17,7 +19,7 @@ export const isNodeActive = (editor: Editor, type: string) => {
   }
   const [match] = Editor.nodes(editor, {
     at: selection,
-    match: n => n.type === type
+    match: (n) => n.type === type,
   });
   return !!match;
 };
@@ -26,7 +28,8 @@ export const isBlockEmpty = (editor: Editor) => {
   const { selection } = editor;
 
   if (selection) {
-    const [node] = Editor.node(editor, selection);
+    const [node] = Editor.parent(editor, selection.focus);
+    console.log("Node text", node, Node.string(node));
     return Node.string(node).length === 0;
   }
   return false;

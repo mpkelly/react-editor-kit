@@ -24,7 +24,6 @@ export const FontSelect = (props: FontSelectProps) => {
   const handleChange = (item: SelectItem) => {
     editor.addSelectionMark("fontFamily", item.value.fontFamily);
   };
-
   const items: SelectItem[] = fonts.map((font) => ({
     text: font.name,
     value: font,
@@ -51,7 +50,6 @@ const getFonts = (editor: ReactEditor, items: SelectItem[]) => {
   let selected = items[0];
   if (current) {
     const currentName = current.replace(/['"]+/g, "");
-
     const currentItem = items.find((choice) => {
       const choiceName = choice.value.fontFamily.replace(/['"]+/g, "");
       return choiceName === currentName;

@@ -18,7 +18,7 @@ export const Intro = () => {
       </XLargeText>
       <Text className="secondary-light-text center" id="intro-sub-text">
         Editor Kit includes plugins for many standard editor features. Easily
-        create anything from a simple comment box to a full blown word-processor
+        create anything from a simple comment box to a full-blown word-processor
         like Google Docs.
       </Text>
       <Logos>

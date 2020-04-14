@@ -1,7 +1,8 @@
 import React from "react";
+import { ReactEditor } from "slate-react";
 import { useEditorKit } from "../../editor/EditorKit";
 import { createLink } from "./Link";
-import { ReactEditor } from "slate-react";
+
 import { isNodeActive } from "../blocks/Blocks";
 import { Action } from "../actions/Action";
 
