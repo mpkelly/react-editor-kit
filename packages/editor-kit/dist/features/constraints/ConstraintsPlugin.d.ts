@@ -16,6 +16,9 @@ export declare const DefaultConstraints: {
         marks: never[];
         nodes: never[];
     };
+    "list-item": {
+        nodes: string[];
+    };
     quote: {
         nodes: string[];
     };

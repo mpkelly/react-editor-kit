@@ -27,3 +27,4 @@ export declare const getPropertyValueAtCursor: (propertyName: string, editor: Re
 export declare const deleteBackward: (editor: ReactEditor, length: number, unit?: "character" | "word" | "line" | "block") => void;
 export declare const addMarkAtRange: (editor: ReactEditor, range: Range, type: string, value: any) => void;
 export declare const getSelectionRootNodes: (selection: Range, editor: ReactEditor) => Node[];
+export declare const getAncestor: (editor: ReactEditor, node: Node, level?: number) => import("slate").Element | null;
