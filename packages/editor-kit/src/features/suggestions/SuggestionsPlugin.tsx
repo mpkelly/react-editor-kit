@@ -82,7 +82,7 @@ const handleTrigger = (editor: ReactEditor, range: Range) => {
   }
 };
 
-export const GlobalStyle = `
+const GlobalStyle = `
   .rek-suggestion-list {
     margin: 0;
     padding: 2px;

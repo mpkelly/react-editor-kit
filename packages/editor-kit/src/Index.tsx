@@ -115,3 +115,7 @@ export * from "./features/readonly/ReadOnlyButton";
 export * from "./features/rule/Rule";
 export * from "./features/rule/RulePlugin";
 export * from "./features/resizable/Resizable";
+export * from "./features/suggestions/Suggestion";
+export * from "./features/suggestions/SuggestionList";
+export * from "./features/suggestions/Suggestions";
+export * from "./features/suggestions/SuggestionsPlugin";
