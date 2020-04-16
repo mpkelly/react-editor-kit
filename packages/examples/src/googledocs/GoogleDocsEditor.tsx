@@ -65,6 +65,8 @@ import {
   Resizable,
   ImagePlugin,
   InfoAlertPlugin,
+  ErrorAlertPlugin,
+  WarningAlertPlugin,
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 import { createStaticHashtags } from "./HashtagSuggestionPlugin";
@@ -116,6 +118,8 @@ const plugins: Plugin[] = [
   RulePlugin,
   ImagePlugin,
   InfoAlertPlugin,
+  WarningAlertPlugin,
+  ErrorAlertPlugin,
   createStaticHashtags({
     hashtags: [
       "#twitter",

@@ -37,7 +37,7 @@ export const createAlertPlugin = (
   triggerName: string
 ): Plugin => {
   return {
-    triggers: [{ pattern: `:${triggerName}`, range: "word-before" }],
+    triggers: [{ pattern: `:${triggerName} `, range: "block" }],
     onTrigger: (
       editor: ReactEditor,
       match?: MatchResult[],

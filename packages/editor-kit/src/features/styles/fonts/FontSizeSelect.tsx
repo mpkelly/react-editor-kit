@@ -19,7 +19,6 @@ export const FontSizeSelect = (props: FontSizeSelectProps) => {
   };
 
   const handleChoice = (item: SelectItem) => {
-    console.log("Choice", item);
     changeValue(item.value);
   };
 

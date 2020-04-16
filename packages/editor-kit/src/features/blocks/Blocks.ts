@@ -29,7 +29,6 @@ export const isBlockEmpty = (editor: Editor) => {
 
   if (selection) {
     const [node] = Editor.parent(editor, selection.focus);
-    console.log("Node text", node, Node.string(node));
     return Node.string(node).length === 0;
   }
   return false;

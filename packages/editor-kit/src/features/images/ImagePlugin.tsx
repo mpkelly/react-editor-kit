@@ -9,10 +9,10 @@ import { Transforms } from "slate";
 export const ImagePlugin: Plugin = {
   withPlugin: (editor: ReactEditor) => {
     const { insertData, isVoid } = editor;
-    editor.isVoid = element => {
+    editor.isVoid = (element) => {
       return element.type === "image" ? true : isVoid(element);
     };
-    editor.insertData = data => {
+    editor.insertData = (data) => {
       const text = data.getData("text/plain");
       const { files } = data;
 
@@ -45,7 +45,7 @@ export const ImagePlugin: Plugin = {
       return <Image {...props} />;
     }
   },
-  editorStyles: () => EditorStyles
+  editorStyles: () => EditorStyles,
 };
 
 export const isImageUrl = (url: string) => {
@@ -65,6 +65,7 @@ export const EditorStyles = `
   .rek-image {
     display: block;
     width: 100%;
+    max-width: 100%;
   }
 
   .rek-image.focused {

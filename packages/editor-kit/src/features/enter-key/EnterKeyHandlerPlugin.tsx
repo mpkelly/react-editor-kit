@@ -8,10 +8,15 @@ export const EnterKeyHandler: Plugin = {
       if (event.shiftKey) {
         editor.insertText("\n");
         event.preventDefault();
-        return true;
+      } else {
+        Transforms.insertNodes(editor, {
+          type: "paragraph",
+          children: [{ text: "" }],
+        });
       }
+      event.stopPropagation();
+      return true;
     }
-
     return false;
   },
 };

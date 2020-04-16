@@ -5,5 +5,5 @@ export const ErrorAlertPlugin = createAlertPlugin(
   "error-alert",
   "red",
   "#ffc5c4",
-  "info"
+  "error"
 );
