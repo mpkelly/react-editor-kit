@@ -4,5 +4,6 @@ export const WarningAlertPlugin = createAlertPlugin(
   "warningAlert",
   "warning-alert",
   "orange",
-  "#ffdea1"
+  "#ffdea1",
+  "warning"
 );

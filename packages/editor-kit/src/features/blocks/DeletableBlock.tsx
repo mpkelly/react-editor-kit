@@ -36,12 +36,7 @@ export const DeletableBlock = (props: DeletableBlockProps) => {
       element={element}
       {...rest}
     >
-      <Resizable
-        initialWidth={element.width || "100%"}
-        onChange={handleWidthChange}
-      >
-        {children}
-      </Resizable>
+      {children}
     </BlockWrapper>
   );
 };

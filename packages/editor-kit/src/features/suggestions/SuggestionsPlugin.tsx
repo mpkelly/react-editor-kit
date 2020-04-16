@@ -30,7 +30,7 @@ export const createSuggestionsPlugin = (
     },
     triggers: options.suggestions.triggers,
     onTrigger: (editor: ReactEditor, matches: MatchResult[]) => {
-      handleTrigger(editor, matches[0].range);
+      handleTrigger(editor, matches[0].range, options.type);
     },
     renderLeaf: (props: RenderLeafProps, editor: ReactEditor) => {
       const { leaf } = props;
@@ -38,8 +38,8 @@ export const createSuggestionsPlugin = (
         ReactEditor.focus(editor);
         Transforms.setNodes(
           editor,
-          { "suggestion-marker": undefined },
-          { match: (node) => node["suggestion-marker"] }
+          { [`${options.type}-marker`]: undefined },
+          { match: (node) => node[`${options.type}-marker`] }
         );
         if (choice) {
           deleteBackward(editor, Node.string(leaf).length);
@@ -53,7 +53,7 @@ export const createSuggestionsPlugin = (
           Editor.insertText(editor, " ");
         }
       };
-      if (leaf["suggestion-marker"]) {
+      if (leaf[`${options.type}-marker`]) {
         return (
           <Suggestion
             {...props}
@@ -75,10 +75,10 @@ export const createSuggestionsPlugin = (
   };
 };
 
-const handleTrigger = (editor: ReactEditor, range: Range) => {
+const handleTrigger = (editor: ReactEditor, range: Range, type: string) => {
   const { selection } = editor;
   if (selection) {
-    addMarkAtRange(editor, range, "suggestion-marker", range);
+    addMarkAtRange(editor, range, `${type}-marker`, range);
   }
 };
 

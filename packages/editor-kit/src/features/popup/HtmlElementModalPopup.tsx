@@ -1,4 +1,4 @@
-import React, { useState, useCallback, CSSProperties, memo } from "react";
+import React, { useState, useCallback, CSSProperties } from "react";
 import ResizeSensor from "react-resize-detector";
 import { PopupContent } from "./PopupContent";
 import { Overlay } from "../../ui/Popup";

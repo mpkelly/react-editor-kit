@@ -64,8 +64,10 @@ import {
   RulePlugin,
   Resizable,
   ImagePlugin,
+  InfoAlertPlugin,
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
+import { createStaticHashtags } from "./HashtagSuggestionPlugin";
 
 const GoogleDocsStylePlugin: Plugin = {
   globalStyles: () => `
@@ -113,6 +115,17 @@ const plugins: Plugin[] = [
   TextAlignPlugin,
   RulePlugin,
   ImagePlugin,
+  InfoAlertPlugin,
+  createStaticHashtags({
+    hashtags: [
+      "#twitter",
+      "#hastags",
+      "#orange",
+      "#blue",
+      "turquoise",
+      "#purple",
+    ],
+  }),
 ];
 
 const initialValue = [
