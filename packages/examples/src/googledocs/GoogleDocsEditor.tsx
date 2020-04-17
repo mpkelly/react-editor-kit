@@ -101,7 +101,6 @@ const plugins: Plugin[] = [
   TablePlugin,
   CodeHighlighterPlugin,
   LabelsPlugin,
-  EnterKeyHandler,
   createStaticMentions({
     mentions: MentionsItems,
   }),
@@ -130,6 +129,7 @@ const plugins: Plugin[] = [
       "#purple",
     ],
   }),
+  EnterKeyHandler,
 ];
 
 const initialValue = [

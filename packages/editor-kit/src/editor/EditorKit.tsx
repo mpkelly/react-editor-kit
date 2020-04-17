@@ -7,14 +7,9 @@ import React, {
   useRef,
   Fragment,
   memo,
-  useCallback
+  useCallback,
 } from "react";
-import {
-  createEditor as createSlateEditor,
-  Editor,
-  Transforms,
-  Node
-} from "slate";
+import { createEditor as createSlateEditor } from "slate";
 import { withReact, ReactEditor } from "slate-react";
 import { Plugin } from "../plugins/Plugin";
 import { DefaultThemePlugin } from "../features/theme/DefaultThemePlugin";
@@ -31,7 +26,7 @@ const InternalPlugins: Plugin[] = [
   IconProviderPlugin,
   SelectionExtensionsPlugin,
   ConstraintsPlugin,
-  LabelsPlugin
+  LabelsPlugin,
 ];
 
 export interface EditorKitValue {
@@ -86,7 +81,7 @@ export const EditorKit = memo((props: EditorKitProps) => {
     spellCheck,
     disableSpellCheck,
     enableSpellCheck,
-    delaySpellCheck
+    delaySpellCheck,
   } = useSpellcheck(Boolean(props.spellCheck), render);
 
   useEffect(() => {
@@ -107,7 +102,7 @@ export const EditorKit = memo((props: EditorKitProps) => {
     spellCheck,
     disableSpellCheck,
     enableSpellCheck,
-    delaySpellCheck
+    delaySpellCheck,
   };
 
   return (
@@ -122,9 +117,9 @@ export const EditorKit = memo((props: EditorKitProps) => {
 
 const getPlugins = (userPlugins: Plugin[]) => {
   return InternalPlugins.filter(
-    plugin =>
+    (plugin) =>
       !userPlugins.find(
-        other => Boolean(other.name) && other.name === plugin.name
+        (other) => Boolean(other.name) && other.name === plugin.name
       )
   ).concat(userPlugins);
 };
@@ -137,13 +132,6 @@ const createEditor = (plugins: Plugin[]): ReactEditor => {
         editor = plugin.withPlugin(editor);
       }
     });
-    editor.replaceNode = (element: Node, replacement: Node) => {
-      const at = ReactEditor.findPath(editor, element);
-      Transforms.select(editor, at);
-      Transforms.unwrapNodes(editor, { at });
-      Transforms.delete(editor);
-      Editor.insertNode(editor, replacement);
-    };
     return editor;
   }, []);
 };
@@ -152,7 +140,7 @@ const generateStyle = (plugins: Plugin[]) => {
   const editorStyles: string[] = [];
   const globalStyles: string[] = [];
 
-  plugins.forEach(plugin => {
+  plugins.forEach((plugin) => {
     if (plugin.editorStyles) {
       editorStyles.push(plugin.editorStyles());
     }

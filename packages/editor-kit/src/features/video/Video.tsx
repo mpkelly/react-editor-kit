@@ -9,6 +9,7 @@ import { stop } from "../../ui/Utils";
 import { useEditorKit } from "../../editor/EditorKit";
 import { HoverPopup } from "../popup/HoverPopup";
 import { IconProvider } from "../icons/IconProviderPlugin";
+import { Transforms } from "slate";
 
 export const Video = memo((props: RenderElementProps) => {
   const { attributes, element, children } = props;
@@ -58,8 +59,7 @@ export const VideoSettings = memo((props: VideoSettingsProps) => {
     []
   );
   const handleSave = useCallback(() => {
-    const next = { ...element, url };
-    editor.replaceNode(element, next);
+    Transforms.setNodes(editor, { url });
   }, [url]);
 
   return (

@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useCallback, memo } from "react";
+import React, { Fragment, useState, useCallback } from "react";
 import { Node, Transforms, Range, Editor } from "slate";
 import { RenderElementProps, ReactEditor } from "slate-react";
 import { Tooltip } from "../popup/Tooltip";
@@ -68,15 +68,15 @@ const updateLink = (editor: ReactEditor, element: Node, link: LinkModel) => {
     url: link.url,
     children: [{ text: link.displayName }],
   };
-  editor.replaceNode(element, node);
+  Transforms.setNodes(editor, node);
 };
 
 export const createLink = (editor: ReactEditor) => {
   if (isNodeActive(editor, "link")) {
-    const [link] = Editor.nodes(editor, {
+    const [] = Editor.nodes(editor, {
       match: (n) => n.type === "link",
     });
-    editor.replaceNode(link[0], { ...link[0], editing: true });
+    Transforms.setNodes(editor, { editing: true });
   } else {
     const { selection } = editor;
     const isCollapsed = selection && Range.isCollapsed(selection);

@@ -3,7 +3,7 @@ import React, {
   useRef,
   Fragment,
   useCallback,
-  CSSProperties
+  CSSProperties,
 } from "react";
 import { Overlay } from "../../ui/Popup";
 import { Show } from "../../ui/Show";
@@ -28,7 +28,7 @@ export const Resizable = (props: ResizableProps) => {
 
   const handleUp = useCallback(() => {
     if (state.down > -1) {
-      setState(current => ({ ...current, down: -1 }));
+      setState((current) => ({ ...current, down: -1 }));
     }
   }, [state]);
 
@@ -56,7 +56,7 @@ export const Resizable = (props: ResizableProps) => {
       multiplier.current = 1;
     }
     const down = event.clientX;
-    setState(current => ({ ...current, down }));
+    setState((current) => ({ ...current, down }));
   };
 
   const allStyle = { ...(style || {}), ...{ width: state.width } };
@@ -64,8 +64,16 @@ export const Resizable = (props: ResizableProps) => {
   return (
     <Fragment>
       <div className="rek-resizable" style={allStyle} ref={handleRef}>
-        <div className="rek-resize-handle-start" onMouseDown={handleDown} />
-        <div className="rek-resize-handle-end" onMouseDown={handleDown} />
+        <div
+          className="rek-resize-handle-start"
+          onMouseDown={handleDown}
+          contentEditable={false}
+        />
+        <div
+          className="rek-resize-handle-end"
+          onMouseDown={handleDown}
+          contentEditable={false}
+        />
         {children}
       </div>
       <Show when={state.down > -1}>

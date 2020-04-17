@@ -1,12 +1,14 @@
 import { useState, useCallback } from "react";
 import { useKeyPress } from "./KeyPress";
 import { block } from "./Utils";
+import { Editor } from "slate";
 
 export const useKeyNavigation = (
   total: number,
   handleSelect: (index: number) => any,
   initialActive: number,
-  enabled: boolean
+  enabled: boolean,
+  editor: HTMLElement
 ) => {
   const [active, setActive] = useState(initialActive);
 
@@ -44,18 +46,21 @@ export const useKeyNavigation = (
     targetKeys: ["ArrowDown"],
     handler: handleNext,
     deps: [enabled, total, active],
+    editor,
   });
 
   useKeyPress({
     targetKeys: ["ArrowUp"],
     handler: handlePrevious,
     deps: [enabled, total, active],
+    editor,
   });
 
   useKeyPress({
     targetKeys: ["Enter", "Tab"],
     handler: _handleSelect,
     deps: [active, enabled, total, handleSelect],
+    editor,
   });
 
   return { activeIndex: active, setActive };

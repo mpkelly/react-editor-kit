@@ -1,28 +1,36 @@
 import React from "react";
-import { Plugin } from "../../plugins/Plugin";
+import { Plugin, Trigger } from "../../plugins/Plugin";
 import { RenderElementProps, ReactEditor } from "slate-react";
-import { Transforms, Range } from "slate";
+import { Transforms } from "slate";
 import { Video } from "./Video";
 import { MatchResult } from "../../editor/Matching";
+import { deleteBackward } from "../../editor/Editor";
 
 export const VideoPlugin: Plugin = {
   name: "video",
   withPlugin: (editor: ReactEditor) => {
     const { isVoid } = editor;
-    editor.isVoid = element => {
+    editor.isVoid = (element) => {
       return element.type === "video" ? true : isVoid(element);
     };
     return editor;
   },
   triggers: [{ pattern: ":video", range: "word-before" }],
-  onTrigger: (editor: ReactEditor, matches?: MatchResult[]) => {
-    if (matches) {
-      editor.deleteBackward("word");
+  onTrigger: (
+    editor: ReactEditor,
+    matches?: MatchResult[],
+    trigger?: Trigger
+  ) => {
+    if (!editor.isNodeSupported("video")) {
+      return;
+    }
+    if (trigger) {
+      deleteBackward(editor, (trigger.pattern as string).length);
     }
     Transforms.insertNodes(editor, {
       type: "video",
       url: "",
-      children: [{ text: "" }] //Include empty child
+      children: [{ text: "" }], //Include empty child
     });
   },
   renderElement: (props: RenderElementProps) => {
@@ -32,7 +40,7 @@ export const VideoPlugin: Plugin = {
     return undefined;
   },
   globalStyles: () => GlobalStyle,
-  editorStyles: () => EditorStyle
+  editorStyles: () => EditorStyle,
 };
 
 const GlobalStyle = `

@@ -11,6 +11,8 @@ import { usePlugin } from "../plugins/usePlugin";
 import { IconProvider } from "../features/icons/IconProviderPlugin";
 import { block } from "./Utils";
 import { useKeyNavigation } from "./KeyNavigation";
+import { ReactEditor } from "slate-react";
+import { useEditorKit } from "../editor/EditorKit";
 
 export interface SelectProps {
   onInputChange?(value: string): void;
@@ -32,6 +34,16 @@ export interface SelectItem {
 }
 
 export const Select = (props: SelectProps) => {
+  const { editor } = useEditorKit();
+  let editorElement: HTMLElement | null = null;
+  try {
+    editorElement = ReactEditor.toDOMNode(editor, editor);
+  } catch (Error) {}
+
+  if (!editorElement) {
+    return null;
+  }
+
   const {
     show,
     items,
@@ -43,7 +55,7 @@ export const Select = (props: SelectProps) => {
     hideChoices,
     handleFocus,
     handleBlur,
-  } = useSelect(props);
+  } = useSelect(props, editorElement);
   const disabled = !items.find((item) => !item.disabled);
   const { data: icons } = usePlugin("icon-provider") as IconProvider;
   const focusClass = show ? "focus" : "";
@@ -88,7 +100,7 @@ export const Select = (props: SelectProps) => {
   );
 };
 
-export const useSelect = (props: SelectProps) => {
+export const useSelect = (props: SelectProps, editor: HTMLElement) => {
   const [show, setShow] = useState(false);
   const hideChoices = () => setShow(false);
   const [value, setValue] = useState(props.value || "");
@@ -134,7 +146,8 @@ export const useSelect = (props: SelectProps) => {
     filteredItems.length,
     handleSelect,
     activeItemIndex,
-    show
+    show,
+    editor
   );
 
   const handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -7,6 +7,9 @@ import { stop } from "../../ui/Utils";
 import { Spinner } from "../../ui/Spinner";
 import { useKeyNavigation } from "../../ui/KeyNavigation";
 import { ensureInView } from "../../ui/List";
+import { useEditorKit } from "../../editor/EditorKit";
+import { ReactEditor } from "slate-react";
+import { Editor } from "slate";
 
 export interface SuggestionListProps {
   match: string;
@@ -23,11 +26,18 @@ export const SuggestionList = memo((props: SuggestionListProps) => {
     }
   };
 
+  const { editor } = useEditorKit();
+  const element = ReactEditor.toDOMNode(editor, editor);
+  if (!element) {
+    return null;
+  }
+
   const { activeIndex, setActive } = useKeyNavigation(
     choices.length,
     handleSelect,
     0,
-    true
+    true,
+    element
   );
 
   useEffect(() => {
@@ -71,7 +81,7 @@ export const SuggestionList = memo((props: SuggestionListProps) => {
                   key={choice.id || choice.name || index}
                   ref={index === activeIndex ? ensureInView : undefined}
                   className={index === activeIndex ? "active" : ""}
-                  onMouseDown={event => {
+                  onMouseDown={(event) => {
                     event.preventDefault();
                     handleChoice(choice);
                   }}

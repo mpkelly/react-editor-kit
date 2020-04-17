@@ -27,8 +27,11 @@ export const BlockWrapper = (props: BlockWrapperProps) => {
   return (
     <div
       className={`rek-block-wrapper ${inlineClassName} ${focusClassName} ${className}`}
+      contentEditable={false}
     >
-      {children}
+      <div contentEditable={true} className="rek-block-wrapper-content">
+        {children}
+      </div>
       <Show when={isFocusedWithin || inside}>
         <div
           contentEditable={false}

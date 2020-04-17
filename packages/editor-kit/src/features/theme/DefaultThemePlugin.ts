@@ -365,8 +365,15 @@ const EditorStyle = `
     }
   }
 
-  .rek-block-wrapper:not(.inline) > :first-child {
+  .rek-block-wrapper:not(.inline) .rek-block-wrapper-content {
     width:100%;
+  }
+
+  .rek-block-wrapper-content {
+    outline:none;
+    :focus {
+      outline:none;
+    }
   }
 
   .rek-block-wrapper.inline {
