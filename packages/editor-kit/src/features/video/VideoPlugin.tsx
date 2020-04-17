@@ -47,6 +47,7 @@ const GlobalStyle = `
 .rek-video-settings {
   padding:8px;
   display:flex;
+  margin-bottom:16px;
 
   input {
     width:240px;
@@ -60,12 +61,16 @@ const GlobalStyle = `
 
 const EditorStyle = `
   .rek-video {
-    position:relative;
-    margin: 0 auto;
-    width:auto !important;
+    position:relative;    
     min-height:120px;
+    background-color: rgba(0,0,0,.1);    
   }
-  .rek-video-,toolbar {
+
+  .rek-video div {
+    margin: 0 auto;
+  }
+
+  .rek-video-toolbar {
     display:flex;
     align-items:center;
     justify-content:center;
@@ -78,5 +83,8 @@ const EditorStyle = `
   }
   .rek-video-toolbar .settings-icon path {
     fill: var(--secondary-text-color);
+    :hover {
+      fill: var(--action-color);
+    }
   }
 `;

@@ -14,8 +14,8 @@ export const BlockWrapper = (props: BlockWrapperProps) => {
   const { isFocusedWithin } = useFocused(element);
   const [inside, setInside] = useState(false);
   const className = props.className || "";
-  const focusClassName = isFocusedWithin ? "focused" : "";
-  const inlineClassName = inline ? "inline" : "";
+  const focusClassName = isFocusedWithin ? "rek-focused" : "";
+  const inlineClassName = inline ? "rek-inline" : "";
 
   const handleEnter = () => {
     setInside(true);

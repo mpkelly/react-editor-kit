@@ -7,9 +7,9 @@ import { deleteBackward } from "../../editor/Editor";
 import { DeletableBlock } from "../blocks/DeletableBlock";
 
 export const DividerPlugin: Plugin = {
-  withPlugin: editor => {
+  withPlugin: (editor) => {
     const { isVoid } = editor;
-    editor.isVoid = element => {
+    editor.isVoid = (element) => {
       return element.type === "divider" ? true : isVoid(element);
     };
     return editor;
@@ -27,7 +27,7 @@ export const DividerPlugin: Plugin = {
     Transforms.insertNodes(editor, {
       type: "divider",
       children: [{ text: "" }],
-      size
+      size,
     });
   },
   renderElement: (props: RenderElementProps) => {
@@ -35,7 +35,7 @@ export const DividerPlugin: Plugin = {
       return <Divider {...props} />;
     }
   },
-  editorStyles: () => EditorStyle
+  editorStyles: () => EditorStyle,
 };
 
 const Divider = (props: RenderElementProps) => {
@@ -55,7 +55,7 @@ const EditorStyle = `
     width:100%;
     height:1px;
     border-top:1px solid var(--divider-color);
-    .focused {
+    .rek-focused {
       border: 2px solid var(--focus-color);
     }
   }
@@ -64,7 +64,7 @@ const EditorStyle = `
     width:100%;
     height:2px;
     border-top:2px solid var(--divider-color);
-    .focused {
+    .rek-focused {
       border: 2px solid var(--focus-color);
     }
   }

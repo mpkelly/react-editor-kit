@@ -3,7 +3,7 @@ import {
   RenderElementProps,
   useSelected,
   useFocused,
-  ReactEditor
+  ReactEditor,
 } from "slate-react";
 import { DeletableBlock } from "../blocks/DeletableBlock";
 import { useEditorKit } from "../../editor/EditorKit";
@@ -19,7 +19,7 @@ export const Image = (props: RenderElementProps) => {
   };
   const selected = useSelected();
   const focused = useFocused();
-  const focusedClass = selected && focused ? "focused" : "";
+  const focusedClass = selected && focused ? "rek-focused" : "";
 
   return (
     <DeletableBlock {...props}>

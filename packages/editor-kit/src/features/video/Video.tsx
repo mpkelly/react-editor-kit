@@ -1,5 +1,5 @@
 import React, { useState, useCallback, memo } from "react";
-import { RenderElementProps } from "slate-react";
+import { RenderElementProps, ReactEditor } from "slate-react";
 import ReactPlayer from "react-player";
 import { DeletableBlock } from "../blocks/DeletableBlock";
 import { usePlugin } from "../../plugins/usePlugin";
@@ -7,13 +7,13 @@ import { Icon } from "../icons/Icon";
 import { ModalPopup } from "../popup/ElementModalPopup";
 import { stop } from "../../ui/Utils";
 import { useEditorKit } from "../../editor/EditorKit";
-import { HoverPopup } from "../popup/HoverPopup";
 import { IconProvider } from "../icons/IconProviderPlugin";
 import { Transforms } from "slate";
 import { Labels } from "../i18n/LabelsPlugin";
 
 export const Video = memo((props: RenderElementProps) => {
   const { attributes, element, children } = props;
+  const { editor } = useEditorKit();
   const { data } = usePlugin("icon-provider") as IconProvider;
   const [showSettings, setShowSettings] = useState(!Boolean(element.url));
 
@@ -23,16 +23,23 @@ export const Video = memo((props: RenderElementProps) => {
   const handleShowSettings = useCallback(() => {
     setShowSettings(true);
   }, []);
+  const handleDelete = useCallback(() => {
+    Transforms.delete(editor, { at: ReactEditor.findPath(editor, element) });
+  }, []);
 
   return (
-    <DeletableBlock {...props}>
-      <div className="rek-video" contentEditable={false} {...attributes}>
-        {element.url && <ReactPlayer url={element.url} light />}
-        <HoverPopup element={element} location="inside-end">
-          <div className="rek-video-toolbar rek-panel">
-            <Icon icon={data.settings} onClick={handleShowSettings} />
-          </div>
-        </HoverPopup>
+    <DeletableBlock
+      {...props}
+      toolbarContent={
+        <div className="rek-video-toolbar rek-panel" contentEditable={false}>
+          <Icon icon={data.settings} onClick={handleShowSettings} />
+          <div className="rek-v-toolbar-divider" />
+          <Icon icon={data.delete} onClick={handleDelete} />
+        </div>
+      }
+    >
+      <div className="rek-video" {...attributes} contentEditable={false}>
+        <ReactPlayer url={element.url} light />
         <ModalPopup
           show={showSettings}
           element={element}
@@ -61,7 +68,11 @@ export const VideoSettings = memo((props: VideoSettingsProps) => {
     []
   );
   const handleSave = useCallback(() => {
-    Transforms.setNodes(editor, { url });
+    Transforms.setNodes(
+      editor,
+      { url },
+      { at: ReactEditor.findPath(editor, element) }
+    );
   }, [url]);
 
   return (

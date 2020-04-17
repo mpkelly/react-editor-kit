@@ -96,7 +96,7 @@ const GlobalStyle = `
   background-color: var(--control-hover-color);
 }
 
-.rek-select.focus:not(.rek-disabled) {
+.rek-select.rek-focus:not(.rek-disabled) {
   border: 2px solid var(--focus-color);
 }
 
@@ -254,6 +254,9 @@ input[type=number] {
 
 .rek-resizable {
   position:relative;    
+  :first-child {
+    margin:0 auto;
+  }
 }
 
 .rek-resize-handle-start {
@@ -294,7 +297,6 @@ input[type=number] {
   height: 0;
   width: 0;
 }
-
 
 .rek-checkmark {
   position: absolute;
@@ -380,7 +382,7 @@ const EditorStyle = `
     display:inline-flex;
   }
 
-  .rek-block-wrapper.focused {
+  .rek-block-wrapper.rek-focused {
     z-index: ${FocusedLayer};
     border: 2px solid var(--focus-color);
   }
