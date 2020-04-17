@@ -10,6 +10,7 @@ import { useEditorKit } from "../../editor/EditorKit";
 import { HoverPopup } from "../popup/HoverPopup";
 import { IconProvider } from "../icons/IconProviderPlugin";
 import { Transforms } from "slate";
+import { Labels } from "../i18n/LabelsPlugin";
 
 export const Video = memo((props: RenderElementProps) => {
   const { attributes, element, children } = props;
@@ -52,6 +53,7 @@ export const VideoSettings = memo((props: VideoSettingsProps) => {
   const { element } = props;
   const [url, setUrl] = useState(element.url);
   const { editor } = useEditorKit();
+  const { data: labels } = usePlugin("labels") as Labels;
   const handleUrlChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setUrl(event.currentTarget.value);
@@ -71,7 +73,7 @@ export const VideoSettings = memo((props: VideoSettingsProps) => {
         className="rek-input"
       />
       <button className="rek-button" onClick={handleSave}>
-        Save
+        {labels.save}
       </button>
     </div>
   );

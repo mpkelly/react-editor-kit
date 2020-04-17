@@ -14,6 +14,7 @@ export interface EditorLabels {
   headerColumn: string;
   numberedColumn: string;
   borderless: string;
+  save: string;
 }
 
 export const EnglishLabels: EditorLabels = {
@@ -30,6 +31,7 @@ export const EnglishLabels: EditorLabels = {
   headerColumn: "Header column",
   numberedColumn: "Numbered column",
   borderless: "Borderless",
+  save: "Save",
 };
 
 export interface Labels extends Plugin {

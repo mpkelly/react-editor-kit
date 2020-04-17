@@ -6,7 +6,6 @@ import { usePlugin } from "../../plugins/usePlugin";
 import { useEditorKit } from "../../editor/EditorKit";
 import { Labels } from "../i18n/LabelsPlugin";
 import { IconProvider } from "../icons/IconProviderPlugin";
-
 import { Icon } from "../icons/Icon";
 import { ModalPopup } from "../popup/HTMLElementModalPopup";
 import { Checkbox } from "../../ui/Checkbox";
