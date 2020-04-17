@@ -13,6 +13,7 @@ export interface EditorLabels {
     headerColumn: string;
     numberedColumn: string;
     borderless: string;
+    save: string;
 }
 export declare const EnglishLabels: EditorLabels;
 export interface Labels extends Plugin {

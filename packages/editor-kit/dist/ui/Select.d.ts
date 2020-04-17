@@ -17,8 +17,8 @@ export interface SelectItem {
     style?: CSSProperties;
     disabled?: boolean;
 }
-export declare const Select: (props: SelectProps) => JSX.Element;
-export declare const useSelect: (props: SelectProps) => {
+export declare const Select: (props: SelectProps) => JSX.Element | null;
+export declare const useSelect: (props: SelectProps, editor: HTMLElement) => {
     show: boolean;
     value: React.Key;
     activeIndex: number;
