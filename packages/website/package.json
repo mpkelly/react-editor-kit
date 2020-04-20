@@ -1,7 +1,7 @@
 {
   "name": "website",
   "private": true,
-  "version": "0.0.26",
+  "version": "0.0.27",
   "description": "> TODO: description",
   "author": "mkelly <kikemelly@gmail.com>",
   "homepage": "https://github.com/mpkelly/react-editor-kit",
@@ -38,7 +38,7 @@
     "@babel/preset-env": "^7.7.1",
     "@babel/preset-react": "^7.7.0",
     "@babel/runtime": "^7.7.2",
-    "@mpkelly/react-editor-kit": "^0.0.26",
+    "@mpkelly/react-editor-kit": "^0.0.27",
     "@types/styled-components": "^4.4.2",
     "gh-pages": "^2.2.0",
     "hard-source-webpack-plugin": "^0.13.1",
