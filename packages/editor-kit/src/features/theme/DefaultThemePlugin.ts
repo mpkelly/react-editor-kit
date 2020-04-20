@@ -408,4 +408,18 @@ const EditorStyle = `
     fill: var(--danger-color);      
   }    
 
+  .rek-resize-handle-start {
+    border-left: 2px dotted var(--divider-color);
+    :hover {
+      border-left: 2px solid var(--focus-color);
+    }
+  }
+  
+  .rek-resize-handle-end {
+    border-right: 2px dotted var(--divider-color);
+    :hover {
+      border-right: 2px solid var(--focus-color);
+    }
+  }
+
 `;

@@ -1,4 +1,4 @@
-import { Editor, Transforms, Node, Path } from "slate";
+import { Editor, Transforms, Node } from "slate";
 
 export const toggleBlock = (editor: Editor, type: string) => {
   const isActive = isNodeActive(editor, type);

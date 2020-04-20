@@ -68,6 +68,7 @@ import {
   ErrorAlertPlugin,
   WarningAlertPlugin,
   AutoFocusPlugin,
+  DeleteKeyHandler,
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 import { createStaticHashtags } from "./HashtagSuggestionPlugin";
@@ -131,6 +132,7 @@ const plugins: Plugin[] = [
     ],
   }),
   EnterKeyHandler,
+  AutoFocusPlugin,
 ];
 
 const initialValue = [
@@ -151,7 +153,7 @@ const wrapperStyle: CSSProperties = {
 const editorStyle: CSSProperties = {
   width: "100%",
   height: 1066,
-  padding: 8,
+  padding: 16,
   border: "1px solid rgba(0,0,0,.1)",
   boxShadow: "rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
   borderRadius: 3,

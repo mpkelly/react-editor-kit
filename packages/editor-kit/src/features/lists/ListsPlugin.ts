@@ -1,4 +1,4 @@
-import { Transforms, Editor, Point, Node, Element } from "slate";
+import { Transforms, Editor, Node, Element } from "slate";
 import { Plugin, Trigger } from "../../plugins/Plugin";
 import { RenderElementProps, ReactEditor } from "slate-react";
 import { renderElement } from "../elements/ElementRenderer";
@@ -20,7 +20,16 @@ const createPlugin = (
     withPlugin: (editor) => {
       const { normalizeNode } = editor;
       editor.normalizeNode = ([node, path]) => {
-        if (node.type == type) {
+        if (node.type === "list-item") {
+          const [parent] = Editor.parent(editor, path);
+          console.log(parent.type);
+          if (
+            parent &&
+            parent.type !== "ordered-list" &&
+            parent.type !== "unordered-list"
+          ) {
+            Transforms.setNodes(editor, { type: "paragraph" }, { at: path });
+          }
         }
         return normalizeNode([node, path]);
       };
@@ -36,17 +45,7 @@ const createPlugin = (
       if (match.length && match[0].regexMatch) {
         deleteBackward(editor, match[0].regexMatch[0].length);
       }
-
-      Transforms.unwrapNodes(editor, {
-        match: (n) => n.type === type,
-        split: true,
-      });
-
-      Transforms.setNodes(editor, {
-        type: "list-item",
-      });
-      const block = { type, children: [] };
-      Transforms.wrapNodes(editor, block);
+      toggleList(editor, type);
     },
     renderElement: (props: RenderElementProps) => {
       const { element } = props;

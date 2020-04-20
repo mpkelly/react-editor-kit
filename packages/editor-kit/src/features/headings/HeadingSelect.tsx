@@ -1,5 +1,5 @@
 import React from "react";
-import { Transforms } from "slate";
+import { Transforms, Range } from "slate";
 import { Select, SelectItem } from "../../ui/Select";
 import { useLastFocused } from "../../editor/LastFocusedNode";
 import { useEditorKit } from "../../editor/EditorKit";
@@ -13,26 +13,30 @@ export const HeadingSelect = (props: HeadingSelectProps) => {
   const { editor } = useEditorKit();
   const { node, selection } = useLastFocused(editor);
 
-  const items: SelectItem[] = types.map(type => ({
+  const items: SelectItem[] = types.map((type) => ({
     text: type.name,
     value: type,
-    disabled: !editor.isNodeSupported(type.type, node)
+    disabled: !editor.isNodeSupported(type.type, node),
   }));
 
   const handleChange = (item: SelectItem) => {
     if (node && item.value.type !== node.type) {
+      console.log("S", Boolean(selection && Range.isExpanded(selection)));
       Transforms.setNodes(
         editor,
         {
-          type: item.value.type
+          type: item.value.type,
         },
-        { at: selection?.focus }
+        {
+          at: selection as Range,
+          split: Boolean(selection && Range.isExpanded(selection)),
+        }
       );
     }
   };
 
   const selected = node
-    ? (items.find(item => item.value.type === node.type) as SelectItem) ||
+    ? (items.find((item) => item.value.type === node.type) as SelectItem) ||
       items[0]
     : items[0];
 
@@ -55,5 +59,5 @@ export const DefaultTypes = [
   { type: "h3", name: "Heading 3" },
   { type: "h4", name: "Heading 4" },
   { type: "h5", name: "Heading 5" },
-  { type: "h6", name: "Heading 6" }
+  { type: "h6", name: "Heading 6" },
 ];
