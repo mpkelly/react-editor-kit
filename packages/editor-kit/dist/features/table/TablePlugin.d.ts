@@ -6,18 +6,31 @@ export interface TablePluginOptions {
     defaultTable: Node[];
 }
 export declare const createTablePlugin: (options: TablePluginOptions) => Plugin;
-export declare const DefaultTable: {
+export declare const DefaultTable: ({
     type: string;
     headerRow: string;
     children: {
         type: string;
-        children: {
+        children: ({
+            type: string;
+            autoFocus: boolean;
+            children: {
+                text: string;
+            }[];
+        } | {
             type: string;
             children: {
                 text: string;
             }[];
-        }[];
+            autoFocus?: undefined;
+        })[];
     }[];
-}[];
+} | {
+    type: string;
+    children: {
+        text: string;
+    }[];
+    headerRow?: undefined;
+})[];
 export declare const TablePlugin: Plugin;
 export declare const renderTable: (props: RenderElementProps) => JSX.Element | undefined;

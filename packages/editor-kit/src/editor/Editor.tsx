@@ -1,4 +1,4 @@
-import React, { useCallback, CSSProperties, memo, useEffect } from "react";
+import React, { useCallback, CSSProperties, memo } from "react";
 import {
   Editor as SlateEditor,
   Location,
@@ -6,7 +6,6 @@ import {
   Transforms,
   NodeEntry,
   Path,
-  Text,
   Node,
 } from "slate";
 import {
@@ -31,7 +30,7 @@ export interface EditorProps {
   as?: React.ElementType;
 }
 
-export const Editor = (props: EditorProps) => {
+export const Editor = memo((props: EditorProps) => {
   const { value, onChange, className, style, ...rest } = props;
   const {
     editor,
@@ -82,7 +81,7 @@ export const Editor = (props: EditorProps) => {
   }, []);
 
   return (
-    <Slate editor={editor} value={value} onChange={onChange}>
+    <Slate editor={editor} value={ensureValue(value)} onChange={onChange}>
       <Editable
         renderElement={renderElement}
         renderLeaf={renderLeaf}
@@ -98,6 +97,17 @@ export const Editor = (props: EditorProps) => {
       />
     </Slate>
   );
+});
+
+const DefaultEmptyValue: Node[] = [
+  { type: "paragraph", children: [{ text: "" }] },
+];
+
+const ensureValue = (value: Node[]) => {
+  if (value.length == 0) {
+    return DefaultEmptyValue;
+  }
+  return value;
 };
 
 const handleRenderElement = (props: RenderElementProps, plugins: Plugin[]) => {
@@ -163,7 +173,7 @@ const handleKeyUp = (
   if (!selection) {
     return;
   }
-  const [node, path] = SlateEditor.node(editor, selection as Location);
+  const [, path] = SlateEditor.node(editor, selection as Location);
   if (!path.length) {
     return;
   }
@@ -272,7 +282,7 @@ export const deletePreviousNode = (editor: ReactEditor) => {
     }
   }
 };
-
+//NOTE: does not account for text wrapping
 export const isOnLastLineOfBlock = (editor: ReactEditor) => {
   if (editor.selection) {
     const [, path] = SlateEditor.node(editor, editor.selection);
@@ -287,7 +297,7 @@ export const isOnLastLineOfBlock = (editor: ReactEditor) => {
 
 export const getActiveNode = (editor: ReactEditor) => {
   if (editor.selection) {
-    const [, path] = SlateEditor.node(editor, editor.selection);
+    const [, path] = SlateEditor.node(editor, editor.selection.focus.path);
     if (path.length) {
       const [parent] = SlateEditor.parent(editor, path);
       return parent;
@@ -353,7 +363,7 @@ export const deleteBackward = (
   length: number,
   unit: "character" | "word" | "line" | "block" = "character"
 ) => {
-  Array.from({ length }).forEach((count) => {
+  Array.from({ length }).forEach(() => {
     editor.deleteBackward({ unit } as any);
   });
 };
@@ -405,9 +415,12 @@ export const getSelectionRootNodes = (
 export const getAncestor = (editor: ReactEditor, node: Node, level = 1) => {
   let parent: Node | null = null;
   let count = 0;
-  while (count !== level) {
+  while (node && count !== level) {
     count++;
     const path = ReactEditor.findPath(editor, node);
+    if (path.length === 0) {
+      return null;
+    }
     parent = SlateEditor.parent(editor, path)[0];
     if (parent === editor) {
       return null;

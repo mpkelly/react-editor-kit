@@ -1,6 +1,4 @@
 import { useEffect, useCallback } from "react";
-import { useEditorKit } from "../editor/EditorKit";
-import { ReactEditor } from "slate-react";
 
 export interface KeyPressProps {
   targetKeys: string | string[];

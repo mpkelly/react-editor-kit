@@ -25,7 +25,6 @@ export const CodeBlock = (props: RenderElementProps) => {
   const handleClose = () => {
     setShowSelect(false);
   };
-
   return (
     <Fragment>
       <pre
@@ -56,7 +55,8 @@ const Toolbar = (props: ToolbarProps) => {
   const { onFocus, onClose, element } = props;
   const { editor } = useEditorKit();
   const { data } = usePlugin("icon-provider") as IconProvider;
-  const selected = Items.find(items => items.text === element.lang) || Items[0];
+  const selected =
+    Items.find((items) => items.text === element.lang) || Items[0];
   const [value, setValue] = useState(selected.text);
 
   const handleChange = (item: SelectItem) => {
@@ -92,7 +92,7 @@ const Toolbar = (props: ToolbarProps) => {
   );
 };
 
-const Items = Object.entries(Languages).map(entry => ({
+const Items = Object.entries(Languages).map((entry) => ({
   text: entry[0],
-  value: entry[1]
+  value: entry[1],
 }));

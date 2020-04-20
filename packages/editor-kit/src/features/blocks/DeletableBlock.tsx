@@ -17,9 +17,11 @@ export const DeletableBlock = (props: DeletableBlockProps) => {
   let { children, element, className, toolbarContent, ...rest } = props;
   className = className || "";
   const { editor } = useEditorKit();
+
   const handleDelete = useCallback(() => {
     Transforms.delete(editor, { at: ReactEditor.findPath(editor, element) });
-  }, []);
+  }, [element]);
+
   const handleWidthChange = (width: number) => {
     Transforms.setNodes(
       editor,
@@ -27,6 +29,7 @@ export const DeletableBlock = (props: DeletableBlockProps) => {
       { match: (node) => node === element }
     );
   };
+
   return (
     <BlockWrapper
       className={`deletable ${className}`}

@@ -11,7 +11,7 @@ export interface EditorProps {
     role?: string;
     as?: React.ElementType;
 }
-export declare const Editor: (props: EditorProps) => JSX.Element;
+export declare const Editor: React.MemoExoticComponent<(props: EditorProps) => JSX.Element>;
 export declare const getNextBlock: (editor: ReactEditor) => import("slate").Element | null;
 export declare const getPreviousBlock: (editor: ReactEditor) => import("slate").Element | null;
 export declare const isNavigatingInto: (editor: ReactEditor, type: string) => boolean | null;

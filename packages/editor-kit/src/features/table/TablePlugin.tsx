@@ -90,6 +90,7 @@ export const DefaultTable = [
         children: [
           {
             type: "table-cell",
+            autoFocus: true,
             children: [{ text: "" }],
           },
           {
@@ -138,6 +139,7 @@ export const DefaultTable = [
       },
     ],
   },
+  { type: "paragraph", children: [{ text: "" }] },
 ];
 
 export const TablePlugin = createTablePlugin({ defaultTable: DefaultTable });

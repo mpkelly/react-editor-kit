@@ -20,6 +20,7 @@ import { createGlobalStyle } from "styled-components";
 import { deleteBackward } from "./Editor";
 import { LabelsPlugin } from "../features/i18n/LabelsPlugin";
 import { useSpellcheck } from "../features/spellcheck/SpellCheck";
+import { AutoFocusPlugin } from "../features/auto-focus/AutoFocusPlugin";
 
 const InternalPlugins: Plugin[] = [
   DefaultThemePlugin,
@@ -27,6 +28,7 @@ const InternalPlugins: Plugin[] = [
   SelectionExtensionsPlugin,
   ConstraintsPlugin,
   LabelsPlugin,
+  AutoFocusPlugin,
 ];
 
 export interface EditorKitValue {

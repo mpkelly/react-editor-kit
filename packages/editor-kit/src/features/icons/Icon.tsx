@@ -1,4 +1,5 @@
 import React from "react";
+import { stop } from "../../ui/Utils";
 
 export type EditorIcon = CssIcon | JSX.Element;
 
@@ -22,6 +23,9 @@ export const Icon = (props: ReactIconProps) => {
         className={`rek-icon ${className} ${iconClassName}`}
         children={(icon as CssIcon).ligature}
         onClick={onClick}
+        onMouseDown={stop}
+        contentEditable={false}
+        data-slate-void="true"
       />
     );
   }

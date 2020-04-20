@@ -3,10 +3,17 @@
   "version": "0.0.25",
   "description": "React library for building editors of all kinds.",
   "author": "mkelly <kikemelly@gmail.com>",
-  "homepage": "",
+  "homepage": "https://github.com/mpkelly/react-editor-kit#readme",
   "license": "ISC",
   "main": "dist/index.js",
   "typings": "dist/Index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mpkelly/react-editor-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mpkelly/react-editor-kit/issues"
+  },
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/plugin-transform-async-to-generator": "^7.7.0",

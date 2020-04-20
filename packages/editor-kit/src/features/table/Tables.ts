@@ -1,8 +1,7 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useMemo } from "react";
 import { ReactEditor, RenderElementProps } from "slate-react";
 import { Editor, Transforms, Element, Path, Ancestor } from "slate";
 import { useEditorKit } from "../../editor/EditorKit";
-import { ListItem } from "../../ui/List";
 import { usePlugin } from "../../plugins/usePlugin";
 import { Labels } from "../i18n/LabelsPlugin";
 import { block } from "../../ui/Utils";
@@ -16,19 +15,19 @@ export const useTables = (props: RenderElementProps) => {
 
   const handleAddColumn = useCallback(() => {
     addColumn(editor, element);
-  }, []);
+  }, [element]);
 
   const handleDeleteColumn = useCallback(() => {
     deleteColumn(editor, element);
-  }, []);
+  }, [element]);
 
   const handleAddRow = useCallback(() => {
     addRow(editor, element);
-  }, []);
+  }, [element]);
 
   const handleDeleteRow = useCallback(() => {
     deleteRow(editor, element);
-  }, []);
+  }, [element]);
 
   const handleClick = useCallback(
     (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -42,24 +41,27 @@ export const useTables = (props: RenderElementProps) => {
     []
   );
 
-  const listItems = useRef<ListItem[]>([
-    {
-      text: labels.addColumn,
-      onClick: handleAddColumn,
-    },
-    {
-      text: labels.deleteColumn,
-      onClick: handleDeleteColumn,
-    },
-    {
-      text: labels.addRow,
-      onClick: handleAddRow,
-    },
-    {
-      text: labels.deleteRow,
-      onClick: handleDeleteRow,
-    },
-  ]);
+  const listItems = useMemo(
+    () => [
+      {
+        text: labels.addColumn,
+        onClick: handleAddColumn,
+      },
+      {
+        text: labels.deleteColumn,
+        onClick: handleDeleteColumn,
+      },
+      {
+        text: labels.addRow,
+        onClick: handleAddRow,
+      },
+      {
+        text: labels.deleteRow,
+        onClick: handleDeleteRow,
+      },
+    ],
+    [element]
+  );
 
   const [cell] = Editor.nodes(editor, {
     match: (n) => n.type === "table-cell",

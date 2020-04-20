@@ -67,6 +67,7 @@ import {
   InfoAlertPlugin,
   ErrorAlertPlugin,
   WarningAlertPlugin,
+  AutoFocusPlugin,
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 import { createStaticHashtags } from "./HashtagSuggestionPlugin";

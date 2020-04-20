@@ -31,14 +31,14 @@ export const Video = memo((props: RenderElementProps) => {
     <DeletableBlock
       {...props}
       toolbarContent={
-        <div className="rek-video-toolbar rek-panel" contentEditable={false}>
+        <div className="rek-video-toolbar rek-panel" data-slate-zero-width="z">
           <Icon icon={data.settings} onClick={handleShowSettings} />
           <div className="rek-v-toolbar-divider" />
           <Icon icon={data.delete} onClick={handleDelete} />
         </div>
       }
     >
-      <div className="rek-video" {...attributes} contentEditable={false}>
+      <div className="rek-video" {...attributes} data-slate-zero-width="z">
         <ReactPlayer url={element.url} light />
         <ModalPopup
           show={showSettings}
@@ -76,7 +76,11 @@ export const VideoSettings = memo((props: VideoSettingsProps) => {
   }, [url]);
 
   return (
-    <div className="rek-video-settings rek-panel" onClick={stop}>
+    <div
+      className="rek-video-settings rek-panel"
+      onClick={stop}
+      data-slate-zero-width="z"
+    >
       <input
         autoFocus
         value={url}

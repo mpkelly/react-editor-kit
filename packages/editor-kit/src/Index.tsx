@@ -119,3 +119,4 @@ export * from "./features/suggestions/Suggestion";
 export * from "./features/suggestions/SuggestionList";
 export * from "./features/suggestions/Suggestions";
 export * from "./features/suggestions/SuggestionsPlugin";
+export * from "./features/auto-focus/AutoFocusPlugin";

@@ -1,6 +1,5 @@
 import React from "react";
 import { RenderElementProps } from "slate-react";
-import { ListItem } from "../../ui/List";
 export declare const useTables: (props: RenderElementProps) => {
     active: boolean;
     handleClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
@@ -9,5 +8,8 @@ export declare const useTables: (props: RenderElementProps) => {
         top: number;
         left: number;
     }>;
-    listItems: React.MutableRefObject<ListItem[]>;
+    listItems: {
+        text: string;
+        onClick: () => void;
+    }[];
 };

@@ -33,7 +33,7 @@ export const TableCell = memo((props: RenderElementProps) => {
           location="inside-end"
           offsets={{ v: 0, h: 0 }}
         >
-          <List items={listItems.current} />
+          <List items={listItems} />
         </ModalPopup>
       </Show>
     </td>

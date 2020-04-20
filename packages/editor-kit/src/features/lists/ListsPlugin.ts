@@ -67,7 +67,7 @@ const createPlugin = (
       const active = getActiveNode(editor);
       let ancestor = getAncestor(editor, active as Element, 1);
 
-      if (ancestor!.type !== type) {
+      if (!ancestor || ancestor!.type !== type) {
         return false;
       }
       if (event.keyCode === 13) {

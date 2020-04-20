@@ -41,7 +41,12 @@ export const List = (props: ListProps) => {
             ref={ref}
             key={item.text}
             className={`rek-list-item ${activeClass} ${disabledClass}`}
-            onClick={item.disabled ? undefined : item.onClick}
+            onClick={(event) => {
+              if (!item.disabled) {
+                item.onClick && item.onClick();
+                event.preventDefault();
+              }
+            }}
             style={item.style}
           >
             {item.text}

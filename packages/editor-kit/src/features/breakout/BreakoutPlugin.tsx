@@ -9,7 +9,15 @@ export interface BreakoutPluginOptions {
 }
 
 export const DefaultOptions: BreakoutPluginOptions = {
-  blocks: ["code-block", "quote", "info-alert", "warning-alert", "error-alert"],
+  blocks: [
+    "code-block",
+    "quote",
+    "info-alert",
+    "warning-alert",
+    "error-alert",
+    "video",
+    "table",
+  ],
 };
 
 export const createBreakoutPlugin = (options = DefaultOptions): Plugin => {
