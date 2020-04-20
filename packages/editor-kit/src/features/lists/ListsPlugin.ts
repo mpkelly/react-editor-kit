@@ -22,7 +22,6 @@ const createPlugin = (
       editor.normalizeNode = ([node, path]) => {
         if (node.type === "list-item") {
           const [parent] = Editor.parent(editor, path);
-          console.log(parent.type);
           if (
             parent &&
             parent.type !== "ordered-list" &&

@@ -21,7 +21,6 @@ export const HeadingSelect = (props: HeadingSelectProps) => {
 
   const handleChange = (item: SelectItem) => {
     if (node && item.value.type !== node.type) {
-      console.log("S", Boolean(selection && Range.isExpanded(selection)));
       Transforms.setNodes(
         editor,
         {
