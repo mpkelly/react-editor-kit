@@ -18,6 +18,7 @@ export const LinkAction = (props: LinkActionProps) => {
     if (!ReactEditor.isFocused(editor)) {
       ReactEditor.focus(editor);
     }
+    editor.markSelection();
     createLink(editor);
   };
   const isActive = () => isNodeActive(editor, "link");

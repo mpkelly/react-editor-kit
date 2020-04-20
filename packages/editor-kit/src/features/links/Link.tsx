@@ -22,20 +22,32 @@ export const Link = (props: LinkProps) => {
     displayName,
   });
 
-  const handleLinkChange = useCallback((link: LinkModel) => {
-    setLink(link);
-  }, []);
-
   const handleEditLink = useCallback(() => {
+    Transforms.setNodes(
+      editor,
+      { editing: true },
+      { at: ReactEditor.findPath(editor, element) }
+    );
     setEditing(true);
-  }, []);
+  }, [element]);
 
   const handleFinishEditing = useCallback(() => {
+    const point = Editor.before(editor, ReactEditor.findPath(editor, element));
+    Transforms.removeNodes(editor, {
+      at: ReactEditor.findPath(editor, element),
+    });
+    Transforms.insertNodes(
+      editor,
+      {
+        type: "link",
+        editing: false,
+        url: link.url,
+        children: [{ text: link.displayName }],
+      },
+      { at: point }
+    );
     setEditing(false);
-    if (link.displayName && link.url) {
-      updateLink(editor, element, link);
-    }
-  }, [link]);
+  }, [element, link]);
 
   return (
     <Fragment>
@@ -52,7 +64,7 @@ export const Link = (props: LinkProps) => {
         show={editing}
         onClickOutside={handleFinishEditing}
       >
-        <LinkEditor link={link} onLinkChange={handleLinkChange} />
+        <LinkEditor link={link} onLinkChange={setLink} />
       </ModalPopup>
 
       <a {...attributes} href={element.url}>
@@ -62,40 +74,36 @@ export const Link = (props: LinkProps) => {
   );
 };
 
-const updateLink = (editor: ReactEditor, element: Node, link: LinkModel) => {
-  const node = {
-    type: "link",
-    url: link.url,
-    children: [{ text: link.displayName }],
-  };
-  Transforms.setNodes(editor, node);
-};
-
 export const createLink = (editor: ReactEditor) => {
   if (isNodeActive(editor, "link")) {
     const [] = Editor.nodes(editor, {
       match: (n) => n.type === "link",
     });
-    Transforms.setNodes(editor, { editing: true });
+    Transforms.setNodes(
+      editor,
+      { editing: true },
+      { at: editor.selection as Range }
+    );
   } else {
     const { selection } = editor;
-    const isCollapsed = selection && Range.isCollapsed(selection);
+    const isExpanded = selection && Range.isExpanded(selection);
     const link = {
       type: "link",
       url: "",
       editing: true,
-      children: isCollapsed ? [{ text: "" }] : [],
+      children: isExpanded ? [] : [{ text: "" }],
     };
-    if (isCollapsed) {
-      Transforms.insertNodes(editor, link);
-    } else {
+
+    if (isExpanded) {
       //Track bug https://github.com/ianstormtaylor/slate/issues/3454
       (Transforms.wrapNodes as any)(editor, link, {
-        at: (selection as Range).focus,
+        at: selection as Range,
         split: true,
         hanging: false,
       });
       Transforms.collapse(editor, { edge: "end" });
+    } else {
+      Transforms.insertNodes(editor, link);
     }
   }
 };
