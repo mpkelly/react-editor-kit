@@ -17,6 +17,7 @@ export declare const getPreviousBlock: (editor: ReactEditor) => import("slate").
 export declare const isNavigatingInto: (editor: ReactEditor, type: string) => boolean | null;
 export declare const isNodeFocused: (editor: ReactEditor, type: string) => boolean;
 export declare const isAtStartOfNode: (editor: ReactEditor) => boolean;
+export declare const isAtEndOfNode: (editor: ReactEditor) => boolean;
 export declare const deletePreviousNode: (editor: ReactEditor) => void;
 export declare const isOnLastLineOfBlock: (editor: ReactEditor) => boolean;
 export declare const getActiveNode: (editor: ReactEditor) => import("slate").Element | null;

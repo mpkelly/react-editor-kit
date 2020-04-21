@@ -1,3 +1,3 @@
 import { createDefaultHeadingPlugin } from "./Heading";
 
-export const H4Plugin = createDefaultHeadingPlugin("h4", ["####"]);
+export const H4Plugin = createDefaultHeadingPlugin("h4", ["#### "]);

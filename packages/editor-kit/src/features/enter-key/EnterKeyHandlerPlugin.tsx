@@ -1,23 +1,21 @@
 import { Plugin } from "../../plugins/Plugin";
-import { Editor, Transforms } from "slate";
+import { ReactEditor } from "slate-react";
+import { block } from "../../ui/Utils";
 
 // Allows for soft-breaks when shift key is down when enter key is pressed.
-export const EnterKeyHandler: Plugin = {
+export const EnterKeyHandlerPlugin: Plugin = {
   name: "enter-key-handler",
-  onKeyDown: (event: React.KeyboardEvent<HTMLDivElement>, editor: Editor) => {
+  onKeyDown: (
+    event: React.KeyboardEvent<HTMLDivElement>,
+    editor: ReactEditor
+  ) => {
     if (event.keyCode === 13) {
       //Enter key
       if (event.shiftKey) {
         editor.insertText("\n");
-        event.preventDefault();
-      } else {
-        Transforms.insertNodes(editor, {
-          type: "paragraph",
-          children: [{ text: "" }],
-        });
+        block(event);
+        return true;
       }
-      event.stopPropagation();
-      return true;
     }
     return false;
   },

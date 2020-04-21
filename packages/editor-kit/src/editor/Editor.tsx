@@ -182,7 +182,7 @@ const handleKeyUp = (
     for (let plugin of plugins) {
       if (plugin.triggers) {
         for (let trigger of plugin.triggers) {
-          const matches = findMatches(trigger.pattern, trigger.range, editor);
+          const matches = findMatches(trigger.pattern, editor, trigger.range);
           if (matches.length) {
             plugin.onTrigger && plugin.onTrigger(editor, matches, trigger);
             return;
@@ -269,6 +269,20 @@ export const isAtStartOfNode = (editor: ReactEditor) => {
   if (editor.selection) {
     const { anchor, focus } = editor.selection;
     return anchor.offset == 0 && focus.offset == 0;
+  }
+  return false;
+};
+
+export const isAtEndOfNode = (editor: ReactEditor) => {
+  if (editor.selection) {
+    const { anchor, focus } = editor.selection;
+    const node = getActiveNode(editor);
+    if (node) {
+      const length = Node.string(node).length;
+      console.log(length, anchor.offset, focus.offset);
+      console.log(node, anchor, focus);
+      return anchor.offset === length && focus.offset === length;
+    }
   }
   return false;
 };

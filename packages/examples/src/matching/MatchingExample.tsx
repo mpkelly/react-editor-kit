@@ -1,20 +1,6 @@
-import React, {
-  useState,
-  CSSProperties,
-  useEffect,
-  useCallback,
-  useMemo,
-  useRef
-} from "react";
-import {
-  Node,
-  Range,
-  Path,
-  NodeEntry,
-  Transforms,
-  Editor as SlateEditor
-} from "slate";
-import { ReactEditor, RenderLeafProps, useEditor } from "slate-react";
+import React, { useState, CSSProperties, useCallback, useMemo } from "react";
+import { Node, Range, Path, NodeEntry } from "slate";
+import { ReactEditor, RenderLeafProps } from "slate-react";
 import {
   Editor,
   EditorKit,
@@ -22,12 +8,11 @@ import {
   BoldPlugin,
   ItalicPlugin,
   DefaultThemePlugin,
-  EnterKeyHandler,
   UnderlinePlugin,
   StrikethroughPlugin,
   findMatches,
   EditorRange,
-  useEditorKit
+  useEditorKit,
 } from "@mpkelly/react-editor-kit";
 
 const plugins: Plugin[] = [
@@ -36,7 +21,6 @@ const plugins: Plugin[] = [
   ItalicPlugin,
   UnderlinePlugin,
   StrikethroughPlugin,
-  EnterKeyHandler
 ];
 
 const initialValue = [
@@ -49,9 +33,9 @@ const initialValue = [
     When all at once I saw a crowd,
     A host, of golden daffodils;
     Beside the lake, beneath the trees,
-    Fluttering and dancing in the breeze.`
-      }
-    ]
+    Fluttering and dancing in the breeze.`,
+      },
+    ],
   },
   {
     type: "paragraph",
@@ -62,9 +46,9 @@ const initialValue = [
     They stretched in never-ending line
     Along the margin of a bay:
     Ten thousand saw I at a glance,
-    Tossing their heads in sprightly dance.`
-      }
-    ]
+    Tossing their heads in sprightly dance.`,
+      },
+    ],
   },
   {
     type: "paragraph",
@@ -75,9 +59,9 @@ const initialValue = [
         A poet could not but be gay,
         In such a jocund company:
         I gazed—and gazed—but little thought
-        What wealth the show to me had brought:`
-      }
-    ]
+        What wealth the show to me had brought:`,
+      },
+    ],
   },
   {
     type: "paragraph",
@@ -88,10 +72,10 @@ const initialValue = [
         They flash upon that inward eye
         Which is the bliss of solitude;
         And then my heart with pleasure fills,
-        And dances with the daffodils.`
-      }
-    ]
-  }
+        And dances with the daffodils.`,
+      },
+    ],
+  },
 ];
 
 const editorStyle = {
@@ -100,11 +84,11 @@ const editorStyle = {
   padding: 8,
   border: "1px solid rgba(0,0,0,.1)",
   borderRadius: 3,
-  overflow: "auto"
+  overflow: "auto",
 };
 
 const containerStyle = {
-  display: "flex"
+  display: "flex",
 };
 
 export interface State {
@@ -118,13 +102,13 @@ export const MatchingExample = () => {
   const allPlugins: Plugin[] = useMemo(() => {
     return plugins.concat([
       {
-        decorate: ([node, path]: NodeEntry, editor: ReactEditor) => {
+        decorate: ([, path]: NodeEntry, editor: ReactEditor) => {
           const ranges = (editor.highlightRanges || []) as Range[];
           const filtered = ranges
-            .filter(range => Path.isDescendant(range.focus.path, path))
-            .map(range => ({
+            .filter((range) => Path.isDescendant(range.focus.path, path))
+            .map((range) => ({
               ...range,
-              type: "highlight"
+              type: "highlight",
             }));
           return filtered;
         },
@@ -138,8 +122,8 @@ export const MatchingExample = () => {
             );
           }
           return undefined;
-        }
-      }
+        },
+      },
     ]);
   }, []);
 
@@ -156,7 +140,7 @@ export const MatchingEditor = () => {
     value,
     setValue,
     handleClick,
-    handleSettingsChange
+    handleSettingsChange,
   } = useMatching();
   return (
     <div style={containerStyle}>
@@ -191,12 +175,12 @@ const useMatching = () => {
         editor as ReactEditor
       );
       editor.highlightRanges = ranges;
-      setValue(value => value.slice());
+      setValue((value) => value.slice());
     } else {
       editor.highlightRanges = [];
     }
     //TODO remove when this is released https://github.com/ianstormtaylor/slate/pull/3437
-    setValue(value => JSON.parse(JSON.stringify(value)));
+    setValue((value) => JSON.parse(JSON.stringify(value)));
   }, [state, editor]);
 
   return {
@@ -204,14 +188,14 @@ const useMatching = () => {
     value,
     setValue,
     handleClick,
-    handleSettingsChange: setState
+    handleSettingsChange: setState,
   };
 };
 
 const settingsStyle: CSSProperties = {
   display: "flex",
   flexDirection: "column",
-  padding: "0 16px"
+  padding: "0 16px",
 };
 
 interface SettingsProps {
@@ -227,7 +211,7 @@ const Settings = (props: SettingsProps) => {
         placeholder="Enter pattern"
         value={state.pattern}
         style={{ height: 30 }}
-        onChange={e => {
+        onChange={(e) => {
           const pattern = e.currentTarget.value;
           onChange({ ...state, pattern });
         }}
@@ -244,7 +228,7 @@ const Settings = (props: SettingsProps) => {
         regex?
       </label>
       <div style={{ display: "flex", flexWrap: "wrap", maxWidth: 400 }}>
-        {ranges.map(range => (
+        {ranges.map((range) => (
           <button
             key={range}
             onClick={() => {
@@ -252,7 +236,7 @@ const Settings = (props: SettingsProps) => {
             }}
             style={{
               margin: 16,
-              background: range == state.matchRange ? "orange" : undefined
+              background: range == state.matchRange ? "orange" : undefined,
             }}
           >
             {range}
@@ -267,7 +251,7 @@ const initialState = (): State => ({
   ranges: [],
   regex: true,
   pattern: "",
-  matchRange: "block-before"
+  matchRange: "block-before",
 });
 
 const ranges: EditorRange[] = [
@@ -280,5 +264,5 @@ const ranges: EditorRange[] = [
   "line-after",
   "block",
   "block-before",
-  "block-after"
+  "block-after",
 ];

@@ -9,11 +9,10 @@ import {
   BoldButton,
   ItalicButton,
   DefaultThemePlugin,
-  EnterKeyHandler,
   UnderlineButton,
   StrikethroughButton,
   UnderlinePlugin,
-  StrikethroughPlugin
+  StrikethroughPlugin,
 } from "@mpkelly/react-editor-kit";
 
 const plugins: Plugin[] = [
@@ -22,14 +21,13 @@ const plugins: Plugin[] = [
   ItalicPlugin,
   UnderlinePlugin,
   StrikethroughPlugin,
-  EnterKeyHandler
 ];
 
 const initialValue = [
   {
     type: "paragraph",
-    children: [{ text: "Text" }]
-  }
+    children: [{ text: "Text" }],
+  },
 ];
 
 const toolbarStyle = {
@@ -37,7 +35,7 @@ const toolbarStyle = {
   background: "rgba(0,0,0,.1)",
   borderRadius: 3,
   width: 300,
-  marginBottom: 8
+  marginBottom: 8,
 };
 
 const editorStyle = {
@@ -45,7 +43,7 @@ const editorStyle = {
   height: 200,
   padding: 8,
   border: "1px solid rgba(0,0,0,.1)",
-  borderRadius: 3
+  borderRadius: 3,
 };
 
 export const SimpleEditor = () => {

@@ -1,6 +1,6 @@
 import { Range, Editor } from "slate";
 import { ReactEditor } from "slate-react";
-import { EditorRange, after, Unit, before, all } from "./Ranges";
+import { EditorRange, after, Unit, before, all, block } from "./Ranges";
 
 export type MatchExpression = string | RegExp;
 
@@ -11,9 +11,10 @@ export interface MatchResult {
 
 export const findMatches = (
   expression: MatchExpression,
-  range: EditorRange,
-  editor: ReactEditor
+  editor: ReactEditor,
+  range?: EditorRange
 ): MatchResult[] => {
+  range = range || "block";
   switch (range) {
     case "block":
       return searchAll(expression, editor, "block");
@@ -94,14 +95,14 @@ const matchesForRange = (
 ): MatchResult[] => {
   const text = Editor.string(editor, range);
   const { path } = range.focus;
-  return findMatchIndices(expression, text).map(match => {
+  return findMatchIndices(expression, text).map((match) => {
     const { offsets, regexMatch } = match;
     const result: MatchResult = {
       range: {
         anchor: { path, offset: start + offsets[0] },
-        focus: { path, offset: start + offsets[1] }
+        focus: { path, offset: start + offsets[1] },
       },
-      regexMatch
+      regexMatch,
     };
     return result;
   });
@@ -136,7 +137,7 @@ const findRegex = (search: RegExp, text: string) => {
   while ((match = globalSearch.exec(text)) !== null) {
     matches.push({
       offsets: [match.index, match.index + match[0].length],
-      regexMatch: match
+      regexMatch: match,
     });
   }
   return matches;

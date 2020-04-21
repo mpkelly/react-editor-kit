@@ -4,7 +4,7 @@ import { EditorRange } from "../editor/Ranges";
 import { MatchExpression, MatchResult } from "../editor/Matching";
 import { CSSProperties } from "react";
 
-export type Trigger = { pattern: MatchExpression; range: EditorRange };
+export type Trigger = { pattern: MatchExpression; range?: EditorRange };
 
 export interface Plugin {
   triggers?: Trigger[];

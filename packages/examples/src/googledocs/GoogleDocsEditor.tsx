@@ -8,7 +8,6 @@ import {
   ItalicPlugin,
   BoldButton,
   ItalicButton,
-  EnterKeyHandler,
   StrikethroughButton,
   UnderlinePlugin,
   StrikethroughPlugin,
@@ -130,7 +129,6 @@ const plugins: Plugin[] = [
       "#purple",
     ],
   }),
-  EnterKeyHandler,
   AutoFocusPlugin,
 ];
 

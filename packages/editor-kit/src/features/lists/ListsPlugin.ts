@@ -91,6 +91,7 @@ export const OrderedListPlugin = createPlugin("ordered-list", "ol", [
 
 export const UnorderedListPlugin = createPlugin("unordered-list", "ul", [
   { pattern: /^\s?\*\s/g, range: "block" },
+  { pattern: /^\s?\-\s/g, range: "block" },
 ]);
 
 export const toggleOrderedList = (editor: ReactEditor) => {

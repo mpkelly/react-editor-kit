@@ -1,2 +1,2 @@
 import { Plugin } from "../../plugins/Plugin";
-export declare const EnterKeyHandler: Plugin;
+export declare const EnterKeyHandlerPlugin: Plugin;

@@ -18,13 +18,19 @@ export const createHeadingPlugin = (
       trigger: Trigger
     ) => {
       if (editor.isNodeSupported(type)) {
-        deleteBackward(editor, (trigger.pattern as String).length);
+        let length = 0;
+        if (typeof trigger.pattern === "string") {
+          length = trigger.pattern.length;
+        } else if (matches[0] && matches[0].regexMatch) {
+          length = matches[0].regexMatch[0].length;
+        }
+        deleteBackward(editor, length);
         toggleBlock(editor, type);
       }
     },
     renderElement: (props: RenderElementProps) => {
       return renderElement(props, type, type);
-    }
+    },
   };
 };
 
@@ -33,8 +39,13 @@ export const createDefaultHeadingPlugin = (
   patterns: string[]
 ) => {
   const triggers: Trigger[] = [
-    { pattern: `:${type}`, range: "line-before" as EditorRange }
-  ].concat(patterns.map(pattern => ({ pattern, range: "line-before" })));
+    { pattern: new RegExp(`^:${type}`), range: "line-before" as EditorRange },
+  ].concat(
+    patterns.map((pattern) => ({
+      pattern: new RegExp(`^${pattern}`),
+      range: "line-before",
+    }))
+  );
 
   return createHeadingPlugin(type, triggers);
 };

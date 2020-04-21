@@ -22,6 +22,7 @@ import { LabelsPlugin } from "../features/i18n/LabelsPlugin";
 import { useSpellcheck } from "../features/spellcheck/SpellCheck";
 import { AutoFocusPlugin } from "../features/auto-focus/AutoFocusPlugin";
 import { DeleteKeyHandlerPlugin } from "../features/delete-key/DeleteKeyHandlerPlugin";
+import { EnterKeyHandlerPlugin } from "../features/enter-key/EnterKeyHandlerPlugin";
 
 const InternalPlugins: Plugin[] = [
   DefaultThemePlugin,
@@ -31,6 +32,7 @@ const InternalPlugins: Plugin[] = [
   LabelsPlugin,
   AutoFocusPlugin,
   DeleteKeyHandlerPlugin,
+  EnterKeyHandlerPlugin,
 ];
 
 export interface EditorKitValue {

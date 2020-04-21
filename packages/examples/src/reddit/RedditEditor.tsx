@@ -9,7 +9,6 @@ import {
   BoldButton,
   ItalicButton,
   DefaultThemePlugin,
-  EnterKeyHandler,
   StrikethroughButton,
   StrikethroughPlugin,
   LinkButton,
@@ -35,12 +34,12 @@ import {
   SpoilerPlugin,
   SpoilerButton,
   CodeHighlighterPlugin,
-  createStaticMentions
+  createStaticMentions,
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 
 const RedditStylePlugin: Plugin = {
-  globalStyles: () => GlobalStyle
+  globalStyles: () => GlobalStyle,
 };
 
 const plugins: Plugin[] = [
@@ -65,16 +64,15 @@ const plugins: Plugin[] = [
   SpoilerPlugin,
   CodeHighlighterPlugin,
   createStaticMentions({
-    mentions: MentionsItems
+    mentions: MentionsItems,
   }),
-  EnterKeyHandler
 ];
 
 const initialValue = [
   {
     type: "paragraph",
-    children: [{ text: "" }]
-  }
+    children: [{ text: "" }],
+  },
 ];
 
 const width = 700;
@@ -86,7 +84,7 @@ const toolbarStyle = {
   background: "rgb(246, 247, 248)",
   borderRadius,
   padding: 4,
-  marginBottom: 8
+  marginBottom: 8,
 };
 
 const editorStyle = {
@@ -95,7 +93,7 @@ const editorStyle = {
   padding: 8,
   border: "1px solid rgba(0,0,0,.1)",
   borderRadius,
-  overflow: "auto"
+  overflow: "auto",
 };
 
 // Make sure to load the icon font: <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons+Round|">
