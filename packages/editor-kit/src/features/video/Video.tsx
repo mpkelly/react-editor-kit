@@ -38,8 +38,15 @@ export const Video = memo((props: RenderElementProps) => {
         </div>
       }
     >
-      <div className="rek-video" {...attributes} data-slate-zero-width="z">
-        <ReactPlayer url={element.url} light />
+      <div
+        className="rek-video"
+        {...attributes}
+        contentEditable={false}
+        data-slate-zero-width="z"
+      >
+        <div data-slate-void="true">
+          <ReactPlayer url={element.url} light controls volume={undefined} />
+        </div>
         <ModalPopup
           show={showSettings}
           element={element}
@@ -86,6 +93,7 @@ export const VideoSettings = memo((props: VideoSettingsProps) => {
         value={url}
         onChange={handleUrlChange}
         className="rek-input"
+        placeholder={labels.validVideoUrl}
       />
       <button className="rek-button" onClick={handleSave}>
         {labels.save}
