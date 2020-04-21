@@ -1,7 +1,7 @@
 import { Plugin } from "../../plugins/Plugin";
 
 export const EditorToolbarPlugin: Plugin = {
-  globalStyles: () => GlobalStyle
+  globalStyles: () => GlobalStyle,
 };
 
 const GlobalStyle = `
@@ -10,6 +10,7 @@ const GlobalStyle = `
     display: flex;
     align-items: center;
     flex-shrink:0;
+    width:100%;
     background-color: var(--content-background);
     border-top: 1px solid rgba(0,0,0,.1);
     overflow:hidden;
@@ -29,9 +30,9 @@ const GlobalStyle = `
   }
 
   .rek-editor-toolbar {
-    display: flex;
+    display: flex;    
     align-items: center;
-    
+    justify-content:center;
     border-radius: 3px;
     padding: 4px;    
     flex-grow:1;
