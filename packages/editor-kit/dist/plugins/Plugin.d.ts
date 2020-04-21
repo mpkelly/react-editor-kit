@@ -21,4 +21,5 @@ export interface Plugin {
     onClick?(event: React.MouseEvent<HTMLElement>, editor: Editor): void;
     name?: string;
     data?: Object;
+    order?: number;
 }
