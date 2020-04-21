@@ -17,11 +17,16 @@ export interface SelectionToolbarProps {
 export const SelectionToolbar = (props: SelectionToolbarProps) => {
   const { children, location, offsets, delay } = props;
   const [outside, setOutside] = useState(false);
-  const { editor } = useEditorKit();
+  const { editor, id } = useEditorKit();
   const { selection } = editor;
   const { isFocused, isFocusedWithin } = useFocused(editor);
   const focused = isFocused || isFocusedWithin;
-  const hide = !focused || !selection || !Range.isExpanded(selection);
+
+  const isPopupShowing =
+    document.querySelector(`#rek-${id}-floating-content`) !== null;
+
+  const hide =
+    isPopupShowing || !focused || !selection || !Range.isExpanded(selection);
 
   useEffect(() => {
     const handleMove = (event: MouseEvent) => {

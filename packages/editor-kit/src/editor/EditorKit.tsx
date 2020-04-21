@@ -48,6 +48,7 @@ export interface EditorKitValue {
   disableSpellCheck(): void;
   enableSpellCheck(): void;
   delaySpellCheck(): void;
+  id: string;
 }
 const Context = createContext<EditorKitValue>({} as EditorKitValue);
 
@@ -64,8 +65,12 @@ export interface EditorKitProps {
   id?: string;
 }
 
+//Used for default IDs when props.id is undefined
+let count = 1;
+
 export const EditorKit = memo((props: EditorKitProps) => {
   const { children, onEditor } = props;
+  const { current: id } = useRef(props.id || `editor${count++}`);
   const plugins = getPlugins(props.plugins);
   const editor: ReactEditor = createEditor(plugins);
   const [, forceUpdate] = useState({});
@@ -112,6 +117,7 @@ export const EditorKit = memo((props: EditorKitProps) => {
     disableSpellCheck,
     enableSpellCheck,
     delaySpellCheck,
+    id,
   };
 
   return (

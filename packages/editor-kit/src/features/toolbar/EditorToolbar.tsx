@@ -7,6 +7,7 @@ import { IconProvider } from "../icons/IconProviderPlugin";
 import { Icon } from "../icons/Icon";
 import { ModalPopup } from "../popup/HtmlElementModalPopup";
 import { block } from "../../ui/Utils";
+import { useEditorKit } from "../../editor/EditorKit";
 
 export interface EditorToolbarProps {
   children: JSX.Element[];
@@ -17,28 +18,29 @@ export interface EditorToolbarProps {
 
 export enum OverflowStrategy {
   Wrap,
-  Menu
+  Menu,
 }
 
 export const EditorToolbar = (props: EditorToolbarProps) => {
   const { overflowStrategy } = props;
+  const { id } = useEditorKit();
   const array = React.Children.toArray(props.children);
   const total = array.length;
   const [index, setIndex] = useState(1);
   const toolbar = useRef<HTMLElement | null>(null);
   const done = useRef(false);
 
-  const children = array.slice(0, index).map(child => {
+  const children = array.slice(0, index).map((child) => {
     return React.cloneElement(child, child.props);
   });
 
-  const overflow = array.slice(index).map(child => {
+  const overflow = array.slice(index).map((child) => {
     return React.cloneElement(child, child.props);
   });
 
   const handleRef = (ref: HTMLElement | null) => {
     toolbar.current = ref;
-    setIndex(index => index);
+    setIndex((index) => index);
     measure();
   };
 
@@ -55,10 +57,10 @@ export const EditorToolbar = (props: EditorToolbarProps) => {
     if (toolbar.current) {
       if (toolbar.current.scrollWidth > toolbar.current.clientWidth) {
         done.current = true;
-        setIndex(index => index - 2);
+        setIndex((index) => index - 2);
       }
       if (total > index) {
-        setIndex(index => index + 1);
+        setIndex((index) => index + 1);
       }
     }
   };
@@ -74,7 +76,8 @@ export const EditorToolbar = (props: EditorToolbarProps) => {
     <ResizeSensor handleWidth onResize={handleResize}>
       <div
         ref={handleRef}
-        className={`rek-editor-toolbar-wrapper ${overflowingClass}`}
+        id={`rek-${id}-toolbar`}
+        className={`rek-editor-toolbar-wrapper ${overflowingClass} `}
       >
         <div className={"rek-editor-toolbar"}>{children}</div>
 
@@ -109,13 +112,13 @@ const Overflow = (props: OverflowProps) => {
   const element = useRef<HTMLElement | null>(null);
   const { data: icons } = usePlugin("icon-provider") as IconProvider;
   const toggleShow = () => {
-    setShow(show => !show);
+    setShow((show) => !show);
   };
 
   return (
     <div
       className="rek-editor-toolbar-overflow"
-      ref={ref => (element.current = ref)}
+      ref={(ref) => (element.current = ref)}
       onMouseDown={block}
     >
       <Icon icon={icons.moreIcon} onClick={toggleShow} />
