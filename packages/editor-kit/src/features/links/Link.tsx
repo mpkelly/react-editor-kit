@@ -33,6 +33,12 @@ export const Link = (props: LinkProps) => {
 
   const handleFinishEditing = useCallback(() => {
     const point = Editor.before(editor, ReactEditor.findPath(editor, element));
+    let childProps: any = {};
+    if (element.children.length === 1) {
+      //Copy style props fromc child to maintain text styles like fontSize etc
+      const { text, ...rest } = element.children[0];
+      childProps = rest;
+    }
     Transforms.removeNodes(editor, {
       at: ReactEditor.findPath(editor, element),
     });
@@ -42,7 +48,7 @@ export const Link = (props: LinkProps) => {
         type: "link",
         editing: false,
         url: link.url,
-        children: [{ text: link.displayName }],
+        children: [{ text: displayName, ...childProps }],
       },
       { at: point }
     );
