@@ -1,1 +1,1 @@
-export declare const usePlugin: (name: string) => import("./Plugin").Plugin | undefined;
+export declare const usePlugin: (name: string) => import("./Plugin").Plugin;

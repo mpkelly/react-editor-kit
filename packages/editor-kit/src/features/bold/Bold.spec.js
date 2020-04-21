@@ -18,7 +18,7 @@ describe("Bold feature", () => {
 
   it("works with markdown", () => {
     cy.enterText("**bold**plain **bold**");
-    cy.expect(output);
+    cy.check(output);
   });
 
   it("works with buttons", () => {
@@ -30,6 +30,6 @@ describe("Bold feature", () => {
     cy.enterText("bold");
     cy.clickMarkButton("bold");
     cy.enterText(" ");
-    cy.expect(output);
+    cy.check(output);
   });
 });

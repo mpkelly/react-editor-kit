@@ -38,6 +38,7 @@ export const Editor = memo((props: EditorProps) => {
     spellCheck,
     delaySpellCheck,
     readOnly,
+    id,
   } = useEditorKit();
   const renderElement = useCallback(
     (props: RenderElementProps) => handleRenderElement(props, plugins),
@@ -93,6 +94,7 @@ export const Editor = memo((props: EditorProps) => {
         style={style}
         spellCheck={spellCheck}
         readOnly={readOnly}
+        id={`editor-${id}`}
         {...rest}
       />
     </Slate>

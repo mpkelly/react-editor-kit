@@ -8,7 +8,7 @@ export const AutoFocusPlugin: Plugin = {
     editor.normalizeNode = ([node, path]) => {
       if (node.autoFocus) {
         Transforms.setNodes(editor, { autoFocus: undefined }, { at: path });
-        Transforms.select(editor, path);
+        setTimeout(() => Transforms.select(editor, path), 1);
       }
       return normalizeNode([node, path]);
     };

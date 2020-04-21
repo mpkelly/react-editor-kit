@@ -6,4 +6,4 @@ export interface SelectionToolbarProps {
     offsets?: Offsets;
     delay?: number;
 }
-export declare const SelectionToolbar: (props: SelectionToolbarProps) => JSX.Element | null;
+export declare const SelectionToolbar: (props: SelectionToolbarProps) => JSX.Element;

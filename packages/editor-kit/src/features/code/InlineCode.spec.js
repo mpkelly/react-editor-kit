@@ -18,7 +18,7 @@ describe("Inline code feature", () => {
 
   it("works with markdown", () => {
     cy.enterText("`code`plain `code`");
-    cy.expect(output);
+    cy.check(output);
   });
 
   it("works with buttons", () => {
@@ -30,6 +30,6 @@ describe("Inline code feature", () => {
     cy.enterText("code");
     cy.clickMarkButton("inline-code");
     cy.enterText(" ");
-    cy.expect(output);
+    cy.check(output);
   });
 });

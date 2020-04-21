@@ -9,4 +9,4 @@ export interface ModalPopupProps {
     location?: Location;
     offsets?: Offsets;
 }
-export declare const ModalPopup: (props: ModalPopupProps) => JSX.Element | null;
+export declare const ModalPopup: (props: ModalPopupProps) => JSX.Element;

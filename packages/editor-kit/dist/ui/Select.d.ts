@@ -17,16 +17,16 @@ export interface SelectItem {
     style?: CSSProperties;
     disabled?: boolean;
 }
-export declare const Select: (props: SelectProps) => JSX.Element | null;
+export declare const Select: (props: SelectProps) => JSX.Element;
 export declare const useSelect: (props: SelectProps, editor: HTMLElement) => {
     show: boolean;
     value: React.Key;
     activeIndex: number;
-    handleRef: (ref: HTMLInputElement | null) => void;
+    handleRef: (ref: HTMLInputElement) => void;
     handleValueChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     handleFocus: (event: React.MouseEvent<Element, MouseEvent>) => void;
     items: ListItem[];
     hideChoices: () => void;
-    element: HTMLElement | null;
+    element: HTMLElement;
     handleBlur: () => void;
 };

@@ -13,8 +13,8 @@ export declare type EditorConstrains = {
 };
 export declare const DefaultConstraints: {
     "code-block": {
-        marks: never[];
-        nodes: never[];
+        marks: any[];
+        nodes: any[];
     };
     "list-item": {
         nodes: string[];

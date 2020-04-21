@@ -8,7 +8,7 @@ import {
   ItalicPlugin,
   BoldButton,
   ItalicButton,
-  EnterKeyHandler,
+  EnterKeyHandlerPlugin,
   StrikethroughButton,
   UnderlinePlugin,
   UnderlineButton,
@@ -48,8 +48,7 @@ import {
   TextAlignRightButton,
   TextAlignCenterButton,
   TextAlignJustifiedButton,
-  FontColorPickerButton,
-  BackgroundColorPickerButton,
+  ColorPickerButton,
   HistoryPlugin,
   ClearFormattingButton,
   DividerPlugin,
@@ -61,7 +60,7 @@ import {
   EditorToolbarPlugin,
   createStaticMentions,
   TextAlignPlugin,
-  ImagePlugin
+  ImagePlugin,
 } from "../src/Index";
 import ReactDOM from "react-dom";
 
@@ -77,7 +76,7 @@ const TestEditorStylePlugin: Plugin = {
       color: rgba(0,0,0,.6);
     }
 
-  `
+  `,
 };
 
 const plugins: Plugin[] = [
@@ -103,7 +102,6 @@ const plugins: Plugin[] = [
   VideoPlugin,
   TablePlugin,
   CodeHighlighterPlugin,
-  EnterKeyHandler,
   StylePlugin,
   TestEditorStylePlugin,
   CodeHighlighterPlugin,
@@ -120,16 +118,17 @@ const plugins: Plugin[] = [
       { name: "Anna Smith" },
       { name: "Brian Small" },
       { name: "Carly Simon" },
-      { name: "Dave Jones" }
-    ]
-  })
+      { name: "Dave Jones" },
+    ],
+  }),
+  EnterKeyHandlerPlugin,
 ];
 
 const initialValue = [
   {
     type: "paragraph",
-    children: [{ text: "" }]
-  }
+    children: [{ text: "" }],
+  },
 ];
 
 const wrapperStyle: CSSProperties = {
@@ -137,7 +136,7 @@ const wrapperStyle: CSSProperties = {
   alignItems: "center",
   flexDirection: "column",
   width: "100%",
-  height: "100%"
+  height: "100%",
 };
 
 const editorStyle: CSSProperties = {
@@ -148,7 +147,7 @@ const editorStyle: CSSProperties = {
   border: "1px solid rgba(0,0,0,.1)",
   boxShadow: "rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
   borderRadius: 3,
-  backgroundColor: "white"
+  backgroundColor: "white",
 };
 
 const editorWrapperStyle: CSSProperties = {
@@ -159,7 +158,7 @@ const editorWrapperStyle: CSSProperties = {
   flex: 1,
   justifyContent: "center",
   overflow: "hidden",
-  padding: 8
+  padding: 8,
 };
 
 export const TestEditor = () => {
@@ -168,7 +167,7 @@ export const TestEditor = () => {
 
   useEffect(() => {
     const fonts = (document as any).fonts;
-    fonts.ready.then(function() {
+    fonts.ready.then(function () {
       setLoaded(true);
     });
   }, []);
@@ -211,13 +210,9 @@ export const TestEditor = () => {
           <InlineCodeButton className="material-icons-round" ligature="code" />
 
           <Divider />
-          <FontColorPickerButton
+          <ColorPickerButton
             className="material-icons-round"
             ligature="text_format"
-          />
-          <BackgroundColorPickerButton
-            className="material-icons-round"
-            ligature="format_paint"
           />
           <Divider />
           <TextAlignLeftButton
@@ -279,7 +274,6 @@ export const TestEditor = () => {
             value={value}
             onChange={setValue}
             style={editorStyle}
-            spellCheck
             autoFocus
           />
         </div>

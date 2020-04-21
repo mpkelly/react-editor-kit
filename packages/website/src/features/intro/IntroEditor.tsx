@@ -43,7 +43,6 @@ import {
   TablePlugin,
   CodeHighlighterPlugin,
   LabelsPlugin,
-  EnterKeyHandler,
   StylePlugin,
   EditorToolbar,
   EditorToolbarPlugin,
@@ -51,7 +50,7 @@ import {
   LinkButton,
   InlineCodeButton,
   TextAlignPlugin,
-  createStaticMentions
+  createStaticMentions,
 } from "@mpkelly/react-editor-kit";
 
 export const IntroEditor = () => {
@@ -225,7 +224,7 @@ const IntroEditorPlugin: Plugin = {
   }
   
   
-`
+`,
 };
 
 const plugins: Plugin[] = [
@@ -252,15 +251,14 @@ const plugins: Plugin[] = [
   TablePlugin,
   CodeHighlighterPlugin,
   LabelsPlugin,
-  EnterKeyHandler,
   StylePlugin,
   HistoryPlugin,
   IntroEditorPlugin,
   EditorToolbarPlugin,
   createStaticMentions({
-    mentions: MentionsItems
+    mentions: MentionsItems,
   }),
-  TextAlignPlugin
+  TextAlignPlugin,
 ];
 
 const initialValue: Node[] = [
@@ -270,9 +268,9 @@ const initialValue: Node[] = [
     children: [
       {
         type: "h1",
-        children: [{ text: "Getting Started", fontFamily: "sans-serif" }]
-      }
-    ]
+        children: [{ text: "Getting Started", fontFamily: "sans-serif" }],
+      },
+    ],
   },
   {
     type: "ordered-list",
@@ -281,46 +279,46 @@ const initialValue: Node[] = [
         type: "list-item",
         children: [
           { text: "Install the NPM Package:\n\n" },
-          { text: "npm i @mpkelly/react-editor-kit\n", "inline-code": true }
-        ]
+          { text: "npm i @mpkelly/react-editor-kit\n", "inline-code": true },
+        ],
       },
       {
         type: "list-item",
         children: [
           {
             text:
-              "Optionally load your icon font if using one. You can check this "
+              "Optionally load your icon font if using one. You can check this ",
           },
           {
             type: "link",
             url: "http://192.168.43.118:8089/packages/website/dist/index.html",
-            children: [{ text: "file" }]
+            children: [{ text: "file" }],
           },
           {
             text:
-              " which loads the Material Icons Round font as used by this Editor. \n"
-          }
-        ]
+              " which loads the Material Icons Round font as used by this Editor. \n",
+          },
+        ],
       },
       {
         type: "list-item",
         children: [
           {
-            text: "Create your Editor component. You can start by copying the "
+            text: "Create your Editor component. You can start by copying the ",
           },
           {
             type: "link",
             url: "http://192.168.43.118:8089/packages/website/dist/index.html",
-            children: [{ text: "SimpleExample" }]
+            children: [{ text: "SimpleExample" }],
           },
           { text: " or more complex " },
           {
             type: "link",
             url: "http://192.168.43.118:8089/packages/website/dist/index.html",
-            children: [{ text: "GoogleDocsExample" }]
+            children: [{ text: "GoogleDocsExample" }],
           },
-          { text: ". \n" }
-        ]
+          { text: ". \n" },
+        ],
       },
       {
         type: "list-item",
@@ -329,39 +327,39 @@ const initialValue: Node[] = [
           {
             type: "link",
             url: "http://192.168.43.118:8089/packages/website/dist/index.html",
-            children: [{ text: "concepts" }]
+            children: [{ text: "concepts" }],
           },
           {
-            text: " and then browse through the docs to learn about the other "
+            text: " and then browse through the docs to learn about the other ",
           },
           {
             type: "link",
             url: "http://192.168.43.118:8089/packages/website/dist/index.html",
-            children: [{ text: "features" }]
+            children: [{ text: "features" }],
           },
-          { text: " and plugins offered. \n" }
-        ]
-      }
-    ]
+          { text: " and plugins offered. \n" },
+        ],
+      },
+    ],
   },
   {
     type: "paragraph",
     textAlign: "center",
-    children: [{ type: "h3", children: [{ text: "Basic Code Structure" }] }]
+    children: [{ type: "h3", children: [{ text: "Basic Code Structure" }] }],
   },
   {
     type: "code-block",
     children: [
       {
         text:
-          "const Editor = () => {\n  const [value, setValue] = useState<Node[]>(initialValue);\n  <EditorKit plugins={plugins}>\n    {/* Include toolbars, controls etc here inside of the <EditorKit/> */}\n    <Editor\n      value={value}\n      onChange={setValue}\n    />\n  </EditorKit>\n}"
-      }
+          "const Editor = () => {\n  const [value, setValue] = useState<Node[]>(initialValue);\n  <EditorKit plugins={plugins}>\n    {/* Include toolbars, controls etc here inside of the <EditorKit/> */}\n    <Editor\n      value={value}\n      onChange={setValue}\n    />\n  </EditorKit>\n}",
+      },
     ],
-    lang: "JavaScript"
+    lang: "JavaScript",
   },
   { type: "paragraph", children: [{ text: "\n" }] },
   { type: "paragraph", children: [{ text: "\n" }] },
-  { type: "paragraph", children: [{ text: "\n" }] }
+  { type: "paragraph", children: [{ text: "\n" }] },
 ];
 
 export const IntroEditorContent = styled.div`

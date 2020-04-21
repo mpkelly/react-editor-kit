@@ -12,6 +12,7 @@ export interface EditorKitValue {
     disableSpellCheck(): void;
     enableSpellCheck(): void;
     delaySpellCheck(): void;
+    id: string;
 }
 export declare const useEditorKit: () => EditorKitValue;
 export interface EditorKitProps {
@@ -20,5 +21,6 @@ export interface EditorKitProps {
     spellCheck?: boolean;
     readOnly?: boolean;
     onEditor?(editor: ReactEditor): void;
+    id?: string;
 }
 export declare const EditorKit: React.MemoExoticComponent<(props: EditorKitProps) => JSX.Element>;

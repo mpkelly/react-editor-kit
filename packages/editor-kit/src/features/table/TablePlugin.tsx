@@ -1,5 +1,5 @@
 import React from "react";
-import { Editor, Transforms, Node } from "slate";
+import { Editor, Transforms, Node, Range } from "slate";
 import { RenderElementProps, ReactEditor } from "slate-react";
 import { TableCell } from "./TableCell";
 import { Plugin, Trigger } from "../../plugins/Plugin";
@@ -63,9 +63,24 @@ export const createTablePlugin = (options: TablePluginOptions): Plugin => {
         editor.insertText("\n");
         return true;
       }
-      if (isDeleting(event) && Node.string(cell[0]).length == 0) {
-        event.preventDefault();
-        return true;
+      if (isDeleting(event)) {
+        const { selection } = editor;
+        const length = Node.string(cell[0]).length;
+        let selectAll = false;
+        if (selection && Range.isExpanded(selection)) {
+          const { anchor, focus } = selection;
+          const distance = focus.offset - anchor.offset;
+          selectAll = distance === length;
+        }
+        if (length == 0) {
+          event.preventDefault();
+          return true;
+        }
+        if (selectAll) {
+          Transforms.delete(editor, { at: selection as Range, hanging: false });
+          event.preventDefault();
+          return true;
+        }
       }
     },
     globalStyles: () => GlobalStyle,

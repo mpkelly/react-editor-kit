@@ -6,10 +6,10 @@ export interface Offsets {
 }
 export declare const getPosition: (bounds: ClientRect, anchor: ClientRect, location?: Location, fixed?: boolean, offsets?: Offsets) => CSSProperties;
 export declare const getAbsolutePosition: (bounds: ClientRect, anchor: ClientRect, position?: Location, offsets?: {
-    h?: number | undefined;
-    v?: number | undefined;
+    h?: number;
+    v?: number;
 }) => CSSProperties;
 export declare const getFixedPosition: (bounds: ClientRect, anchor: ClientRect, position?: Location, offsets?: {
-    h?: number | undefined;
-    v?: number | undefined;
+    h?: number;
+    v?: number;
 }) => CSSProperties;

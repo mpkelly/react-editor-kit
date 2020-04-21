@@ -18,7 +18,7 @@ describe("Underline feature", () => {
 
   it("works with markdown", () => {
     cy.enterText("__underline__plain __underline__");
-    cy.expect(output);
+    cy.check(output);
   });
 
   it("works with buttons", () => {
@@ -30,6 +30,6 @@ describe("Underline feature", () => {
     cy.enterText("underline");
     cy.clickMarkButton("underline");
     cy.enterText(" ");
-    cy.expect(output);
+    cy.check(output);
   });
 });

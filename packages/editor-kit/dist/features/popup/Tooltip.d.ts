@@ -4,4 +4,4 @@ export interface TooltipProps {
     element: Node;
     text?: string;
 }
-export declare const Tooltip: (props: TooltipProps) => JSX.Element | null;
+export declare const Tooltip: (props: TooltipProps) => JSX.Element;

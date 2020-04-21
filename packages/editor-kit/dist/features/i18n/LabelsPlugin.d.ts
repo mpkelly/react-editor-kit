@@ -14,6 +14,7 @@ export interface EditorLabels {
     numberedColumn: string;
     borderless: string;
     save: string;
+    validVideoUrl: string;
 }
 export declare const EnglishLabels: EditorLabels;
 export interface Labels extends Plugin {

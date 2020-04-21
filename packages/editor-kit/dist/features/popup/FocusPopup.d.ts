@@ -8,4 +8,4 @@ export interface FocusPopupProps {
     offsets?: Offsets;
     fixed?: boolean;
 }
-export declare const FocusPopup: React.MemoExoticComponent<(props: FocusPopupProps) => JSX.Element | null>;
+export declare const FocusPopup: React.MemoExoticComponent<(props: FocusPopupProps) => JSX.Element>;

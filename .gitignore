@@ -3,3 +3,14 @@ node_modules
 packages/editor-kit/dist/index.js.LICENSE
 packages/editor-kit/System.ts
 lerna-debug.log
+packages/editor-kit/cypress/videos/features/bold/Bold.spec.js.mp4
+packages/editor-kit/cypress/videos/features/code/InlineCode.spec.js.mp4
+packages/editor-kit/cypress/videos/features/italic/Italic.spec.js.mp4
+packages/editor-kit/cypress/videos/features/lists/Lists.spec.js.mp4
+packages/editor-kit/cypress/videos/features/strikethrough/Strikethrough.spec.js.mp4
+packages/editor-kit/cypress/videos/features/subscript/Subscript.spec.js.mp4
+packages/editor-kit/cypress/videos/features/superscript/Superscript.spec.js.mp4
+packages/editor-kit/cypress/videos/features/table/Tables.spec.js.mp4
+packages/editor-kit/cypress/videos/features/underline/Underline.spec.js.mp4
+packages/editor-kit/cypress/screenshots/features/table/Tables.spec.js/Tables feature -- Adds and removes columns (failed).png
+packages/editor-kit/cypress/screenshots/features/table/Tables.spec.js/Tables feature -- Adds and removes rows (failed).png

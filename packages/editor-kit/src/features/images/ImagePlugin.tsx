@@ -1,10 +1,10 @@
 import React from "react";
 import { Plugin } from "../../plugins/Plugin";
 import { ReactEditor, RenderElementProps } from "slate-react";
-import imageExtensions from "image-extensions";
 import isUrl from "is-url";
 import { Image } from "./Image";
 import { Transforms } from "slate";
+import { ImageExtensions } from "./ImageExtensions";
 
 export const ImagePlugin: Plugin = {
   withPlugin: (editor: ReactEditor) => {
@@ -17,7 +17,7 @@ export const ImagePlugin: Plugin = {
       const { files } = data;
 
       if (files && files.length > 0) {
-        for (const file of files) {
+        for (const file of Array.from(files)) {
           const reader = new FileReader();
           const [mime] = file.type.split("/");
 
@@ -52,7 +52,7 @@ export const isImageUrl = (url: string) => {
   if (!url) return false;
   if (!isUrl(url)) return false;
   const ext = new URL(url).pathname.split(".").pop() as string;
-  return imageExtensions.includes(ext);
+  return ImageExtensions.includes(ext);
 };
 
 const insertImage = (editor: ReactEditor, url: string) => {

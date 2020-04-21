@@ -5,6 +5,7 @@ import { block } from "../../ui/Utils";
 // Allows for soft-breaks when shift key is down when enter key is pressed.
 export const EnterKeyHandlerPlugin: Plugin = {
   name: "enter-key-handler",
+  order: 1000,
   onKeyDown: (
     event: React.KeyboardEvent<HTMLDivElement>,
     editor: ReactEditor

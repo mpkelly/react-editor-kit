@@ -8,6 +8,7 @@ import { isBlockEmpty } from "../blocks/Blocks";
 // node will be removed and the two remaining nodes stay as they were.
 export const DeleteKeyHandlerPlugin: Plugin = {
   name: "delete-key-handler",
+  order: 1000,
   onKeyDown: (event: React.KeyboardEvent<HTMLDivElement>, editor: Editor) => {
     if (event.keyCode === 8) {
       //Backspace

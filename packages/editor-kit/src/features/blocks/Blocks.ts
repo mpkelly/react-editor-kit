@@ -8,6 +8,7 @@ export const toggleBlock = (editor: Editor, type: string) => {
   }
   Transforms.setNodes(editor, {
     type: isActive ? "paragraph" : type,
+    autoFocus: true,
     at: selection.focus,
   });
 };

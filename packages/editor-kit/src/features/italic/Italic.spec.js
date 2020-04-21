@@ -18,7 +18,7 @@ describe("Italic feature", () => {
 
   it("works with markdown", () => {
     cy.enterText("*italic*plain *italic*");
-    cy.expect(output);
+    cy.check(output);
   });
 
   it("works with buttons", () => {
@@ -30,6 +30,6 @@ describe("Italic feature", () => {
     cy.enterText("italic");
     cy.clickMarkButton("italic");
     cy.enterText(" ");
-    cy.expect(output);
+    cy.check(output);
   });
 });

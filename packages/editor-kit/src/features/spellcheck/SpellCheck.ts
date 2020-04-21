@@ -1,6 +1,10 @@
 import { useState, useRef, useCallback } from "react";
 
-export const useSpellcheck = (enabled: boolean, callback = () => {}) => {
+export const useSpellcheck = (
+  enabled: boolean,
+  id: string,
+  callback = () => {}
+) => {
   const [spellCheck, setSpellCheck] = useState(enabled);
   const timeout = useRef(0);
 

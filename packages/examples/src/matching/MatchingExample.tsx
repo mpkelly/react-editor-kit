@@ -171,8 +171,8 @@ const useMatching = () => {
         : state.pattern;
       const ranges = findMatches(
         search,
-        state.matchRange,
-        editor as ReactEditor
+        editor as ReactEditor,
+        state.matchRange
       );
       editor.highlightRanges = ranges;
       setValue((value) => value.slice());

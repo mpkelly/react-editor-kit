@@ -5,4 +5,4 @@ export interface SuggestionListProps {
     suggestions: Suggestions;
     onChoice(choice?: Object, displayText?: string, match?: string): void;
 }
-export declare const SuggestionList: React.MemoExoticComponent<(props: SuggestionListProps) => JSX.Element | null>;
+export declare const SuggestionList: React.MemoExoticComponent<(props: SuggestionListProps) => JSX.Element>;

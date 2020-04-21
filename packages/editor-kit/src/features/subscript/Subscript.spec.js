@@ -18,7 +18,7 @@ describe("Subscript feature", () => {
 
   it("works with markdown", () => {
     cy.enterText("~subscript~plain ~subscript~");
-    cy.expect(output);
+    cy.check(output);
   });
 
   it("works with buttons", () => {
@@ -30,6 +30,6 @@ describe("Subscript feature", () => {
     cy.enterText("subscript");
     cy.clickMarkButton("sub");
     cy.enterText(" ");
-    cy.expect(output);
+    cy.check(output);
   });
 });

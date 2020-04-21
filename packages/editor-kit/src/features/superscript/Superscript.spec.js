@@ -18,7 +18,7 @@ describe("Superscript feature", () => {
 
   it("works with markdown", () => {
     cy.enterText("^superscript^plain ^superscript^");
-    cy.expect(output);
+    cy.check(output);
   });
 
   it("works with buttons", () => {
@@ -30,6 +30,6 @@ describe("Superscript feature", () => {
     cy.enterText("superscript");
     cy.clickMarkButton("super");
     cy.enterText(" ");
-    cy.expect(output);
+    cy.check(output);
   });
 });

@@ -9,7 +9,7 @@ import React, {
   memo,
   useCallback,
 } from "react";
-import { createEditor as createSlateEditor } from "slate";
+import { createEditor as createSlateEditor, Transforms } from "slate";
 import { withReact, ReactEditor } from "slate-react";
 import { Plugin } from "../plugins/Plugin";
 import { DefaultThemePlugin } from "../features/theme/DefaultThemePlugin";
@@ -96,7 +96,7 @@ export const EditorKit = memo((props: EditorKitProps) => {
     disableSpellCheck,
     enableSpellCheck,
     delaySpellCheck,
-  } = useSpellcheck(Boolean(props.spellCheck), render);
+  } = useSpellcheck(Boolean(props.spellCheck), id, render);
 
   useEffect(() => {
     const { onChange } = editor;
@@ -136,7 +136,11 @@ const getPlugins = (userPlugins: Plugin[]) => {
       !userPlugins.find(
         (other) => Boolean(other.name) && other.name === plugin.name
       )
-  ).concat(userPlugins);
+  )
+    .concat(userPlugins)
+    .sort((a, b) => {
+      return (a.order || 0) - (b.order || 0);
+    });
 };
 
 const createEditor = (plugins: Plugin[]): ReactEditor => {
@@ -186,6 +190,12 @@ const maybeConfigureTesting = (editor: ReactEditor, forceUpdate: Function) => {
       ReactEditor.blur(editor);
     };
     global.refreshEditor = () => forceUpdate();
+    global.focusNode = (node: HTMLElement) => {
+      const slateNode = ReactEditor.toSlateNode(editor, node);
+      if (slateNode) {
+        Transforms.select(editor, ReactEditor.findPath(editor, slateNode));
+      }
+    };
     global.deleteBackward = (distance: number, unit: string = "character") => {
       deleteBackward(editor, distance, unit as any);
     };

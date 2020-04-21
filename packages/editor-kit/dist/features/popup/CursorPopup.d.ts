@@ -9,8 +9,8 @@ export interface CursorPopupProps {
     expanded?: boolean;
     delay?: number;
 }
-export declare const CursorPopup: (props: CursorPopupProps) => JSX.Element | null;
+export declare const CursorPopup: (props: CursorPopupProps) => JSX.Element;
 export declare const getCursor: () => {
-    range: Range | null;
+    range: Range;
     length: number;
 };

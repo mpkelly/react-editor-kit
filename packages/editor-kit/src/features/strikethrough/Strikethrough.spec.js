@@ -18,7 +18,7 @@ describe("Strikethrough feature", () => {
 
   it("works with markdown", () => {
     cy.enterText("~~strikethrough~~plain ~~strikethrough~~");
-    cy.expect(output);
+    cy.check(output);
   });
 
   it("works with buttons", () => {
@@ -30,6 +30,6 @@ describe("Strikethrough feature", () => {
     cy.enterText("strikethrough");
     cy.clickMarkButton("strikethrough");
     cy.enterText(" ");
-    cy.expect(output);
+    cy.check(output);
   });
 });

@@ -5,7 +5,7 @@ import { MatchExpression, MatchResult } from "../editor/Matching";
 import { CSSProperties } from "react";
 export declare type Trigger = {
     pattern: MatchExpression;
-    range: EditorRange;
+    range?: EditorRange;
 };
 export interface Plugin {
     triggers?: Trigger[];
