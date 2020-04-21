@@ -24,6 +24,8 @@ import { AutoFocusPlugin } from "../features/auto-focus/AutoFocusPlugin";
 import { DeleteKeyHandlerPlugin } from "../features/delete-key/DeleteKeyHandlerPlugin";
 import { EnterKeyHandlerPlugin } from "../features/enter-key/EnterKeyHandlerPlugin";
 
+// These core plugins can be overriden (or disabled) by passing a plugin with the same "name"
+// to <EditorKit plugins={...}/>
 const InternalPlugins: Plugin[] = [
   DefaultThemePlugin,
   IconProviderPlugin,
@@ -59,6 +61,7 @@ export interface EditorKitProps {
   spellCheck?: boolean;
   readOnly?: boolean;
   onEditor?(editor: ReactEditor): void;
+  id?: string;
 }
 
 export const EditorKit = memo((props: EditorKitProps) => {
@@ -162,6 +165,7 @@ const generateStyle = (plugins: Plugin[]) => {
     }`;
   }
   const globalStyle = globalStyles.join("\n");
+  //Normally a bad thing to do but ok here as only created once
   return createGlobalStyle` ${globalStyle} ${editorStyle}`;
 };
 

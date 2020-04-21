@@ -8,10 +8,10 @@ import { deleteBackward } from "../../editor/Editor";
 export const QuotePlugin: Plugin = {
   triggers: [
     { pattern: `:quote`, range: "line-before" },
-    { pattern: /^\s?>$/, range: "block" }
+    { pattern: /^\s?>$/, range: "block" },
   ],
   onTrigger: (editor: ReactEditor, matches: MatchResult[]) => {
-    if (matches[0]) {
+    if (editor.isNodeSupported("quote") && matches[0]) {
       const range = matches[0].range;
       const length = range.focus.offset - range.anchor.offset;
       deleteBackward(editor, length);
@@ -20,5 +20,15 @@ export const QuotePlugin: Plugin = {
   },
   renderElement: (props: RenderElementProps) => {
     return renderElement(props, "quote", "blockquote");
-  }
+  },
+  editorStyles: () => EditorStyles,
 };
+
+const EditorStyles = `
+  blockquote {
+    border-left: 6px solid var(--divider-color);
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 16px;
+  }
+`;

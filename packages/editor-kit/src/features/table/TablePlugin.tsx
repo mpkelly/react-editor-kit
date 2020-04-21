@@ -139,7 +139,6 @@ export const DefaultTable = [
       },
     ],
   },
-  { type: "paragraph", children: [{ text: "" }] },
 ];
 
 export const TablePlugin = createTablePlugin({ defaultTable: DefaultTable });

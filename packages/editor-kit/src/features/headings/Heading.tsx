@@ -12,18 +12,10 @@ export const createHeadingPlugin = (
 ): Plugin => {
   return {
     triggers: triggers,
-    onTrigger: (
-      editor: ReactEditor,
-      matches: MatchResult[],
-      trigger: Trigger
-    ) => {
+    onTrigger: (editor: ReactEditor, matches: MatchResult[]) => {
       if (editor.isNodeSupported(type)) {
-        let length = 0;
-        if (typeof trigger.pattern === "string") {
-          length = trigger.pattern.length;
-        } else if (matches[0] && matches[0].regexMatch) {
-          length = matches[0].regexMatch[0].length;
-        }
+        const range = matches[0].range;
+        const length = range.focus.offset - range.anchor.offset;
         deleteBackward(editor, length);
         toggleBlock(editor, type);
       }
