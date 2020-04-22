@@ -38,6 +38,7 @@ const GlobalStyle = `
 .rek-floating-content {
   position:fixed;    
   z-index:${PopupContentLayer};
+  box-sizing: border-box;
 }
 
 .rek-editor-tooltip {
@@ -45,6 +46,7 @@ const GlobalStyle = `
   padding:2px 8px;
   font-size:14px;
   background-color: var(--primary-text-color);
+  box-sizing: border-box;
 }
 
 .rek-editor-tooltip span {
@@ -57,6 +59,9 @@ const GlobalStyle = `
   color: var(--primary-text-color);
   font-family: var(--editor-ui-font);  
   box-shadow: 0 2px 2px 1px rgba(0,0,0,.1);
+  * {
+    box-sizing: border-box;
+  }
 }
 
 .rek-list {        
@@ -353,6 +358,7 @@ input[type=number] {
 const EditorStyle = `  
   font-family: var(--editor-ui-font);
   color: var(--primary-text-color);
+  box-sizing: border-box;
 
   * {
     line-height:1.4;

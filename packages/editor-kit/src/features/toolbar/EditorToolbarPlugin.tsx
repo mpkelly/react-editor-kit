@@ -13,8 +13,10 @@ const GlobalStyle = `
     width:100%;
     background-color: var(--content-background);
     overflow:hidden;
+
     * {
       flex-shrink:0;
+      box-sizing: border-box;
     }    
   }
 

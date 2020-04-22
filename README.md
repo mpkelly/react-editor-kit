@@ -14,9 +14,22 @@ A suite of plugins for composing react-based text editors. Editor Kit is built u
 
 2. **Create an editor.**
 
-The easiest way to create an editor is to start with one of the examples, such as [SimpleEditor](https://github.com/mpkelly/react-editor-kit/blob/master/packages/examples/src/simple/SimpleEditor.tsx).
+The easiest way to create an editor is to start with one of the Code Sandbox examples above, you can copy all of [KitchenSinkEditor](https://codesandbox.io/s/react-editor-kit-examples-0e31g?file=/src/KitchenSinkEditor.tsx) file and remove what you don't need.
 
-3. **Optionally load your icon font.** SimpleEditor uses Editor Kit's built-in Button components which are designed to work with icon fonts and require CSS class names and optionally a ligature. If you're also using an icon font then you'll need to make sure it is loaded before you render the editor.
+3. Load the CSS (if using). Editor Kit does not require external CSS but if you're using the `KitchenSinkEditor` then you'll need to load the CSS files for the icon font and custom editor font.
+
+```CSS
+    //index.html
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Material+Icons+Round|"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+```
 
 ## Concepts
 
