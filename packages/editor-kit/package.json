@@ -36,7 +36,6 @@
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "*",
     "cypress": "^4.4.1",
-    "goober": "^1.7.1",
     "hard-source-webpack-plugin": "^0.13.1",
     "is-url": "^1.2.4",
     "prismjs": "^1.19.0",
@@ -66,5 +65,8 @@
     "cypress": "npx cypress run",
     "test": "npm run disttest && npm run cypress"
   },
-  "gitHead": "bb3fcf705399ff70fcd79a8e82936af0e359d2a8"
+  "gitHead": "bb3fcf705399ff70fcd79a8e82936af0e359d2a8",
+  "dependencies": {
+    "styled-components": "^5.1.0"
+  }
 }

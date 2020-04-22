@@ -11,7 +11,8 @@ import React, {
 } from "react";
 import { createEditor as createSlateEditor, Transforms } from "slate";
 import { withReact, ReactEditor } from "slate-react";
-import { glob } from "goober";
+//import { glob } from "goober";
+import { createGlobalStyle } from "styled-components";
 import { Plugin } from "../plugins/Plugin";
 import { DefaultThemePlugin } from "../features/theme/DefaultThemePlugin";
 import { SelectionExtensionsPlugin } from "../features/selection/SelectionExtensionsPlugin";
@@ -76,9 +77,9 @@ export const EditorKit = memo((props: EditorKitProps) => {
   const [, forceUpdate] = useState({});
   const [readOnly, setReadOnly] = useState(Boolean(props.readOnly));
   maybeConfigureTesting(editor, forceUpdate);
-  useEffect(() => {
-    generateStyle(plugins);
-  }, [plugins]);
+
+  const Style = useMemo(() => generateStyle(plugins), [plugins]);
+
   onEditor && onEditor(editor);
 
   const disableReadOnly = () => {
@@ -124,6 +125,7 @@ export const EditorKit = memo((props: EditorKitProps) => {
 
   return (
     <Fragment>
+      <Style />
       <Context.Provider value={context}>
         <Fragment>{children}</Fragment>
       </Context.Provider>
@@ -177,7 +179,7 @@ const generateStyle = (plugins: Plugin[]) => {
   }
   const globalStyle = globalStyles.join("\n");
   //Normally a bad thing to do but ok here as only created once
-  return glob(`${globalStyle} ${editorStyle}`);
+  return createGlobalStyle`${globalStyle} ${editorStyle}`;
 };
 
 const maybeConfigureTesting = (editor: ReactEditor, forceUpdate: Function) => {

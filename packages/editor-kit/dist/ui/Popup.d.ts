@@ -10,6 +10,4 @@ export interface PopupProps {
     className?: string;
 }
 export declare const Popup: (props: PopupProps) => JSX.Element;
-export declare const Overlay: import("goober").StyledVNode<React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & {
-    children: any;
-}>;
+export declare const Overlay: import("styled-components").StyledComponent<"div", any, {}, never>;

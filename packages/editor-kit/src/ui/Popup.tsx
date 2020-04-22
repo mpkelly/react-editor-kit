@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "goober";
+import styled from "styled-components";
 import { OverlayLayer } from "./Layers";
 
 export interface PopupProps {
@@ -25,12 +25,7 @@ export const Popup = (props: PopupProps) => {
   );
 };
 
-type DivType = React.DetailedHTMLProps<
-  React.HTMLAttributes<HTMLDivElement>,
-  HTMLDivElement
->;
-
-export const Overlay = styled<DivType>("div")`
+export const Overlay = styled.div`
   position: fixed;
   z-index: ${OverlayLayer};
   top: 0;
