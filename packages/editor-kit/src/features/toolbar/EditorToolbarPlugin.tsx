@@ -37,7 +37,7 @@ const GlobalStyle = `
     border-radius: 3px;
     padding: 4px;    
     flex-grow:1;
-
+    
     .rek-icon-button {
       min-width:36px;  
       width:36px; 

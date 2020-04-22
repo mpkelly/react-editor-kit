@@ -72,14 +72,16 @@ let count = 1;
 export const EditorKit = memo((props: EditorKitProps) => {
   const { children, onEditor } = props;
   const { current: id } = useRef(props.id || `editor${count++}`);
-  const plugins = getPlugins(props.plugins);
+  const plugins = useMemo(() => getPlugins(props.plugins), [props.plugins]);
   const editor: ReactEditor = createEditor(plugins);
   const [, forceUpdate] = useState({});
   const [readOnly, setReadOnly] = useState(Boolean(props.readOnly));
+  const Style = useRef<any>();
+  useEffect(() => {
+    Style.current = generateStyle(plugins);
+  }, [props.plugins]);
+
   maybeConfigureTesting(editor, forceUpdate);
-
-  const Style = useMemo(() => generateStyle(plugins), [plugins]);
-
   onEditor && onEditor(editor);
 
   const disableReadOnly = () => {
@@ -125,7 +127,7 @@ export const EditorKit = memo((props: EditorKitProps) => {
 
   return (
     <Fragment>
-      <Style />
+      {Style.current && <Style.current />}
       <Context.Provider value={context}>
         <Fragment>{children}</Fragment>
       </Context.Provider>
@@ -177,8 +179,9 @@ const generateStyle = (plugins: Plugin[]) => {
       ${editorStyles.join("\n")}
     }`;
   }
+  console.log("Generate");
   const globalStyle = globalStyles.join("\n");
-  //Normally a bad thing to do but ok here as only created once
+
   return createGlobalStyle`${globalStyle} ${editorStyle}`;
 };
 
