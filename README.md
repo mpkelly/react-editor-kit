@@ -2,7 +2,9 @@
 
 A suite of plugins for composing react-based text editors. Editor Kit is built using [Slate](https://github.com/ianstormtaylor/slate/) (v0.50+) - the fantastic editor framework for React. You don't need any Slate knowledge to use Editor Kit but it is recommended if you plan to extend it.
 
-**NOTE** project is in alpha stage and you might experience some issues.
+[Live Examples](https://codesandbox.io/s/react-editor-kit-examples-0e31g?file=/src/SimpleEditor.tsx)
+
+**NOTE** project is currently in beta and you might experience some issues.
 
 ## Quick Start
 
