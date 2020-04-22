@@ -11,12 +11,12 @@ import React, {
 } from "react";
 import { createEditor as createSlateEditor, Transforms } from "slate";
 import { withReact, ReactEditor } from "slate-react";
+import { glob } from "goober";
 import { Plugin } from "../plugins/Plugin";
 import { DefaultThemePlugin } from "../features/theme/DefaultThemePlugin";
 import { SelectionExtensionsPlugin } from "../features/selection/SelectionExtensionsPlugin";
 import { IconProviderPlugin } from "../features/icons/IconProviderPlugin";
 import { ConstraintsPlugin } from "../features/constraints/ConstraintsPlugin";
-import { createGlobalStyle } from "styled-components";
 import { deleteBackward } from "./Editor";
 import { LabelsPlugin } from "../features/i18n/LabelsPlugin";
 import { useSpellcheck } from "../features/spellcheck/SpellCheck";
@@ -76,7 +76,7 @@ export const EditorKit = memo((props: EditorKitProps) => {
   const [, forceUpdate] = useState({});
   const [readOnly, setReadOnly] = useState(Boolean(props.readOnly));
   maybeConfigureTesting(editor, forceUpdate);
-  const Style = useRef(generateStyle(plugins));
+  generateStyle(plugins);
   onEditor && onEditor(editor);
 
   const disableReadOnly = () => {
@@ -122,7 +122,6 @@ export const EditorKit = memo((props: EditorKitProps) => {
 
   return (
     <Fragment>
-      <Style.current />
       <Context.Provider value={context}>
         <Fragment>{children}</Fragment>
       </Context.Provider>
@@ -176,7 +175,7 @@ const generateStyle = (plugins: Plugin[]) => {
   }
   const globalStyle = globalStyles.join("\n");
   //Normally a bad thing to do but ok here as only created once
-  return createGlobalStyle` ${globalStyle} ${editorStyle}`;
+  return glob(`${globalStyle} ${editorStyle}`);
 };
 
 const maybeConfigureTesting = (editor: ReactEditor, forceUpdate: Function) => {

@@ -106,7 +106,6 @@ const plugins: Plugin[] = [
   }),
   StylePlugin,
   GoogleDocsStylePlugin,
-  CodeHighlighterPlugin,
   createBreakoutPlugin(),
   DividerPlugin,
   HistoryPlugin,

@@ -10,4 +10,4 @@ export interface PopupProps {
     className?: string;
 }
 export declare const Popup: (props: PopupProps) => JSX.Element;
-export declare const Overlay: import("styled-components").StyledComponent<"div", any, {}, never>;
+export declare const Overlay: (props: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>) => JSX.Element;

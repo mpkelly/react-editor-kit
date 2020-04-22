@@ -33,7 +33,7 @@ const GlobalStyle = `
   z-index:${PopupMarkerLayer};
 }
 
-.rek-floating-content{
+.rek-floating-content {
   position:fixed;    
   z-index:${PopupContentLayer};
 }
@@ -41,8 +41,8 @@ const GlobalStyle = `
 .rek-editor-tooltip {
   border-radius:6px;
   padding:2px 8px;
-  font-sie:14px;
-  background-color: var(--primary-text-color);rek-block-wrapper
+  font-size:14px;
+  background-color: var(--primary-text-color);
 }
 
 .rek-editor-tooltip span {

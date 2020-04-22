@@ -32,7 +32,7 @@ export const LinkPlugin: Links = {
 };
 
 const GlobalStyle = `
-  .rek-link-toolbar  {
+  .rek-link-toolbar {
     display:flex;
     align-items:center;
     margin-top:16px;

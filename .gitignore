@@ -14,3 +14,4 @@ packages/editor-kit/cypress/videos/features/table/Tables.spec.js.mp4
 packages/editor-kit/cypress/videos/features/underline/Underline.spec.js.mp4
 packages/editor-kit/cypress/screenshots/features/table/Tables.spec.js/Tables feature -- Adds and removes columns (failed).png
 packages/editor-kit/cypress/screenshots/features/table/Tables.spec.js/Tables feature -- Adds and removes rows (failed).png
+packages/editor-kit/src/editor/delete-me-styles.css

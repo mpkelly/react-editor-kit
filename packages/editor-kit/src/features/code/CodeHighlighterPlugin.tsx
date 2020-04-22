@@ -116,7 +116,7 @@ const GlobalStyle = `
       fill:var(--secondary-text-color);      
     }
 
-    .rek-icon.rek-delete-icon:hover path{
+    .rek-icon.rek-delete-icon:hover path {
       fill:var(--danger-color);
     }
   }

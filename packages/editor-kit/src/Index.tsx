@@ -1,3 +1,8 @@
+import { createElement } from "react";
+import { css, styled, setPragma, glob } from "goober";
+setPragma(createElement);
+
+export { css, styled, setPragma, glob };
 export * from "./editor/Editor";
 export * from "./editor/LastFocusedNode";
 export * from "./editor/Focus";

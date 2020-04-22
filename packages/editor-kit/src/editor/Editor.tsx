@@ -281,8 +281,6 @@ export const isAtEndOfNode = (editor: ReactEditor) => {
     const node = getActiveNode(editor);
     if (node) {
       const length = Node.string(node).length;
-      console.log(length, anchor.offset, focus.offset);
-      console.log(node, anchor, focus);
       return anchor.offset === length && focus.offset === length;
     }
   }

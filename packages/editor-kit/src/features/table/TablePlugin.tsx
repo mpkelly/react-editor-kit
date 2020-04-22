@@ -204,7 +204,7 @@ const GlobalStyle = `
     display:flex;
     flex-direction:column;
     padding:8px;
-    > *  {
+    > * {
       margin-top:4px;
       margin-bottom:4px;
     }
