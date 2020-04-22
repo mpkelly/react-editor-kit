@@ -121,11 +121,13 @@ const Overflow = (props: OverflowProps) => {
       ref={(ref) => (element.current = ref)}
       onMouseDown={block}
     >
-      <Icon
-        data-id="toolbar-overflow-button"
-        icon={icons.moreIcon}
-        onClick={toggleShow}
-      />
+      <div className="rek-icon-button">
+        <Icon
+          data-id="toolbar-overflow-button"
+          icon={icons.moreIcon}
+          onClick={toggleShow}
+        />
+      </div>
       <ModalPopup
         element={element.current}
         show={show}

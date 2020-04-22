@@ -27,6 +27,8 @@ export const Video = memo((props: RenderElementProps) => {
     Transforms.delete(editor, { at: ReactEditor.findPath(editor, element) });
   }, []);
 
+  const urlClass = element.url ? "" : "rek-no-url";
+
   return (
     <DeletableBlock
       {...props}
@@ -39,7 +41,7 @@ export const Video = memo((props: RenderElementProps) => {
       }
     >
       <div
-        className="rek-video"
+        className={`rek-video ${urlClass}`}
         {...attributes}
         contentEditable={false}
         data-slate-zero-width="z"

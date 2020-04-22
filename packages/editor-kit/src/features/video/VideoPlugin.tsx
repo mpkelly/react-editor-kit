@@ -63,7 +63,10 @@ const EditorStyle = `
   .rek-video {
     position:relative;    
     min-height:120px;
-    background-color: rgba(0,0,0,.1);    
+  }
+
+  .rek-video.rek-no-url {
+    background-color: var(--gray-light2-color);
   }
 
   .rek-video div {

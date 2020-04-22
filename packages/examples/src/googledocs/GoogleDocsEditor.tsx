@@ -66,7 +66,6 @@ import {
   InfoAlertPlugin,
   ErrorAlertPlugin,
   WarningAlertPlugin,
-  AutoFocusPlugin,
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 import { createStaticHashtags } from "./HashtagSuggestionPlugin";
@@ -76,7 +75,6 @@ const GoogleDocsStylePlugin: Plugin = {
     .rek-editor-toolbar .rek-icon-button {
       color: rgba(0,0,0,.6);
     }
-
   `,
 };
 

@@ -194,9 +194,6 @@ const GlobalStyle = `
     position:absolute;
     top:2px;
     right:2px;
-  }
-
-  .rek-table-cell-menu.dropdown-icon.svg-icon {
     transform:scale(.8);
   }
 

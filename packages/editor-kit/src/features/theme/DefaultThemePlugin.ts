@@ -6,6 +6,7 @@ import {
 } from "../../ui/Layers";
 
 export const DefaultThemePlugin: Plugin = {
+  name: "default-theme",
   editorStyles: () => EditorStyle,
   globalStyles: () => GlobalStyle,
 };
