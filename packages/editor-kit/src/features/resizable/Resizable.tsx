@@ -78,7 +78,9 @@ export const Resizable = (props: ResizableProps) => {
       </div>
       <Show when={state.down > -1}>
         {ReactDOM.createPortal(
-          <Overlay onMouseUp={handleUp} onMouseMove={handleMove} />,
+          <Overlay onMouseUp={handleUp} onMouseMove={handleMove}>
+            {""}
+          </Overlay>,
           document.body
         )}
       </Show>

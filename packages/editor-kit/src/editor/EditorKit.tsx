@@ -76,7 +76,9 @@ export const EditorKit = memo((props: EditorKitProps) => {
   const [, forceUpdate] = useState({});
   const [readOnly, setReadOnly] = useState(Boolean(props.readOnly));
   maybeConfigureTesting(editor, forceUpdate);
-  generateStyle(plugins);
+  useEffect(() => {
+    generateStyle(plugins);
+  }, [plugins]);
   onEditor && onEditor(editor);
 
   const disableReadOnly = () => {

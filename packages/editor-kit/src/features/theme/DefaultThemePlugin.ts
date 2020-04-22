@@ -256,7 +256,7 @@ input[type=number] {
 
 .rek-resizable {
   position:relative;    
-  :first-child {
+  :last-child {
     margin:0 auto;
   }
 }
@@ -268,6 +268,10 @@ input[type=number] {
   width:20px;  
   cursor:ew-resize;
   height:100%;
+  border-left: 2px dotted var(--divider-color);
+  :hover {
+    border-left: 2px solid var(--focus-color);
+  }
 }
 
 .rek-resize-handle-end {
@@ -277,6 +281,10 @@ input[type=number] {
   width:20px;
   cursor:ew-resize;
   height:100%;
+  border-right: 2px dotted var(--divider-color);
+  :hover {
+    border-right: 2px solid var(--focus-color);
+  }
 }
 
 .rek-check-container {
@@ -409,19 +417,5 @@ const EditorStyle = `
   .rek-delete-icon.rek-svg-icon path {
     fill: var(--danger-color);      
   }    
-
-  .rek-resize-handle-start {
-    border-left: 2px dotted var(--divider-color);
-    :hover {
-      border-left: 2px solid var(--focus-color);
-    }
-  }
-  
-  .rek-resize-handle-end {
-    border-right: 2px dotted var(--divider-color);
-    :hover {
-      border-right: 2px solid var(--focus-color);
-    }
-  }
 
 `;

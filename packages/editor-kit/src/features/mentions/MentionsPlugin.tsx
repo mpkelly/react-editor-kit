@@ -31,7 +31,6 @@ export const createStaticMentions = (options: StaticMentionOptions) => {
           mention.name.toLowerCase().includes(lower)
         )
       );
-      //.then(x => new Promise(resolve => setTimeout(() => resolve(x), 1000)));
     },
     renderChoice: (choice: Mention) => {
       return <MentionChoice choice={choice} />;

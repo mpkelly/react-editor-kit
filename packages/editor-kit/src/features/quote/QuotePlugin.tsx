@@ -26,7 +26,7 @@ export const QuotePlugin: Plugin = {
 
 const EditorStyles = `
   blockquote {
-    border-left: 6px solid var(--divider-color);
+    border-left: 4px solid var(--divider-color);
     padding-top: 4px;
     padding-bottom: 4px;
     padding-left: 16px;

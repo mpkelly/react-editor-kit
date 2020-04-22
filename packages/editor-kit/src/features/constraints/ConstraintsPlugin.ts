@@ -27,7 +27,7 @@ export const DefaultConstraints = {
   "list-item": {
     nodes: ["link", "unordered-list", "ordered-list", "aligned-block"],
   },
-  //Accept only links
+  //Accept only links and aligned blocks
   quote: {
     nodes: ["link"],
   },

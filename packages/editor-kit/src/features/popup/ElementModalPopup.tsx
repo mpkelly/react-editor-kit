@@ -11,32 +11,31 @@ import { block } from "../../ui/Utils";
 export interface ModalPopupProps {
   element: Element;
   children: JSX.Element;
-  onClickOutside?(event?: React.MouseEvent<HTMLElement, MouseEvent>): void;
   show: boolean;
   location?: Location;
   offsets?: Offsets;
+  onClickOutside?(event?: React.MouseEvent<HTMLElement, MouseEvent>): void;
 }
 
 export const ModalPopup = (props: ModalPopupProps) => {
   const { element, children, onClickOutside, show, location, offsets } = props;
   const { editor } = useEditorKit();
   const [domElement, setDomElement] = useState<HTMLElement | null>(null);
-  const handleRef = useCallback((ref: HTMLElement) => {
-    setDomElement(ref);
+  const handleRef = useCallback((element: HTMLElement) => {
+    setDomElement(element);
   }, []);
 
   if (!show) {
     return null;
   }
 
-  let style: CSSProperties = {};
+  let style: CSSProperties = { display: "inline-block" };
   if (domElement) {
     const htmlElement = ReactEditor.toDOMNode(editor, element);
     const anchorBounds = htmlElement.getBoundingClientRect();
     const bounds = domElement.getBoundingClientRect();
     style = getPosition(bounds, anchorBounds, location, true, offsets);
   }
-
   return (
     <Portal>
       <Overlay onClick={onClickOutside}>

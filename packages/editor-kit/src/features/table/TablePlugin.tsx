@@ -227,11 +227,11 @@ const EditorStyle = `
     border: 1px solid var(--divider-color);
   }
 
-  .rek-header-row  .rek-tr:first-child {
+  .rek-header-row .rek-tr:first-child {
     background-color: #f3f5f7;
   }
 
-  .rek-header-column  .rek-td:first-child {
+  .rek-header-column .rek-td:first-child {
     background-color: #f3f5f7;
   }
 
