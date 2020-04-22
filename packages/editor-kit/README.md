@@ -8,15 +8,15 @@ A suite of plugins for composing react-based text editors. Editor Kit is built u
 
 ## Quick Start
 
-1. **Install the package**
+**Step one** Install the package
 
 `npm i @mpkelly/react-editor-kit`
 
-2. **Create an editor.**
+**Step two** Create an editor
 
 The easiest way to create an editor is to start with one of the Code Sandbox examples above. It's probably best to start by copying all of the [KitchenSinkEditor](https://codesandbox.io/s/react-editor-kit-examples-0e31g?file=/src/KitchenSinkEditor.tsx) file and removing what you don't need.
 
-3. Load the CSS (if using). Editor Kit does not require external CSS but if you're using the `KitchenSinkEditor` then you'll need to load the CSS files for the icon font and custom editor font.
+**Step three** Load the CSS (if using). Editor Kit does not require external CSS but if you're using the `KitchenSinkEditor` then you'll need to load the CSS files for the icon font and custom editor font.
 
 ```CSS
     //index.html
