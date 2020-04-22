@@ -264,33 +264,64 @@ input[type=number] {
   position:relative;    
   :last-child {
     margin:0 auto;
+    max-width:100%;    
   }
 }
 
-.rek-resize-handle-start {
+.rek-resize-handle {
   position:absolute;  
-  left:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;  
   margin-left:-10px;
   width:20px;  
   cursor:ew-resize;
   height:100%;
-  border-left: 2px dotted var(--divider-color);
-  :hover {
-    border-left: 2px solid var(--focus-color);
+  flex-shrink:0;  
+  z-index: ${PopupContentLayer};
+}
+[data-slate-editor=true]:not([contenteditable=true]) {
+  .rek-resize-handle {
+    display:none;
   }
+}
+.rek-resize-handle-start {
+  left:0;
 }
 
 .rek-resize-handle-end {
-  position:absolute;    
   right:-10px;
-  margin-left:-10px;
-  width:20px;
-  cursor:ew-resize;
-  height:100%;
-  border-right: 2px dotted var(--divider-color);
+}
+
+.rek-resize-handle-grip {
+  height:20px;
+  width:3px;
+  min-width:3px;  
+  flex-shrink:0;
+  background-color: var(--divider-color);
   :hover {
-    border-right: 2px solid var(--focus-color);
-  }
+    background-color: var(--focus-color);
+  }  
+}
+
+.rek-resize-track {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:5px;
+  height:100%;  
+  :active,
+  :hover {
+    background-color: var(--focus-color);
+  }  
+}
+
+.rek-resize-track-left {
+  margin-right:8px;
+}
+
+.rek-resize-track-right {
+  margin-right:-8px;
 }
 
 .rek-check-container {

@@ -65,15 +65,23 @@ export const Resizable = (props: ResizableProps) => {
     <Fragment>
       <div className="rek-resizable" style={allStyle} ref={handleRef}>
         <div
-          className="rek-resize-handle-start"
+          className="rek-resize-handle rek-resize-handle-start"
           onMouseDown={handleDown}
           contentEditable={false}
-        />
+        >
+          <div className="rek-resize-track rek-resize-track-left">
+            <div className="rek-resize-handle-grip" />
+          </div>
+        </div>
         <div
-          className="rek-resize-handle-end"
+          className="rek-resize-handle rek-resize-handle-end"
           onMouseDown={handleDown}
           contentEditable={false}
-        />
+        >
+          <div className="rek-resize-track rek-resize-track-right">
+            <div className="rek-resize-handle-grip" />
+          </div>
+        </div>
         {children}
       </div>
       <Show when={state.down > -1}>
