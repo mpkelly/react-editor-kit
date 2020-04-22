@@ -1,11 +1,11 @@
 import React, { memo } from "react";
+import { RenderElementProps } from "slate-react";
 import { Trigger } from "../../plugins/Plugin";
 import {
   createSuggestionsPlugin,
-  SuggestionPluginOptions
+  SuggestionPluginOptions,
 } from "../suggestions/SuggestionsPlugin";
 import { Suggestions } from "../suggestions/Suggestions";
-import { RenderElementProps } from "slate-react";
 
 export interface Mention {
   name: string;
@@ -19,7 +19,7 @@ export interface StaticMentionOptions {
 }
 
 export const DefaultTriggers: Trigger[] = [
-  { pattern: /@(\w+)$/, range: "word-before" }
+  { pattern: /@(\w+)$/, range: "word-before" },
 ];
 
 export const createStaticMentions = (options: StaticMentionOptions) => {
@@ -27,7 +27,7 @@ export const createStaticMentions = (options: StaticMentionOptions) => {
     getSuggestions: (match: string) => {
       const lower = match.toLowerCase().substring(1);
       return Promise.resolve(
-        options.mentions.filter(mention =>
+        options.mentions.filter((mention) =>
           mention.name.toLowerCase().includes(lower)
         )
       );
@@ -40,14 +40,14 @@ export const createStaticMentions = (options: StaticMentionOptions) => {
     displayText: (choice: Mention) => `@${choice.name}`,
     renderSuggestion: (props: RenderElementProps) => {
       return <MentionElement {...props} />;
-    }
+    },
   };
 
   const suggestionsOptions: SuggestionPluginOptions = {
     type: "mention",
     suggestions,
     globalStyle: GlobalStyle,
-    editorStyle: EditorStyle
+    editorStyle: EditorStyle,
   };
 
   return createSuggestionsPlugin(suggestionsOptions);
@@ -62,7 +62,10 @@ export const MentionChoice = memo((props: MentionChoiceProps) => {
   return (
     <div className="rek-mention-choice">
       {choice.imageUrl && <img src={choice.imageUrl} />}
-      <span>{choice.name}</span>
+      <span className={"rek-mention-name"}>{choice.name}</span>
+      {choice.subText && (
+        <span className={"rek-mention-subtext"}>{choice.subText}</span>
+      )}
     </div>
   );
 });
@@ -70,10 +73,15 @@ export const MentionChoice = memo((props: MentionChoiceProps) => {
 export const MentionElement = (props: RenderElementProps) => {
   const { attributes, element, children } = props;
   return (
-    <span {...attributes} contentEditable={false} className={"rek-mention"}>
+    <div
+      {...attributes}
+      contentEditable={false}
+      className={"rek-mention"}
+      data-id-mention={element.displayText}
+    >
       {element.displayText}
       {children}
-    </span>
+    </div>
   );
 };
 
@@ -82,20 +90,27 @@ export const GlobalStyle = `
     display:flex;
     align-items:center;
     padding:4px;
-
+    
     img {
       border-radius:50%;
       height:30px;
       width:30px;
       margin-right:16px;
-    }    
+    } 
+
+    .rek-mention-subtext {
+      margin-left:8px;
+      color:var(--secondary-text-color);
+      font-size:smaller;
+    }
   }
 `;
 
 export const EditorStyle = `
   .rek-mention {
-    background-color: rgba(0,0,0,.2);
-    padding: 1px 2px;
-    border-radius: 3px;
+    display:inline-flex;
+    background-color: var(--gray-light2-color);
+    padding: 1px 3px;
+    border-radius: 2px;
   }
 `;

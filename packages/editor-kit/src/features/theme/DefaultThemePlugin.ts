@@ -18,8 +18,10 @@ const GlobalStyle = `
   --content-background: white;
   --primary-text-color: rgba(0,0,0, .75);
   --secondary-text-color: rgba(0,0,0, .54);
-  --divider-color: rgba(0,0,0,.2);  
-  --input-background-color:rgba(0,0,0,.1);  
+  --gray-light-color:rgba(0,0,0,.2);
+  --gray-light2-color:rgba(0,0,0,.1);
+  --divider-color: var(--gray-light-color);
+  --input-background-color:var(--gray-light2-color);
   --action-color: mediumseagreen;
   --button-color: white;
   --danger-color: red;

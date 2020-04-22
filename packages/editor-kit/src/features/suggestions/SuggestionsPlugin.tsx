@@ -103,7 +103,7 @@ const GlobalStyle = `
   }
 
   .rek-suggestion-marker {
-    color:blue;
+    color: var(--action-color);
   }
 
   .rek-suggestion-loading {

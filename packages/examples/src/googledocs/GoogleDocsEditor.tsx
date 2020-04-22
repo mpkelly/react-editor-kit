@@ -128,7 +128,6 @@ const plugins: Plugin[] = [
       "#purple",
     ],
   }),
-  AutoFocusPlugin,
 ];
 
 const initialValue = [
@@ -197,7 +196,7 @@ export const GoogleDocsEditor = () => {
           <Divider />
           <ColorPickerButton
             className="material-icons-round"
-            ligature="text_format"
+            ligature="palette"
           />
           <Divider />
           <TextAlignLeftButton

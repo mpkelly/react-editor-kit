@@ -12,7 +12,6 @@ const GlobalStyle = `
     flex-shrink:0;
     width:100%;
     background-color: var(--content-background);
-    border-top: 1px solid rgba(0,0,0,.1);
     overflow:hidden;
     * {
       flex-shrink:0;

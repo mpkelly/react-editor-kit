@@ -1,6 +1,14 @@
 export const MentionsItems = [
-  { name: "Alan Smith", imageUrl: "https://i.pravatar.cc/80?img=1" },
-  { name: "Barry Kelly", imageUrl: "https://i.pravatar.cc/80?img=2" },
+  {
+    name: "Alan Smith",
+    imageUrl: "https://i.pravatar.cc/80?img=1",
+    subText: "asmith",
+  },
+  {
+    name: "Barry Kelly",
+    imageUrl: "https://i.pravatar.cc/80?img=2",
+    subText: "bkelly",
+  },
   { name: "Chloe Jones", imageUrl: "https://i.pravatar.cc/80?img=3" },
   { name: "Darren Young", imageUrl: "https://i.pravatar.cc/80?img=4" },
   { name: "Elena Cooper", imageUrl: "https://i.pravatar.cc/80?img=5" },
@@ -24,5 +32,5 @@ export const MentionsItems = [
   { name: "Wes Tate", imageUrl: "https://i.pravatar.cc/80?img=23" },
   { name: "Xi Wan", imageUrl: "https://i.pravatar.cc/80?img=25" },
   { name: "Yvonne Terrence", imageUrl: "https://i.pravatar.cc/80?img=26" },
-  { name: "Zoe Keats", imageUrl: "https://i.pravatar.cc/80?img=27" }
+  { name: "Zoe Keats", imageUrl: "https://i.pravatar.cc/80?img=27" },
 ];
