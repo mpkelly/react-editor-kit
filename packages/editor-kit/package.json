@@ -1,6 +1,6 @@
 {
   "name": "@mpkelly/react-editor-kit",
-  "version": "0.0.35",
+  "version": "0.0.36",
   "description": "React library for building editors of all kinds.",
   "author": "mkelly <kikemelly@gmail.com>",
   "homepage": "https://github.com/mpkelly/react-editor-kit#readme",
@@ -48,14 +48,14 @@
     "slate-hyperscript": "^0.57.1",
     "slate-react": "github:mpkelly/slate#slate-react-v0.57.2-gitpkg",
     "source-map-loader": "^0.2.4",
+    "styled-components": "^5.1.0",
     "terser-webpack-plugin": "^2.2.1",
     "typescript": "^3.8.0-dev.20191216",
     "uglifyjs-webpack-plugin": "^2.1.3",
     "webpack": "^4.41.2",
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^3.3.10",
-    "webpack-glob": "^2.0.2",
-    "styled-components": "^5.1.0"
+    "webpack-glob": "^2.0.2"
   },
   "scripts": {
     "watch": "webpack -w --mode=development",
