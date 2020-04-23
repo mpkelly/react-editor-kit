@@ -1,3 +1,3 @@
-import React from "react";
+/// <reference types="react" />
 import { RenderElementProps } from "slate-react";
-export declare const TableCell: React.MemoExoticComponent<(props: RenderElementProps) => JSX.Element>;
+export declare const TableCell: (props: RenderElementProps) => JSX.Element;
