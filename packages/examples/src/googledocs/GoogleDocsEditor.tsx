@@ -131,10 +131,8 @@ const plugins: Plugin[] = [
 ];
 
 const initialValue = [
-  {
-    type: "paragraph",
-    children: [{ text: "" }],
-  },
+  { type: "paragraph", children: [{ text: "" }] },
+  { type: "divider", children: [{ text: "" }], size: 1, resizedWidth: 589 },
 ];
 
 const wrapperStyle: CSSProperties = {
@@ -269,7 +267,10 @@ export const GoogleDocsEditor = () => {
           <Resizable initialWidth={826}>
             <Editor
               value={value}
-              onChange={setValue}
+              onChange={(value: any) => {
+                console.log(JSON.stringify(value));
+                setValue(value);
+              }}
               style={editorStyle}
               autoFocus
             />
