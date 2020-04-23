@@ -22,13 +22,16 @@ export const DeletableBlock = (props: DeletableBlockProps) => {
     Transforms.delete(editor, { at: ReactEditor.findPath(editor, element) });
   }, [element]);
 
-  const handleWidthChange = (resizedWidth: number) => {
-    Transforms.setNodes(
-      editor,
-      { resizedWidth },
-      { match: (node) => node === element }
-    );
-  };
+  const handleWidthChange = useCallback(
+    (resizedWidth: number) => {
+      Transforms.setNodes(
+        editor,
+        { resizedWidth },
+        { at: ReactEditor.findPath(editor, element) }
+      );
+    },
+    [element]
+  );
 
   return (
     <BlockWrapper

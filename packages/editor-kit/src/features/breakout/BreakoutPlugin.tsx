@@ -17,6 +17,7 @@ export const DefaultOptions: BreakoutPluginOptions = {
     "warning-alert",
     "error-alert",
     "video",
+    "divider",
   ],
   paddedBlocks: ["table"],
 };
