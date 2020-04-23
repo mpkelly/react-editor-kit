@@ -297,6 +297,7 @@ input[type=number] {
   height:20px;
   width:3px;
   min-width:3px;  
+  border-radius:999px;
   flex-shrink:0;
   background-color: var(--divider-color);
   :hover {

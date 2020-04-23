@@ -35,7 +35,7 @@ export interface SelectItem {
 
 export const Select = (props: SelectProps) => {
   const { editor } = useEditorKit();
-  let editorElement: HTMLElement | null = null;
+  let editorElement: HTMLElement | undefined;
   try {
     editorElement = ReactEditor.toDOMNode(editor, editor);
   } catch (Error) {}

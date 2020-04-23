@@ -34,6 +34,9 @@ export const FocusPopup = memo((props: FocusPopupProps) => {
   }
 
   const htmlElement = ReactEditor.toDOMNode(editor, element);
+  if (!htmlElement) {
+    return null;
+  }
   const anchorBounds = htmlElement.getBoundingClientRect();
 
   const style = getPosition(

@@ -31,10 +31,12 @@ export const SelectionToolbar = (props: SelectionToolbarProps) => {
   useEffect(() => {
     const handleMove = (event: MouseEvent) => {
       const { clientX: x, clientY: y } = event;
-      const { left, width, top, height } = ReactEditor.toDOMNode(
-        editor,
-        editor
-      ).getBoundingClientRect();
+      const node = ReactEditor.toDOMNode(editor, editor);
+      if (!node) {
+        setOutside(true);
+        return;
+      }
+      const { left, width, top, height } = node.getBoundingClientRect();
       const outside =
         x < left || x > left + width || y < top || y > top + height;
       setOutside(outside);

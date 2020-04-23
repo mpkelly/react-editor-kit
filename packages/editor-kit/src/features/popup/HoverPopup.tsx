@@ -3,7 +3,7 @@ import React, {
   CSSProperties,
   useState,
   Fragment,
-  memo
+  memo,
 } from "react";
 import { Node } from "slate";
 import { ReactEditor } from "slate-react";
@@ -31,7 +31,7 @@ export const HoverPopup = memo((props: HoverPopupProps) => {
     fixed,
     hideWhenFocusedWithin,
     children,
-    offsets
+    offsets,
   } = props;
   const [marker, setMarker] = useState<HTMLElement | null>(null);
   const [popup, setPopup] = useState<HTMLElement | null>(null);
@@ -44,6 +44,9 @@ export const HoverPopup = memo((props: HoverPopupProps) => {
 
   if (marker) {
     const htmlElement = ReactEditor.toDOMNode(editor, element);
+    if (!htmlElement) {
+      return null;
+    }
     const anchor = htmlElement.getBoundingClientRect();
     const bounds = popup ? popup.getBoundingClientRect() : anchor;
     contentStyle = getPosition(bounds, anchor, location, fixed, offsets);
@@ -51,7 +54,7 @@ export const HoverPopup = memo((props: HoverPopupProps) => {
       width: anchor.width,
       top: anchor.top,
       left: anchor.left,
-      height: anchor.height
+      height: anchor.height,
     };
   }
 

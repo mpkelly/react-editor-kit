@@ -46,7 +46,7 @@
     "slate": "github:mpkelly/slate#slate-v0.57.1-gitpkg",
     "slate-history": "^0.57.1",
     "slate-hyperscript": "^0.57.1",
-    "slate-react": "github:mpkelly/slate#slate-react-v0.57.1-gitpkg",
+    "slate-react": "github:mpkelly/slate#slate-react-v0.57.2-gitpkg",
     "source-map-loader": "^0.2.4",
     "terser-webpack-plugin": "^2.2.1",
     "typescript": "^3.8.0-dev.20191216",
@@ -54,7 +54,8 @@
     "webpack": "^4.41.2",
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^3.3.10",
-    "webpack-glob": "^2.0.2"
+    "webpack-glob": "^2.0.2",
+    "styled-components": "^5.1.0"
   },
   "scripts": {
     "watch": "webpack -w --mode=development",
@@ -65,8 +66,5 @@
     "cypress": "npx cypress run",
     "test": "npm run disttest && npm run cypress"
   },
-  "gitHead": "bb3fcf705399ff70fcd79a8e82936af0e359d2a8",
-  "dependencies": {
-    "styled-components": "^5.1.0"
-  }
+  "gitHead": "bb3fcf705399ff70fcd79a8e82936af0e359d2a8"
 }

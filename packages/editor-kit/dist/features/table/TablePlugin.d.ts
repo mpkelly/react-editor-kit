@@ -6,24 +6,13 @@ export interface TablePluginOptions {
     defaultTable: Node[];
 }
 export declare const createTablePlugin: (options: TablePluginOptions) => Plugin;
+export declare const cell: (props?: any) => any;
 export declare const DefaultTable: {
     type: string;
     headerRow: string;
     children: {
         type: string;
-        children: ({
-            type: string;
-            autoFocus: boolean;
-            children: {
-                text: string;
-            }[];
-        } | {
-            type: string;
-            children: {
-                text: string;
-            }[];
-            autoFocus?: undefined;
-        })[];
+        children: any[];
     }[];
 }[];
 export declare const TablePlugin: Plugin;

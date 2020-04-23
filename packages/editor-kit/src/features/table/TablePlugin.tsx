@@ -5,7 +5,7 @@ import { TableCell } from "./TableCell";
 import { Plugin, Trigger } from "../../plugins/Plugin";
 import { clone, isDeleting } from "../../ui/Utils";
 import { MatchResult } from "../../editor/Matching";
-import { deleteBackward } from "../../editor/Editor";
+import { deleteBackward, getActiveNode } from "../../editor/Editor";
 import { Table } from "./Table";
 
 export interface TablePluginOptions {
@@ -59,20 +59,31 @@ export const createTablePlugin = (options: TablePluginOptions): Plugin => {
         return;
       }
       if (event.keyCode === 13) {
+        if (event.shiftKey) {
+          editor.insertText("\n");
+        } else {
+          // Default behaviour would add a new table cell to the parent row
+          // so insert new paragraph instead
+          Transforms.insertNodes(editor, {
+            type: "paragraph",
+            children: [{ text: "" }],
+          });
+        }
         event.preventDefault();
-        editor.insertText("\n");
         return true;
       }
       if (isDeleting(event)) {
+        // Overrides default behaviour which would some times let the user
+        // delete the table-cell and break the table
         const { selection } = editor;
         const length = Node.string(cell[0]).length;
         let selectAll = false;
         if (selection && Range.isExpanded(selection)) {
           const { anchor, focus } = selection;
           const distance = focus.offset - anchor.offset;
-          selectAll = distance === length;
+          selectAll = distance === length && length > 0;
         }
-        if (length == 0) {
+        if (length == 0 && cell[0].children.length == 1) {
           event.preventDefault();
           return true;
         }
@@ -95,6 +106,12 @@ const wrapInCell = (node: Node) => {
   };
 };
 
+export const cell = (props: any = {}) => ({
+  type: "table-cell",
+  ...props,
+  children: [{ type: "paragraph", children: [{ text: "" }] }],
+});
+
 export const DefaultTable = [
   {
     type: "table",
@@ -102,55 +119,15 @@ export const DefaultTable = [
     children: [
       {
         type: "table-row",
-        children: [
-          {
-            type: "table-cell",
-            autoFocus: true,
-            children: [{ text: "" }],
-          },
-          {
-            type: "table-cell",
-            children: [{ text: "" }],
-          },
-          {
-            type: "table-cell",
-            children: [{ text: "" }],
-          },
-        ],
+        children: [cell({ autoFocus: true }), cell(), cell()],
       },
       {
         type: "table-row",
-        children: [
-          {
-            type: "table-cell",
-            children: [{ text: "" }],
-          },
-          {
-            type: "table-cell",
-            children: [{ text: "" }],
-          },
-          {
-            type: "table-cell",
-            children: [{ text: "" }],
-          },
-        ],
+        children: [cell(), cell(), cell()],
       },
       {
         type: "table-row",
-        children: [
-          {
-            type: "table-cell",
-            children: [{ text: "" }],
-          },
-          {
-            type: "table-cell",
-            children: [{ text: "" }],
-          },
-          {
-            type: "table-cell",
-            children: [{ text: "" }],
-          },
-        ],
+        children: [cell(), cell(), cell()],
       },
     ],
   },

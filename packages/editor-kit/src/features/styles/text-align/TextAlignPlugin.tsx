@@ -5,7 +5,6 @@ export const TextAlignPlugin: Plugin = {
   name: "text-align",
   styleElement: (props: RenderElementProps) => {
     const { element } = props;
-    console.log("S", element.type, element.textAlign);
     if (!element.textAlign) {
       return undefined;
     }

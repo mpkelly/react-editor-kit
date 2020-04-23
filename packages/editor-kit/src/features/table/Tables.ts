@@ -5,6 +5,7 @@ import { useEditorKit } from "../../editor/EditorKit";
 import { usePlugin } from "../../plugins/usePlugin";
 import { Labels } from "../i18n/LabelsPlugin";
 import { block } from "../../ui/Utils";
+import { cell } from "./TablePlugin";
 
 export const useTables = (props: RenderElementProps) => {
   const { element } = props;
@@ -78,14 +79,7 @@ const addColumn = (editor: ReactEditor, element: Element) => {
   table.children.forEach((row) => {
     const path = ReactEditor.findPath(editor, row.children[index]);
     path[path.length - 1]++;
-    Transforms.insertNodes(
-      editor,
-      {
-        type: "table-cell",
-        children: [{ text: "" }],
-      },
-      { at: path }
-    );
+    Transforms.insertNodes(editor, cell(), { at: path });
   });
 };
 
@@ -103,10 +97,9 @@ const deleteColumn = (editor: ReactEditor, element: Element) => {
 const addRow = (editor: ReactEditor, element: Element) => {
   const [row, rowPath] = findRow(editor, element);
   rowPath[rowPath.length - 1]++;
-  const children = Array.from({ length: row.children.length }).map(() => ({
-    type: "table-cell",
-    children: [{ text: "" }],
-  }));
+  const children = Array.from({ length: row.children.length }).map(() =>
+    cell()
+  );
 
   const newRow = {
     type: "table-row",

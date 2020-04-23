@@ -32,9 +32,11 @@ export const ModalPopup = (props: ModalPopupProps) => {
   let style: CSSProperties = { display: "inline-block" };
   if (domElement) {
     const htmlElement = ReactEditor.toDOMNode(editor, element);
-    const anchorBounds = htmlElement.getBoundingClientRect();
-    const bounds = domElement.getBoundingClientRect();
-    style = getPosition(bounds, anchorBounds, location, true, offsets);
+    if (htmlElement) {
+      const anchorBounds = htmlElement.getBoundingClientRect();
+      const bounds = domElement.getBoundingClientRect();
+      style = getPosition(bounds, anchorBounds, location, true, offsets);
+    }
   }
   return (
     <Portal>

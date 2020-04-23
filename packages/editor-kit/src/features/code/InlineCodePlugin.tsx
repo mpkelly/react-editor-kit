@@ -5,7 +5,7 @@ import { applyRegexMark } from "../marks/Marks";
 import { MatchResult } from "../../Index";
 
 export const InlineCodePlugin: Plugin = {
-  triggers: [{ pattern: /(`)([^`]+)\1/, range: "block" }],
+  triggers: [{ pattern: /(`)([^`]+)\1/, range: "line-before" }],
   onTrigger: (editor: ReactEditor, matches: MatchResult[]) => {
     applyRegexMark(editor, matches[0], "inline-code");
   },
