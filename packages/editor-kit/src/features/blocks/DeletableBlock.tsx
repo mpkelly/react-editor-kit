@@ -22,10 +22,10 @@ export const DeletableBlock = (props: DeletableBlockProps) => {
     Transforms.delete(editor, { at: ReactEditor.findPath(editor, element) });
   }, [element]);
 
-  const handleWidthChange = (width: number) => {
+  const handleWidthChange = (resizedWidth: number) => {
     Transforms.setNodes(
       editor,
-      { width },
+      { resizedWidth },
       { match: (node) => node === element }
     );
   };
@@ -37,7 +37,10 @@ export const DeletableBlock = (props: DeletableBlockProps) => {
       element={element}
       {...rest}
     >
-      <Resizable initialWidth={"100%"} onChange={handleWidthChange}>
+      <Resizable
+        initialWidth={element.resizedWidth || "100%"}
+        onChange={handleWidthChange}
+      >
         {children}
       </Resizable>
     </BlockWrapper>
