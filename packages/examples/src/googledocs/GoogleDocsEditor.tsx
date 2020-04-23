@@ -69,6 +69,7 @@ import {
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 import { createStaticHashtags } from "./HashtagSuggestionPlugin";
+import { DarkThemePlugin } from "./DarkThemePlugin";
 
 const GoogleDocsStylePlugin: Plugin = {
   globalStyles: () => `
@@ -96,6 +97,7 @@ const plugins: Plugin[] = [
   OrderedListPlugin,
   UnorderedListPlugin,
   VideoPlugin,
+  TextAlignPlugin,
   TablePlugin,
   CodeHighlighterPlugin,
   LabelsPlugin,
@@ -110,7 +112,7 @@ const plugins: Plugin[] = [
   ConstraintsPlugin,
   SelectionToolbarPlugin,
   EditorToolbarPlugin,
-  TextAlignPlugin,
+
   RulePlugin,
   ImagePlugin,
   InfoAlertPlugin,

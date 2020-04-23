@@ -4,7 +4,7 @@ import { Action } from "../../actions/Action";
 import { useEditorKit } from "../../../editor/EditorKit";
 import {
   getSelectionRootNodes,
-  getPropertyValueAtCursor
+  getPropertyValueAtCursor,
 } from "../../../editor/Editor";
 import { block } from "../../../ui/Utils";
 import { ReactEditor } from "slate-react";
@@ -24,7 +24,7 @@ export const TextAlignAction = (props: TextAlignActionProps) => {
     const { selection } = editor;
     if (selection) {
       const nodes = getSelectionRootNodes(selection, editor);
-      nodes.forEach(node => {
+      nodes.forEach((node) => {
         Transforms.setNodes(
           editor,
           { textAlign },
@@ -64,7 +64,7 @@ const getTextAlign = (editor: ReactEditor) => {
   const { selection } = editor;
   if (selection) {
     const [node] = Editor.nodes(editor, {
-      match: node => node.type === "aligned-block"
+      match: (node) => node.type === "aligned-block",
     });
     if (node && node[0].textAlign) {
       return node[0].textAlign;

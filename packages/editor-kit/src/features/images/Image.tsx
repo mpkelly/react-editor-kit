@@ -12,7 +12,7 @@ import { Transforms } from "slate";
 export interface ImageProps extends RenderElementProps {}
 
 export const Image = (props: RenderElementProps) => {
-  const { children, element } = props;
+  const { children, element, attributes, ...rest } = props;
   const { editor } = useEditorKit();
   const handleClick = () => {
     Transforms.select(editor, ReactEditor.findPath(editor, element));
@@ -23,7 +23,7 @@ export const Image = (props: RenderElementProps) => {
 
   return (
     <DeletableBlock {...props}>
-      <div contentEditable={false} onClick={handleClick}>
+      <div contentEditable={false} onClick={handleClick} {...rest}>
         <img src={element.url} className={`rek-image ${focusedClass}`} />
       </div>
       {children}

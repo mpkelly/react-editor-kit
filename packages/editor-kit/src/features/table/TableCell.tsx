@@ -9,13 +9,13 @@ import { usePlugin } from "../../plugins/usePlugin";
 import { IconProvider } from "../icons/IconProviderPlugin";
 import { useFocused } from "../../editor/Focus";
 
-export const TableCell = memo((props: RenderElementProps) => {
-  const { attributes, children, element } = props;
+export const TableCell = (props: RenderElementProps) => {
+  const { attributes, children, element, ...rest } = props;
   const { handleClick, showMenu, listItems } = useTables(props);
   const { data: icons } = usePlugin("icon-provider") as IconProvider;
   const { isFocusedWithin } = useFocused(element);
   return (
-    <td {...attributes} className="rek-td">
+    <td {...attributes} {...rest} className="rek-td">
       <Show when={isFocusedWithin && !showMenu}>
         <div className="rek-table-cell-menu" onClick={handleClick}>
           <Icon
@@ -38,4 +38,4 @@ export const TableCell = memo((props: RenderElementProps) => {
       </Show>
     </td>
   );
-});
+};

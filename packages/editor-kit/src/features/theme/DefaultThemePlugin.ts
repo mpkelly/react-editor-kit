@@ -286,11 +286,11 @@ input[type=number] {
   }
 }
 .rek-resize-handle-start {
-  left:0;
+  left:-2px;
 }
 
 .rek-resize-handle-end {
-  right:-10px;
+  right:-11px;
 }
 
 .rek-resize-handle-grip {
@@ -316,11 +316,11 @@ input[type=number] {
   }  
 }
 
-.rek-resize-track-left {
+.rek-resize-track-start {
   margin-right:8px;
 }
 
-.rek-resize-track-right {
+.rek-resize-track-end {
   margin-right:-8px;
 }
 
@@ -394,6 +394,7 @@ const EditorStyle = `
 
   * {
     line-height:1.4;
+    box-sizing: border-box;
   }
 
   .rek-block-wrapper {

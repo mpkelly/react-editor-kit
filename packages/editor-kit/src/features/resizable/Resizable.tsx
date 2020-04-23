@@ -69,7 +69,7 @@ export const Resizable = (props: ResizableProps) => {
           onMouseDown={handleDown}
           contentEditable={false}
         >
-          <div className="rek-resize-track rek-resize-track-left">
+          <div className="rek-resize-track rek-resize-track-start">
             <div className="rek-resize-handle-grip" />
           </div>
         </div>
@@ -78,7 +78,7 @@ export const Resizable = (props: ResizableProps) => {
           onMouseDown={handleDown}
           contentEditable={false}
         >
-          <div className="rek-resize-track rek-resize-track-right">
+          <div className="rek-resize-track rek-resize-track-end">
             <div className="rek-resize-handle-grip" />
           </div>
         </div>
@@ -86,9 +86,7 @@ export const Resizable = (props: ResizableProps) => {
       </div>
       <Show when={state.down > -1}>
         {ReactDOM.createPortal(
-          <Overlay onMouseUp={handleUp} onMouseMove={handleMove}>
-            {""}
-          </Overlay>,
+          <Overlay onMouseUp={handleUp} onMouseMove={handleMove} />,
           document.body
         )}
       </Show>

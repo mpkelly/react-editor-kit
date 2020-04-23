@@ -179,7 +179,6 @@ const generateStyle = (plugins: Plugin[]) => {
       ${editorStyles.join("\n")}
     }`;
   }
-  console.log("Generate");
   const globalStyle = globalStyles.join("\n");
 
   return createGlobalStyle`${globalStyle} ${editorStyle}`;

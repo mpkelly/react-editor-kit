@@ -14,11 +14,11 @@ export interface AlertProps extends RenderElementProps {
 }
 
 export const Alert = (props: AlertProps) => {
-  const { children, attributes, iconName, element } = props;
+  const { children, attributes, iconName, element, ...rest } = props;
   const { data } = usePlugin("icon-provider") as IconProvider;
   return (
     <DeletableBlock {...props}>
-      <div {...attributes} className={`rek-alert ${element.type}`}>
+      <div {...attributes} {...rest} className={`rek-alert ${element.type}`}>
         <Icon
           icon={data[iconName]}
           className={`rek-alert-icon ${element.type}`}
