@@ -8,7 +8,8 @@ export type Location =
   | "start"
   | "end"
   | "top"
-  | "bottom";
+  | "bottom"
+  | "auto";
 
 export interface Offsets {
   h?: number;
@@ -44,43 +45,58 @@ export const getAbsolutePosition = (
   const voffset = offsets.v || 0;
   const hoffset = offsets.h || 0;
   const center = anchor.width / 2 - bounds.width / 2;
+  const halfWidth = window.innerWidth / 2;
+  const halfHeight = window.innerHeight / 2;
   switch (position) {
     case "inside-start":
       return { left: 0 + hoffset, top: 0 + voffset };
     case "inside-end":
       return {
         top: 0 + voffset,
-        left: anchor.width - bounds.width - hoffset
+        left: anchor.width - bounds.width - hoffset,
       };
     case "inside-top":
       return {
         top: voffset,
-        left: center
+        left: center,
       };
     case "inside-bottom":
       return {
         top: anchor.height - voffset,
-        left: center
+        left: center,
       };
     case "start":
       return {
         top: voffset,
-        left: -(bounds.width + hoffset)
+        left: -(bounds.width + hoffset),
       };
     case "end":
       return {
         top: voffset,
-        left: anchor.width + hoffset
+        left: anchor.width + hoffset,
       };
     case "top":
       return {
         top: -(anchor.height + voffset),
-        left: center
+        left: center,
       };
     case "bottom":
       return {
         top: anchor.height + voffset,
-        left: center
+        left: center,
+      };
+    case "auto":
+      let left = anchor.width + hoffset;
+      if (anchor.left > halfWidth) {
+        left = -(bounds.width + hoffset);
+      }
+      let top = anchor.height + voffset;
+      if (anchor.top > halfHeight) {
+        top = -(anchor.height + voffset);
+      }
+      return {
+        top,
+        left,
       };
   }
 };
@@ -94,46 +110,61 @@ export const getFixedPosition = (
   const center = anchor.left + anchor.width / 2 - bounds.width / 2;
   const voffset = offsets.v || 0;
   const hoffset = offsets.h || 0;
+  const halfWidth = window.innerWidth / 2;
+  const halfHeight = window.innerHeight / 2;
   switch (position) {
     case "inside-start":
       return {
         top: anchor.top + voffset,
-        left: anchor.left + hoffset
+        left: anchor.left + hoffset,
       };
     case "inside-end":
       return {
         top: anchor.top + voffset,
-        left: anchor.left + anchor.width - bounds.width - hoffset
+        left: anchor.left + anchor.width - bounds.width - hoffset,
       };
     case "inside-top":
       return {
         top: anchor.top + voffset,
-        left: center
+        left: center,
       };
     case "inside-bottom":
       return {
         top: anchor.top + anchor.height - bounds.height + voffset,
-        left: center
+        left: center,
       };
     case "start":
       return {
         top: anchor.top + voffset,
-        left: anchor.left - bounds.width + hoffset
+        left: anchor.left - bounds.width + hoffset,
       };
     case "end":
       return {
         top: anchor.top + voffset,
-        left: anchor.left + anchor.width + hoffset
+        left: anchor.left + anchor.width + hoffset,
       };
     case "top":
       return {
         top: anchor.top - bounds.height + voffset,
-        left: center
+        left: center,
       };
     case "bottom":
       return {
         top: anchor.top + anchor.height + voffset,
-        left: center
+        left: center,
+      };
+    case "auto":
+      let left = anchor.left + anchor.width + hoffset;
+      if (anchor.left > halfWidth) {
+        left = anchor.left - bounds.width + hoffset;
+      }
+      let top = anchor.top + anchor.height + voffset;
+      if (anchor.top > halfHeight) {
+        top = anchor.top - bounds.height + voffset;
+      }
+      return {
+        top,
+        left,
       };
   }
 };

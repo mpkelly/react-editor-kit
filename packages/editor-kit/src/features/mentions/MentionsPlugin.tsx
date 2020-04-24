@@ -19,7 +19,7 @@ export interface StaticMentionOptions {
 }
 
 export const DefaultTriggers: Trigger[] = [
-  { pattern: /@(\w+)$/, range: "word-before" },
+  { pattern: /@(\w+)$/, range: "line-before" },
 ];
 
 export const createStaticMentions = (options: StaticMentionOptions) => {

@@ -59,7 +59,7 @@ export const SuggestionList = memo((props: SuggestionListProps) => {
   return (
     <Fragment>
       <Show when={!Boolean(choices.length)}>
-        <CursorPopup onClose={handleClose} fixed location={"end"}>
+        <CursorPopup onClose={handleClose} fixed location={"auto"}>
           <Fragment>
             <Show when={Boolean(suggestions.renderLoading)}>
               {suggestions.renderLoading && suggestions.renderLoading()}
@@ -73,7 +73,7 @@ export const SuggestionList = memo((props: SuggestionListProps) => {
         </CursorPopup>
       </Show>
       <Show when={Boolean(choices.length)}>
-        <CursorPopup onClose={handleClose} fixed location={"end"}>
+        <CursorPopup onClose={handleClose} fixed location={"auto"}>
           <ul onClick={stop} className={"rek-suggestion-list rek-panel"}>
             <Show when={Boolean(choices.length)}>
               {choices.map((choice, index) => (

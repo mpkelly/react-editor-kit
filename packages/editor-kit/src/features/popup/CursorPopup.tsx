@@ -22,11 +22,16 @@ export const CursorPopup = (props: CursorPopupProps) => {
     onClose,
     offsets,
     expanded,
-    delay
+    delay,
   } = props;
   const { range, length } = getCursor();
   const [show, setShow] = useState(!delay);
+  const [contentElement, setContentElement] = useState<HTMLElement>();
   const [rect] = useState(range ? range.getBoundingClientRect() : null);
+
+  const handleContent = (element?: HTMLElement) => {
+    setContentElement(element);
+  };
 
   useEffect(() => {
     if (!delay) {
@@ -49,8 +54,8 @@ export const CursorPopup = (props: CursorPopupProps) => {
   if (!show) {
     return null;
   }
-
-  const style = getPosition(rect, rect, position, fixed, offsets);
+  const bounds = contentElement ? contentElement.getBoundingClientRect() : rect;
+  const style = getPosition(bounds, rect, position, fixed, offsets);
   let content = <PopupContent style={style}>{children}</PopupContent>;
 
   if (onClose) {
@@ -60,7 +65,9 @@ export const CursorPopup = (props: CursorPopupProps) => {
   if (fixed) {
     return (
       <Portal>
-        <PopupContent style={style}>{children}</PopupContent>
+        <PopupContent style={style} ref={handleContent}>
+          {children}
+        </PopupContent>
       </Portal>
     );
   }

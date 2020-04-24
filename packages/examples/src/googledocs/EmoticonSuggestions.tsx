@@ -20,7 +20,7 @@ export interface EmoticonOptions {
 
 export const DefaultTriggers: Trigger[] = [
   //Listen for a colon  before the cursor;
-  { pattern: /:\w+/, range: "line-before" },
+  { pattern: /:\S+/, range: "line-before" },
 ];
 
 interface EmoticonType {
