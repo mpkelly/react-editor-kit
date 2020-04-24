@@ -15,6 +15,8 @@ export interface EditorLabels {
     borderless: string;
     save: string;
     validVideoUrl: string;
+    initialLetterOn: string;
+    initialLetterOff: string;
 }
 export declare const EnglishLabels: EditorLabels;
 export interface Labels extends Plugin {

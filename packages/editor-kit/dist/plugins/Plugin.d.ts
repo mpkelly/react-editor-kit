@@ -1,4 +1,4 @@
-import { Editor, NodeEntry, Range } from "slate";
+import { Editor, NodeEntry, Range, Element } from "slate";
 import { RenderElementProps, RenderLeafProps, ReactEditor } from "slate-react";
 import { EditorRange } from "../editor/Ranges";
 import { MatchExpression, MatchResult } from "../editor/Matching";
@@ -12,6 +12,7 @@ export interface Plugin {
     triggers?: Trigger[];
     onTrigger?(editor: ReactEditor, match?: MatchResult[], trigger?: Trigger): void;
     styleElement?: (props: RenderElementProps) => CSSProperties | undefined;
+    getClasses?: (element: Element) => string | undefined;
     renderElement?: (props: RenderElementProps) => JSX.Element | undefined;
     renderLeaf?: (props: RenderLeafProps, editor: ReactEditor) => JSX.Element | undefined;
     decorate?: (entry: NodeEntry, editor: ReactEditor) => Range[];
@@ -29,6 +30,7 @@ export declare const createPlugin: (plugin: Plugin, ...triggers: Trigger[]) => {
     triggers: Trigger[];
     onTrigger?(editor: ReactEditor, match?: MatchResult[], trigger?: Trigger): void;
     styleElement?: (props: RenderElementProps) => CSSProperties;
+    getClasses?: (element: Element) => string;
     renderElement?: (props: RenderElementProps) => JSX.Element;
     renderLeaf?: (props: RenderLeafProps, editor: ReactEditor) => JSX.Element;
     decorate?: (entry: NodeEntry<import("slate").Node>, editor: ReactEditor) => Range[];

@@ -1,4 +1,10 @@
-import React, { useCallback, CSSProperties, memo } from "react";
+import React, {
+  useCallback,
+  CSSProperties,
+  memo,
+  useState,
+  Fragment,
+} from "react";
 import {
   Editor as SlateEditor,
   Location,
@@ -18,6 +24,10 @@ import {
 import { Plugin } from "../plugins/Plugin";
 import { useEditorKit } from "./EditorKit";
 import { findMatches } from "./Matching";
+import { clone } from "../ui/Utils";
+import { MenuItem, Menu } from "../features/menu/Menu";
+import { ContextMenu } from "../features/context-menu/ContextMenu";
+import { Show } from "../ui/Show";
 
 export interface EditorProps {
   value: Node[];
@@ -40,37 +50,64 @@ export const Editor = memo((props: EditorProps) => {
     readOnly,
     id,
   } = useEditorKit();
+  const [menu, setMenu] = useState<{ items: MenuItem[]; x: number; y: number }>(
+    { items: [], x: 0, y: 0 }
+  );
+
   const renderElement = useCallback(
     (props: RenderElementProps) => handleRenderElement(props, plugins),
-    []
+    [plugins]
   );
   const renderLeaf = useCallback(
     (props: RenderLeafProps) => handleRenderLeaf(props, plugins, editor),
-    []
+    [plugins]
   );
 
   const decorate = useCallback(
     (entry: NodeEntry) => handleDecorate(entry, plugins, editor),
-    []
+    [plugins]
   );
 
   const keyDown = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
       delaySpellCheck();
+      handleCloseMenu();
       handleKeyDown(event, plugins, editor);
     },
-    [spellCheck]
+    [spellCheck, plugins]
   );
 
-  const keyUp = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
-    handleKeyUp(event, plugins, editor);
-  }, []);
+  const keyUp = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      handleKeyUp(event, plugins, editor);
+    },
+    [plugins]
+  );
 
   const click = useCallback(
-    (event: React.MouseEvent<HTMLElement>) =>
-      handleClick(event, plugins, editor),
-    []
+    (event: React.MouseEvent<HTMLElement>) => {
+      handleCloseMenu();
+      handleClick(event, plugins, editor);
+    },
+    [plugins]
   );
+
+  const contextMenu = useCallback(
+    (event: React.MouseEvent) => {
+      const items = handleContextMenu(event, plugins, editor);
+      const x = event.clientX;
+      const y = event.clientY;
+      if (items.length) {
+        event.preventDefault();
+      }
+      setMenu({ items, x, y });
+    },
+    [plugins]
+  );
+
+  const handleCloseMenu = () => {
+    setMenu({ items: [], x: 0, y: 0 });
+  };
 
   const paste = useCallback((event) => {
     const clipboardData = event.clipboardData;
@@ -80,23 +117,28 @@ export const Editor = memo((props: EditorProps) => {
     }
     editor.insertText(pastedData);
   }, []);
-
   return (
     <Slate editor={editor} value={ensureValue(value)} onChange={onChange}>
-      <Editable
-        renderElement={renderElement}
-        renderLeaf={renderLeaf}
-        decorate={decorate}
-        onPaste={paste}
-        onKeyDown={keyDown}
-        onKeyUp={keyUp}
-        onClick={click}
-        style={style}
-        spellCheck={spellCheck}
-        readOnly={readOnly}
-        id={`editor-${id}`}
-        {...rest}
-      />
+      <Fragment>
+        <Editable
+          renderElement={renderElement}
+          renderLeaf={renderLeaf}
+          decorate={decorate}
+          onPaste={paste}
+          onKeyDown={keyDown}
+          onKeyUp={keyUp}
+          onClick={click}
+          onContextMenu={contextMenu}
+          style={style}
+          spellCheck={spellCheck}
+          readOnly={readOnly}
+          id={`editor-${id}`}
+          {...rest}
+        />
+        <Show when={menu.items.length}>
+          <ContextMenu {...menu} onClose={handleCloseMenu} />
+        </Show>
+      </Fragment>
     </Slate>
   );
 });
@@ -107,13 +149,14 @@ const DefaultEmptyValue: Node[] = [
 
 const ensureValue = (value: Node[]) => {
   if (value.length == 0) {
-    return DefaultEmptyValue;
+    return clone(DefaultEmptyValue);
   }
   return value;
 };
 
 const handleRenderElement = (props: RenderElementProps, plugins: Plugin[]) => {
   let style: CSSProperties = {};
+  let classes = "";
   let element: JSX.Element | undefined;
 
   for (let plugin of plugins) {
@@ -124,10 +167,13 @@ const handleRenderElement = (props: RenderElementProps, plugins: Plugin[]) => {
       const otherStyle = plugin.styleElement(props) || {};
       style = { ...style, ...otherStyle };
     }
+    if (plugin.getClasses) {
+      classes = `${classes} ${plugin.getClasses(props.element)}`;
+    }
   }
   element = element || <p {...props.attributes}>{[props.children]}</p>;
-  if (Object.keys(style).length) {
-    return React.cloneElement(element, { style });
+  if (Object.keys(style).length || classes) {
+    return React.cloneElement(element, { style, className: classes });
   }
   return element;
 };
@@ -193,6 +239,54 @@ const handleKeyUp = (
       }
     }
   }
+};
+
+const handleContextMenu = (
+  event: React.MouseEvent,
+  plugins: Plugin[],
+  editor: ReactEditor
+) => {
+  let items: MenuItem[] = [];
+  const node = getActiveNode(editor);
+  const { selection } = editor;
+  const marks = editor.marks || {};
+
+  for (let plugin of plugins) {
+    if (plugin.contextMenu) {
+      for (let choice of plugin.contextMenu)
+        if (choice.trigger === undefined) {
+          items = items.concat(choice.items);
+        } else {
+          const { trigger } = choice;
+          if (trigger.node !== undefined) {
+            if (!node) {
+              continue;
+            }
+            if (node.type !== trigger.node) {
+              continue;
+            }
+          }
+          if (trigger.mark !== undefined) {
+            if (!marks[trigger.mark]) {
+              continue;
+            }
+          }
+          if (trigger.selectionExpanded !== undefined) {
+            if (!selection) {
+              continue;
+            }
+            if (trigger.selectionExpanded && !Range.isExpanded(selection)) {
+              continue;
+            }
+          }
+          if (trigger.matched && !trigger.matched(editor)) {
+            continue;
+          }
+          items = items.concat(choice.items);
+        }
+    }
+  }
+  return items;
 };
 
 const handleKeyDown = (

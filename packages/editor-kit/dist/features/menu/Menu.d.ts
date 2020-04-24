@@ -1,13 +1,20 @@
-import { EditorIcon } from "../icons/Icon";
+import React, { CSSProperties, ReactNode } from "react";
 import { ReactEditor } from "slate-react";
-export interface Menu {
-    items: MenuItem[];
-}
+import { EditorIcon } from "../icons/Icon";
+import { EditorLabels } from "../i18n/LabelsPlugin";
 export interface MenuItem {
-    icon?: EditorIcon;
+    icon?: EditorIcon | ReactNode;
     text?: string;
-    labelKey?: string;
+    labelKey?: keyof EditorLabels;
+    rightText?: string;
+    rightLabelKey?: keyof EditorLabels;
     group?: string;
-    items: MenuItem[];
+    items?: MenuItem[];
     onClick(editor: ReactEditor): void;
 }
+export interface MenuProps {
+    items: MenuItem[];
+    style?: CSSProperties;
+}
+export declare const Menu: React.ForwardRefExoticComponent<MenuProps & React.RefAttributes<unknown>>;
+export declare const MenuItem: (props: MenuItem) => JSX.Element;

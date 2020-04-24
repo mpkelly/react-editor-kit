@@ -1,7 +1,7 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { stop } from "../../ui/Utils";
 
-export type EditorIcon = CssIcon | JSX.Element;
+export type EditorIcon = CssIcon | ReactNode;
 
 export interface CssIcon {
   className: string;

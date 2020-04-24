@@ -1,5 +1,5 @@
-import React from "react";
-export declare type EditorIcon = CssIcon | JSX.Element;
+import React, { ReactNode } from "react";
+export declare type EditorIcon = CssIcon | ReactNode;
 export interface CssIcon {
     className: string;
     ligature?: string;

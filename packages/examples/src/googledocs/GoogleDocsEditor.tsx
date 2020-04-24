@@ -66,10 +66,10 @@ import {
   InfoAlertPlugin,
   ErrorAlertPlugin,
   WarningAlertPlugin,
+  createInitialLetterPlugin,
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 import { createStaticHashtags } from "./HashtagSuggestionPlugin";
-import { DarkThemePlugin } from "./DarkThemePlugin";
 import { createEmoticonSuggestions } from "./EmoticonSuggestions";
 
 const GoogleDocsStylePlugin: Plugin = {
@@ -130,6 +130,7 @@ const plugins: Plugin[] = [
     ],
   }),
   createEmoticonSuggestions(),
+  createInitialLetterPlugin(),
 ];
 
 const initialValue = [{ type: "paragraph", children: [{ text: "" }] }];

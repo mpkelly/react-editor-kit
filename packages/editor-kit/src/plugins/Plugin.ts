@@ -1,4 +1,4 @@
-import { Editor, NodeEntry, Range } from "slate";
+import { Editor, NodeEntry, Range, Element } from "slate";
 import { RenderElementProps, RenderLeafProps, ReactEditor } from "slate-react";
 import { EditorRange } from "../editor/Ranges";
 import { MatchExpression, MatchResult } from "../editor/Matching";
@@ -15,6 +15,7 @@ export interface Plugin {
     trigger?: Trigger
   ): void;
   styleElement?: (props: RenderElementProps) => CSSProperties | undefined;
+  getClasses?: (element: Element) => string | undefined;
   renderElement?: (props: RenderElementProps) => JSX.Element | undefined;
   renderLeaf?: (
     props: RenderLeafProps,
