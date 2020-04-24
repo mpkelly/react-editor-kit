@@ -7,7 +7,7 @@ import { SuggestionList } from "./SuggestionList";
 export interface SuggestionProps extends RenderLeafProps {
   suggestions: Suggestions;
   type: string;
-  onChoice(choice?: any, display?: String): void;
+  onChoice(choice?: any): void;
 }
 
 export const Suggestion = (props: SuggestionProps) => {

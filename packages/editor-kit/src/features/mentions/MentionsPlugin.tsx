@@ -36,7 +36,6 @@ export const createStaticMentions = (options: StaticMentionOptions) => {
       return <MentionChoice choice={choice} />;
     },
     triggers: options.triggers || DefaultTriggers,
-    displayText: (choice: Mention) => `@${choice.name}`,
     renderSuggestion: (props: RenderElementProps) => {
       return <MentionElement {...props} />;
     },
@@ -76,9 +75,9 @@ export const MentionElement = (props: RenderElementProps) => {
       {...attributes}
       contentEditable={false}
       className={"rek-mention"}
-      data-id-mention={element.displayText}
+      data-id-mention={element.name}
     >
-      {element.displayText}
+      @{element.value.name}
       {children}
     </div>
   );

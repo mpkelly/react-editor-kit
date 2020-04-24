@@ -53,7 +53,7 @@ export const createStylePlugin = (): Plugin => {
         );
       }
     },
-    globalStyles: () => GlobalStyle
+    globalStyles: () => GlobalStyle,
   };
 };
 
@@ -99,6 +99,11 @@ const GlobalStyle = `
   height:18px;
   width:18px;
   cursor:pointer;
+  border: 1px solid transparent;
+}
+
+.rek-selected-color {
+  border:1px solid var(--focus-color);
 }
 
 .compact-picker .flexbox-fix div,

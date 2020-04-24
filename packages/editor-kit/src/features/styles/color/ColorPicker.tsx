@@ -49,13 +49,13 @@ const ColorPanel = (props: ColorPanelProps) => {
       {colors.map((colors: any[], index: number) => {
         return (
           <div className="rek-color-picker-row" key={index}>
-            {colors.map(color => {
+            {colors.map((color) => {
               const selectedClass =
                 color === selected ? "rek-selected-color" : "";
               return (
                 <div
                   className={`rek-color-picker-color ${selectedClass}`}
-                  onClick={event => {
+                  onClick={(event) => {
                     block(event);
                     onChange(color);
                   }}

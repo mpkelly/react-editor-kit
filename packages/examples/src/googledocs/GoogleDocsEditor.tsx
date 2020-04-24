@@ -70,6 +70,7 @@ import {
 import { MentionsItems } from "../Mentions";
 import { createStaticHashtags } from "./HashtagSuggestionPlugin";
 import { DarkThemePlugin } from "./DarkThemePlugin";
+import { createEmoticonSuggestions } from "./EmoticonSuggestions";
 
 const GoogleDocsStylePlugin: Plugin = {
   globalStyles: () => `
@@ -128,12 +129,10 @@ const plugins: Plugin[] = [
       "#purple",
     ],
   }),
+  createEmoticonSuggestions(),
 ];
 
-const initialValue = [
-  { type: "paragraph", children: [{ text: "" }] },
-  { type: "divider", children: [{ text: "" }], size: 1, resizedWidth: 589 },
-];
+const initialValue = [{ type: "paragraph", children: [{ text: "" }] }];
 
 const wrapperStyle: CSSProperties = {
   display: "flex",
@@ -145,8 +144,7 @@ const wrapperStyle: CSSProperties = {
 
 const editorStyle: CSSProperties = {
   width: "100%",
-  //height: 1066,
-  height: "100%",
+  minHeight: 1066,
   padding: 16,
   border: "1px solid rgba(0,0,0,.1)",
   boxShadow: "rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",

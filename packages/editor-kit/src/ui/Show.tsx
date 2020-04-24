@@ -1,8 +1,8 @@
-import React, { Fragment } from "react";
+import React, { Fragment, ReactNode } from "react";
 
 export interface ShowProps {
-  when: boolean | undefined | null;
-  children: JSX.Element | JSX.Element[];
+  when: any | undefined | null;
+  children: ReactNode;
 }
 
 export const Show = (props: ShowProps) => {

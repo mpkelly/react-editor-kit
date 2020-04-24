@@ -14,7 +14,7 @@ import { Editor } from "slate";
 export interface SuggestionListProps {
   match: string;
   suggestions: Suggestions;
-  onChoice(choice?: Object, displayText?: string, match?: string): void;
+  onChoice(choice?: Object): void;
 }
 
 export const SuggestionList = memo((props: SuggestionListProps) => {
@@ -53,7 +53,7 @@ export const SuggestionList = memo((props: SuggestionListProps) => {
 
   const handleClose = () => onChoiceSelected();
   const handleChoice = (choice: any) => {
-    onChoiceSelected(choice, suggestions.displayText(choice));
+    onChoiceSelected(choice);
   };
 
   return (

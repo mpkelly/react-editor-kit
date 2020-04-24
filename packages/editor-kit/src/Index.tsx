@@ -121,3 +121,4 @@ export * from "./features/suggestions/Suggestions";
 export * from "./features/suggestions/SuggestionsPlugin";
 export * from "./features/auto-focus/AutoFocusPlugin";
 export * from "./features/delete-key/DeleteKeyHandlerPlugin";
+export * from "./features/buttons/IconButton";

@@ -31,7 +31,6 @@ export const createStaticHashtags = (options: StaticHashtagOptions) => {
       return <HashtagChoice choice={choice} />;
     },
     triggers: options.triggers || DefaultTriggers,
-    displayText: (choice: string) => choice,
     renderSuggestion: (props: RenderElementProps) => {
       return <HashtagElement {...props} />;
     },
@@ -63,7 +62,7 @@ export const HashtagElement = (props: RenderElementProps) => {
   const { attributes, element, children } = props;
   return (
     <span {...attributes} contentEditable={false} className={"hashtag"}>
-      {element.displayText}
+      {element.value}
       {children}
     </span>
   );

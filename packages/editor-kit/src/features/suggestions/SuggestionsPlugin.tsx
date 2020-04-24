@@ -34,7 +34,7 @@ export const createSuggestionsPlugin = (
     },
     renderLeaf: (props: RenderLeafProps, editor: ReactEditor) => {
       const { leaf } = props;
-      const handleChoice = (choice?: any, displayText?: string) => {
+      const handleChoice = (choice?: any) => {
         ReactEditor.focus(editor);
         Transforms.setNodes(
           editor,
@@ -47,8 +47,7 @@ export const createSuggestionsPlugin = (
           Transforms.insertNodes(editor, {
             type: options.type,
             children: [{ text: "" }],
-            displayText,
-            suggestion: choice,
+            value: choice,
           });
           Editor.insertText(editor, " ");
         }
