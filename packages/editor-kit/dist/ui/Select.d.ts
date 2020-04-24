@@ -20,7 +20,7 @@ export interface SelectItem {
 export declare const Select: (props: SelectProps) => JSX.Element;
 export declare const useSelect: (props: SelectProps, editor: HTMLElement) => {
     show: boolean;
-    value: React.Key;
+    value: React.ReactText;
     activeIndex: number;
     handleRef: (ref: HTMLInputElement) => void;
     handleValueChange: (event: React.ChangeEvent<HTMLInputElement>) => void;

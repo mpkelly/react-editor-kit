@@ -1,6 +1,6 @@
-/// <reference types="react" />
+import { ReactNode } from "react";
 export interface ShowProps {
-    when: boolean | undefined | null;
-    children: JSX.Element | JSX.Element[];
+    when: any | undefined | null;
+    children: ReactNode;
 }
 export declare const Show: (props: ShowProps) => JSX.Element;
