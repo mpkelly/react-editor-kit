@@ -25,6 +25,12 @@ export declare const DefaultConstraints: {
     "table-cell": {
         nodes: string[];
     };
+    "todo-list": {
+        nodes: string[];
+    };
+    "todo-list-item": {
+        nodes: string[];
+    };
 };
 export declare const createConstrainsPlugin: (constraints: EditorConstrains) => {
     name: string;

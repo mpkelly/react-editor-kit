@@ -10,7 +10,7 @@ export interface BlockWrapperProps extends RenderElementProps {
 }
 
 export const BlockWrapper = (props: BlockWrapperProps) => {
-  const { children, element, focusToolbar, inline } = props;
+  const { children, element, focusToolbar, inline, ...rest } = props;
   const { isFocusedWithin } = useFocused(element);
   const [inside, setInside] = useState(false);
   const className = props.className || "";

@@ -1,5 +1,4 @@
-import React from "react";
-import styled from "styled-components";
+import React, { CSSProperties } from "react";
 import { OverlayLayer } from "./Layers";
 
 export interface PopupProps {
@@ -25,13 +24,22 @@ export const Popup = (props: PopupProps) => {
   );
 };
 
-export const Overlay = styled.div`
-  position: fixed;
-  z-index: ${OverlayLayer};
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  height: 100vh;
-  width: 100vw;
-`;
+export const overlayStyle: CSSProperties = {
+  position: "fixed",
+  zIndex: OverlayLayer,
+  top: 0,
+  left: 0,
+  bottom: 0,
+  right: 0,
+  height: "100vh",
+  width: "100vw",
+};
+
+export const Overlay = (
+  props: React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLDivElement>,
+    HTMLDivElement
+  >
+) => {
+  return <div style={overlayStyle} {...props} />;
+};

@@ -125,3 +125,4 @@ export * from "./features/delete-key/DeleteKeyHandlerPlugin";
 export * from "./features/buttons/IconButton";
 export * from "./features/menu/Menu";
 export * from "./features/context-menu/ContextMenu";
+export * from "./features/todo-list/TodoListPlugin";

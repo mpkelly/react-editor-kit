@@ -55,17 +55,11 @@ const EditorStyle = `
     width:100%;
     height:1px;
     border-top:1px solid var(--divider-color);
-    .rek-focused {
-      border: 2px solid var(--focus-color);
-    }
   }
 
   .rek-divider-double {
     width:100%;
     height:2px;
     border-top:2px solid var(--divider-color);
-    .rek-focused {
-      border: 2px solid var(--focus-color);
-    }
   }
 `;

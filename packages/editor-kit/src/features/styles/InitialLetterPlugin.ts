@@ -40,7 +40,6 @@ export const createInitialLetterPlugin = (
             const [match] = Editor.nodes(editor, {
               match: (node) => node.type === "paragraph" && node.initialLetter,
             });
-            console.log(match);
             return match === null;
           },
         },

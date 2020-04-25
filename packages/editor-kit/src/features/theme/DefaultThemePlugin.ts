@@ -262,10 +262,7 @@ input[type=number] {
 
 .rek-resizable {
   position:relative;    
-  :last-child {
-    margin:0 auto;
-    max-width:100%;    
-  }
+  margin:0 auto;
 }
 
 .rek-resize-handle {
@@ -476,7 +473,7 @@ const EditorStyle = `
   }
 
   .rek-block-wrapper-content {
-    outline:none;
+    outline:none;    
     :focus {
       outline:none;
     }

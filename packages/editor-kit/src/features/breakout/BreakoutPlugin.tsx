@@ -19,7 +19,7 @@ export const DefaultOptions: BreakoutPluginOptions = {
     "video",
     "divider",
   ],
-  paddedBlocks: ["table"],
+  paddedBlocks: ["table", "todo-list"],
 };
 
 export const createBreakoutPlugin = (options = DefaultOptions): Plugin => {

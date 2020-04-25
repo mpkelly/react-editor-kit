@@ -35,6 +35,12 @@ export const DefaultConstraints = {
   "table-cell": {
     nodes: ["!table", "!video"],
   },
+  "todo-list": {
+    nodes: ["todo-list-item"],
+  },
+  "todo-list-item": {
+    nodes: ["paragraph", "mention", "unordered-list", "ordered-list", "link"],
+  },
 };
 
 export const createConstrainsPlugin = (constraints: EditorConstrains) => {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Node, Range } from "slate";
+import { Node } from "slate";
 import {
   Editor,
   EditorKit,

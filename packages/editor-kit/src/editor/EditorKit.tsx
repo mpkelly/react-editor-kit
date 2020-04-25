@@ -11,8 +11,7 @@ import React, {
 } from "react";
 import { createEditor as createSlateEditor, Transforms } from "slate";
 import { withReact, ReactEditor } from "slate-react";
-//import { glob } from "goober";
-import { createGlobalStyle } from "styled-components";
+import * as StylisDefault from "stylis";
 import { Plugin } from "../plugins/Plugin";
 import { DefaultThemePlugin } from "../features/theme/DefaultThemePlugin";
 import { SelectionExtensionsPlugin } from "../features/selection/SelectionExtensionsPlugin";
@@ -24,6 +23,9 @@ import { useSpellcheck } from "../features/spellcheck/SpellCheck";
 import { AutoFocusPlugin } from "../features/auto-focus/AutoFocusPlugin";
 import { DeleteKeyHandlerPlugin } from "../features/delete-key/DeleteKeyHandlerPlugin";
 import { EnterKeyHandlerPlugin } from "../features/enter-key/EnterKeyHandlerPlugin";
+
+//Typings do not seem to match exported object :/
+const Stylis: any = StylisDefault;
 
 // These core plugins can be overriden (or disabled) by passing a plugin with the same "name"
 // to <EditorKit plugins={...}/>
@@ -76,9 +78,8 @@ export const EditorKit = memo((props: EditorKitProps) => {
   const editor: ReactEditor = createEditor(plugins);
   const [, forceUpdate] = useState({});
   const [readOnly, setReadOnly] = useState(Boolean(props.readOnly));
-  const Style = useRef<any>();
   useEffect(() => {
-    Style.current = generateStyle(plugins);
+    generateStyle(plugins, id);
   }, [props.plugins]);
 
   maybeConfigureTesting(editor, forceUpdate);
@@ -127,7 +128,6 @@ export const EditorKit = memo((props: EditorKitProps) => {
 
   return (
     <Fragment>
-      {Style.current && <Style.current />}
       <Context.Provider value={context}>
         <Fragment>{children}</Fragment>
       </Context.Provider>
@@ -157,10 +157,10 @@ const createEditor = (plugins: Plugin[]): ReactEditor => {
       }
     });
     return editor;
-  }, []);
+  }, [plugins]);
 };
 
-const generateStyle = (plugins: Plugin[]) => {
+const generateStyle = (plugins: Plugin[], id: string) => {
   const editorStyles: string[] = [];
   const globalStyles: string[] = [];
 
@@ -180,8 +180,11 @@ const generateStyle = (plugins: Plugin[]) => {
     }`;
   }
   const globalStyle = globalStyles.join("\n");
-
-  return createGlobalStyle`${globalStyle} ${editorStyle}`;
+  const css = Stylis.serialize(
+    Stylis.compile(`${globalStyle} ${editorStyle}`),
+    Stylis.stringify
+  );
+  attachEditorStyle(css, id);
 };
 
 const maybeConfigureTesting = (editor: ReactEditor, forceUpdate: Function) => {
@@ -205,4 +208,21 @@ const maybeConfigureTesting = (editor: ReactEditor, forceUpdate: Function) => {
       deleteBackward(editor, distance, unit as any);
     };
   }
+};
+
+const attachEditorStyle = (css: string, id: string) => {
+  const linkElement = document.createElement("link");
+  const styleId = `rek-styles-${id}`;
+  const existing = document.getElementById(styleId);
+  if (existing) {
+    existing.parentElement?.removeChild(existing);
+  }
+  linkElement.id = styleId;
+  linkElement.setAttribute("rel", "stylesheet");
+  linkElement.setAttribute("type", "text/css");
+  linkElement.setAttribute(
+    "href",
+    "data:text/css;charset=UTF-8," + encodeURIComponent(css)
+  );
+  document.head.appendChild(linkElement);
 };

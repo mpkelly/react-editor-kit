@@ -7,6 +7,7 @@ import { clone, isDeleting } from "../../ui/Utils";
 import { MatchResult } from "../../editor/Matching";
 import { deleteBackward, getActiveNode } from "../../editor/Editor";
 import { Table } from "./Table";
+import { isDeletingBlockContents } from "../blocks/Blocks";
 
 export interface TablePluginOptions {
   defaultTable: Node[];
@@ -72,27 +73,14 @@ export const createTablePlugin = (options: TablePluginOptions): Plugin => {
         event.preventDefault();
         return true;
       }
-      if (isDeleting(event)) {
-        // Overrides default behaviour which would some times let the user
-        // delete the table-cell and break the table
-        const { selection } = editor;
-        const length = Node.string(cell[0]).length;
-        let selectAll = false;
-        if (selection && Range.isExpanded(selection)) {
-          const { anchor, focus } = selection;
-          const distance = focus.offset - anchor.offset;
-          selectAll = distance === length && length > 0;
-        }
-        if (length == 0 && cell[0].children.length == 1) {
-          event.preventDefault();
-          return true;
-        }
-        if (selectAll) {
-          Transforms.delete(editor, { at: selection as Range, hanging: false });
-          event.preventDefault();
-          return true;
-        }
+
+      // Overrides default behaviour which would some times let the user
+      // delete the table-cell and break the table
+      if (isDeletingBlockContents(editor, cell[0], event)) {
+        event.preventDefault();
+        return true;
       }
+      return false;
     },
     globalStyles: () => GlobalStyle,
     editorStyles: () => EditorStyle,

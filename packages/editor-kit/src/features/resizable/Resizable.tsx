@@ -4,6 +4,7 @@ import React, {
   Fragment,
   useCallback,
   CSSProperties,
+  useEffect,
 } from "react";
 import { Overlay } from "../../ui/Popup";
 import { Show } from "../../ui/Show";
@@ -26,11 +27,15 @@ export const Resizable = (props: ResizableProps) => {
     element.current = ref;
   };
 
-  const handleUp = useCallback(() => {
-    if (state.down > -1) {
-      setState((current) => ({ ...current, down: -1 }));
-    }
-  }, [state]);
+  useEffect(() => {
+    const handleUp = () => {
+      if (state.down > -1) {
+        setState((current) => ({ ...current, down: -1 }));
+      }
+    };
+    window.addEventListener("mouseup", handleUp);
+    return () => window.removeEventListener("mouseup", handleUp);
+  }, [state.down]);
 
   const handleMove = useCallback(
     (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -82,11 +87,11 @@ export const Resizable = (props: ResizableProps) => {
             <div className="rek-resize-handle-grip" />
           </div>
         </div>
-        {children}
+        <div className="rek-resizable-content">{children}</div>
       </div>
       <Show when={state.down > -1}>
         {ReactDOM.createPortal(
-          <Overlay onMouseUp={handleUp} onMouseMove={handleMove} />,
+          <Overlay onMouseMove={handleMove}> </Overlay>,
           document.body
         )}
       </Show>

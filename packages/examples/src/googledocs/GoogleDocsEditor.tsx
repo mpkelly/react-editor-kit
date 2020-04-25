@@ -67,6 +67,7 @@ import {
   ErrorAlertPlugin,
   WarningAlertPlugin,
   createInitialLetterPlugin,
+  TodoListPlugin,
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 import { createStaticHashtags } from "./HashtagSuggestionPlugin";
@@ -130,13 +131,20 @@ const plugins: Plugin[] = [
     ],
   }),
   createEmoticonSuggestions(),
-  createInitialLetterPlugin(),
+  // createInitialLetterPlugin(),
+  TodoListPlugin,
 ];
 
 const initialValue = [
   {
-    type: "paragraph",
-    children: [{ text: "Said he who knew" }],
+    type: "todo-list",
+    children: [
+      {
+        type: "todo-item",
+        complete: false,
+        children: [{ text: "Test" }],
+      },
+    ],
   },
 ];
 

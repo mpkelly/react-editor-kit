@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 export interface PopupProps {
     onClose(event: React.MouseEvent<HTMLElement, MouseEvent>): any;
     top?: number;
@@ -10,4 +10,5 @@ export interface PopupProps {
     className?: string;
 }
 export declare const Popup: (props: PopupProps) => JSX.Element;
-export declare const Overlay: import("styled-components").StyledComponent<"div", any, {}, never>;
+export declare const overlayStyle: CSSProperties;
+export declare const Overlay: (props: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>) => JSX.Element;
