@@ -48,7 +48,7 @@ export const Link = (props: LinkProps) => {
         type: "link",
         editing: false,
         url: link.url,
-        children: [{ text: displayName, ...childProps }],
+        children: [{ text: link.displayName, ...childProps }],
       },
       { at: point }
     );
