@@ -13,7 +13,6 @@ export const toggleMark = (editor: Editor, type: string, value = true) => {
 };
 
 export const isMarkActive = (editor: Editor, type: string) => {
-  console.log(editor.children);
   const marks = Editor.marks(editor);
   return marks ? marks[type] === true : false;
 };

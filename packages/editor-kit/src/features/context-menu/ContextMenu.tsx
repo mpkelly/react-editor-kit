@@ -26,7 +26,7 @@ export const ContextMenu = (props: ContextMenuProps) => {
   const { x, y, items, onClose } = props;
 
   return (
-    <Overlay onClick={onClose}>
+    <Overlay onMouseDown={onClose}>
       <Menu style={{ left: x, top: y, position: "fixed" }}>{items}</Menu>
     </Overlay>
   );

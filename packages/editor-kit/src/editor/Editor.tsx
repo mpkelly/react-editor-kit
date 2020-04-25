@@ -96,6 +96,7 @@ export const Editor = memo((props: EditorProps) => {
 
   const contextMenu = useCallback(
     (event: React.MouseEvent) => {
+      Transforms.collapse(editor, { edge: "end" });
       const items = handleContextMenu(event, plugins, editor);
       const x = event.clientX;
       const y = event.clientY;
@@ -408,11 +409,15 @@ export const isOnLastLineOfBlock = (editor: ReactEditor) => {
 
 export const getActiveNode = (editor: ReactEditor) => {
   if (editor.selection) {
-    const [, path] = SlateEditor.node(editor, editor.selection.focus.path);
-    if (path.length) {
-      const [parent] = SlateEditor.parent(editor, path);
-      return parent;
+    const path = editor.selection.focus.path.slice();
+    const [node] = SlateEditor.node(editor, path);
+    if (node.text) {
+      const parent = SlateEditor.parent(editor, path);
+      if (parent) {
+        return parent[0];
+      }
     }
+    return node;
   }
   return null;
 };

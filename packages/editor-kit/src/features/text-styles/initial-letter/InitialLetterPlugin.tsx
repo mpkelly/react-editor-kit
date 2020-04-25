@@ -1,5 +1,6 @@
 import React from "react";
-import { RenderLeafProps } from "slate-react";
+import { Transforms, Node } from "slate";
+import { RenderLeafProps, ReactEditor } from "slate-react";
 import "./Dropcaps";
 import { Plugin } from "../../../plugins/Plugin";
 import { EditorIcon } from "../../icons/Icon";
@@ -33,6 +34,17 @@ export const createInitialLetterPlugin = (
   options = InitialLetterDefaultOptions
 ): Plugin => {
   return {
+    withPlugin: (editor) => {
+      const { normalizeNode } = editor;
+      editor.normalizeNode = ([node, path]) => {
+        if (node.children && node.children.length) {
+          const child = node.children.find((text: Node) => text.initialLetter);
+          //TODO force initial letter to be first char
+        }
+        return normalizeNode([node, path]);
+      };
+      return editor;
+    },
     contextMenu: [
       {
         trigger: {
@@ -64,6 +76,7 @@ export const createInitialLetterPlugin = (
     renderLeaf: (props: RenderLeafProps) => {
       const { leaf, children, attributes } = props;
       if (leaf.initialLetter) {
+        // TODO handle text alignment
         // let textAlign = element.textAlign || "left";
         // if (textAlign == "left" || textAlign == "justify") {
         //   return "rek-initial-letter";

@@ -1,3 +1,4 @@
+import "./Dropcaps";
 import { Plugin } from "../../../plugins/Plugin";
 import { EditorIcon } from "../../icons/Icon";
 export interface InitialLetterPluginOptions {

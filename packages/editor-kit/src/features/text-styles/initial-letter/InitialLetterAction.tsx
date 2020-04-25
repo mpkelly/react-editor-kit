@@ -1,5 +1,5 @@
 import React from "react";
-import { Range, Transforms } from "slate";
+import { Range, Transforms, Editor, Node } from "slate";
 import { MarkAction } from "../../marks/MarkAction";
 import { useEditorKit } from "../../../editor/EditorKit";
 import { toggleMark } from "../../marks/Marks";
@@ -12,21 +12,41 @@ export interface InitialLetterActionProps {
 
 export const InitialLetterAction = (props: InitialLetterActionProps) => {
   const { editor } = useEditorKit();
+  const isActiive = () => isInitialLetterActive(editor);
+
   const onMouseDown = (event: React.MouseEvent) => {
     const selection = editor.selection;
-    if (!selection || Range.isExpanded(selection)) {
+    if (!selection) {
       return;
     }
-    const { path } = selection.focus;
-    const firstCharacter: Range = {
-      anchor: { path, offset: 0 },
-      focus: { path, offset: 1 },
-    };
-    Transforms.setSelection(editor, firstCharacter);
-    toggleMark(editor, "initialLetter", true);
+    const node = getActiveNode(editor);
+    if (
+      !Boolean(node && node.children.find((text: Node) => text.initialLetter))
+    ) {
+      const path = selection.focus.path;
+      const firstCharacter: Range = {
+        anchor: { path, offset: 0 },
+        focus: { path, offset: 1 },
+      };
+      Transforms.setSelection(editor, firstCharacter);
+      toggleMark(editor, "initialLetter", true);
+      Transforms.collapse(editor, { edge: "end" });
+    } else {
+      if (node) {
+        const child = node.children.find((text: Node) => text.initialLetter);
+        if (child) {
+          Transforms.setNodes(
+            editor,
+            { initialLetter: undefined },
+            { at: ReactEditor.findPath(editor, child) }
+          );
+        }
+      }
+    }
+
     event.preventDefault();
   };
-  const isActiive = () => isInitialLetterActive(editor);
+
   return (
     <MarkAction
       {...props}
@@ -39,6 +59,10 @@ export const InitialLetterAction = (props: InitialLetterActionProps) => {
 
 export const isInitialLetterActive = (editor: ReactEditor) => {
   const node = getActiveNode(editor);
-  console.log("N", node);
-  return Boolean(node && node.children.find((text) => text.initialLetter));
+  ReactEditor.focus(editor);
+  Transforms.collapse(editor, { edge: "end" });
+
+  return Boolean(
+    node && node.children.find((text: Node) => text.initialLetter)
+  );
 };
