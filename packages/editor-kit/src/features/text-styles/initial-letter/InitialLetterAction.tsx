@@ -20,8 +20,13 @@ export const InitialLetterAction = (props: InitialLetterActionProps) => {
       return;
     }
     const node = getActiveNode(editor);
+    console.log("Node", node);
     if (
-      !Boolean(node && node.children.find((text: Node) => text.initialLetter))
+      !Boolean(
+        node &&
+          node.children &&
+          node.children.find((text: Node) => text.initialLetter)
+      )
     ) {
       const path = selection.focus.path;
       const firstCharacter: Range = {
@@ -63,6 +68,8 @@ export const isInitialLetterActive = (editor: ReactEditor) => {
   Transforms.collapse(editor, { edge: "end" });
 
   return Boolean(
-    node && node.children.find((text: Node) => text.initialLetter)
+    node &&
+      node.children &&
+      node.children.find((text: Node) => text.initialLetter)
   );
 };
