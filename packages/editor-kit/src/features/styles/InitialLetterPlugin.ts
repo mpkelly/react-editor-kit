@@ -1,8 +1,6 @@
-import { Transforms, Editor, Node } from "slate";
+import { Transforms, Editor } from "slate";
 import { Plugin } from "../../plugins/Plugin";
-import { getActiveNode } from "../../editor/Editor";
 import { EditorIcon } from "../icons/Icon";
-import { createBreakoutPlugin } from "../breakout/BreakoutPlugin";
 
 export interface InitialLetterPluginOptions {
   style: string;
