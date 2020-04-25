@@ -13,13 +13,14 @@ export const toggleMark = (editor: Editor, type: string, value = true) => {
 };
 
 export const isMarkActive = (editor: Editor, type: string) => {
+  console.log(editor.children);
   const marks = Editor.marks(editor);
   return marks ? marks[type] === true : false;
 };
 
 export const marks = (editor: Editor) => {
   const marks = editor.marks || {};
-  return Object.keys(marks).map(key => ({ key, value: marks[key] }));
+  return Object.keys(marks).map((key) => ({ key, value: marks[key] }));
 };
 
 export const applyRegexMark = (
