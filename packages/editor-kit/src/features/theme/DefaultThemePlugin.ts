@@ -4,6 +4,7 @@ import {
   PopupMarkerLayer,
   PopupContentLayer,
   OverlayLayer,
+  ResizeHandleLayer,
 } from "../../ui/Layers";
 
 export const DefaultThemePlugin: Plugin = {
@@ -276,7 +277,7 @@ input[type=number] {
   cursor:ew-resize;
   height:100%;
   flex-shrink:0;  
-  z-index: ${PopupContentLayer};
+  z-index: ${ResizeHandleLayer};
 }
 [data-slate-editor=true]:not([contenteditable=true]) {
   .rek-resize-handle {

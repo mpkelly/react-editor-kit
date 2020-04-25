@@ -1,18 +1,15 @@
 import React, { useCallback } from "react";
-import { Transforms } from "slate";
+import { Transforms, Range, Path, Node } from "slate";
 import { ReactEditor, RenderElementProps } from "slate-react";
 import { Plugin } from "../../plugins/Plugin";
 import { MatchResult } from "../../editor/Matching";
 import { DeletableBlock } from "../blocks/DeletableBlock";
 import { Checkbox } from "../../ui/Checkbox";
-import {
-  deleteBackward,
-  getActiveNodeType,
-  getActiveNode,
-} from "../../editor/Editor";
+import { deleteBackward, getActiveNode } from "../../editor/Editor";
 import { useEditorKit } from "../../editor/EditorKit";
 import { useFocused } from "../../editor/Focus";
-import { isBlockEmpty } from "../blocks/Blocks";
+import { isBlockEmpty, isNodeActive } from "../blocks/Blocks";
+import { isDeleting } from "../../ui/Utils";
 
 export const TodoListPlugin: Plugin = {
   name: "todo-list",
@@ -21,11 +18,9 @@ export const TodoListPlugin: Plugin = {
     {
       pattern: "[ ] ",
     },
-    {
-      pattern: ":todo",
-    },
   ],
   onTrigger: (editor: ReactEditor, matches?: MatchResult[]) => {
+    console.log("Todo List");
     if (editor.isNodeSupported("todo-list") && matches && matches[0]) {
       const range = matches[0].range;
       const length = range.focus.offset - range.anchor.offset;
@@ -34,12 +29,21 @@ export const TodoListPlugin: Plugin = {
     }
   },
   onKeyDown: (event: React.KeyboardEvent<HTMLElement>, editor: ReactEditor) => {
-    const node = getActiveNode(editor);
-    if (node && node.type === "todo-item") {
-      if (event.keyCode === 13) {
+    if (isNodeActive(editor, "todo-item")) {
+      const { selection } = editor;
+      if (!selection) {
+        return;
+      }
+      const node = getActiveNode(editor);
+      if (!node) {
+        return;
+      }
+      const path = ReactEditor.findPath(editor, node);
+
+      if (Range.isCollapsed(selection) && event.keyCode === 13) {
         //Enter key
+
         if (!event.shiftKey) {
-          const path = ReactEditor.findPath(editor, node);
           if (isBlockEmpty(editor)) {
             const next = [path[0] + 1];
             Transforms.removeNodes(editor);
