@@ -1,9 +1,9 @@
-import { Transforms, Editor, Range } from "slate";
+import React from "react";
 import { Plugin } from "../../../plugins/Plugin";
 import { EditorIcon } from "../../icons/Icon";
-import { getActiveNode } from "../../../editor/Editor";
-import { ReactEditor } from "slate-react";
-import { isMarkActive, toggleMark } from "../../marks/Marks";
+import { isMarkActive } from "../../marks/Marks";
+import { InitialLetterMenuItem } from "./InitialLetterMenuItem";
+import { BoldMenuItem } from "../../blocks/BoldMenuItem";
 
 export interface InitialLetterPluginOptions {
   style: string;
@@ -44,25 +44,11 @@ export const createInitialLetterPlugin = (
           },
         },
         items: [
-          {
-            labelKey: "initialLetterOn",
-            icon: options.onIcon,
-            onClick: (editor) => {
-              const node = getActiveNode(editor);
-              const path = ReactEditor.findPath(editor, node as any);
-              console.log(path, node);
-              const selection: Range = {
-                anchor: { path, offset: 0 },
-                focus: { path, offset: 1 },
-              };
-              ReactEditor.focus(editor);
-              Transforms.setSelection(editor, selection);
-              setTimeout(() => {
-                toggleMark(editor, "initialLetter", true);
-              }, 1);
-            },
-            items: [],
-          },
+          <InitialLetterMenuItem
+            labelKey={"initialLetterOn"}
+            icon={options.onIcon}
+          />,
+          <BoldMenuItem text="Bold" />,
         ],
       },
       {
@@ -72,20 +58,10 @@ export const createInitialLetterPlugin = (
           },
         },
         items: [
-          {
-            labelKey: "initialLetterOff",
-            icon: options.offIcon,
-            onClick: (editor) => {
-              Transforms.setNodes(
-                editor,
-                { initialLetter: undefined },
-                {
-                  match: (node) => node.initialLetter,
-                }
-              );
-            },
-            items: [],
-          },
+          <InitialLetterMenuItem
+            labelKey={"initialLetterOff"}
+            icon={options.onIcon}
+          />,
         ],
       },
     ],

@@ -260,8 +260,7 @@ export const GoogleDocsEditor = () => {
             readOnlyLigature="lock"
           />
         </EditorToolbar>
-        <Rule />
-        <SelectionToolbar>
+        {/* <SelectionToolbar>
           <BoldButton className="material-icons-round" ligature="format_bold" />
           <ItalicButton
             className="material-icons-round"
@@ -272,7 +271,7 @@ export const GoogleDocsEditor = () => {
             className="material-icons-round"
             ligature="format_strikethrough"
           />
-        </SelectionToolbar>
+        </SelectionToolbar> */}
         <div style={editorWrapperStyle}>
           <Resizable initialWidth={826}>
             <Editor

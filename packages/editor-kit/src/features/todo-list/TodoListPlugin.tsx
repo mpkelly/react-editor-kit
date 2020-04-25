@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Transforms, Range, Path, Node } from "slate";
+import { Transforms, Range } from "slate";
 import { ReactEditor, RenderElementProps } from "slate-react";
 import { Plugin } from "../../plugins/Plugin";
 import { MatchResult } from "../../editor/Matching";
@@ -9,7 +9,6 @@ import { deleteBackward, getActiveNode } from "../../editor/Editor";
 import { useEditorKit } from "../../editor/EditorKit";
 import { useFocused } from "../../editor/Focus";
 import { isBlockEmpty, isNodeActive } from "../blocks/Blocks";
-import { isDeleting } from "../../ui/Utils";
 
 export const TodoListPlugin: Plugin = {
   name: "todo-list",
@@ -20,7 +19,6 @@ export const TodoListPlugin: Plugin = {
     },
   ],
   onTrigger: (editor: ReactEditor, matches?: MatchResult[]) => {
-    console.log("Todo List");
     if (editor.isNodeSupported("todo-list") && matches && matches[0]) {
       const range = matches[0].range;
       const length = range.focus.offset - range.anchor.offset;
@@ -145,8 +143,6 @@ const EditorStyle = `
   .rek-todo-list-item[data-todo-complete=true] {
     text-decoration: line-through;
   }
-
-  
 
   .rek-todo-list-item.focus {
     background-color:var(--gray-light2-color);

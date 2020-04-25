@@ -4,6 +4,7 @@ import React, {
   memo,
   useState,
   Fragment,
+  ReactNode,
 } from "react";
 import {
   Editor as SlateEditor,
@@ -25,7 +26,6 @@ import { Plugin } from "../plugins/Plugin";
 import { useEditorKit } from "./EditorKit";
 import { findMatches } from "./Matching";
 import { clone } from "../ui/Utils";
-import { MenuItem, Menu } from "../features/menu/Menu";
 import { ContextMenu } from "../features/context-menu/ContextMenu";
 import { Show } from "../ui/Show";
 
@@ -50,9 +50,11 @@ export const Editor = memo((props: EditorProps) => {
     readOnly,
     id,
   } = useEditorKit();
-  const [menu, setMenu] = useState<{ items: MenuItem[]; x: number; y: number }>(
-    { items: [], x: 0, y: 0 }
-  );
+  const [menu, setMenu] = useState<{
+    items: ReactNode[];
+    x: number;
+    y: number;
+  }>({ items: [], x: 0, y: 0 });
 
   const renderElement = useCallback(
     (props: RenderElementProps) => handleRenderElement(props, plugins),
@@ -247,7 +249,7 @@ const handleContextMenu = (
   plugins: Plugin[],
   editor: ReactEditor
 ) => {
-  let items: MenuItem[] = [];
+  let items: ReactNode[] = [];
   const node = getActiveNode(editor);
   const { selection } = editor;
   const marks = editor.marks || {};

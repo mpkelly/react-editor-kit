@@ -8,6 +8,7 @@ export interface MarkActionProps {
   children: JSX.Element;
   type: string;
   value?: any;
+  onMouseDown?(event: ReactMouseEvent<HTMLElement, MouseEvent>): void;
 }
 
 export const MarkAction = (props: MarkActionProps) => {
@@ -16,10 +17,13 @@ export const MarkAction = (props: MarkActionProps) => {
   const isActive = () => isMarkActive(editor, type);
   const node = useLastFocused(editor);
   const enabled = editor.isMarkSupported(type, node) || isActive();
-  const onMouseDown = (event: ReactMouseEvent<HTMLElement, MouseEvent>) => {
-    event.preventDefault();
-    toggleMark(editor, type, value);
-  };
+  let onMouseDown = props.onMouseDown;
+  if (!onMouseDown) {
+    onMouseDown = (event: ReactMouseEvent<HTMLElement, MouseEvent>) => {
+      event.preventDefault();
+      toggleMark(editor, type, value);
+    };
+  }
 
   return (
     <Action isActive={isActive} onMouseDown={onMouseDown} disabled={!enabled}>

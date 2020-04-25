@@ -1,9 +1,8 @@
-/// <reference types="react" />
+import { ReactNode } from "react";
 import { ReactEditor } from "slate-react";
-import { MenuItem } from "../menu/Menu";
 export interface ContextMenuContribution {
     trigger?: ContextMenuTrigger;
-    items: MenuItem[];
+    items: ReactNode[];
 }
 export interface ContextMenuTrigger {
     node?: string;
@@ -12,7 +11,7 @@ export interface ContextMenuTrigger {
     matched?(editor: ReactEditor): boolean;
 }
 export interface ContextMenuProps {
-    items: MenuItem[];
+    items: ReactNode[];
     x: number;
     y: number;
     onClose(): void;

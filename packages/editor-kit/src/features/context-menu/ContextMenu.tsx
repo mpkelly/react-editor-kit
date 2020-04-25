@@ -1,11 +1,11 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { ReactEditor } from "slate-react";
-import { MenuItem, Menu } from "../menu/Menu";
+import { Menu } from "../menu/Menu";
 import { Overlay } from "../../ui/Popup";
 
 export interface ContextMenuContribution {
   trigger?: ContextMenuTrigger;
-  items: MenuItem[];
+  items: ReactNode[];
 }
 
 export interface ContextMenuTrigger {
@@ -16,7 +16,7 @@ export interface ContextMenuTrigger {
 }
 
 export interface ContextMenuProps {
-  items: MenuItem[];
+  items: ReactNode[];
   x: number;
   y: number;
   onClose(): void;
@@ -27,7 +27,7 @@ export const ContextMenu = (props: ContextMenuProps) => {
 
   return (
     <Overlay onClick={onClose}>
-      <Menu items={items} style={{ left: x, top: y, position: "fixed" }} />
+      <Menu style={{ left: x, top: y, position: "fixed" }}>{items}</Menu>
     </Overlay>
   );
 };
