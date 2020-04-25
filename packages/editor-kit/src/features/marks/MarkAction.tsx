@@ -8,13 +8,17 @@ export interface MarkActionProps {
   children: JSX.Element;
   type: string;
   value?: any;
+  isActive?(): boolean;
   onMouseDown?(event: ReactMouseEvent<HTMLElement, MouseEvent>): void;
 }
 
 export const MarkAction = (props: MarkActionProps) => {
   const { type, children, value } = props;
   const { editor } = useEditorKit();
-  const isActive = () => isMarkActive(editor, type);
+  let isActive = props.isActive;
+  if (isActive === undefined) {
+    isActive = () => isMarkActive(editor, type);
+  }
   const node = useLastFocused(editor);
   const enabled = editor.isMarkSupported(type, node) || isActive();
   let onMouseDown = props.onMouseDown;

@@ -1,9 +1,10 @@
 import React from "react";
+import { RenderLeafProps } from "slate-react";
+import "./Dropcaps";
 import { Plugin } from "../../../plugins/Plugin";
 import { EditorIcon } from "../../icons/Icon";
-import { isMarkActive } from "../../marks/Marks";
 import { InitialLetterMenuItem } from "./InitialLetterMenuItem";
-import { BoldMenuItem } from "../../blocks/BoldMenuItem";
+import { isInitialLetterActive } from "./InitialLetterAction";
 
 export interface InitialLetterPluginOptions {
   style: string;
@@ -13,13 +14,9 @@ export interface InitialLetterPluginOptions {
 
 export const InitialLetterDefaultOptions: InitialLetterPluginOptions = {
   style: `
-    .rek-initial-letter:first-of-type::first-letter {
-      float: left;
-      font-size: 75px;
-      line-height: 60px;
-      padding-top: 4px;
-      padding-right: 8px;
-      padding-left: 3px;
+    .rek-initial-letter *{
+        line-height:0 !important;
+      }
     }
   `,
   onIcon: {
@@ -40,7 +37,7 @@ export const createInitialLetterPlugin = (
       {
         trigger: {
           matched: (editor) => {
-            return !isMarkActive(editor, "initialLetter");
+            return !isInitialLetterActive(editor);
           },
         },
         items: [
@@ -48,13 +45,12 @@ export const createInitialLetterPlugin = (
             labelKey={"initialLetterOn"}
             icon={options.onIcon}
           />,
-          <BoldMenuItem text="Bold" />,
         ],
       },
       {
         trigger: {
           matched: (editor) => {
-            return isMarkActive(editor, "initialLetter");
+            return isInitialLetterActive(editor);
           },
         },
         items: [
@@ -65,13 +61,22 @@ export const createInitialLetterPlugin = (
         ],
       },
     ],
-    getClasses: (element) => {
-      if (!element.initialLetter) {
-        return undefined;
-      }
-      let textAlign = element.textAlign || "left";
-      if (textAlign == "left" || textAlign == "justify") {
-        return "rek-initial-letter";
+    renderLeaf: (props: RenderLeafProps) => {
+      const { leaf, children, attributes } = props;
+      if (leaf.initialLetter) {
+        // let textAlign = element.textAlign || "left";
+        // if (textAlign == "left" || textAlign == "justify") {
+        //   return "rek-initial-letter";
+        // }
+        setTimeout(() => {
+          const dropcaps = document.querySelectorAll(".rek-initial-letter");
+          (window as any).Dropcap.layout(dropcaps, 3);
+        }, 1);
+        return (
+          <span className="rek-initial-letter" {...attributes}>
+            {children}
+          </span>
+        );
       }
     },
     editorStyles: () => options.style,
