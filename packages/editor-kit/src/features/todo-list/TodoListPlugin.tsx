@@ -112,6 +112,7 @@ export const TodoItem = (props: RenderElementProps) => {
     <div
       className={`rek-todo-list-item ${focusClass}`}
       data-slate-zero-width="z"
+      data-todo-complete={element.complete}
       {...attributes}
     >
       <div contentEditable="false">
@@ -126,7 +127,7 @@ const EditorStyle = `
   .rek-todo-list {
     display:flex;
     flex-direction:column;
-  }
+  }  
 
   .rek-todo-list-item {
     display:flex;
@@ -140,6 +141,12 @@ const EditorStyle = `
       transform:scale(.8);
     }    
   }
+
+  .rek-todo-list-item[data-todo-complete=true] {
+    text-decoration: line-through;
+  }
+
+  
 
   .rek-todo-list-item.focus {
     background-color:var(--gray-light2-color);
