@@ -98,6 +98,7 @@ export const Editor = memo((props: EditorProps) => {
       const x = event.clientX;
       const y = event.clientY;
       if (items.length) {
+        event.stopPropagation();
         event.preventDefault();
       }
       setMenu({ items, x, y });

@@ -1,6 +1,9 @@
-import { Transforms, Editor } from "slate";
-import { Plugin } from "../../plugins/Plugin";
-import { EditorIcon } from "../icons/Icon";
+import { Transforms, Editor, Range } from "slate";
+import { Plugin } from "../../../plugins/Plugin";
+import { EditorIcon } from "../../icons/Icon";
+import { getActiveNode } from "../../../editor/Editor";
+import { ReactEditor } from "slate-react";
+import { isMarkActive, toggleMark } from "../../marks/Marks";
 
 export interface InitialLetterPluginOptions {
   style: string;
@@ -37,10 +40,7 @@ export const createInitialLetterPlugin = (
       {
         trigger: {
           matched: (editor) => {
-            const [match] = Editor.nodes(editor, {
-              match: (node) => node.type === "paragraph" && node.initialLetter,
-            });
-            return match === null;
+            return !isMarkActive(editor, "initialLetter");
           },
         },
         items: [
@@ -48,7 +48,18 @@ export const createInitialLetterPlugin = (
             labelKey: "initialLetterOn",
             icon: options.onIcon,
             onClick: (editor) => {
-              Transforms.setNodes(editor, { initialLetter: true });
+              const node = getActiveNode(editor);
+              const path = ReactEditor.findPath(editor, node as any);
+              console.log(path, node);
+              const selection: Range = {
+                anchor: { path, offset: 0 },
+                focus: { path, offset: 1 },
+              };
+              ReactEditor.focus(editor);
+              Transforms.setSelection(editor, selection);
+              setTimeout(() => {
+                toggleMark(editor, "initialLetter", true);
+              }, 1);
             },
             items: [],
           },
@@ -57,10 +68,7 @@ export const createInitialLetterPlugin = (
       {
         trigger: {
           matched: (editor) => {
-            const [match] = Editor.nodes(editor, {
-              match: (n) => n.type === "paragraph" && n.initialLetter,
-            });
-            return match !== null;
+            return isMarkActive(editor, "initialLetter");
           },
         },
         items: [
@@ -72,8 +80,7 @@ export const createInitialLetterPlugin = (
                 editor,
                 { initialLetter: undefined },
                 {
-                  match: (node) =>
-                    node.type === "paragraph" && node.initialLetter,
+                  match: (node) => node.initialLetter,
                 }
               );
             },

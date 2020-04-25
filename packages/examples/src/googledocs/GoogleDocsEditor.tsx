@@ -131,18 +131,16 @@ const plugins: Plugin[] = [
     ],
   }),
   createEmoticonSuggestions(),
-  // createInitialLetterPlugin(),
+  createInitialLetterPlugin(),
   TodoListPlugin,
 ];
 
 const initialValue = [
   {
-    type: "todo-list",
+    type: "paragraph",
     children: [
       {
-        type: "todo-item",
-        complete: false,
-        children: [{ text: "Test" }],
+        text: "Stuff here",
       },
     ],
   },
