@@ -133,7 +133,12 @@ const plugins: Plugin[] = [
   createInitialLetterPlugin(),
 ];
 
-const initialValue = [{ type: "paragraph", children: [{ text: "" }] }];
+const initialValue = [
+  {
+    type: "paragraph",
+    children: [{ text: "Said he who knew" }],
+  },
+];
 
 const wrapperStyle: CSSProperties = {
   display: "flex",

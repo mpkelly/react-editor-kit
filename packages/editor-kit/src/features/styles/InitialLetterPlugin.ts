@@ -1,7 +1,8 @@
-import { Transforms } from "slate";
+import { Transforms, Editor, Node } from "slate";
 import { Plugin } from "../../plugins/Plugin";
 import { getActiveNode } from "../../editor/Editor";
 import { EditorIcon } from "../icons/Icon";
+import { createBreakoutPlugin } from "../breakout/BreakoutPlugin";
 
 export interface InitialLetterPluginOptions {
   style: string;
@@ -11,7 +12,7 @@ export interface InitialLetterPluginOptions {
 
 export const InitialLetterDefaultOptions: InitialLetterPluginOptions = {
   style: `
-    .rek-initial-letter::first-letter {
+    .rek-initial-letter:first-of-type::first-letter {
       float: left;
       font-size: 75px;
       line-height: 60px;
@@ -38,10 +39,11 @@ export const createInitialLetterPlugin = (
       {
         trigger: {
           matched: (editor) => {
-            const node = getActiveNode(editor);
-            return Boolean(
-              node && node.type === "paragraph" && !node.initialLetter
-            );
+            const [match] = Editor.nodes(editor, {
+              match: (node) => node.type === "paragraph" && node.initialLetter,
+            });
+            console.log(match);
+            return match === null;
           },
         },
         items: [
@@ -58,10 +60,10 @@ export const createInitialLetterPlugin = (
       {
         trigger: {
           matched: (editor) => {
-            const node = getActiveNode(editor);
-            return Boolean(
-              node && node.type === "paragraph" && node.initialLetter
-            );
+            const [match] = Editor.nodes(editor, {
+              match: (n) => n.type === "paragraph" && n.initialLetter,
+            });
+            return match !== null;
           },
         },
         items: [
@@ -69,7 +71,14 @@ export const createInitialLetterPlugin = (
             labelKey: "initialLetterOff",
             icon: options.offIcon,
             onClick: (editor) => {
-              Transforms.setNodes(editor, { initialLetter: undefined });
+              Transforms.setNodes(
+                editor,
+                { initialLetter: undefined },
+                {
+                  match: (node) =>
+                    node.type === "paragraph" && node.initialLetter,
+                }
+              );
             },
             items: [],
           },
@@ -77,7 +86,11 @@ export const createInitialLetterPlugin = (
       },
     ],
     getClasses: (element) => {
-      if (element.initialLetter) {
+      if (!element.initialLetter) {
+        return undefined;
+      }
+      let textAlign = element.textAlign || "left";
+      if (textAlign == "left" || textAlign == "justify") {
         return "rek-initial-letter";
       }
     },
