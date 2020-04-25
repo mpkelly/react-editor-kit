@@ -3,6 +3,7 @@ import {
   FocusedLayer,
   PopupMarkerLayer,
   PopupContentLayer,
+  OverlayLayer,
 } from "../../ui/Layers";
 
 export const DefaultThemePlugin: Plugin = {
@@ -297,9 +298,6 @@ input[type=number] {
   border-radius:999px;
   flex-shrink:0;
   background-color: var(--divider-color);
-  :hover {
-    background-color: var(--focus-color);
-  }  
 }
 
 .rek-resize-track {
@@ -308,11 +306,14 @@ input[type=number] {
   justify-content:center;
   width:5px;
   height:100%;  
-  :active,
-  :hover {
+  z-index:${FocusedLayer};
+  &:active,
+  &:hover {
     background-color: var(--focus-color);
   }  
 }
+
+  
 
 .rek-resize-track-start {
   margin-right:8px;
@@ -405,7 +406,7 @@ input[type=number] {
     z-index:${PopupContentLayer};
     white-space: nowrap;
     
-    :hover {
+    &:hover {
       background-color:var(--control-hover-color);
     }    
     .rek-menu-item-icon {
@@ -461,7 +462,7 @@ const EditorStyle = `
       bottom:-40px;
       .rek-svg-icon {
         fill:var(--secondary-text-color);        
-        :hover {
+        &:hover {
           fill:var(--action-color);     
         }
       }
@@ -474,7 +475,7 @@ const EditorStyle = `
 
   .rek-block-wrapper-content {
     outline:none;    
-    :focus {
+    &:focus {
       outline:none;
     }
   }

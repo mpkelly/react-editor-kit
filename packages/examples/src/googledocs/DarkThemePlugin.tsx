@@ -29,7 +29,7 @@ export const DarkThemePlugin: Plugin = {
     .rek-icon-button {
       color: var(--secondary-text-color);      
       border-radius: 3px;
-      :hover,
+      &:hover,
       .active:not(.rek-disabled) {
         color: var(--primary-text-color);
         background-color:var(--action-color) !important;
