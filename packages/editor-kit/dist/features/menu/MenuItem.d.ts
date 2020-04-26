@@ -11,7 +11,7 @@ export interface MenuItemProps {
     group?: string;
     children?: ReactNode;
     onClick?(editor: ReactEditor): void;
-    isActive?(): boolean;
+    active?: boolean;
     disabled?: boolean;
 }
 export declare const MenuItem: (props: MenuItemProps) => JSX.Element;
