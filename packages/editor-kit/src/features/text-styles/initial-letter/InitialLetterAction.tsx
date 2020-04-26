@@ -1,5 +1,5 @@
 import React from "react";
-import { Range, Transforms, Editor, Node } from "slate";
+import { Range, Transforms, Node } from "slate";
 import { MarkAction } from "../../marks/MarkAction";
 import { useEditorKit } from "../../../editor/EditorKit";
 import { toggleMark } from "../../marks/Marks";
@@ -20,7 +20,9 @@ export const InitialLetterAction = (props: InitialLetterActionProps) => {
       return;
     }
     const node = getActiveNode(editor);
-    console.log("Node", node);
+    if (!node || node.type !== "paragraph") {
+      return;
+    }
     if (
       !Boolean(
         node &&
@@ -65,6 +67,8 @@ export const InitialLetterAction = (props: InitialLetterActionProps) => {
 export const isInitialLetterActive = (editor: ReactEditor) => {
   const node = getActiveNode(editor);
   ReactEditor.focus(editor);
+  // Used in context-menu which will often select a word
+  // and break this function
   Transforms.collapse(editor, { edge: "end" });
 
   return Boolean(

@@ -1,11 +1,12 @@
 import React from "react";
-import { Transforms, Node } from "slate";
+import { Transforms, Node, Editor } from "slate";
 import { RenderLeafProps, ReactEditor } from "slate-react";
 import "./Dropcaps";
 import { Plugin } from "../../../plugins/Plugin";
 import { EditorIcon } from "../../icons/Icon";
 import { InitialLetterMenuItem } from "./InitialLetterMenuItem";
 import { isInitialLetterActive } from "./InitialLetterAction";
+import { useEditorKit } from "../../../editor/EditorKit";
 
 export interface InitialLetterPluginOptions {
   style: string;
@@ -76,11 +77,6 @@ export const createInitialLetterPlugin = (
     renderLeaf: (props: RenderLeafProps) => {
       const { leaf, children, attributes } = props;
       if (leaf.initialLetter) {
-        // TODO handle text alignment
-        // let textAlign = element.textAlign || "left";
-        // if (textAlign == "left" || textAlign == "justify") {
-        //   return "rek-initial-letter";
-        // }
         setTimeout(() => {
           const dropcaps = document.querySelectorAll(".rek-initial-letter");
           (window as any).Dropcap.layout(dropcaps, 3);
