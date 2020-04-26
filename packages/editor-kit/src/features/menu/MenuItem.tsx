@@ -66,6 +66,15 @@ export const MenuItem = (props: MenuItemProps) => {
     const anchor = element.getBoundingClientRect();
     const bounds = childMenuElement.getBoundingClientRect();
     style = getPosition(bounds, anchor, "auto", false, { v: 0 });
+    // Need to maintain alignment so override auto position which
+    // doesn't support chaining
+    const halfHeight = window.innerHeight / 2;
+    if (anchor.top < halfHeight) {
+      style.top = anchor.height;
+    } else {
+      style.top = undefined;
+      style.bottom = 0;
+    }
   }
 
   return (
