@@ -1,5 +1,5 @@
-/// <reference types="react" />
+import React from "react";
 export interface TableActionProps {
-    children: JSX.Element;
+    children: React.ReactNode;
 }
 export declare const TableAction: (props: TableActionProps) => JSX.Element;

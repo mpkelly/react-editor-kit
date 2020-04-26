@@ -6,7 +6,7 @@ import { usePlugin } from "../../plugins/usePlugin";
 import { useLastFocused } from "../../editor/LastFocusedNode";
 
 export interface TableActionProps {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 export const TableAction = (props: TableActionProps) => {

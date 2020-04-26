@@ -3,7 +3,7 @@ import { Element } from "slate";
 import { Location, Offsets } from "./Popups";
 export interface ModalPopupProps {
     element: Element;
-    children: JSX.Element;
+    children: React.ReactNode;
     show: boolean;
     location?: Location;
     offsets?: Offsets;

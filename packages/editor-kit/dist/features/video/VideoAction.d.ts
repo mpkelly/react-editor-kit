@@ -1,5 +1,5 @@
-/// <reference types="react" />
+import React from "react";
 export interface VideoActionProps {
-    children: JSX.Element;
+    children: React.ReactNode;
 }
 export declare const VideoAction: (props: VideoActionProps) => JSX.Element;

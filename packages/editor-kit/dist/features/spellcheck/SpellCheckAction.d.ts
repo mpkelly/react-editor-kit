@@ -1,5 +1,5 @@
-/// <reference types="react" />
+import React from "react";
 export interface SpellCheckActionProps {
-    children: JSX.Element;
+    children: React.ReactNode;
 }
 export declare const SpellCheckAction: (props: SpellCheckActionProps) => JSX.Element;

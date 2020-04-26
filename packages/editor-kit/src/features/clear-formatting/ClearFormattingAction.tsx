@@ -4,7 +4,7 @@ import { Action } from "../actions/Action";
 
 export interface ClearFormattingActionProps {
   formats?: string[];
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 export const ClearFormattingAction = (props: ClearFormattingActionProps) => {
@@ -13,7 +13,7 @@ export const ClearFormattingAction = (props: ClearFormattingActionProps) => {
   const { editor } = useEditorKit();
 
   const onMouseDown = () => {
-    formats.forEach(mark => {
+    formats.forEach((mark) => {
       editor.removeMark(mark);
     });
   };
@@ -33,5 +33,5 @@ export const DefaultEditorFormats = [
   "strikethrough",
   "fontSize",
   "fontColor",
-  "backgroundColor"
+  "backgroundColor",
 ];

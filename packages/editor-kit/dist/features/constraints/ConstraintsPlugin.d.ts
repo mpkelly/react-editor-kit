@@ -28,7 +28,7 @@ export declare const DefaultConstraints: {
     "todo-list": {
         nodes: string[];
     };
-    "todo-list-item": {
+    "todo-item": {
         nodes: string[];
     };
 };

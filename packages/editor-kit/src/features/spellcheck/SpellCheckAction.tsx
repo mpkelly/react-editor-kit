@@ -4,7 +4,7 @@ import { block } from "../../ui/Utils";
 import { useEditorKit } from "../../editor/EditorKit";
 
 export interface SpellCheckActionProps {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 export const SpellCheckAction = (props: SpellCheckActionProps) => {

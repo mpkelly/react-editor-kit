@@ -1,6 +1,6 @@
-/// <reference types="react" />
+import React from "react";
 export interface ColorPickerActionProps {
-    children: JSX.Element;
+    children: React.ReactNode;
     colors?: Color[][];
 }
 export declare type HexColor = string;

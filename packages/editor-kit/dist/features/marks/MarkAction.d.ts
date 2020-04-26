@@ -1,6 +1,6 @@
-import { MouseEvent as ReactMouseEvent } from "react";
+import React, { MouseEvent as ReactMouseEvent } from "react";
 export interface MarkActionProps {
-    children: JSX.Element;
+    children: React.ReactNode;
     type: string;
     value?: any;
     isActive?(): boolean;

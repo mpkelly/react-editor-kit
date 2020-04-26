@@ -1,5 +1,5 @@
-/// <reference types="react" />
+import React from "react";
 export interface QuoteActionProps {
-    children: JSX.Element;
+    children: React.ReactNode;
 }
 export declare const QuoteAction: (props: QuoteActionProps) => JSX.Element;

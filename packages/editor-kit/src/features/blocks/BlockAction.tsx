@@ -6,7 +6,8 @@ import { block } from "../../ui/Utils";
 import { useLastFocused } from "../../editor/LastFocusedNode";
 
 export interface BlockActionProps {
-  children: JSX.Element;
+  children: React.ReactNode;
+  onMouseDown?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
   type: string;
 }
 
@@ -16,12 +17,15 @@ export const BlockAction = (props: BlockActionProps) => {
   const isActive = () => isNodeActive(editor, type);
   const { node } = useLastFocused(editor);
   const enabled = editor.isNodeSupported(type, node) || isActive();
-  const onMouseDown = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    block(event);
-    if (enabled) {
-      toggleBlock(editor, type);
-    }
-  };
+  let onMouseDown = props.onMouseDown;
+  if (!onMouseDown) {
+    onMouseDown = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+      block(event);
+      if (enabled) {
+        toggleBlock(editor, type);
+      }
+    };
+  }
 
   return (
     <Action isActive={isActive} onMouseDown={onMouseDown} disabled={!enabled}>

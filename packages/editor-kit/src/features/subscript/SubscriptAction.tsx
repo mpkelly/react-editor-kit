@@ -2,7 +2,7 @@ import React from "react";
 import { MarkAction } from "../marks/MarkAction";
 
 export interface SubscriptActionProps {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 export const SubscriptAction = (props: SubscriptActionProps) => {

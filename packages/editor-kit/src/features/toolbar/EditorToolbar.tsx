@@ -102,7 +102,7 @@ export const EditorToolbar = (props: EditorToolbarProps) => {
 };
 
 interface OverflowProps {
-  children: JSX.Element;
+  children: React.ReactNode;
   maxWidth: number;
 }
 

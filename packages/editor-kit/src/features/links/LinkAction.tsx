@@ -7,7 +7,7 @@ import { isNodeActive } from "../blocks/Blocks";
 import { Action } from "../actions/Action";
 
 export interface LinkActionProps {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 export const LinkAction = (props: LinkActionProps) => {

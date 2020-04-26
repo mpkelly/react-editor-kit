@@ -1,6 +1,6 @@
-/// <reference types="react" />
+import React from "react";
 export interface HeadingToggleActionProps {
-    children: JSX.Element;
+    children: React.ReactNode;
     heading?: string;
 }
 export declare const HeadingToggleAction: (props: HeadingToggleActionProps) => JSX.Element;

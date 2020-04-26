@@ -6,7 +6,7 @@ import { Action } from "../actions/Action";
 import { useLastFocused } from "../../editor/LastFocusedNode";
 
 export interface HeadingToggleActionProps {
-  children: JSX.Element;
+  children: React.ReactNode;
   heading?: string;
 }
 

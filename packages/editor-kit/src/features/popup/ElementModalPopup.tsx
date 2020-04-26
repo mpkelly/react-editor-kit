@@ -10,7 +10,7 @@ import { block } from "../../ui/Utils";
 
 export interface ModalPopupProps {
   element: Element;
-  children: JSX.Element;
+  children: React.ReactNode;
   show: boolean;
   location?: Location;
   offsets?: Offsets;

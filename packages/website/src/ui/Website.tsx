@@ -5,7 +5,7 @@ import { Styles as Head } from "./Styles";
 import { Theme } from "./Theme";
 
 export interface WebsiteProps {
-  children: JSX.Element | JSX.Element[];
+  children: React.ReactNode;
 }
 
 export const Website = (props: WebsiteProps) => {

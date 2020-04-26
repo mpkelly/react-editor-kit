@@ -4,7 +4,7 @@ import { Location, Offsets } from "./Popups";
 export interface FocusPopupProps {
     element: Element;
     location?: Location;
-    children: JSX.Element;
+    children: React.ReactNode;
     offsets?: Offsets;
     fixed?: boolean;
 }

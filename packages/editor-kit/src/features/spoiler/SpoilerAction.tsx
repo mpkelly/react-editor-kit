@@ -5,7 +5,7 @@ import { Action } from "../actions/Action";
 import { toggleInline } from "../inlines/Inlines";
 
 export interface SpoilerActionProps {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 export const SpoilerAction = memo((props: SpoilerActionProps) => {

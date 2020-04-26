@@ -5,7 +5,7 @@ import { Action } from "../actions/Action";
 import { useLastFocused } from "../../editor/LastFocusedNode";
 
 export interface MarkActionProps {
-  children: JSX.Element;
+  children: React.ReactNode;
   type: string;
   value?: any;
   isActive?(): boolean;

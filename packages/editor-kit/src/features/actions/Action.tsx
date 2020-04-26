@@ -1,7 +1,7 @@
 import React, { Fragment, MouseEvent as ReactMouseEvent } from "react";
 
 export interface ActionProps {
-  children: JSX.Element;
+  children: React.ReactNode;
   onMouseDown(event?: ReactMouseEvent<HTMLElement, MouseEvent>): void;
   isActive(): boolean;
   disabled?: boolean;
@@ -23,11 +23,15 @@ export const Action = (props: ActionProps) => {
       }
     },
     active: isActive(),
-    disabled
+    disabled,
   };
-  const childWithProps = React.cloneElement(children, {
-    ...children.props,
-    ...buttonProps
+  if (!children || typeof children == "string") {
+    throw Error("Actions require a JSX.Element or JSX.Element[]");
+  }
+  const element = children as JSX.Element;
+  const childWithProps = React.cloneElement(element, {
+    ...element.props,
+    ...buttonProps,
   });
 
   return <Fragment>{childWithProps}</Fragment>;

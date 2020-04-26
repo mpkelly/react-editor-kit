@@ -11,7 +11,7 @@ import { ReactEditor } from "slate-react";
 import { useLastFocused } from "../../../editor/LastFocusedNode";
 
 export interface TextAlignActionProps {
-  children: JSX.Element;
+  children: React.ReactNode;
   textAlign: string;
 }
 

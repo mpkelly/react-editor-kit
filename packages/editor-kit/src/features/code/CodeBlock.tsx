@@ -13,7 +13,7 @@ import { IconProvider } from "../icons/IconProviderPlugin";
 
 export const CodeBlock = (props: RenderElementProps) => {
   const { attributes, element, children } = props;
-  const lang = Languages[element.lang as any];
+  const lang = Languages[(element.lang as any) || "JavaScript"];
   const [showSelect, setShowSelect] = useState(false);
   const { isFocused, isFocusedWithin } = useFocused(element);
   const show = showSelect || isFocused || isFocusedWithin;
@@ -25,6 +25,7 @@ export const CodeBlock = (props: RenderElementProps) => {
   const handleClose = () => {
     setShowSelect(false);
   };
+
   return (
     <Fragment>
       <pre

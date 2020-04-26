@@ -7,7 +7,7 @@ import { ReactEditor } from "slate-react";
 import { getActiveNode } from "../../../editor/Editor";
 
 export interface InitialLetterActionProps {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 export const InitialLetterAction = (props: InitialLetterActionProps) => {

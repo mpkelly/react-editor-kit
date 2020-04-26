@@ -1,8 +1,8 @@
-/// <reference types="react" />
+import React from "react";
 import { Location, Offsets } from "./Popups";
 export interface CursorPopupProps {
     location?: Location;
-    children: JSX.Element;
+    children: React.ReactNode;
     onClose?(): void;
     fixed?: boolean;
     offsets?: Offsets;

@@ -5,7 +5,7 @@ export interface PopupProps {
     left?: number;
     bottom?: number;
     right?: number;
-    children: JSX.Element;
+    children: React.ReactNode;
     attributes?: any;
     className?: string;
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { BlockAction } from "../blocks/BlockAction";
 
 export interface QuoteActionProps {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 export const QuoteAction = (props: QuoteActionProps) => {

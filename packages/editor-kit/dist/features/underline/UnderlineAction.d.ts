@@ -1,5 +1,5 @@
-/// <reference types="react" />
+import React from "react";
 export interface UnderlineActionProps {
-    children: JSX.Element;
+    children: React.ReactNode;
 }
 export declare const UnderlineAction: (props: UnderlineActionProps) => JSX.Element;

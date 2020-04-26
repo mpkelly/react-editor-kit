@@ -7,7 +7,7 @@ import { Portal } from "./Portal";
 
 export interface ModalPopupProps {
   element: HTMLElement | null;
-  children: JSX.Element;
+  children: React.ReactNode;
   location?: Location;
   onClickOutside?(event?: React.MouseEvent<HTMLElement, MouseEvent>): void;
   show: boolean;

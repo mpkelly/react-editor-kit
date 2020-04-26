@@ -5,7 +5,7 @@ import { Action } from "../actions/Action";
 import { useLastFocused } from "../../editor/LastFocusedNode";
 
 export interface UnorderedListActionProps {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 export const UnorderedListAction = (props: UnorderedListActionProps) => {

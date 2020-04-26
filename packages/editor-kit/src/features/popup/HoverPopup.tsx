@@ -17,7 +17,7 @@ import { PopupContent } from "./PopupContent";
 export interface HoverPopupProps {
   element: Node;
   location?: Location;
-  children: JSX.Element;
+  children: React.ReactNode;
   fixed?: boolean;
   hideWhenFocusedWithin?: boolean;
   offsets?: Offsets;

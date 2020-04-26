@@ -1,6 +1,7 @@
-/// <reference types="react" />
+import React from "react";
 export interface BlockActionProps {
-    children: JSX.Element;
+    children: React.ReactNode;
+    onMouseDown?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
     type: string;
 }
 export declare const BlockAction: (props: BlockActionProps) => JSX.Element;

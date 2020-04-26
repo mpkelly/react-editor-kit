@@ -1,5 +1,5 @@
-/// <reference types="react" />
+import React from "react";
 export interface ReadOnlyActionProps {
-    children: JSX.Element;
+    children: React.ReactNode;
 }
 export declare const ReadOnlyAction: (props: ReadOnlyActionProps) => JSX.Element;

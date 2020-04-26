@@ -2,7 +2,7 @@ import React from "react";
 import { MarkAction } from "../marks/MarkAction";
 
 export interface ItalicActionProps {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 export const ItalicAction = (props: ItalicActionProps) => {

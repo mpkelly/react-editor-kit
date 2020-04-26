@@ -7,7 +7,7 @@ import { usePlugin } from "../../plugins/usePlugin";
 import { useLastFocused } from "../../editor/LastFocusedNode";
 
 export interface VideoActionProps {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 export const VideoAction = (props: VideoActionProps) => {

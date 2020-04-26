@@ -6,7 +6,7 @@ import { Portal } from "./Portal";
 
 export interface CursorPopupProps {
   location?: Location;
-  children: JSX.Element;
+  children: React.ReactNode;
   onClose?(): void;
   fixed?: boolean;
   offsets?: Offsets;

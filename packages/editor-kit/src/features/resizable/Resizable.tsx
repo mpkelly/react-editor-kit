@@ -11,7 +11,7 @@ import { Show } from "../../ui/Show";
 import ReactDOM from "react-dom";
 
 export interface ResizableProps {
-  children: JSX.Element;
+  children: React.ReactNode;
   style?: CSSProperties;
   initialWidth: string | number;
   onChange?(width: number): void;

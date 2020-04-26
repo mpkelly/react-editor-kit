@@ -6,7 +6,7 @@ import { useEditorKit } from "../../editor/EditorKit";
 import { useLastFocused } from "../../editor/LastFocusedNode";
 
 export interface OrderedListActionProps {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 export const OrderedListAction = (props: OrderedListActionProps) => {

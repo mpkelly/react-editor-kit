@@ -1,6 +1,6 @@
-import { MouseEvent as ReactMouseEvent } from "react";
+import React, { MouseEvent as ReactMouseEvent } from "react";
 export interface ActionProps {
-    children: JSX.Element;
+    children: React.ReactNode;
     onMouseDown(event?: ReactMouseEvent<HTMLElement, MouseEvent>): void;
     isActive(): boolean;
     disabled?: boolean;

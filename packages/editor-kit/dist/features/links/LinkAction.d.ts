@@ -1,5 +1,5 @@
-/// <reference types="react" />
+import React from "react";
 export interface LinkActionProps {
-    children: JSX.Element;
+    children: React.ReactNode;
 }
 export declare const LinkAction: (props: LinkActionProps) => JSX.Element;

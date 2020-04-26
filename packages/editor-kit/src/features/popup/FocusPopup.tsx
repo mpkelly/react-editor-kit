@@ -11,7 +11,7 @@ import { Portal } from "./Portal";
 export interface FocusPopupProps {
   element: Element;
   location?: Location;
-  children: JSX.Element;
+  children: React.ReactNode;
   offsets?: Offsets;
   fixed?: boolean;
 }

@@ -1,6 +1,6 @@
-import { CSSProperties } from "react";
+import React, { CSSProperties } from "react";
 export interface ResizableProps {
-    children: JSX.Element;
+    children: React.ReactNode;
     style?: CSSProperties;
     initialWidth: string | number;
     onChange?(width: number): void;

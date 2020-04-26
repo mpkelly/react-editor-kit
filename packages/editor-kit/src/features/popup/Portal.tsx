@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 
 export interface PortalProps {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 export const Portal = (props: PortalProps) => {

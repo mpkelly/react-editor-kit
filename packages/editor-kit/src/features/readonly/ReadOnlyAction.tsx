@@ -4,7 +4,7 @@ import { block } from "../../ui/Utils";
 import { useEditorKit } from "../../editor/EditorKit";
 
 export interface ReadOnlyActionProps {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 export const ReadOnlyAction = (props: ReadOnlyActionProps) => {

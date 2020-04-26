@@ -4,7 +4,7 @@ import { useEditorKit } from "../../editor/EditorKit";
 
 export interface PopupContentProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  children: JSX.Element | JSX.Element[];
+  children: React.ReactNode;
   style?: CSSProperties;
 }
 

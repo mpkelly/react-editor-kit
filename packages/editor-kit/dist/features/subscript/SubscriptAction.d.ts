@@ -1,5 +1,5 @@
-/// <reference types="react" />
+import React from "react";
 export interface SubscriptActionProps {
-    children: JSX.Element;
+    children: React.ReactNode;
 }
 export declare const SubscriptAction: (props: SubscriptActionProps) => JSX.Element;
