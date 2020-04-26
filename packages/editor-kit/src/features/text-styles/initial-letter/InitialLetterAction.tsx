@@ -66,10 +66,6 @@ export const InitialLetterAction = (props: InitialLetterActionProps) => {
 
 export const isInitialLetterActive = (editor: ReactEditor) => {
   const node = getActiveNode(editor);
-  ReactEditor.focus(editor);
-  // Used in context-menu which will often select a word
-  // and break this function
-  Transforms.collapse(editor, { edge: "end" });
 
   return Boolean(
     node &&

@@ -19,6 +19,8 @@ export interface MenuItemProps {
   group?: string;
   children?: ReactNode;
   onClick?(editor: ReactEditor): void;
+  active?: boolean;
+  disabled?: boolean;
 }
 
 export const MenuItem = (props: MenuItemProps) => {
@@ -30,6 +32,8 @@ export const MenuItem = (props: MenuItemProps) => {
     rightLabelKey,
     children,
     onClick,
+    active,
+    disabled,
     ...rest
   } = props;
   const { data: labels } = usePlugin("labels") as Labels;
@@ -66,11 +70,11 @@ export const MenuItem = (props: MenuItemProps) => {
     const anchor = element.getBoundingClientRect();
     const bounds = childMenuElement.getBoundingClientRect();
     style = getPosition(bounds, anchor, "auto", false, { v: 0 });
-    // Need to maintain alignment so override auto position which
-    // doesn't support chaining
+    // Need to maintain alignment so override auto's verical position
+    // as this mode doesn't support chaining
     const halfHeight = window.innerHeight / 2;
     if (anchor.top < halfHeight) {
-      style.top = anchor.height;
+      style.top = 0;
     } else {
       style.top = undefined;
       style.bottom = 0;
@@ -80,6 +84,8 @@ export const MenuItem = (props: MenuItemProps) => {
   return (
     <div
       className="rek-menu-item"
+      data-disabled={disabled}
+      data-active={active}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={(event) => {

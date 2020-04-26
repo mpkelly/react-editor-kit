@@ -10,6 +10,7 @@ import { InfoAlertIcon } from "./InfoAlertIcon";
 import { SettingsIcon } from "./SettingsIcon";
 import { DropdownIcon } from "./DropdownIcon";
 import { MoreIcon } from "./MoreIcon";
+import { CheckIcon } from "./CheckIon";
 
 export interface IconProvider extends Plugin {
   data: Icons;
@@ -27,6 +28,7 @@ export interface Icons {
   settings: EditorIcon;
   dropdownIcon: EditorIcon;
   moreIcon: EditorIcon;
+  checkIcon: EditorIcon;
 }
 
 export const createIconProviderPlugin = (data: Icons): IconProvider => {
@@ -43,5 +45,6 @@ export const IconProviderPlugin = createIconProviderPlugin({
   infoAlert: InfoAlertIcon,
   settings: SettingsIcon,
   dropdownIcon: DropdownIcon,
-  moreIcon: MoreIcon
+  moreIcon: MoreIcon,
+  checkIcon: CheckIcon,
 });

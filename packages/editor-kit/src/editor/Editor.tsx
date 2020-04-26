@@ -96,7 +96,6 @@ export const Editor = memo((props: EditorProps) => {
 
   const contextMenu = useCallback(
     (event: React.MouseEvent) => {
-      Transforms.collapse(editor, { edge: "end" });
       const items = handleContextMenu(event, plugins, editor);
       const x = event.clientX;
       const y = event.clientY;

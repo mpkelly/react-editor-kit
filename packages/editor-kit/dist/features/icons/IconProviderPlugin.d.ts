@@ -15,6 +15,7 @@ export interface Icons {
     settings: EditorIcon;
     dropdownIcon: EditorIcon;
     moreIcon: EditorIcon;
+    checkIcon: EditorIcon;
 }
 export declare const createIconProviderPlugin: (data: Icons) => IconProvider;
 export declare const IconProviderPlugin: IconProvider;

@@ -178,6 +178,13 @@ const GlobalStyle = `
   margin-right:4px;
   background-color:var(--input-background-color);
 }
+.rek-h-divider {
+  height:1px;
+  width:100%;
+  margin-top:4px;
+  margin-bottom:4px;
+  background-color:var(--input-background-color);
+}
 
 .rek-button {
   border:none;
@@ -399,6 +406,7 @@ input[type=number] {
   }
 
   .rek-menu-item {
+    position:relative;
     display:flex;
     align-items:center;
     height:40px;    
@@ -437,6 +445,10 @@ input[type=number] {
     .dropdown-icon {
       transform:rotate(-90deg) scale(.8);
     }
+  }
+  .rek-menu-item[data-disabled=true] {
+    pointer-event:none;
+    opacity:.5;
   }
 
 `;

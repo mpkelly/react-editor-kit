@@ -73,6 +73,7 @@ import { MentionsItems } from "../Mentions";
 import { createStaticHashtags } from "./HashtagSuggestionPlugin";
 import { createEmoticonSuggestions } from "./EmoticonSuggestions";
 import { InsertContextMenuPlugin } from "./InsertContextMenuPlugin";
+import { FormatContextMenuPlugin } from "./FormatContextMenuPlugin";
 
 const GoogleDocsStylePlugin: Plugin = {
   globalStyles: () => `
@@ -135,6 +136,7 @@ const plugins: Plugin[] = [
   createInitialLetterPlugin(),
   TodoListPlugin,
   InsertContextMenuPlugin,
+  FormatContextMenuPlugin,
 ];
 
 const initialValue = [
