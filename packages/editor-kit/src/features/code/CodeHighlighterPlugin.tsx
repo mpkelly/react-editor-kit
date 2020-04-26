@@ -102,9 +102,6 @@ const handleKeyDown = (event: React.KeyboardEvent, editor: ReactEditor) => {
 
 const GlobalStyle = `
   .rek-code-block-toolbar {
-    display:flex;
-    align-items:center;
-    padding:4px;
 
     input {
       padding:4px;

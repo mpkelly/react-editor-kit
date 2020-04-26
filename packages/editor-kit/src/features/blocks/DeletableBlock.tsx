@@ -57,5 +57,5 @@ export interface ToolbarProps {
 export const Toolbar = (props: ToolbarProps) => {
   const { onDelete } = props;
   const { data } = usePlugin("icon-provider") as IconProvider;
-  return <Icon icon={data.delete} onClick={onDelete} />;
+  return <Icon icon={data.delete} onMouseDown={onDelete} />;
 };

@@ -75,7 +75,7 @@ const Toolbar = (props: ToolbarProps) => {
 
   return (
     <div
-      className="rek-code-block-toolbar rek-panel"
+      className="rel-block-toolbar rek-code-block-toolbar rek-panel"
       onClick={stop}
       onMouseEnter={onFocus}
     >

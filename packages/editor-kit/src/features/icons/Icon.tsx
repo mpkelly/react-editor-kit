@@ -11,11 +11,12 @@ export interface CssIcon {
 export interface ReactIconProps {
   icon: EditorIcon;
   className?: string;
+  onMouseDown?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
   onClick?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
 }
 
 export const Icon = (props: ReactIconProps) => {
-  const { icon, className, onClick } = props;
+  const { icon, className, onClick, onMouseDown } = props;
   const iconClassName = (icon as CssIcon).className;
   if (iconClassName) {
     return (
@@ -23,12 +24,15 @@ export const Icon = (props: ReactIconProps) => {
         className={`rek-icon ${className} ${iconClassName}`}
         children={(icon as CssIcon).ligature}
         onClick={onClick}
-        onMouseDown={stop}
+        onMouseDown={(event) => {
+          stop(event);
+          onMouseDown && onMouseDown(event);
+        }}
         contentEditable={false}
         data-slate-void="true"
       />
     );
   }
   const reactIcon = icon as JSX.Element;
-  return React.cloneElement(reactIcon, { onClick });
+  return React.cloneElement(reactIcon, { onClick, onMouseDown });
 };

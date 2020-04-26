@@ -412,9 +412,8 @@ input[type=number] {
     height:40px;    
     padding: 0 8px;
     cursor:pointer;
-    z-index:${PopupContentLayer};
     white-space: nowrap;
-    
+    background-color:var(--content-background);
     &:hover {
       background-color:var(--control-hover-color);
     }    
@@ -480,6 +479,11 @@ const EditorStyle = `
         }
       }
     }
+  }
+  .rek-block-toolbar {
+    display:flex;
+    align-items:center;
+    padding:4px;
   }
 
   .rek-block-wrapper:not(.inline) .rek-block-wrapper-content {
