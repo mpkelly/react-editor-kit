@@ -38,8 +38,8 @@ export const DefaultConstraints = {
   "todo-list": {
     nodes: ["todo-list-item"],
   },
-  "todo-list-item": {
-    nodes: ["paragraph", "mention", "unordered-list", "ordered-list", "link"],
+  "todo-item": {
+    nodes: ["paragraph", "mention", "link"],
   },
 };
 
