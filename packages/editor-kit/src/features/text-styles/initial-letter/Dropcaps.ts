@@ -299,6 +299,7 @@ http://www.apache.org/licenses/LICENSE-2.0.html
     if (!strut) {
       strut = doc.createElement("span");
       strut.style.display = "inline-block";
+      strut.setAttribute("contenteditable", "false");
       dcap.appendChild(strut);
       dcap.dcapjsStrut = strut;
     }

@@ -7,6 +7,7 @@ export interface CssIcon {
 export interface ReactIconProps {
     icon: EditorIcon;
     className?: string;
+    onMouseDown?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
     onClick?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
 }
 export declare const Icon: (props: ReactIconProps) => JSX.Element;

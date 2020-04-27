@@ -132,11 +132,11 @@ const plugins: Plugin[] = [
       "#purple",
     ],
   }),
+  TodoListPlugin,
   createEmoticonSuggestions(),
   createInitialLetterPlugin(),
-  TodoListPlugin,
-  InsertContextMenuPlugin,
-  FormatContextMenuPlugin,
+  // InsertContextMenuPlugin,
+  // FormatContextMenuPlugin,
 ];
 
 const initialValue = [
@@ -144,7 +144,7 @@ const initialValue = [
     type: "paragraph",
     children: [
       {
-        text: "Stuff here",
+        text: "",
       },
     ],
   },

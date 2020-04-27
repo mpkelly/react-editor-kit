@@ -281,7 +281,6 @@ input[type=number] {
   justify-content:center;  
   margin-left:-10px;
   width:20px;  
-  cursor:ew-resize;
   height:100%;
   flex-shrink:0;  
   z-index: ${ResizeHandleLayer};
@@ -315,14 +314,17 @@ input[type=number] {
   width:5px;
   height:100%;  
   z-index:${FocusedLayer};
+  cursor:ew-resize;
   &:active,
   &:hover {
     background-color: var(--focus-color);
   }  
 }
 
+.rek-resizable-content {
+  height:100%;
+}
   
-
 .rek-resize-track-start {
   margin-right:8px;
 }
