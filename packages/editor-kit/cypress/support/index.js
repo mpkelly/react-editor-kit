@@ -14,8 +14,9 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
+import "cypress-plugin-tab";
 
-Cypress.on("window:load", window => {
+Cypress.on("window:load", (window) => {
   window.enableEditorKitOnGlobalScope = true;
 });
 

@@ -31,6 +31,89 @@ The easiest way to create an editor is to start with one of the Code Sandbox exa
     />
 ```
 
+## Further customisations
+
+After playing around with one of the examples you'll probably want to start overriding CSS styles and provide your own icons and text labels. In Editor Kit, everything is basically a plugin and you override things by providing your own plugins.
+
+### Overriding text labels
+
+Take a look at [LabelsPlugin.ts](https://github.com/mpkelly/react-editor-kit/blob/master/packages/editor-kit/src/features/i18n/LabelsPlugin.ts) and then define your own like so:
+
+```TypeScript
+
+export const CustomLabels: EditorLabels = {
+  addColumn: "Add new column",
+ ...
+}
+
+const MyLabelsPlugin = {
+  data: CustomLabels,
+  name: "labels", //important
+}
+
+```
+
+Then register `MyLabelsPlugin` when creating `<EditorKit plugins={[..]}/>` and your label plugin will override the default internal plugin with the same name.
+
+### Overriding icons
+
+Editor using some internal icons for things like dropdown and delete buttons. The [internal icons](https://github.com/mpkelly/react-editor-kit/blob/master/packages/editor-kit/src/features/icons/IconProviderPlugin.ts) are based on the Google Material Icons Regular set. You can override these icons in a similar way that you override labels above. Note that both SVG/Components and icon fonts are supported and can be mixed.
+
+```TypeScript
+
+const MyIconSet = {
+    delete: {
+        //Use Unicons icon set https://iconscout.com/unicons/explore/line
+        className:"uil uil-trash-alt"
+        //ligature: not needed here but ligature is supported, too
+    },
+
+    // In your SVG root element, copy the classes from the internal icon,
+    // e.g. className="rek-icon dropdown-icon rek-svg-icon", so that styling is applied
+    dropdownIcon: <MyDropdownSvgIcon/>
+    ...
+}
+
+const MyIconPlugin = {
+ data:MyIconSet,
+ name: "icon-provider"
+}
+
+```
+
+### Changing the base CSS
+
+Plugins contribute their own styles but there is also a core style which you can override. For plugins, go to the [features folder](https://github.com/mpkelly/react-editor-kit/tree/master/packages/editor-kit/src/features) and find the plugin you want to change. The styles are inside the `*Plugin file`.
+
+You can also change the colours and things like border radius and box-shadows by overriding the core styles in [DefaultThemePlugin](https://github.com/mpkelly/react-editor-kit/blob/master/packages/editor-kit/src/features/theme/DefaultThemePlugin.ts) - be sure to change the CSS variables and common classes like `.rek-panel`. Also note that there are global styles, for things like popup views that are rendered outside of the editor in portals, and styles that are scoped to the editor instance by the [Editor's ID](https://github.com/mpkelly/react-editor-kit/blob/dcf38182d0aab3544e0b31e5275b076730d6aa6d/packages/editor-kit/src/editor/EditorKit.tsx#L178);
+
+**NOTE** Don't use a name on your theme plugin unless you want to replace the _whole_ default style, which you probably don't.
+
+```TypeScript
+
+export const MyTheme = {
+  globalStyles: () => `
+     body {
+      background-color: #151515
+     }
+
+    :root {
+      --content-background: #2f2f2f;
+      --primary-text-color: rgba(255,255,255, .95);
+      --secondary-text-color: rgba(255,255,255, .54);
+      ...
+    }
+ `,
+ editorStyles: ()=> `
+    h1 {
+     font-family:serif;
+    }
+    ...
+ `
+```
+
+Be sure to check the [Code Sandbox Examples](https://codesandbox.io/s/react-editor-kit-examples-0e31g?file=/src/SimpleEditor.tsx) to learn more about how to override and extend Editor Kit.
+
 ## Concepts
 
 Editor Kit's source code and API are easy to understand but there are few concepts that are worth learning in advance.

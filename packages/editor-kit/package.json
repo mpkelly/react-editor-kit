@@ -36,6 +36,7 @@
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "*",
     "cypress": "^4.4.1",
+    "cypress-plugin-tab": "^1.0.5",
     "hard-source-webpack-plugin": "^0.13.1",
     "is-url": "^1.2.4",
     "prismjs": "^1.19.0",

@@ -135,7 +135,7 @@ export const Editor = memo((props: EditorProps) => {
           style={style}
           spellCheck={spellCheck}
           readOnly={readOnly}
-          id={`editor-${id}`}
+          id={`${id}`}
           {...rest}
         />
         <Show when={menu.items.length}>
@@ -410,7 +410,7 @@ export const getActiveNode = (editor: ReactEditor) => {
   if (editor.selection) {
     const path = editor.selection.focus.path.slice();
     const [node] = SlateEditor.node(editor, path);
-    if (node.text) {
+    if (node.text !== undefined) {
       const parent = SlateEditor.parent(editor, path);
       if (parent) {
         return parent[0];

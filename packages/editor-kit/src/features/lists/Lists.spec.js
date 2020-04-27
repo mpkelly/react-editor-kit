@@ -34,4 +34,23 @@ describe("Lists feature", () => {
     cy.get("[data-id-button-unordered-list]").click();
     cy.get("ul > li").should("have.length", 2);
   });
+
+  it("Nests lists", () => {
+    cy.enterText("1. Item 1");
+    cy.get("li").type("{enter}");
+    cy.enterText("Item 2");
+    cy.get("body").tab();    
+    cy.get("ol > li").should("have.length", 2);
+    cy.get("ol").should("have.length", 2);
+    cy.get(".more-icon").click();
+    cy.get("[data-id-button-unordered-list=true]").click();    
+    cy.get("ol").should("have.length", 1);
+    cy.get("ul").should("have.length", 1);
+    cy.get("ul > li span span span").click();
+    cy.get("body").tab({shift:true});    
+    cy.get("ol").should("have.length", 1);
+    cy.get("ol > li").should("have.length", 2);
+    
+  });
+});
 });

@@ -175,7 +175,7 @@ const generateStyle = (plugins: Plugin[], id: string) => {
   let editorStyle = "";
   if (editorStyles.length) {
     editorStyle = `
-    [data-slate-editor=true] {
+    #${id} {
       ${editorStyles.join("\n")}
     }`;
   }
