@@ -57,7 +57,7 @@ Then register `MyLabelsPlugin` when creating `<EditorKit plugins={[..]}/>` and y
 
 ### Overriding icons
 
-Editor Kit uses some internal icons for things like dropdown and delete buttons. The [internal icons](https://github.com/mpkelly/react-editor-kit/blob/master/packages/editor-kit/src/features/icons/IconProviderPlugin.ts) are based on the Google's Material Icons Regular set. You can override these icons in a similar way that you override labels above. Note that both SVG/Components and icon fonts are supported and can be mixed. **If you using a component/SVG then be sure to spread the props on your root element for Actions to work - read more below**. 
+Editor Kit uses some internal icons for things like dropdown and delete buttons. The [internal icons](https://github.com/mpkelly/react-editor-kit/blob/master/packages/editor-kit/src/features/icons/IconProviderPlugin.ts) are based on the Google Material Icons Regular set. You can override these icons in a similar way that you override labels above. Note that both SVG/Components and icon fonts are supported and can be mixed. **If you using a component/SVG then be sure to spread the props on your root element for Actions to work - read more below**. 
 
 ```TypeScript
 
