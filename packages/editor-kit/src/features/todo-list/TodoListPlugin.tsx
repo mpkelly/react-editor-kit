@@ -116,7 +116,7 @@ export const TodoItem = (props: RenderElementProps) => {
       <div contentEditable="false">
         <Checkbox checked={element.complete} onChange={handleChange} />
       </div>
-      {children}
+      <div className="rek-todo-item-content">{children}</div>
     </div>
   );
 };
@@ -138,6 +138,10 @@ const EditorStyle = `
       margin-bottom:15px;
       transform:scale(.8);
     }    
+
+    .rek-todo-item-content {
+      flex-grow:1;
+    }
   }
 
   .rek-todo-list-item[data-todo-complete=true] {

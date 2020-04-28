@@ -104,6 +104,7 @@ export const EditorKit = memo((props: EditorKitProps) => {
     delaySpellCheck,
   } = useSpellcheck(Boolean(props.spellCheck), id, render);
 
+  //TODO remove this hack once workaround is found
   useEffect(() => {
     const { onChange } = editor;
     editor.onChange = () => {
@@ -127,11 +128,9 @@ export const EditorKit = memo((props: EditorKitProps) => {
   };
 
   return (
-    <Fragment>
-      <Context.Provider value={context}>
-        <Fragment>{children}</Fragment>
-      </Context.Provider>
-    </Fragment>
+    <Context.Provider value={context}>
+      <Fragment>{children}</Fragment>
+    </Context.Provider>
   );
 });
 

@@ -1,169 +1,23 @@
-/*! exports provided: default */
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
 
-/*! exports provided: default, concatArrays, merge */
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
 
-/*! exports provided: default, createGlobalStyle, css, isStyledComponent, keyframes, ServerStyleSheet, StyleSheetConsumer, StyleSheetContext, StyleSheetManager, ThemeConsumer, ThemeContext, ThemeProvider, withTheme, __DO_NOT_USE_OR_YOU_WILL_BE_HAUNTED_BY_SPOOKY_GHOSTS */
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
 
-/*! exports provided: getType, isAnyObject, isArray, isBlob, isBoolean, isDate, isEmptyString, isFile, isFullString, isFunction, isNull, isNullOrUndefined, isNumber, isObject, isObjectLike, isPlainObject, isPrimitive, isRegExp, isString, isSymbol, isType, isUndefined */
-
-/*! no static exports found */
-
-/*!***********************!*\
-  !*** ./src/Index.tsx ***!
-  \***********************/
-
-/*!************************!*\
-  !*** external "React" ***!
-  \************************/
-
-/*!*************************!*\
-  !*** ./src/ui/Blob.tsx ***!
-  \*************************/
-
-/*!*************************!*\
-  !*** ./src/ui/Text.tsx ***!
-  \*************************/
-
-/*!*************************!*\
-  !*** ./src/ui/Theme.ts ***!
-  \*************************/
-
-/*!*************************!*\
-  !*** ./src/ui/Wave.tsx ***!
-  \*************************/
-
-/*!***************************!*\
-  !*** ./src/ui/Styles.tsx ***!
-  \***************************/
-
-/*!***************************!*\
-  !*** external "ReactDOM" ***!
-  \***************************/
-
-/*!****************************!*\
-  !*** ./src/ui/Section.tsx ***!
-  \****************************/
-
-/*!****************************!*\
-  !*** ./src/ui/Website.tsx ***!
-  \****************************/
-
-/*!******************************!*\
-  !*** ./src/ui/ReactLogo.tsx ***!
-  \******************************/
-
-/*!*******************************!*\
-  !*** ./src/ui/GitHubLogo.tsx ***!
-  \*******************************/
-
-/*!**********************************!*\
-  !*** ./src/features/faq/Faq.tsx ***!
-  \**********************************/
-
-/*!***********************************!*\
-  !*** ../editor-kit/dist/index.js ***!
-  \***********************************/
-
-/*!***********************************!*\
-  !*** ../examples/src/Mentions.ts ***!
-  \***********************************/
-
-/*!***********************************!*\
-  !*** ./src/ui/JavaScriptLogo.tsx ***!
-  \***********************************/
-
-/*!***********************************!*\
-  !*** ./src/ui/TypeScriptLogo.tsx ***!
-  \***********************************/
-
-/*!*************************************!*\
-  !*** ./src/features/nav/NavBar.tsx ***!
-  \*************************************/
-
-/*!**************************************!*\
-  !*** ./src/features/intro/Intro.tsx ***!
-  \**************************************/
-
-/*!***************************************!*\
-  !*** ./src/features/faq/FaqBlock.tsx ***!
-  \***************************************/
-
-/*!****************************************!*\
-  !*** ./node_modules/react-is/index.js ***!
-  \****************************************/
-
-/*!*****************************************!*\
-  !*** ./node_modules/process/browser.js ***!
-  \*****************************************/
-
-/*!*****************************************!*\
-  !*** ./src/features/plugins/Plugin.tsx ***!
-  \*****************************************/
-
-/*!******************************************!*\
-  !*** ./node_modules/prop-types/index.js ***!
-  \******************************************/
-
-/*!******************************************!*\
-  !*** ./src/features/plugins/Plugins.tsx ***!
-  \******************************************/
-
-/*!*******************************************!*\
-  !*** ./node_modules/stylis/stylis.min.js ***!
-  \*******************************************/
-
-/*!********************************************!*\
-  !*** ./src/features/intro/IntroEditor.tsx ***!
-  \********************************************/
-
-/*!*********************************************!*\
-  !*** ./node_modules/object-assign/index.js ***!
-  \*********************************************/
-
-/*!************************************************!*\
-  !*** ./node_modules/is-what/dist/index.esm.js ***!
-  \************************************************/
-
-/*!*************************************************!*\
-  !*** ./node_modules/stylis-rule-sheet/index.js ***!
-  \*************************************************/
-
-/*!***************************************************!*\
-  !*** ./node_modules/prop-types/checkPropTypes.js ***!
-  \***************************************************/
-
-/*!*******************************************************!*\
-  !*** ./node_modules/merge-anything/dist/index.esm.js ***!
-  \*******************************************************/
-
-/*!**********************************************************!*\
-  !*** ./node_modules/memoize-one/dist/memoize-one.esm.js ***!
-  \**********************************************************/
-
-/*!***********************************************************!*\
-  !*** ./node_modules/react-is/cjs/react-is.development.js ***!
-  \***********************************************************/
-
-/*!************************************************************!*\
-  !*** ./node_modules/prop-types/factoryWithTypeCheckers.js ***!
-  \************************************************************/
-
-/*!*************************************************************!*\
-  !*** ./node_modules/prop-types/lib/ReactPropTypesSecret.js ***!
-  \*************************************************************/
-
-/*!*******************************************************************!*\
-  !*** ./node_modules/@emotion/memoize/dist/memoize.browser.esm.js ***!
-  \*******************************************************************/
-
-/*!*********************************************************************!*\
-  !*** ./node_modules/@emotion/unitless/dist/unitless.browser.esm.js ***!
-  \*********************************************************************/
-
-/*!******************************************************************************!*\
-  !*** ./node_modules/styled-components/dist/styled-components.browser.esm.js ***!
-  \******************************************************************************/
-
-/*!*******************************************************************************!*\
-  !*** ./node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js ***!
-  \*******************************************************************************/
+/** @license React v16.12.0
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
