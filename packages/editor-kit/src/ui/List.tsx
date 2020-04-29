@@ -1,5 +1,5 @@
 import React, { CSSProperties, useCallback } from "react";
-import { stop } from "./Utils";
+import { stopEvent } from "./Utils";
 
 export interface ListProps {
   items: ListItem[];
@@ -28,7 +28,7 @@ export const List = (props: ListProps) => {
   return (
     <div
       className={`rek-panel rek-list ${clazz}`}
-      onMouseDown={stop}
+      onMouseDown={stopEvent}
       style={style}
     >
       {items.map((item: ListItem, index: number) => {

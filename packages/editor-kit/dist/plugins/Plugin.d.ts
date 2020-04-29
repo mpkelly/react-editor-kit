@@ -8,6 +8,10 @@ export declare type Trigger = {
     pattern: MatchExpression;
     range?: EditorRange;
 };
+export declare type HotKey = {
+    pattern: string;
+    handle: (editor: ReactEditor, event: KeyboardEvent, pattern: string) => boolean;
+};
 export interface Plugin {
     triggers?: Trigger[];
     onTrigger?(editor: ReactEditor, match?: MatchResult[], trigger?: Trigger): void;
@@ -19,6 +23,7 @@ export interface Plugin {
     withPlugin?(editor: ReactEditor): ReactEditor;
     editorStyles?(): string;
     globalStyles?(): string;
+    onHotKey?: HotKey[];
     onKeyDown?(event: React.KeyboardEvent<HTMLElement>, editor: ReactEditor): boolean | undefined;
     onClick?(event: React.MouseEvent<HTMLElement>, editor: Editor): void;
     contextMenu?: ContextMenuContribution[];
@@ -37,6 +42,7 @@ export declare const createPlugin: (plugin: Plugin, ...triggers: Trigger[]) => {
     withPlugin?(editor: ReactEditor): ReactEditor;
     editorStyles?(): string;
     globalStyles?(): string;
+    onHotKey?: HotKey[];
     onKeyDown?(event: import("react").KeyboardEvent<HTMLElement>, editor: ReactEditor): boolean;
     onClick?(event: import("react").MouseEvent<HTMLElement, MouseEvent>, editor: Editor): void;
     contextMenu?: ContextMenuContribution[];

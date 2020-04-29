@@ -6,7 +6,7 @@ import { usePlugin } from "../../plugins/usePlugin";
 import { IconProvider } from "../icons/IconProviderPlugin";
 import { Icon } from "../icons/Icon";
 import { ModalPopup } from "../popup/HtmlElementModalPopup";
-import { block } from "../../ui/Utils";
+import { blockEvent } from "../../ui/Utils";
 import { useEditorKit } from "../../editor/EditorKit";
 
 export interface EditorToolbarProps {
@@ -119,7 +119,7 @@ const Overflow = (props: OverflowProps) => {
     <div
       className="rek-editor-toolbar-overflow"
       ref={(ref) => (element.current = ref)}
-      onMouseDown={block}
+      onMouseDown={blockEvent}
     >
       <div className="rek-icon-button">
         <Icon

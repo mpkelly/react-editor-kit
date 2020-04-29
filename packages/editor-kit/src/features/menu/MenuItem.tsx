@@ -4,7 +4,7 @@ import { EditorIcon, Icon } from "../icons/Icon";
 import { usePlugin } from "../../plugins/usePlugin";
 import { Labels, EditorLabels } from "../i18n/LabelsPlugin";
 import { useEditorKit } from "../../editor/EditorKit";
-import { block } from "../../ui/Utils";
+import { blockEvent } from "../../ui/Utils";
 import { IconProvider } from "../icons/IconProviderPlugin";
 import { Show } from "../../ui/Show";
 import { getPosition } from "../popup/Popups";
@@ -90,7 +90,7 @@ export const MenuItem = (props: MenuItemProps) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={(event) => {
-        block(event);
+        blockEvent(event);
         onClick && onClick(editor);
       }}
       {...rest}

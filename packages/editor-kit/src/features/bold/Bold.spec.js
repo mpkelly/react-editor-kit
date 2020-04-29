@@ -32,4 +32,16 @@ describe("Bold feature", () => {
     cy.enterText(" ");
     cy.check(output);
   });
+
+  it("works with hotkey", () => {
+    cy.get("[data-slate-editor]").type("{cmd}b");
+    cy.enterText("bold");
+    cy.get("[data-slate-editor]").type("{cmd}b");
+    cy.enterText(" plain ");
+    cy.get("[data-slate-editor]").type("{cmd}b");
+    cy.enterText("bold");
+    cy.get("[data-slate-editor]").type("{cmd}b");
+    cy.enterText(" ");
+    cy.check(output);
+  });
 });

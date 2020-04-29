@@ -10,7 +10,7 @@ import { List, ListItem } from "./List";
 import { ModalPopup } from "../features/popup/HtmlElementModalPopup";
 import { usePlugin } from "../plugins/usePlugin";
 import { IconProvider } from "../features/icons/IconProviderPlugin";
-import { block } from "./Utils";
+import { blockEvent } from "./Utils";
 import { useKeyNavigation } from "./KeyNavigation";
 import { ReactEditor } from "slate-react";
 import { useEditorKit } from "../editor/EditorKit";
@@ -188,7 +188,7 @@ export const useSelect = (props: SelectProps, editor: HTMLElement) => {
   };
 
   const handleFocus = (event: React.MouseEvent) => {
-    block(event);
+    blockEvent(event);
     props.onFocus && props.onFocus();
     setShow(true);
     if (clicked.current) {

@@ -7,6 +7,15 @@ import { ContextMenuContribution } from "../features/context-menu/ContextMenu";
 
 export type Trigger = { pattern: MatchExpression; range?: EditorRange };
 
+export type HotKey = {
+  pattern: string;
+  handle: (
+    editor: ReactEditor,
+    event: KeyboardEvent,
+    pattern: string
+  ) => boolean;
+};
+
 export interface Plugin {
   triggers?: Trigger[];
   onTrigger?(
@@ -25,6 +34,7 @@ export interface Plugin {
   withPlugin?(editor: ReactEditor): ReactEditor;
   editorStyles?(): string;
   globalStyles?(): string;
+  onHotKey?: HotKey[];
   onKeyDown?(
     event: React.KeyboardEvent<HTMLElement>,
     editor: ReactEditor

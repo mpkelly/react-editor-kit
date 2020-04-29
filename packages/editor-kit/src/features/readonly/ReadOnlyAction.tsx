@@ -1,6 +1,6 @@
 import React from "react";
 import { Action } from "../actions/Action";
-import { block } from "../../ui/Utils";
+import { blockEvent } from "../../ui/Utils";
 import { useEditorKit } from "../../editor/EditorKit";
 
 export interface ReadOnlyActionProps {
@@ -13,7 +13,7 @@ export const ReadOnlyAction = (props: ReadOnlyActionProps) => {
 
   const isActive = () => readOnly;
   const onMouseDown = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    block(event);
+    blockEvent(event);
     if (isActive()) {
       disableReadOnly();
     } else {

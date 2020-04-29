@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback, memo, Fragment } from "react";
 import { Suggestions } from "./Suggestions";
 import { Show } from "../../ui/Show";
 import { CursorPopup } from "../popup/CursorPopup";
-import { stop } from "../../ui/Utils";
+import { stopEvent } from "../../ui/Utils";
 import { Spinner } from "../../ui/Spinner";
 import { useKeyNavigation } from "../../ui/KeyNavigation";
 import { ensureInView } from "../../ui/List";
@@ -74,7 +74,7 @@ export const SuggestionList = memo((props: SuggestionListProps) => {
       </Show>
       <Show when={Boolean(choices.length)}>
         <CursorPopup onClose={handleClose} fixed location={"auto"}>
-          <ul onClick={stop} className={"rek-suggestion-list rek-panel"}>
+          <ul onClick={stopEvent} className={"rek-suggestion-list rek-panel"}>
             <Show when={Boolean(choices.length)}>
               {choices.map((choice, index) => (
                 <li

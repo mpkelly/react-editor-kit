@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { stop } from "../../ui/Utils";
+import { stopEvent } from "../../ui/Utils";
 
 export type EditorIcon = CssIcon | ReactNode;
 
@@ -25,7 +25,7 @@ export const Icon = (props: ReactIconProps) => {
         children={(icon as CssIcon).ligature}
         onClick={onClick}
         onMouseDown={(event) => {
-          stop(event);
+          stopEvent(event);
           onMouseDown && onMouseDown(event);
         }}
         contentEditable={false}

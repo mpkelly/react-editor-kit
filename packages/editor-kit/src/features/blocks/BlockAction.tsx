@@ -2,7 +2,7 @@ import React from "react";
 import { toggleBlock, isNodeActive } from "./Blocks";
 import { useEditorKit } from "../../editor/EditorKit";
 import { Action } from "../actions/Action";
-import { block } from "../../ui/Utils";
+import { blockEvent } from "../../ui/Utils";
 import { useLastFocused } from "../../editor/LastFocusedNode";
 
 export interface BlockActionProps {
@@ -20,7 +20,7 @@ export const BlockAction = (props: BlockActionProps) => {
   let onMouseDown = props.onMouseDown;
   if (!onMouseDown) {
     onMouseDown = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-      block(event);
+      blockEvent(event);
       if (enabled) {
         toggleBlock(editor, type);
       }

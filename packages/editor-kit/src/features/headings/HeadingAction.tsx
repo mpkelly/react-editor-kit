@@ -3,7 +3,7 @@ import { Transforms } from "slate";
 import { useEditorKit } from "../../editor/EditorKit";
 import { Action } from "../actions/Action";
 import { isNodeActive } from "../blocks/Blocks";
-import { block } from "../../ui/Utils";
+import { blockEvent } from "../../ui/Utils";
 
 export interface HeadingActionProps {
   heading: string;
@@ -20,7 +20,7 @@ export const HeadingAction = (props: HeadingActionProps) => {
   };
 
   const onMouseDown = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    block(event);
+    blockEvent(event);
     if (!isActive()) {
       Transforms.setNodes(editor, { type: heading, children: [] });
     }

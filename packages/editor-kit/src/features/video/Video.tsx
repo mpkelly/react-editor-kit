@@ -5,7 +5,7 @@ import { DeletableBlock } from "../blocks/DeletableBlock";
 import { usePlugin } from "../../plugins/usePlugin";
 import { Icon } from "../icons/Icon";
 import { ModalPopup } from "../popup/ElementModalPopup";
-import { stop } from "../../ui/Utils";
+import { stopEvent } from "../../ui/Utils";
 import { useEditorKit } from "../../editor/EditorKit";
 import { IconProvider } from "../icons/IconProviderPlugin";
 import { Transforms } from "slate";
@@ -87,7 +87,7 @@ export const VideoSettings = memo((props: VideoSettingsProps) => {
   return (
     <div
       className="rek-video-settings rek-panel"
-      onClick={stop}
+      onClick={stopEvent}
       data-slate-zero-width="z"
     >
       <input

@@ -4,7 +4,7 @@ import { Editor, Transforms, Element, Path, Ancestor } from "slate";
 import { useEditorKit } from "../../editor/EditorKit";
 import { usePlugin } from "../../plugins/usePlugin";
 import { Labels } from "../i18n/LabelsPlugin";
-import { block } from "../../ui/Utils";
+import { blockEvent } from "../../ui/Utils";
 import { cell } from "./TablePlugin";
 
 export const useTables = (props: RenderElementProps) => {
@@ -32,7 +32,7 @@ export const useTables = (props: RenderElementProps) => {
 
   const handleClick = useCallback(
     (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-      block(event);
+      blockEvent(event);
       position.current = {
         top: event.clientY,
         left: event.clientX,

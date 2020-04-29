@@ -1,3 +1,5 @@
+import isHotkey from "is-hotkey";
+
 export * from "./editor/Editor";
 export * from "./editor/LastFocusedNode";
 export * from "./editor/Focus";
@@ -164,3 +166,4 @@ export {
   Location,
 } from "slate";
 export { ReactEditor, RenderElementProps, RenderLeafProps } from "slate-react";
+export { isHotkey } from "is-hotkey";

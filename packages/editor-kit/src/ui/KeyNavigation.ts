@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { useKeyPress } from "./KeyPress";
-import { block } from "./Utils";
+import { blockEvent } from "./Utils";
 import { Editor } from "slate";
 
 export const useKeyNavigation = (
@@ -15,7 +15,7 @@ export const useKeyNavigation = (
   const handlePrevious = useCallback(
     (event: KeyboardEvent) => {
       if (enabled) {
-        block(event);
+        blockEvent(event);
         setActive(nextState(active, -1, total));
       }
     },
@@ -25,7 +25,7 @@ export const useKeyNavigation = (
   const handleNext = useCallback(
     (event: KeyboardEvent) => {
       if (enabled) {
-        block(event);
+        blockEvent(event);
         setActive(nextState(active, 1, total));
       }
     },
@@ -35,7 +35,7 @@ export const useKeyNavigation = (
   const _handleSelect = useCallback(
     (event: KeyboardEvent) => {
       if (enabled) {
-        block(event);
+        blockEvent(event);
         handleSelect(active);
       }
     },

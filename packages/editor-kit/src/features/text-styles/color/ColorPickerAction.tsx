@@ -3,7 +3,7 @@ import { Action } from "../../actions/Action";
 import { ColorPicker, getCssColor } from "./ColorPicker";
 import { useEditorKit } from "../../../editor/EditorKit";
 import { marks } from "../../marks/Marks";
-import { block } from "../../../ui/Utils";
+import { blockEvent } from "../../../ui/Utils";
 import { ModalPopup } from "../../popup/HtmlElementModalPopup";
 import { DefaultColors } from "./ColorPickerButton";
 

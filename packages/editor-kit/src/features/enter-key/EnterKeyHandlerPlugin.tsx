@@ -1,6 +1,6 @@
 import { Plugin } from "../../plugins/Plugin";
 import { ReactEditor } from "slate-react";
-import { block } from "../../ui/Utils";
+import { blockEvent } from "../../ui/Utils";
 
 // Allows for soft-breaks when shift key is down when enter key is pressed.
 export const EnterKeyHandlerPlugin: Plugin = {
@@ -14,7 +14,7 @@ export const EnterKeyHandlerPlugin: Plugin = {
       //Enter key
       if (event.shiftKey) {
         editor.insertText("\n");
-        block(event);
+        blockEvent(event);
         return true;
       }
     }

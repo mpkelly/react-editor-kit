@@ -5,7 +5,7 @@ import { useEditorKit } from "../../../editor/EditorKit";
 import { toggleMark } from "../../marks/Marks";
 import { ReactEditor } from "slate-react";
 import { getActiveNode } from "../../../editor/Editor";
-import { block } from "../../../ui/Utils";
+import { blockEvent } from "../../../ui/Utils";
 
 export interface InitialLetterActionProps {
   children: React.ReactNode;

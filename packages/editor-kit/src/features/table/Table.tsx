@@ -9,7 +9,7 @@ import { IconProvider } from "../icons/IconProviderPlugin";
 import { Icon } from "../icons/Icon";
 import { ModalPopup } from "../popup/HTMLElementModalPopup";
 import { Checkbox } from "../../ui/Checkbox";
-import { block, stop } from "../../ui/Utils";
+import { blockEvent, stopEvent } from "../../ui/Utils";
 import { useFocused } from "../../editor/Focus";
 
 export const Table = (props: RenderElementProps) => {
@@ -70,8 +70,8 @@ const Toolbar = (props: ToolbarProps) => {
     <Fragment>
       <div
         className="rek-block-toolbar rek-panel"
-        onMouseDown={stop}
-        onClick={block}
+        onMouseDown={stopEvent}
+        onClick={blockEvent}
       >
         <Icon icon={data.settings} onClick={handleSettings} />
         <div className="rek-v-toolbar-divider" />
@@ -84,7 +84,7 @@ const Toolbar = (props: ToolbarProps) => {
         element={toolbar as HTMLElement}
         onClickOutside={hideSettings}
       >
-        <div className="rek-panel rek-table-settings" onClick={block}>
+        <div className="rek-panel rek-table-settings" onClick={blockEvent}>
           <Checkbox
             label={labels.headerRow}
             checked={element.headerRow}

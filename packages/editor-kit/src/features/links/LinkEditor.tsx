@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { stop } from "../../ui/Utils";
+import { stopEvent } from "../../ui/Utils";
 import { Labels } from "../i18n/LabelsPlugin";
 import { usePlugin } from "../../plugins/usePlugin";
 
@@ -19,14 +19,18 @@ export const LinkEditor = (props: LinkEditorProps) => {
     props
   );
   return (
-    <div className="rek-link-editor rek-panel" onClick={stop} onKeyDown={stop}>
+    <div
+      className="rek-link-editor rek-panel"
+      onClick={stopEvent}
+      onKeyDown={stopEvent}
+    >
       <input
         type="text"
         className="rek-input"
         placeholder={labels.enterUrl}
         value={link.url}
         autoFocus
-        onMouseDown={stop}
+        onMouseDown={stopEvent}
         onChange={handleUrlChange}
       />
       <input
@@ -34,7 +38,7 @@ export const LinkEditor = (props: LinkEditorProps) => {
         className="rek-input"
         placeholder={labels.enterDisplayText}
         value={link.displayName}
-        onMouseDown={stop}
+        onMouseDown={stopEvent}
         onChange={handleDisplayNameChange}
       />
     </div>

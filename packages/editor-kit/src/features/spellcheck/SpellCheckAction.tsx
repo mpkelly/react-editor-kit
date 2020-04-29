@@ -1,6 +1,6 @@
 import React from "react";
 import { Action } from "../actions/Action";
-import { block } from "../../ui/Utils";
+import { blockEvent } from "../../ui/Utils";
 import { useEditorKit } from "../../editor/EditorKit";
 
 export interface SpellCheckActionProps {
@@ -13,7 +13,7 @@ export const SpellCheckAction = (props: SpellCheckActionProps) => {
 
   const isActive = () => spellCheck;
   const onMouseDown = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    block(event);
+    blockEvent(event);
     if (isActive()) {
       disableSpellCheck();
     } else {

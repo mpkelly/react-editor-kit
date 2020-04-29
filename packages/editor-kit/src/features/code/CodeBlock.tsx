@@ -4,7 +4,7 @@ import { Languages } from "./Languages";
 import { Select, SelectItem } from "../../ui/Select";
 import { ModalPopup } from "../popup/ElementModalPopup";
 import { useFocused } from "../../editor/Focus";
-import { stop } from "../../ui/Utils";
+import { stopEvent } from "../../ui/Utils";
 import { Transforms } from "slate";
 import { useEditorKit } from "../../editor/EditorKit";
 import { Icon } from "../icons/Icon";
@@ -76,7 +76,7 @@ const Toolbar = (props: ToolbarProps) => {
   return (
     <div
       className="rel-block-toolbar rek-code-block-toolbar rek-panel"
-      onClick={stop}
+      onClick={stopEvent}
       onMouseEnter={onFocus}
     >
       <Select

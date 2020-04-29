@@ -2,7 +2,8 @@ import { Plugin } from "../../plugins/Plugin";
 import { RenderLeafProps, ReactEditor } from "slate-react";
 import { renderLeaf } from "../leafs/LeafRenderer";
 import { MatchResult } from "../../Index";
-import { applyRegexMark } from "../marks/Marks";
+import { applyRegexMark, toggleMark } from "../marks/Marks";
+import { blockEvent } from "../../ui/Utils";
 
 export const ItalicPlugin: Plugin = {
   triggers: [{ pattern: /(^|[^*])\*([^*]+)\*/, range: "block" }],
@@ -18,5 +19,14 @@ export const ItalicPlugin: Plugin = {
   },
   renderLeaf: (props: RenderLeafProps) => {
     return renderLeaf(props, "italic", "em");
-  }
+  },
+  onHotKey: [
+    {
+      pattern: "mod+i",
+      handle: (editor, event) => {
+        toggleMark(editor, "italic");
+        return blockEvent(event);
+      },
+    },
+  ],
 };

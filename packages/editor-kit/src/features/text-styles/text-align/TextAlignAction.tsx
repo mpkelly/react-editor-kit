@@ -6,7 +6,7 @@ import {
   getSelectionRootNodes,
   getPropertyValueAtCursor,
 } from "../../../editor/Editor";
-import { block } from "../../../ui/Utils";
+import { blockEvent } from "../../../ui/Utils";
 import { ReactEditor } from "slate-react";
 import { useLastFocused } from "../../../editor/LastFocusedNode";
 
@@ -20,7 +20,7 @@ export const TextAlignAction = (props: TextAlignActionProps) => {
   const { editor } = useEditorKit();
   const { node } = useLastFocused(editor);
   const onMouseDown = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    block(event);
+    blockEvent(event);
     const { selection } = editor;
     if (selection) {
       const nodes = getSelectionRootNodes(selection, editor);

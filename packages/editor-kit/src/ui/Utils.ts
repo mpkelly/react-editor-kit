@@ -11,11 +11,14 @@ export const isDeleting = (event: React.KeyboardEvent) => {
   return event.keyCode == 8 || event.keyCode == 46;
 };
 
-export const stop = (
+export const stopEvent = (
   event: React.MouseEvent<any> | MouseEvent | React.KeyboardEvent
-) => event.stopPropagation();
+) => {
+  event.stopPropagation();
+  return true;
+};
 
-export const block = (
+export const blockEvent = (
   event:
     | React.MouseEvent<any>
     | MouseEvent
@@ -24,6 +27,7 @@ export const block = (
 ) => {
   event.preventDefault();
   event.stopPropagation();
+  return true;
 };
 
 export const noOp = (...args: any[]) => {};

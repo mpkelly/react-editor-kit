@@ -28,6 +28,7 @@ import { findMatches } from "./Matching";
 import { clone } from "../ui/Utils";
 import { ContextMenu } from "../features/context-menu/ContextMenu";
 import { Show } from "../ui/Show";
+import isHotkey from "is-hotkey";
 
 export interface EditorProps {
   value: Node[];
@@ -298,6 +299,15 @@ const handleKeyDown = (
   editor: ReactEditor
 ) => {
   for (let plugin of plugins) {
+    if (plugin.onHotKey) {
+      for (let hotkey of plugin.onHotKey) {
+        if (isHotkey(hotkey.pattern, event.nativeEvent)) {
+          if (hotkey.handle(editor, event.nativeEvent, hotkey.pattern)) {
+            return;
+          }
+        }
+      }
+    }
     if (plugin.onKeyDown) {
       if (plugin.onKeyDown(event, editor)) {
         return;

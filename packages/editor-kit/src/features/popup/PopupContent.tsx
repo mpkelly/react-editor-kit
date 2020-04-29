@@ -1,5 +1,5 @@
 import React, { CSSProperties, memo } from "react";
-import { block } from "../../ui/Utils";
+import { blockEvent } from "../../ui/Utils";
 import { useEditorKit } from "../../editor/EditorKit";
 
 export interface PopupContentProps
@@ -18,7 +18,7 @@ export const PopupContent = memo(
         id={`rek-${id}-floating-content`}
         className="rek-floating-content"
         style={style}
-        onMouseDown={block}
+        onMouseDown={blockEvent}
         {...rest}
       >
         {children}

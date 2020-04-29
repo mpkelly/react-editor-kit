@@ -2,7 +2,7 @@ import React from "react";
 import { usePlugin } from "../../../plugins/usePlugin";
 import { Labels } from "../../i18n/LabelsPlugin";
 import { Color, HslaColor, RgbaColor } from "./ColorPickerAction";
-import { block } from "../../../ui/Utils";
+import { blockEvent } from "../../../ui/Utils";
 import { DefaultColors } from "./ColorPickerButton";
 
 export interface ColorPickerProps {
@@ -57,10 +57,10 @@ const ColorPanel = (props: ColorPanelProps) => {
                 <div
                   className={`rek-color-picker-color ${selectedClass}`}
                   onClick={(event) => {
-                    block(event);
+                    blockEvent(event);
                     onChange(color);
                   }}
-                  onMouseDown={block}
+                  onMouseDown={blockEvent}
                   style={{ backgroundColor: getCssColor(color) }}
                 />
               );
