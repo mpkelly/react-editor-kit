@@ -3,13 +3,14 @@ import { usePlugin } from "../../../plugins/usePlugin";
 import { Labels } from "../../i18n/LabelsPlugin";
 import { Color, HslaColor, RgbaColor } from "./ColorPickerAction";
 import { block } from "../../../ui/Utils";
+import { DefaultColors } from "./ColorPickerButton";
 
 export interface ColorPickerProps {
   color: Color;
   backgroundColor: Color;
   onColorChange(color: Color): void;
   onBackgroundColorChange(color: Color): void;
-  colors: Color[][];
+  colors?: Color[][];
 }
 
 export const ColorPicker = (props: ColorPickerProps) => {
@@ -21,13 +22,13 @@ export const ColorPicker = (props: ColorPickerProps) => {
       <ColorPanel
         color={color}
         onChange={onColorChange}
-        colors={colors}
+        colors={colors || DefaultColors}
         title={labels.textColor}
       />
       <ColorPanel
         color={color}
         onChange={onBackgroundColorChange}
-        colors={colors}
+        colors={colors || DefaultColors}
         title={labels.backgroundColor}
       />
     </div>

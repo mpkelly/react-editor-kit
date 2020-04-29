@@ -1,17 +1,19 @@
-import React from "react";
-import { Range } from "slate";
+import React, { FunctionComponent } from "react";
 import { ReactEditor } from "slate-react";
 import { Select, SelectItem } from "../../../ui/Select";
 import { useEditorKit } from "../../../editor/EditorKit";
 import { getPropertyValueAtCursor } from "../../../editor/Editor";
 import { useLastFocused } from "../../../editor/LastFocusedNode";
+import { TooltipContentProps } from "../../popup/Tooltip";
 
-export interface FontSizeSelectProps {
+export interface FontSizeSelectProps extends TooltipContentProps {
   fontSizes?: number[];
 }
 
-export const FontSizeSelect = (props: FontSizeSelectProps) => {
-  const fontSizes = props.fontSizes || DefaultFontSizes;
+export const FontSizeSelect: FunctionComponent<FontSizeSelectProps> = (
+  props: FontSizeSelectProps
+) => {
+  const { fontSizes, ...rest } = props;
   const { editor } = useEditorKit();
   const { node } = useLastFocused(editor);
   const changeValue = (value: number) => {
@@ -25,7 +27,7 @@ export const FontSizeSelect = (props: FontSizeSelectProps) => {
   const handleChange = (value: string) => {
     changeValue(Number(value));
   };
-  const items: SelectItem[] = fontSizes.map((size) => ({
+  const items: SelectItem[] = (fontSizes || []).map((size) => ({
     text: String(size),
     value: size,
     disabled: !editor.isMarkSupported("fontSize", node),
@@ -45,6 +47,7 @@ export const FontSizeSelect = (props: FontSizeSelectProps) => {
       onFocus={editor.markSelection}
       type="number"
       editable
+      {...rest}
     />
   );
 };
@@ -72,3 +75,6 @@ export const DefaultFontSizes = [
   60,
   72,
 ];
+FontSizeSelect.defaultProps = {
+  fontSizes: DefaultFontSizes,
+};

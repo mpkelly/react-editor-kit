@@ -4,6 +4,7 @@ import React, {
   useRef,
   useEffect,
   useCallback,
+  Fragment,
 } from "react";
 import { List, ListItem } from "./List";
 import { ModalPopup } from "../features/popup/HtmlElementModalPopup";
@@ -13,8 +14,10 @@ import { block } from "./Utils";
 import { useKeyNavigation } from "./KeyNavigation";
 import { ReactEditor } from "slate-react";
 import { useEditorKit } from "../editor/EditorKit";
+import { TooltipContentProps, Tooltip } from "../features/popup/Tooltip";
+import { Show } from "./Show";
 
-export interface SelectProps {
+export interface SelectProps extends TooltipContentProps {
   onInputChange?(value: string): void;
   onItemSelected(item: SelectItem): void;
   onFocus?(): void;
@@ -34,6 +37,12 @@ export interface SelectItem {
 }
 
 export const Select = (props: SelectProps) => {
+  const {
+    tooltipComponent,
+    tooltipText,
+    tooltipOffsets,
+    tooltipLocation,
+  } = props;
   const { editor } = useEditorKit();
   let editorElement: HTMLElement | undefined;
   try {
@@ -64,39 +73,51 @@ export const Select = (props: SelectProps) => {
     props.className || ""
   } rek-select ${focusClass} ${disabledClass}`;
 
+  const hasTooltip = tooltipText || tooltipComponent;
   return (
-    <div
-      className={className}
-      onClick={stop}
-      onKeyDown={stop}
-      ref={handleRef}
-      onMouseDown={disabled ? undefined : handleFocus}
-    >
-      <input
-        className="rek-input"
-        value={value}
-        onChange={handleValueChange}
-        onBlur={handleBlur}
-        onFocus={props.onFocus}
-        ref={handleRef}
-        disabled={disabled || !props.editable}
-        type={props.type}
-        onClick={handleFocus}
-      />
-      {icons.dropdownIcon}
-      <ModalPopup
-        show={show}
-        element={element as HTMLElement}
-        onClickOutside={hideChoices}
-      >
-        <List
-          items={items}
-          activeIndex={activeIndex}
-          className="rek-select-list"
-          style={getStyle(element)}
+    <Fragment>
+      <Show when={tooltipComponent && hasTooltip}>
+        <Tooltip
+          element={element as HTMLElement}
+          tooltipComponent={tooltipComponent}
+          tooltipText={tooltipText}
+          tooltipLocation={tooltipLocation}
+          tooltipOffsets={tooltipOffsets}
         />
-      </ModalPopup>
-    </div>
+      </Show>
+      <div
+        className={className}
+        onClick={stop}
+        onKeyDown={stop}
+        ref={handleRef}
+        onMouseDown={disabled ? undefined : handleFocus}
+      >
+        <input
+          className="rek-input"
+          value={value}
+          onChange={handleValueChange}
+          onBlur={handleBlur}
+          onFocus={props.onFocus}
+          ref={handleRef}
+          disabled={disabled || !props.editable}
+          type={props.type}
+          onClick={handleFocus}
+        />
+        {icons.dropdownIcon}
+        <ModalPopup
+          show={show}
+          element={element as HTMLElement}
+          onClickOutside={hideChoices}
+        >
+          <List
+            items={items}
+            activeIndex={activeIndex}
+            className="rek-select-list"
+            style={getStyle(element)}
+          />
+        </ModalPopup>
+      </div>
+    </Fragment>
   );
 };
 

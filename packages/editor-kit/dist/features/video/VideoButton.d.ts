@@ -1,3 +1,4 @@
 /// <reference types="react" />
 import { IconProps } from "../buttons/IconButton";
-export declare const VideoButton: (props: IconProps) => JSX.Element;
+import { TooltipContentProps } from "../popup/Tooltip";
+export declare const VideoButton: (props: IconProps & TooltipContentProps) => JSX.Element;

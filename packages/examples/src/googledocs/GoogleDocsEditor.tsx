@@ -199,10 +199,16 @@ export const GoogleDocsEditor = () => {
           <Divider />
           <FontSizeSelect />
           <Divider />
-          <BoldButton className="material-icons-round" ligature="format_bold" />
+          <BoldButton
+            className="material-icons-round"
+            ligature="format_bold"
+            tooltipLocation={"start"}
+            tooltipComponent={<span>HELLO World</span>}
+          />
           <ItalicButton
             className="material-icons-round"
             ligature="format_italic"
+            tooltipText={"This is italic!"}
           />
           <LinkButton className="material-icons-round" ligature="link" />
           <StrikethroughButton

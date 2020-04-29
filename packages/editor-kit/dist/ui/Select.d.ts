@@ -1,6 +1,7 @@
 import React, { CSSProperties } from "react";
 import { ListItem } from "./List";
-export interface SelectProps {
+import { TooltipContentProps } from "../features/popup/Tooltip";
+export interface SelectProps extends TooltipContentProps {
     onInputChange?(value: string): void;
     onItemSelected(item: SelectItem): void;
     onFocus?(): void;

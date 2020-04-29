@@ -3,15 +3,18 @@ import { useEditorKit } from "./EditorKit";
 import { ReactEditor } from "slate-react";
 import { useState, useEffect } from "react";
 
-export const useFocused = (element: Node) => {
+export const useFocused = (node?: Node) => {
   const { editor } = useEditorKit();
   const { selection } = editor;
   const [focus, setFocus] = useState({
     isFocused: false,
-    isFocusedWithin: false
+    isFocusedWithin: false,
   });
   useEffect(() => {
-    const path = ReactEditor.findPath(editor, element);
+    if (!node) {
+      return;
+    }
+    const path = ReactEditor.findPath(editor, node);
     let isFocused = false;
     let isFocusedWithin = false;
     if (selection) {
@@ -20,7 +23,7 @@ export const useFocused = (element: Node) => {
       isFocused = Path.equals(focus.path, path);
     }
     setFocus({ isFocused, isFocusedWithin });
-  }, [element, selection]);
+  }, [node, selection]);
 
   return { ...focus };
 };

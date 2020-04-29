@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { IconProps } from "../buttons/IconButton";
-export interface OrderedListButtonProps extends IconProps {
+import { TooltipContentProps } from "../popup/Tooltip";
+export interface OrderedListButtonProps extends IconProps, TooltipContentProps {
 }
 export declare const OrderedListButton: (props: OrderedListButtonProps) => JSX.Element;

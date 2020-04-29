@@ -1,7 +1,9 @@
-/// <reference types="react" />
+import { FunctionComponent } from "react";
 import { IconProps } from "../../buttons/IconButton";
 import { Color } from "./ColorPickerAction";
-export interface ColorPickerButtonProps extends IconProps {
+import { TooltipContentProps } from "../../popup/Tooltip";
+export interface ColorPickerButtonProps extends IconProps, TooltipContentProps {
     colors?: Color[][];
 }
-export declare const ColorPickerButton: (props: ColorPickerButtonProps) => JSX.Element;
+export declare const ColorPickerButton: FunctionComponent<ColorPickerButtonProps>;
+export declare const DefaultColors: Color[][];

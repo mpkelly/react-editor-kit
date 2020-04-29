@@ -1,6 +1,7 @@
 /// <reference types="react" />
 import { IconProps } from "../buttons/IconButton";
-export interface BlockButtonProps extends IconProps {
+import { TooltipContentProps } from "../popup/Tooltip";
+export interface BlockButtonProps extends IconProps, TooltipContentProps {
     type: string;
 }
 export declare const BlockButton: (props: BlockButtonProps) => JSX.Element;

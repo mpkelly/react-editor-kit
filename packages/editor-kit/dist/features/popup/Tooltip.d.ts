@@ -1,13 +1,15 @@
 import { ReactNode } from "react";
 import { Node } from "slate";
-import { Location } from "./Popups";
-export interface ToolipContentProps {
-    text?: string;
-    component?: ReactNode;
-    location?: Location;
+import { Location, Offsets } from "./Popups";
+export interface TooltipContentProps {
+    tooltipText?: string;
+    tooltipComponent?: ReactNode;
+    tooltipLocation?: Location;
+    tooltipOffsets?: Offsets;
 }
-export interface TooltipProps extends ToolipContentProps {
-    element: Node;
+export interface TooltipProps extends TooltipContentProps {
+    node?: Node;
+    element?: HTMLElement;
 }
 export declare const Tooltip: (props: TooltipProps) => JSX.Element;
 export interface TextTooltipProps {

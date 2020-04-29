@@ -1,6 +1,7 @@
 /// <reference types="react" />
 import { ActionChildProps } from "../actions/Action";
-export interface IconProps {
+import { TooltipContentProps } from "../popup/Tooltip";
+export interface IconProps extends TooltipContentProps {
     className: string;
     ligature?: string;
 }

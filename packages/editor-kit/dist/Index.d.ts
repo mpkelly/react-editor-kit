@@ -151,3 +151,5 @@ export * from "./features/todo-list/TodoListPlugin";
 export * from "./features/marks/MarkAction";
 export * from "./features/marks/MarkButton";
 export * from "./features/marks/MarkMenuItem";
+export { Editor as SlateEditor, NodeEntry, Node, Text, Element, Transforms, Range, Path, Point, Location, } from "slate";
+export { ReactEditor, RenderElementProps, RenderLeafProps } from "slate-react";

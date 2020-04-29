@@ -25,7 +25,7 @@ export const Spoiler = memo((props: RenderElementProps) => {
   return (
     <Fragment>
       <Show when={isReadOnly && !show}>
-        <Tooltip text={"Click to see spoiler"} element={element} />
+        <Tooltip tooltipText={"Click to see spoiler"} node={element} />
       </Show>
       <div
         {...attributes}

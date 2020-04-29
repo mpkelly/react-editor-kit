@@ -1,19 +1,23 @@
-import React from "react";
+import React, { Fragment, FunctionComponent } from "react";
 import { Transforms, Range } from "slate";
 import { Select, SelectItem } from "../../ui/Select";
 import { useLastFocused } from "../../editor/LastFocusedNode";
 import { useEditorKit } from "../../editor/EditorKit";
+import { TooltipContentProps } from "../popup/Tooltip";
 
-export interface HeadingSelectProps {
+export interface HeadingSelectProps extends TooltipContentProps {
   types?: { type: string; name: string }[];
 }
 
-export const HeadingSelect = (props: HeadingSelectProps) => {
-  const types = props.types || DefaultTypes;
+export const HeadingSelect: FunctionComponent<HeadingSelectProps> = (
+  props: HeadingSelectProps
+) => {
+  const { types, ...rest } = props;
+
   const { editor } = useEditorKit();
   const { node, selection } = useLastFocused(editor);
 
-  const items: SelectItem[] = types.map((type) => ({
+  const items: SelectItem[] = (types || []).map((type) => ({
     text: type.name,
     value: type,
     disabled: !editor.isNodeSupported(type.type, node),
@@ -40,14 +44,17 @@ export const HeadingSelect = (props: HeadingSelectProps) => {
     : items[0];
 
   return (
-    <Select
-      className="rek-heading-select"
-      items={items}
-      selected={selected}
-      onItemSelected={handleChange}
-      onFocus={editor.markSelection}
-      value={selected.text}
-    />
+    <Fragment>
+      <Select
+        className="rek-heading-select"
+        items={items}
+        selected={selected}
+        onItemSelected={handleChange}
+        onFocus={editor.markSelection}
+        value={selected.text}
+        {...rest}
+      />
+    </Fragment>
   );
 };
 
@@ -60,3 +67,7 @@ export const DefaultTypes = [
   { type: "h5", name: "Heading 5" },
   { type: "h6", name: "Heading 6" },
 ];
+
+HeadingSelect.defaultProps = {
+  types: DefaultTypes,
+};

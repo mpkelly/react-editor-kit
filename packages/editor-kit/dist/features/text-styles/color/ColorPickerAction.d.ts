@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 export interface ColorPickerActionProps {
     children: React.ReactNode;
     colors?: Color[][];
@@ -17,4 +17,4 @@ export declare type RgbaColor = {
     a?: number;
 };
 export declare type Color = HexColor | HslaColor | RgbaColor | "transparent";
-export declare const ColorPickerAction: (props: ColorPickerActionProps) => JSX.Element;
+export declare const ColorPickerAction: FunctionComponent<ColorPickerActionProps>;

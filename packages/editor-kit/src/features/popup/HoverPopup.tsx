@@ -15,7 +15,8 @@ import { Location, getPosition, Offsets } from "./Popups";
 import { PopupContent } from "./PopupContent";
 
 export interface HoverPopupProps {
-  element: Node;
+  node?: Node;
+  element?: HTMLElement;
   location?: Location;
   children: React.ReactNode;
   fixed?: boolean;
@@ -26,6 +27,7 @@ export interface HoverPopupProps {
 export const HoverPopup = memo((props: HoverPopupProps) => {
   const { editor } = useEditorKit();
   const {
+    node,
     element,
     location,
     fixed,
@@ -33,17 +35,22 @@ export const HoverPopup = memo((props: HoverPopupProps) => {
     children,
     offsets,
   } = props;
+  console.log(node, element);
+  if (!node && !element) {
+    return children as JSX.Element;
+  }
+
   const [marker, setMarker] = useState<HTMLElement | null>(null);
   const [popup, setPopup] = useState<HTMLElement | null>(null);
 
   const over = useHover(marker);
-  const { isFocusedWithin } = useFocused(element);
+  const { isFocusedWithin } = useFocused(node);
 
   let style: CSSProperties = { position: "static" };
   let contentStyle: CSSProperties = {};
 
   if (marker) {
-    const htmlElement = ReactEditor.toDOMNode(editor, element);
+    const htmlElement = element || ReactEditor.toDOMNode(editor, node as Node);
     if (!htmlElement) {
       return null;
     }
@@ -64,6 +71,7 @@ export const HoverPopup = memo((props: HoverPopupProps) => {
 
   const showWhenFocused = hideWhenFocusedWithin ? !isFocusedWithin : true;
   const show = over && showWhenFocused;
+  console.log(show, over, showWhenFocused);
 
   return (
     <Fragment>

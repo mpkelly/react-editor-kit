@@ -5,7 +5,7 @@ export interface ColorPickerProps {
     backgroundColor: Color;
     onColorChange(color: Color): void;
     onBackgroundColorChange(color: Color): void;
-    colors: Color[][];
+    colors?: Color[][];
 }
 export declare const ColorPicker: (props: ColorPickerProps) => JSX.Element;
 export interface ColorPanelProps {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { ReactEditor } from "slate-react";
 import { useEditorKit } from "../../editor/EditorKit";
 import { isNodeActive, toggleBlock } from "../blocks/Blocks";
@@ -10,11 +10,11 @@ export interface HeadingToggleActionProps {
   heading?: string;
 }
 
-export const HeadingToggleAction = (props: HeadingToggleActionProps) => {
+export const HeadingToggleAction: FunctionComponent<HeadingToggleActionProps> = (
+  props: HeadingToggleActionProps
+) => {
   let { children, heading } = props;
   const { editor } = useEditorKit();
-  heading = heading || "h1";
-
   const onMouseDown = () => {
     if (!ReactEditor.isFocused(editor)) {
       ReactEditor.focus(editor);
@@ -30,4 +30,8 @@ export const HeadingToggleAction = (props: HeadingToggleActionProps) => {
       {children}
     </Action>
   );
+};
+
+HeadingToggleAction.defaultProps = {
+  heading: "h1",
 };

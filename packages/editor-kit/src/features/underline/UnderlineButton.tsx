@@ -1,7 +1,8 @@
 import React from "react";
-import { IconProps } from "../buttons/IconButton";
 import { MarkButton } from "../marks/MarkButton";
+import { TooltipContentProps } from "../popup/Tooltip";
+import { IconProps } from "../buttons/IconButton";
 
-export const UnderlineButton = (props: IconProps) => {
+export const UnderlineButton = (props: IconProps & TooltipContentProps) => {
   return <MarkButton {...props} type="underline" />;
 };

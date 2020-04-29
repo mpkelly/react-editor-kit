@@ -58,7 +58,7 @@ export const Link = (props: LinkProps) => {
   return (
     <Fragment>
       <Show when={!editing}>
-        <Tooltip element={element} text={element.url} />
+        <Tooltip node={element} tooltipText={element.url} />
 
         <FocusPopup element={element} fixed>
           <LinkToolbar element={element} onEditLink={handleEditLink} />

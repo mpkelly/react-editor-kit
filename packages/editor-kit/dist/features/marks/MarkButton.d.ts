@@ -1,6 +1,7 @@
 /// <reference types="react" />
 import { IconProps } from "../buttons/IconButton";
-export interface MarkButtonProps extends IconProps {
+import { TooltipContentProps } from "../popup/Tooltip";
+export interface MarkButtonProps extends IconProps, TooltipContentProps {
     type: string;
     value?: any;
 }
