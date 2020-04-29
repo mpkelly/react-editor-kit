@@ -70,6 +70,8 @@ import {
   createFixedTitlePlugin,
   TodoListPlugin,
   createFixedBlock,
+  createOutline,
+  OutlineEntry,
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 import { createStaticHashtags } from "./HashtagSuggestionPlugin";
@@ -310,6 +312,27 @@ export const GoogleDocsEditor = () => {
           </Resizable>
         </div>
       </div>
+      <SimpleOutline nodes={value} />
     </EditorKit>
+  );
+};
+
+export const SimpleOutline = (props: { nodes: Node[] }) => {
+  const { nodes } = props;
+  const outline = createOutline(nodes);
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        position: "absolute",
+        left: 16,
+        top: 100,
+      }}
+    >
+      {outline.map((entry: OutlineEntry) => {
+        return <p style={{ paddingLeft: entry.depth * 16 }}>{entry.content}</p>;
+      })}
+    </div>
   );
 };

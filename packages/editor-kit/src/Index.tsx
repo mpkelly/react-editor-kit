@@ -152,6 +152,7 @@ export * from "./features/todo-list/TodoListPlugin";
 export * from "./features/marks/MarkAction";
 export * from "./features/marks/MarkButton";
 export * from "./features/marks/MarkMenuItem";
+export * from "./features/outline/Outline";
 export {
   Editor as SlateEditor,
   NodeEntry,
