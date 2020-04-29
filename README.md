@@ -124,7 +124,7 @@ export const MyTheme = {
  `
 ```
 
-Be sure to check the [Code Sandbox Examples](https://codesandbox.io/s/react-editor-kit-examples-0e31g?file=/src/SimpleEditor.tsx) to learn more about how to override and extend Editor Kit.
+Be sure to check the [Code Sandbox Examples](https://codesandbox.io/s/react-editor-kit-examples-0e31g?file=/src/SimpleEditor.tsx) to learn more about how to override and extend Editor Kit. If you're looking for a dark theme then [this example](https://codesandbox.io/s/react-editor-kit-examples-0e31g?file=/src/DarkThemePlugin.ts) is a good start, as well as well as being a good example how much work is involved in customizing the CSS (which isn't very much).
 
 ## Concepts
 
@@ -138,29 +138,36 @@ Apart form a small core, the project functionality is plugin-based. This means y
 //All properties optional
 export type Trigger = { pattern: MatchExpression; range: EditorRange };
 
+export type HotKey = {pattern: string, handle: (editor: ReactEditor, event: KeyboardEvent, pattern: string) => boolean};
+
 export interface Plugin {
-  triggers?: Trigger[];
-  onTrigger?(
-    editor: ReactEditor,
-    match?: MatchResult[],
-    trigger?: Trigger
-  ): void;
-  renderElement?: (props: RenderElementProps) => JSX.Element | undefined;
-  renderLeaf?: (
-    props: RenderLeafProps,
-    editor: ReactEditor
-  ) => JSX.Element | undefined;
-  decorate?: (entry: NodeEntry, editor: ReactEditor) => Range[];
-  withPlugin?(editor: ReactEditor): ReactEditor;
-  editorStyles?(): string;
-  globalStyles?(): string;
-  onKeyDown?(
-    event: React.KeyboardEvent<HTMLElement>,
-    editor: ReactEditor
-  ): boolean | undefined;
-  onClick?(event: React.MouseEvent<HTMLElement>, editor: Editor): void;
-  name?: string;
-  data?: Object;
+  triggers?: Trigger[];
+  onTrigger?(
+    editor: ReactEditor,
+    match?: MatchResult[],
+    trigger?: Trigger
+  ): void;
+  styleElement?: (props: RenderElementProps) => CSSProperties | undefined;
+  getClasses?: (element: Element) => string | undefined;
+  renderElement?: (props: RenderElementProps) => JSX.Element | undefined;
+  renderLeaf?: (
+    props: RenderLeafProps,
+    editor: ReactEditor
+  ) => JSX.Element | undefined;
+  decorate?: (entry: NodeEntry, editor: ReactEditor) => Range[];
+  withPlugin?(editor: ReactEditor): ReactEditor;
+  editorStyles?(): string;
+  globalStyles?(): string;
+  onHotKey?: HotKey[];
+  onKeyDown?(
+    event: React.KeyboardEvent<HTMLElement>,
+    editor: ReactEditor
+  ): boolean | undefined;
+  onClick?(event: React.MouseEvent<HTMLElement>, editor: Editor): void;
+  contextMenu?: ContextMenuContribution[];
+  name?: string;
+  data?: Object;
+  order?: number;
 }
 ```
 

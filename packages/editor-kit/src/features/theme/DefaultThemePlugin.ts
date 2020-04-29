@@ -49,12 +49,13 @@ const GlobalStyle = `
   padding:2px 8px;
   font-size:14px;
   background-color: var(--primary-text-color);
-  box-sizing: border-box;
+  box-sizing: border-box;  
 }
 
 .rek-editor-tooltip span {
   color: var(--tooltip-text-color) !important;
-  font-size:smaller;
+    font-size:smaller;
+  font-family:var(--editor-ui-font);
 }  
 
 .rek-panel {
