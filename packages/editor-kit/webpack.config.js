@@ -7,12 +7,12 @@ var path = require("path");
 
 var config = {
   entry: {
-    app: "./src/Index.ts",
+    app: "./src/Index.tsx",
   },
   output: {
     path: path.join(__dirname, "dist"),
     filename: "index.js",
-    publicPath: "./lib",
+    publicPath: "./dist",
     libraryTarget: "umd",
     umdNamedDefine: true,
   },

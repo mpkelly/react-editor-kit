@@ -67,7 +67,9 @@ import {
   ErrorAlertPlugin,
   WarningAlertPlugin,
   createInitialLetterPlugin,
+  createFixedTitlePlugin,
   TodoListPlugin,
+  createFixedBlock,
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 import { createStaticHashtags } from "./HashtagSuggestionPlugin";
@@ -137,9 +139,11 @@ const plugins: Plugin[] = [
   createInitialLetterPlugin(),
   InsertContextMenuPlugin,
   FormatContextMenuPlugin,
+  createFixedTitlePlugin(),
 ];
 
 const initialValue = [
+  // createFixedBlock(),
   {
     type: "paragraph",
     children: [

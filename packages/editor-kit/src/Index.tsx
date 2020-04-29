@@ -1,5 +1,3 @@
-import isHotkey from "is-hotkey";
-
 export * from "./editor/Editor";
 export * from "./editor/LastFocusedNode";
 export * from "./editor/Focus";
@@ -145,6 +143,7 @@ export * from "./features/suggestions/Suggestions";
 export * from "./features/suggestions/SuggestionsPlugin";
 export * from "./features/auto-focus/AutoFocusPlugin";
 export * from "./features/delete-key/DeleteKeyHandlerPlugin";
+export * from "./features/fixed-title/FixedTitlePlugin";
 export * from "./features/buttons/IconButton";
 export * from "./features/menu/Menu";
 export * from "./features/menu/MenuItem";
