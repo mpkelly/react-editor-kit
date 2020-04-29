@@ -10,7 +10,7 @@ var config = {
     app: "./src/Index.ts",
   },
   output: {
-    path: path.join(__dirname, "dist"),
+    path: path.join(__dirname, "lib"),
     filename: "index.js",
     publicPath: "./lib",
     libraryTarget: "umd",
@@ -43,18 +43,8 @@ var config = {
     new HardSourceWebpackPlugin(),
   ],
   externals: {
-    "react-dom": {
-      commonjs: "react-dom",
-      commonjs2: "react-dom",
-      amd: "react-dom",
-      root: "ReactDOM",
-    },
-    react: {
-      commonjs2: "react",
-      commonjs: "react",
-      amd: "react",
-      root: "React",
-    },
+    slate: true,
+    "slate-react": true,
   },
 };
 

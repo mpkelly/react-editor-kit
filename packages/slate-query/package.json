@@ -1,0 +1,58 @@
+{
+  "name": "slate-query",
+  "version": "0.0.1",
+  "description": "A small library for querying Slate's data model which is an alternative to the Path-based API.",
+  "keywords": [
+    "Slate",
+    "React",
+    "Query"
+  ],
+  "author": "mkelly <kikemelly@gmail.com>",
+  "homepage": "https://github.com/mpkelly/react-editor-kit#readme",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "typings": "lib/Index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mpkelly/react-editor-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mpkelly/react-editor-kit/issues"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-transform-async-to-generator": "^7.7.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/polyfill": "^7.7.0",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "@babel/runtime": "^7.7.2",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "*",
+    "hard-source-webpack-plugin": "^0.13.1",
+    "slate": "github:mpkelly/slate#slate-v0.57.3-gitpkg",
+    "slate-react": "github:mpkelly/slate#slate-react-v0.57.4-gitpkg",
+    "source-map-loader": "^0.2.4",
+    "stylis": "^4.0.0",
+    "terser-webpack-plugin": "^2.2.1",
+    "typescript": "^3.8.0-dev.20191216",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-glob": "^2.0.2"
+  },
+  "scripts": {
+    "watch": "webpack -w --mode=development",
+    "dist": "npm run typings && webpack --mode=production",
+    "clean": "find dist -name '*.d.ts' -delete",
+    "typings": "tsc src/Index.ts -d --emitDeclarationOnly --allowJs false --downlevelIteration --jsx react --skipLibCheck   --esModuleInterop true --outDir ./lib"
+  }
+}
