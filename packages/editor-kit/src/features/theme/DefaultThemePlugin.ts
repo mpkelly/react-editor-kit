@@ -5,6 +5,9 @@ import {
   PopupContentLayer,
   OverlayLayer,
   ResizeHandleLayer,
+  MenuLayer,
+  MenuItemLayer,
+  HoverItemLayer,
 } from "../../ui/Layers";
 
 export const DefaultThemePlugin: Plugin = {
@@ -398,6 +401,7 @@ input[type=number] {
   .rek-menu {
     position:fixed;
     box-sizing: border-box;
+    z-index:${MenuLayer};
   }
 
   .rek-menu-divider {
@@ -417,8 +421,10 @@ input[type=number] {
     cursor:pointer;
     white-space: nowrap;
     background-color:var(--content-background);
+    z-index:${MenuItemLayer};
     &:hover {
       background-color:var(--control-hover-color);
+      z-index:${HoverItemLayer};
     }    
     .rek-menu-item-icon {
       min-width:30px;      
@@ -429,7 +435,7 @@ input[type=number] {
     }
     .rek-menu-item-text {
       margin:0 8px;
-      font-size:smaller;
+      font-size:smaller;      
     }
     .rek-menu-item-right {            
       margin-left:auto;

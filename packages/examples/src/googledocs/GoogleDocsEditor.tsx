@@ -135,8 +135,8 @@ const plugins: Plugin[] = [
   TodoListPlugin,
   createEmoticonSuggestions(),
   createInitialLetterPlugin(),
-  // InsertContextMenuPlugin,
-  // FormatContextMenuPlugin,
+  InsertContextMenuPlugin,
+  FormatContextMenuPlugin,
 ];
 
 const initialValue = [
