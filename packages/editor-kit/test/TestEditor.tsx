@@ -61,6 +61,7 @@ import {
   createStaticMentions,
   TextAlignPlugin,
   ImagePlugin,
+  createInitialLetterPlugin,
 } from "../src/Index";
 import ReactDOM from "react-dom";
 
@@ -122,6 +123,7 @@ const plugins: Plugin[] = [
     ],
   }),
   EnterKeyHandlerPlugin,
+  createInitialLetterPlugin(),
 ];
 
 const initialValue = [

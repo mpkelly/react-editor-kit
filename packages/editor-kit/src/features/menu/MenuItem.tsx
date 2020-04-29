@@ -70,7 +70,7 @@ export const MenuItem = (props: MenuItemProps) => {
     const anchor = element.getBoundingClientRect();
     const bounds = childMenuElement.getBoundingClientRect();
     style = getPosition(bounds, anchor, "auto", false, { v: 0 });
-    // Need to maintain alignment so override auto's verical position
+    // Need to maintain alignment so override auto's vertical position
     // as this mode doesn't support chaining
     const halfHeight = window.innerHeight / 2;
     if (anchor.top < halfHeight) {
@@ -86,6 +86,7 @@ export const MenuItem = (props: MenuItemProps) => {
       className="rek-menu-item"
       data-disabled={disabled}
       data-active={active}
+      data-name={text}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={(event) => {

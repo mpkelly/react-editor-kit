@@ -9,7 +9,7 @@ import React, {
   memo,
   useCallback,
 } from "react";
-import { createEditor as createSlateEditor, Transforms } from "slate";
+import { createEditor as createSlateEditor, Transforms, Node } from "slate";
 import { withReact, ReactEditor } from "slate-react";
 import * as StylisDefault from "stylis";
 import { Plugin } from "../plugins/Plugin";
@@ -82,7 +82,11 @@ export const EditorKit = memo((props: EditorKitProps) => {
     generateStyle(plugins, id);
   }, [props.plugins]);
 
-  maybeConfigureTesting(editor, forceUpdate);
+  const render = useCallback((value = {}) => {
+    forceUpdate(value);
+  }, []);
+
+  maybeConfigureTesting(editor, render);
   onEditor && onEditor(editor);
 
   const disableReadOnly = () => {
@@ -92,10 +96,6 @@ export const EditorKit = memo((props: EditorKitProps) => {
   const enableReadOnly = () => {
     setReadOnly(true);
   };
-
-  const render = useCallback(() => {
-    forceUpdate({});
-  }, []);
 
   const {
     spellCheck,
@@ -186,29 +186,6 @@ const generateStyle = (plugins: Plugin[], id: string) => {
   attachEditorStyle(css, id);
 };
 
-const maybeConfigureTesting = (editor: ReactEditor, forceUpdate: Function) => {
-  if ((window as any).enableEditorKitOnGlobalScope) {
-    const global: any = window;
-    global.editor = editor;
-    global.focusEditor = () => {
-      ReactEditor.focus(editor);
-    };
-    global.blurEditor = () => {
-      ReactEditor.blur(editor);
-    };
-    global.refreshEditor = () => forceUpdate();
-    global.focusNode = (node: HTMLElement) => {
-      const slateNode = ReactEditor.toSlateNode(editor, node);
-      if (slateNode) {
-        Transforms.select(editor, ReactEditor.findPath(editor, slateNode));
-      }
-    };
-    global.deleteBackward = (distance: number, unit: string = "character") => {
-      deleteBackward(editor, distance, unit as any);
-    };
-  }
-};
-
 const attachEditorStyle = (css: string, id: string) => {
   const linkElement = document.createElement("link");
   const styleId = `rek-styles-${id}`;
@@ -224,4 +201,39 @@ const attachEditorStyle = (css: string, id: string) => {
     "data:text/css;charset=UTF-8," + encodeURIComponent(css)
   );
   document.head.appendChild(linkElement);
+};
+
+const maybeConfigureTesting = (editor: ReactEditor, forceUpdate: Function) => {
+  if ((window as any).enableEditorKitOnGlobalScope) {
+    const global: any = window;
+    global.editor = editor;
+    global.focusEditor = () => {
+      ReactEditor.focus(editor);
+    };
+    global.blurEditor = () => {
+      ReactEditor.blur(editor);
+    };
+    global.refreshEditor = () => forceUpdate({});
+
+    global.setEditorValue = (value: Node[]) => {
+      console.log(editor.children.slice());
+      Transforms.removeNodes(editor, { at: [0] });
+      Transforms.insertNodes(editor, value);
+      console.log(value);
+      console.log(editor.children.slice());
+    };
+
+    global.focusNode = (
+      node: HTMLElement,
+      point: "start" | "end" = "start"
+    ) => {
+      const slateNode = ReactEditor.toSlateNode(editor, node);
+      if (slateNode) {
+        Transforms.select(editor, ReactEditor.findPath(editor, slateNode));
+      }
+    };
+    global.deleteBackward = (distance: number, unit: string = "character") => {
+      deleteBackward(editor, distance, unit as any);
+    };
+  }
 };
