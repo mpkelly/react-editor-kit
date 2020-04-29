@@ -50,7 +50,6 @@ export const createInitialLetterPlugin = (
       {
         trigger: {
           matched: (editor) => {
-            console.log("Check");
             return !isInitialLetterActive(editor);
           },
         },

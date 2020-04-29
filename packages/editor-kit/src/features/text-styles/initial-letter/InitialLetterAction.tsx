@@ -50,10 +50,8 @@ export const InitialLetterAction = (props: InitialLetterActionProps) => {
 
 export const isInitialLetterActive = (editor: ReactEditor) => {
   const range = findInitialLetterRange(editor);
-  console.log("1", range);
   if (range) {
     const [node] = Editor.node(editor, range);
-    console.log("2", node);
     return node.initialLetter;
   }
   return false;
@@ -80,10 +78,7 @@ export const findInitialLetterRange = (editor: ReactEditor): Range | null => {
     element as Element,
     selection.anchor.path
   );
-  console.log("1", textOffset);
   const offsetInParent = textOffset + selection.anchor.offset;
-
-  console.log("1a", offsetInParent);
 
   // Find the first line break before the selection, if there is one, to use are our
   // start location - the target char must come after this point
