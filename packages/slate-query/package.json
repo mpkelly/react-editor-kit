@@ -1,6 +1,6 @@
 {
   "name": "slate-query",
-  "version": "0.0.53",
+  "version": "0.0.54",
   "description": "A small library for querying Slate's data model which is an alternative to the Path-based API.",
   "keywords": [
     "Slate",
@@ -10,6 +10,7 @@
   "author": "mkelly <kikemelly@gmail.com>",
   "homepage": "https://github.com/mpkelly/react-editor-kit#readme",
   "license": "ISC",
+  "private": true,
   "main": "lib/index.js",
   "typings": "lib/Index.d.ts",
   "directories": {
