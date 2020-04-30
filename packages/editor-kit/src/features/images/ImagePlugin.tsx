@@ -48,20 +48,20 @@ export const ImagePlugin: Plugin = {
   editorStyles: () => EditorStyles,
 };
 
-export const isImageUrl = (url: string) => {
+export const isImageUrl = (url: string, extensions = ImageExtensions) => {
   if (!url) return false;
   if (!isUrl(url)) return false;
   const ext = new URL(url).pathname.split(".").pop() as string;
-  return ImageExtensions.includes(ext);
+  return extensions.includes(ext);
 };
 
-const insertImage = (editor: ReactEditor, url: string) => {
+export const insertImage = (editor: ReactEditor, url: string) => {
   const text = { text: "" };
   const image = { type: "image", url, children: [text] };
   Transforms.insertNodes(editor, image);
 };
 
-export const EditorStyles = `
+const EditorStyles = `
   .rek-image {
     display: block;
     width: 100%;

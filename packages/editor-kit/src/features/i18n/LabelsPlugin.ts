@@ -16,6 +16,7 @@ export interface EditorLabels {
   borderless: string;
   save: string;
   validVideoUrl: string;
+  validImageUrl: string;
   initialLetterOn: string;
   initialLetterOff: string;
 }
@@ -36,6 +37,7 @@ export const EnglishLabels: EditorLabels = {
   borderless: "Borderless",
   save: "Save",
   validVideoUrl: "A valid video URL",
+  validImageUrl: "A valid image URL",
   initialLetterOn: "Initial letter on",
   initialLetterOff: "Initial letter off",
 };

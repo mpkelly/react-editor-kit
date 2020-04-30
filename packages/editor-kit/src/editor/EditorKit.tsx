@@ -130,9 +130,15 @@ export const EditorKit = memo((props: EditorKitProps) => {
   return (
     <Context.Provider value={context}>
       <Fragment>{children}</Fragment>
+      <FileUpload />
     </Context.Provider>
   );
 });
+
+export const UploadId = "uploadMedia";
+export const FileUpload = () => (
+  <input type="file" id={UploadId} hidden multiple />
+);
 
 const getPlugins = (userPlugins: Plugin[]) => {
   return InternalPlugins.filter(
@@ -216,11 +222,8 @@ const maybeConfigureTesting = (editor: ReactEditor, forceUpdate: Function) => {
     global.refreshEditor = () => forceUpdate({});
 
     global.setEditorValue = (value: Node[]) => {
-      console.log(editor.children.slice());
       Transforms.removeNodes(editor, { at: [0] });
       Transforms.insertNodes(editor, value);
-      console.log(value);
-      console.log(editor.children.slice());
     };
 
     global.focusNode = (

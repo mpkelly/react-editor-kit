@@ -5,11 +5,11 @@ import { DeletableBlock } from "../blocks/DeletableBlock";
 import { usePlugin } from "../../plugins/usePlugin";
 import { Icon } from "../icons/Icon";
 import { ModalPopup } from "../popup/ElementModalPopup";
-import { stopEvent } from "../../ui/Utils";
 import { useEditorKit } from "../../editor/EditorKit";
 import { IconProvider } from "../icons/IconProviderPlugin";
 import { Transforms } from "slate";
 import { Labels } from "../i18n/LabelsPlugin";
+import { SaveDialog } from "../../ui/SaveDialog";
 
 export const Video = memo((props: RenderElementProps) => {
   const { attributes, element, children } = props;
@@ -67,39 +67,23 @@ export interface VideoSettingsProps extends RenderElementProps {}
 
 export const VideoSettings = memo((props: VideoSettingsProps) => {
   const { element } = props;
-  const [url, setUrl] = useState(element.url);
   const { editor } = useEditorKit();
   const { data: labels } = usePlugin("labels") as Labels;
-  const handleUrlChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setUrl(event.currentTarget.value);
-    },
-    []
-  );
-  const handleSave = useCallback(() => {
+  const handleSave = (url: string) => {
     Transforms.setNodes(
       editor,
       { url },
       { at: ReactEditor.findPath(editor, element) }
     );
-  }, [url]);
+  };
 
   return (
-    <div
-      className="rek-video-settings rek-panel"
-      onClick={stopEvent}
-      data-slate-zero-width="z"
-    >
-      <input
-        autoFocus
-        value={url}
-        onChange={handleUrlChange}
-        className="rek-input"
-        placeholder={labels.validVideoUrl}
-      />
-      <button className="rek-button" onClick={handleSave}>
-        {labels.save}
-      </button>
-    </div>
+    <SaveDialog
+      className={"rek-video-settings"}
+      saveButtonText={labels.save}
+      placeholderText={labels.validVideoUrl}
+      value={element.url}
+      onSave={handleSave}
+    />
   );
 });

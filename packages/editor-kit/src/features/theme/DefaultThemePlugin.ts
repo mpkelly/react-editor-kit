@@ -459,6 +459,19 @@ input[type=number] {
     opacity:.5;
   }
 
+  .rek-save-dialog {
+    padding:8px;
+    display:flex;
+    
+    input {
+      width:240px;
+      height:26px;
+    }
+    .rek-button {
+      margin-left:8px;
+    }
+  }
+
 `;
 
 const EditorStyle = `  

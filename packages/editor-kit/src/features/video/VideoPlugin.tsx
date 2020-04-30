@@ -44,19 +44,9 @@ export const VideoPlugin: Plugin = {
 };
 
 const GlobalStyle = `
-.rek-video-settings {
-  padding:8px;
-  display:flex;
-  margin-bottom:16px;
-
-  input {
-    width:240px;
-    height:26px;
+  .rek-video-settings {
+    margin-bottom:16px;
   }
-  .rek-button {
-    margin-left:8px;
-  }
-}
 `;
 
 const EditorStyle = `

@@ -72,6 +72,9 @@ import {
   createFixedBlock,
   createOutline,
   OutlineEntry,
+  ImageButton,
+  UploadImageMenuItem,
+  InsertImageByUrlMenuItem,
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 import { createStaticHashtags } from "./HashtagSuggestionPlugin";
@@ -141,7 +144,7 @@ const plugins: Plugin[] = [
   createInitialLetterPlugin(),
   InsertContextMenuPlugin,
   FormatContextMenuPlugin,
-  createFixedTitlePlugin(),
+  // createFixedTitlePlugin(),
 ];
 
 const initialValue = [
@@ -267,6 +270,22 @@ export const GoogleDocsEditor = () => {
             className="material-icons-round"
             ligature="format_quote"
           />
+          <ImageButton className="material-icons-round" ligature="insert_photo">
+            <UploadImageMenuItem
+              icon={{
+                className: "material-icons-round",
+                ligature: "publish",
+              }}
+              text={"Upload image"}
+            />
+            <InsertImageByUrlMenuItem
+              icon={{
+                className: "material-icons-round",
+                ligature: "link",
+              }}
+              text={"Insert by URL"}
+            />
+          </ImageButton>
           <TableButton className="material-icons-round" ligature="grid_on" />
           <VideoButton className="material-icons-round" ligature="videocam" />
           <Divider />

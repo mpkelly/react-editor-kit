@@ -9,6 +9,7 @@ export type Location =
   | "end"
   | "top"
   | "bottom"
+  | "center"
   | "auto";
 
 export interface Offsets {
@@ -44,7 +45,8 @@ export const getAbsolutePosition = (
 ): CSSProperties => {
   const voffset = offsets.v || 0;
   const hoffset = offsets.h || 0;
-  const center = anchor.width / 2 - bounds.width / 2;
+  const centerH = anchor.width / 2 - bounds.width / 2;
+  const centerV = anchor.height / 2 - bounds.height / 2;
   const halfWidth = window.innerWidth / 2;
   const halfHeight = window.innerHeight / 2;
   switch (position) {
@@ -58,12 +60,12 @@ export const getAbsolutePosition = (
     case "inside-top":
       return {
         top: voffset,
-        left: center,
+        left: centerH,
       };
     case "inside-bottom":
       return {
         top: anchor.height - voffset,
-        left: center,
+        left: centerH,
       };
     case "start":
       return {
@@ -78,12 +80,17 @@ export const getAbsolutePosition = (
     case "top":
       return {
         top: -(anchor.height + voffset),
-        left: center,
+        left: centerH,
       };
     case "bottom":
       return {
         top: anchor.height + voffset,
-        left: center,
+        left: centerH,
+      };
+    case "center":
+      return {
+        top: centerV + voffset,
+        left: centerH + hoffset,
       };
     case "auto":
       let left = anchor.width + hoffset;
@@ -107,7 +114,8 @@ export const getFixedPosition = (
   position: Location = "bottom",
   offsets: { h?: number; v?: number } = { v: 0, h: 0 }
 ): CSSProperties => {
-  const center = anchor.left + anchor.width / 2 - bounds.width / 2;
+  const centerV = anchor.top + anchor.height / 2 - bounds.height / 2;
+  const centerH = anchor.left + anchor.width / 2 - bounds.width / 2;
   const voffset = offsets.v || 0;
   const hoffset = offsets.h || 0;
   const halfWidth = window.innerWidth / 2;
@@ -126,12 +134,12 @@ export const getFixedPosition = (
     case "inside-top":
       return {
         top: anchor.top + voffset,
-        left: center,
+        left: centerH,
       };
     case "inside-bottom":
       return {
         top: anchor.top + anchor.height - bounds.height + voffset,
-        left: center,
+        left: centerH,
       };
     case "start":
       return {
@@ -146,12 +154,17 @@ export const getFixedPosition = (
     case "top":
       return {
         top: anchor.top - bounds.height + voffset,
-        left: center,
+        left: centerH,
       };
     case "bottom":
       return {
         top: anchor.top + anchor.height + voffset,
-        left: center,
+        left: centerH,
+      };
+    case "center":
+      return {
+        top: centerV + voffset,
+        left: centerH + hoffset,
       };
     case "auto":
       let left = anchor.left + anchor.width + hoffset;

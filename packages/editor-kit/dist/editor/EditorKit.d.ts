@@ -24,3 +24,5 @@ export interface EditorKitProps {
     id?: string;
 }
 export declare const EditorKit: React.MemoExoticComponent<(props: EditorKitProps) => JSX.Element>;
+export declare const UploadId = "uploadMedia";
+export declare const FileUpload: () => JSX.Element;

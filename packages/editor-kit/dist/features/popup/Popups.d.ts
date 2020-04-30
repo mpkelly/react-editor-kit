@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-export declare type Location = "inside-start" | "inside-end" | "inside-top" | "inside-bottom" | "start" | "end" | "top" | "bottom" | "auto";
+export declare type Location = "inside-start" | "inside-end" | "inside-top" | "inside-bottom" | "start" | "end" | "top" | "bottom" | "center" | "auto";
 export interface Offsets {
     h?: number;
     v?: number;

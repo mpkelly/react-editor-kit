@@ -35,7 +35,6 @@ export const HoverPopup = memo((props: HoverPopupProps) => {
     children,
     offsets,
   } = props;
-  console.log(node, element);
   if (!node && !element) {
     return children as JSX.Element;
   }
@@ -71,7 +70,6 @@ export const HoverPopup = memo((props: HoverPopupProps) => {
 
   const showWhenFocused = hideWhenFocusedWithin ? !isFocusedWithin : true;
   const show = over && showWhenFocused;
-  console.log(show, over, showWhenFocused);
 
   return (
     <Fragment>

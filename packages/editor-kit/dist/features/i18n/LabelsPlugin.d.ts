@@ -15,6 +15,7 @@ export interface EditorLabels {
     borderless: string;
     save: string;
     validVideoUrl: string;
+    validImageUrl: string;
     initialLetterOn: string;
     initialLetterOff: string;
 }

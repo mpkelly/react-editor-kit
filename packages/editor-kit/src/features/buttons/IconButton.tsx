@@ -1,4 +1,11 @@
-import React, { useRef, Fragment, useCallback, useState } from "react";
+import React, {
+  useRef,
+  Fragment,
+  useCallback,
+  useState,
+  RefObject,
+  Ref,
+} from "react";
 import { ActionChildProps } from "../actions/Action";
 import { Tooltip, TooltipContentProps } from "../popup/Tooltip";
 import { Show } from "../../ui/Show";
@@ -6,6 +13,7 @@ import { Show } from "../../ui/Show";
 export interface IconProps extends TooltipContentProps {
   className: string;
   ligature?: string;
+  onRef?(node?: HTMLElement | null): void;
 }
 
 export interface IconButtonProps extends ActionChildProps, IconProps {}
@@ -21,6 +29,7 @@ export const IconButton = (props: IconButtonProps) => {
     tooltipComponent,
     tooltipLocation,
     tooltipOffsets,
+    onRef,
     ...rest
   } = props;
   const activeClass = active ? "active" : "";
@@ -31,16 +40,13 @@ export const IconButton = (props: IconButtonProps) => {
   const handleRef = useCallback(
     (node?: HTMLElement | null) => {
       if (node && !element) {
-        console.log("Set");
         setElement(node);
       }
+      onRef && onRef(node);
     },
     [element]
   );
   const hasTooltip = tooltipText || tooltipComponent;
-  if (hasTooltip) {
-    console.log(ligature, element);
-  }
 
   return (
     <Fragment>

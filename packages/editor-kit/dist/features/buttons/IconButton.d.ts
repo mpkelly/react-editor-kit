@@ -4,6 +4,7 @@ import { TooltipContentProps } from "../popup/Tooltip";
 export interface IconProps extends TooltipContentProps {
     className: string;
     ligature?: string;
+    onRef?(node?: HTMLElement | null): void;
 }
 export interface IconButtonProps extends ActionChildProps, IconProps {
 }
