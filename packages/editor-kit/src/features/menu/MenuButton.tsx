@@ -3,7 +3,9 @@ import { MenuProps, Menu } from "./Menu";
 import { IconProps, IconButton } from "../buttons/IconButton";
 import { ModalPopup } from "../popup/HTMLElementModalPopup";
 
-export interface MenuButtonProps extends IconProps, MenuProps {}
+export interface MenuButtonProps
+  extends IconProps,
+    Omit<MenuProps, "className"> {}
 
 export const MenuButton = (props: MenuButtonProps) => {
   const { children, style, ...rest } = props;
@@ -12,6 +14,7 @@ export const MenuButton = (props: MenuButtonProps) => {
   const toggleShow = () => {
     setShow((show) => !show);
   };
+
   return (
     <Fragment>
       <IconButton
@@ -24,7 +27,9 @@ export const MenuButton = (props: MenuButtonProps) => {
         show={show}
         onClickOutside={toggleShow}
       >
-        <Menu style={style}>{children}</Menu>
+        <Menu style={style} className={"rek-menu-button-menu"}>
+          {children}
+        </Menu>
       </ModalPopup>
     </Fragment>
   );

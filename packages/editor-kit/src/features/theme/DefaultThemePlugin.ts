@@ -459,6 +459,10 @@ input[type=number] {
     opacity:.5;
   }
 
+  .rek-menu-button-menu {
+    position:static;
+  }
+
   .rek-save-dialog {
     padding:8px;
     display:flex;
@@ -471,6 +475,8 @@ input[type=number] {
       margin-left:8px;
     }
   }
+
+
 
 `;
 
