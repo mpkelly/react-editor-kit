@@ -1,18 +1,13 @@
-import React, {
-  useRef,
-  Fragment,
-  useCallback,
-  useState,
-  RefObject,
-  Ref,
-} from "react";
+import React, { Fragment, useCallback, useState } from "react";
 import { ActionChildProps } from "../actions/Action";
 import { Tooltip, TooltipContentProps } from "../popup/Tooltip";
 import { Show } from "../../ui/Show";
+import { Icon, EditorIcon } from "../icons/Icon";
 
 export interface IconProps extends TooltipContentProps {
-  className: string;
+  className?: string;
   ligature?: string;
+  icon?: EditorIcon;
   onRef?(node?: HTMLElement | null): void;
 }
 
@@ -22,6 +17,7 @@ export const IconButton = (props: IconButtonProps) => {
   const {
     active,
     onMouseDown,
+    icon,
     className,
     ligature,
     disabled,
@@ -34,12 +30,12 @@ export const IconButton = (props: IconButtonProps) => {
   } = props;
   const activeClass = active ? "active" : "";
   const disabledClass = disabled ? "rek-disabled" : "";
-  const clazz = `rek-icon-button rek-icon rek-css-icon ${className} ${activeClass} ${disabledClass}`;
+  const clazz = `rek-icon-button rek-icon ${className} ${activeClass} ${disabledClass}`;
   const [element, setElement] = useState<HTMLElement>();
 
   const handleRef = useCallback(
     (node?: HTMLElement | null) => {
-      if (node && !element) {
+      if (node && node != element) {
         setElement(node);
       }
       onRef && onRef(node);
@@ -47,6 +43,8 @@ export const IconButton = (props: IconButtonProps) => {
     [element]
   );
   const hasTooltip = tooltipText || tooltipComponent;
+
+  const editorIcon: EditorIcon = icon ? icon : { className, ligature };
 
   return (
     <Fragment>
@@ -59,14 +57,13 @@ export const IconButton = (props: IconButtonProps) => {
           tooltipOffsets={tooltipOffsets}
         />
       </Show>
-      <span
+      <Icon
+        icon={editorIcon}
         className={clazz}
         onMouseDown={onMouseDown}
         ref={handleRef}
         {...rest}
-      >
-        {ligature}
-      </span>
+      />
     </Fragment>
   );
 };

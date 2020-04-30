@@ -4,6 +4,7 @@ import { Action } from "../actions/Action";
 import { isNodeActive } from "../blocks/Blocks";
 import { usePlugin } from "../../plugins/usePlugin";
 import { useLastFocused } from "../../editor/LastFocusedNode";
+import { Trigger } from "../../plugins/Plugin";
 
 export interface TableActionProps {
   children: React.ReactNode;
@@ -15,7 +16,7 @@ export const TableAction = (props: TableActionProps) => {
   const plugin = usePlugin("table");
   const onMouseDown = () => {
     if (plugin && plugin.onTrigger) {
-      plugin.onTrigger(editor);
+      plugin.onTrigger(editor, [], (undefined as unknown) as Trigger);
     }
   };
   const { node } = useLastFocused(editor);

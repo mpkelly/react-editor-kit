@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, forwardRef } from "react";
 import { stopEvent } from "../../ui/Utils";
 
 export type EditorIcon = CssIcon | ReactNode;
@@ -15,24 +15,38 @@ export interface ReactIconProps {
   onClick?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
 }
 
-export const Icon = (props: ReactIconProps) => {
-  const { icon, className, onClick, onMouseDown } = props;
-  const iconClassName = (icon as CssIcon).className;
-  if (iconClassName) {
+export const Icon = forwardRef<HTMLDivElement, ReactIconProps>(
+  (props: ReactIconProps, ref) => {
+    const { icon, className, onClick, onMouseDown, ...rest } = props;
+    const iconClassName = (icon as CssIcon).className;
+    if (iconClassName) {
+      return (
+        <span
+          className={`rek-icon ${className} ${iconClassName}`}
+          children={(icon as CssIcon).ligature}
+          onClick={onClick}
+          onMouseDown={(event) => {
+            stopEvent(event);
+            onMouseDown && onMouseDown(event);
+          }}
+          contentEditable={false}
+          data-slate-void="true"
+          ref={ref}
+          {...rest}
+        />
+      );
+    }
+    const reactIcon = icon as JSX.Element;
     return (
-      <span
-        className={`rek-icon ${className} ${iconClassName}`}
-        children={(icon as CssIcon).ligature}
+      <div
+        ref={ref}
         onClick={onClick}
-        onMouseDown={(event) => {
-          stopEvent(event);
-          onMouseDown && onMouseDown(event);
-        }}
-        contentEditable={false}
-        data-slate-void="true"
-      />
+        onMouseDown={onMouseDown}
+        className={`rek-icon ${className}`}
+        {...rest}
+      >
+        {reactIcon}
+      </div>
     );
   }
-  const reactIcon = icon as JSX.Element;
-  return React.cloneElement(reactIcon, { onClick, onMouseDown });
-};
+);

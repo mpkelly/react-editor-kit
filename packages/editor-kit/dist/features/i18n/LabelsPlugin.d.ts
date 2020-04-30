@@ -18,6 +18,9 @@ export interface EditorLabels {
     validImageUrl: string;
     initialLetterOn: string;
     initialLetterOff: string;
+    removeDueDate: string;
+    moveToTop: string;
+    delete: string;
 }
 export declare const EnglishLabels: EditorLabels;
 export interface Labels extends Plugin {

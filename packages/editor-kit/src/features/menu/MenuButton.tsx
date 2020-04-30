@@ -1,24 +1,24 @@
-import React, { Fragment, useState, useRef } from "react";
+import React, { Fragment, useState, useRef, FunctionComponent } from "react";
 import { MenuProps, Menu } from "./Menu";
 import { IconProps, IconButton } from "../buttons/IconButton";
 import { ModalPopup } from "../popup/HTMLElementModalPopup";
-import { useLastFocused } from "../../editor/LastFocusedNode";
-import { useEditorKit } from "../../editor/EditorKit";
 
 export interface MenuButtonProps
   extends IconProps,
-    Omit<MenuProps, "className"> {}
+    Omit<MenuProps, "className"> {
+  disabled?: boolean;
+  menuClassName?: string;
+}
 
-export const MenuButton = (props: MenuButtonProps) => {
-  const { children, style, ...rest } = props;
-  const { editor } = useEditorKit();
+export const MenuButton: FunctionComponent<MenuButtonProps> = (
+  props: MenuButtonProps
+) => {
+  const { children, style, disabled, menuClassName, ...rest } = props;
   const [show, setShow] = useState(false);
   const element = useRef<HTMLElement | null>();
-  const { node } = useLastFocused(editor);
-  const enabled = editor.isNodeSupported("image", node);
 
   const toggleShow = () => {
-    if (enabled) {
+    if (!disabled) {
       setShow((show) => !show);
     }
   };
@@ -28,18 +28,22 @@ export const MenuButton = (props: MenuButtonProps) => {
       <IconButton
         {...rest}
         onMouseDown={toggleShow}
-        disabled={!enabled}
+        disabled={disabled}
         onRef={(node) => (element.current = node)}
-      ></IconButton>
+      />
       <ModalPopup
         element={element.current as HTMLElement}
         show={show}
         onClickOutside={toggleShow}
       >
-        <Menu style={style} className={"rek-menu-button-menu"}>
+        <Menu style={style} className={"rek-menu-button-menu " + menuClassName}>
           {children}
         </Menu>
       </ModalPopup>
     </Fragment>
   );
+};
+
+MenuButton.defaultProps = {
+  menuClassName: "",
 };

@@ -5,7 +5,11 @@ import { MatchExpression, MatchResult } from "../editor/Matching";
 import { CSSProperties } from "react";
 import { ContextMenuContribution } from "../features/context-menu/ContextMenu";
 
-export type Trigger = { pattern: MatchExpression; range?: EditorRange };
+export type Trigger = {
+  pattern: MatchExpression;
+  range?: EditorRange;
+  id?: any;
+};
 
 export type HotKey = {
   pattern: string;
@@ -18,11 +22,7 @@ export type HotKey = {
 
 export interface Plugin {
   triggers?: Trigger[];
-  onTrigger?(
-    editor: ReactEditor,
-    match?: MatchResult[],
-    trigger?: Trigger
-  ): void;
+  onTrigger?(editor: ReactEditor, match: MatchResult[], trigger: Trigger): void;
   styleElement?: (props: RenderElementProps) => CSSProperties | undefined;
   getClasses?: (element: Element) => string | undefined;
   renderElement?: (props: RenderElementProps) => JSX.Element | undefined;

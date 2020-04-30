@@ -7,6 +7,7 @@ import { ContextMenuContribution } from "../features/context-menu/ContextMenu";
 export declare type Trigger = {
     pattern: MatchExpression;
     range?: EditorRange;
+    id?: any;
 };
 export declare type HotKey = {
     pattern: string;
@@ -14,7 +15,7 @@ export declare type HotKey = {
 };
 export interface Plugin {
     triggers?: Trigger[];
-    onTrigger?(editor: ReactEditor, match?: MatchResult[], trigger?: Trigger): void;
+    onTrigger?(editor: ReactEditor, match: MatchResult[], trigger: Trigger): void;
     styleElement?: (props: RenderElementProps) => CSSProperties | undefined;
     getClasses?: (element: Element) => string | undefined;
     renderElement?: (props: RenderElementProps) => JSX.Element | undefined;
@@ -33,7 +34,7 @@ export interface Plugin {
 }
 export declare const createPlugin: (plugin: Plugin, ...triggers: Trigger[]) => {
     triggers: Trigger[];
-    onTrigger?(editor: ReactEditor, match?: MatchResult[], trigger?: Trigger): void;
+    onTrigger?(editor: ReactEditor, match: MatchResult[], trigger: Trigger): void;
     styleElement?: (props: RenderElementProps) => CSSProperties;
     getClasses?: (element: Element) => string;
     renderElement?: (props: RenderElementProps) => JSX.Element;

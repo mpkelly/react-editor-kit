@@ -10,4 +10,4 @@ export interface ReactIconProps {
     onMouseDown?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
     onClick?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
 }
-export declare const Icon: (props: ReactIconProps) => JSX.Element;
+export declare const Icon: React.ForwardRefExoticComponent<ReactIconProps & React.RefAttributes<HTMLDivElement>>;

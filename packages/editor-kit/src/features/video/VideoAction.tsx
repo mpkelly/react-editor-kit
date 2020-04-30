@@ -1,6 +1,6 @@
 import React from "react";
 import { Action } from "../actions/Action";
-import { Plugin } from "../../plugins/Plugin";
+import { Plugin, Trigger } from "../../plugins/Plugin";
 import { isNodeActive } from "../blocks/Blocks";
 import { useEditorKit } from "../../editor/EditorKit";
 import { usePlugin } from "../../plugins/usePlugin";
@@ -16,7 +16,8 @@ export const VideoAction = (props: VideoActionProps) => {
   const video = usePlugin("video") as Plugin;
   const { node } = useLastFocused(editor);
   const onMouseDown = () => {
-    video.onTrigger && video.onTrigger(editor);
+    video.onTrigger &&
+      video.onTrigger(editor, [], (undefined as unknown) as Trigger);
   };
   const isActive = () => isNodeActive(editor, "video");
   const enabled = editor.isNodeSupported("video", node);

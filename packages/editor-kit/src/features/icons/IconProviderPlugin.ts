@@ -11,6 +11,8 @@ import { SettingsIcon } from "./SettingsIcon";
 import { DropdownIcon } from "./DropdownIcon";
 import { MoreIcon } from "./MoreIcon";
 import { CheckIcon } from "./CheckIon";
+import { MoreVertIcon } from "./MoeVertIcon";
+import { DateIcon } from "./DateIcon";
 
 export interface IconProvider extends Plugin {
   data: Icons;
@@ -28,7 +30,9 @@ export interface Icons {
   settings: EditorIcon;
   dropdownIcon: EditorIcon;
   moreIcon: EditorIcon;
+  moreVertIcon: EditorIcon;
   checkIcon: EditorIcon;
+  dateIcon: EditorIcon;
 }
 
 export const createIconProviderPlugin = (data: Icons): IconProvider => {
@@ -46,5 +50,7 @@ export const IconProviderPlugin = createIconProviderPlugin({
   settings: SettingsIcon,
   dropdownIcon: DropdownIcon,
   moreIcon: MoreIcon,
+  moreVertIcon: MoreVertIcon,
   checkIcon: CheckIcon,
+  dateIcon: DateIcon,
 });
