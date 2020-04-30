@@ -6,7 +6,7 @@ A suite of plugins for composing react-based text editors. Editor Kit is built u
 
 **NOTE**
 
-1. THe project is currently in beta and you might experience some issues but the editor and most plugins are already usable
+1. The project is currently in beta and you might experience some issues but the editor and most plugins are already usable
 2. Micro-releases are being pushed to NPM frequently - please update often
 
 ## Quick Start
