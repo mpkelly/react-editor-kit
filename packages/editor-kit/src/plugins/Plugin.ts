@@ -20,6 +20,18 @@ export type HotKey = {
   ) => boolean;
 };
 
+/**
+ * Changes:
+ *
+ * 1. Merge Trigger and onTrigger
+ * 2. Add options property
+ * 3. rename contextMenu to onContextMenu
+ * 4. Allow arbitrary properties
+ * 6. Add constraints
+ * 7. Add Trigger.clear:boolean prop
+ * 8. Move actions into Plugins
+ */
+
 export interface Plugin {
   triggers?: Trigger[];
   onTrigger?(editor: ReactEditor, match: MatchResult[], trigger: Trigger): void;

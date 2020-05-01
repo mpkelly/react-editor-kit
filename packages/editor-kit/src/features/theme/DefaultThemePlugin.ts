@@ -327,6 +327,7 @@ input[type=number] {
 
 .rek-resizable-content {
   height:100%;
+  padding: 0 16px;
 }
   
 .rek-resize-track-start {
@@ -476,7 +477,18 @@ input[type=number] {
     }
   }
 
-
+  .rek-element-toolbar {
+    display: flex;
+    align-items:center;
+    padding:8px;
+    border-radius:4px;
+    background-color: var(--content-background);
+    color:var(--secondary-text-color);
+    border: 1px solid var(--gray-light2-color);
+    * {
+      cursor:pointer;
+    }
+  }
 
 `;
 

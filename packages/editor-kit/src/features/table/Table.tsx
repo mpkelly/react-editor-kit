@@ -11,10 +11,26 @@ import { ModalPopup } from "../popup/HTMLElementModalPopup";
 import { Checkbox } from "../../ui/Checkbox";
 import { blockEvent, stopEvent } from "../../ui/Utils";
 import { useFocused } from "../../editor/Focus";
+import { useTables } from "./Tables";
 
 export const Table = (props: RenderElementProps) => {
   const { attributes, element, children } = props;
+  const { data: icons } = usePlugin("icon-provider") as IconProvider;
+  const { addRow, addColumn } = useTables();
+
   const classes: string[] = ["rek-table"];
+
+  const handleAddRow = () => {
+    const lastRow = element.children[element.children.length - 1];
+    const cell = lastRow.children[0];
+    addRow(cell);
+  };
+
+  const handleAddColumn = () => {
+    const row = element.children[0];
+    const lastCell = row.children[row.children.length - 1];
+    addColumn(lastCell);
+  };
 
   if (element.headerRow) {
     classes.push("rek-header-row");
@@ -28,11 +44,30 @@ export const Table = (props: RenderElementProps) => {
   if (element.borderless && !isFocusedWithin) {
     classes.push("rek-borderless");
   }
+
   return (
     <DeletableBlock {...props} toolbarContent={<Toolbar element={element} />}>
-      <table tabIndex={1} className={classes.join(" ")}>
-        <tbody {...attributes}>{children}</tbody>
-      </table>
+      <div className="rek-table-wrapper">
+        <div className="rek-table-wrapper-body">
+          <table tabIndex={1} className={classes.join(" ")}>
+            <tbody {...attributes}>{children}</tbody>
+          </table>
+          <div
+            contentEditable={false}
+            className="rek-table-right"
+            onClick={handleAddColumn}
+          >
+            {icons.plusIcon}
+          </div>
+        </div>
+        <div
+          contentEditable={false}
+          className="rek-table-bottom"
+          onClick={handleAddRow}
+        >
+          {icons.plusIcon}
+        </div>
+      </div>
     </DeletableBlock>
   );
 };

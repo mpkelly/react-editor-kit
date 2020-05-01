@@ -68,7 +68,6 @@ import {
   WarningAlertPlugin,
   createInitialLetterPlugin,
   createFixedTitlePlugin,
-  createTodoListPlugin,
   createFixedBlock,
   createOutline,
   OutlineEntry,
@@ -139,7 +138,6 @@ const plugins: Plugin[] = [
       "#purple",
     ],
   }),
-  createTodoListPlugin(),
   createEmoticonSuggestions(),
   // createInitialLetterPlugin(),
   // InsertContextMenuPlugin,
@@ -150,13 +148,45 @@ const plugins: Plugin[] = [
 const initialValue = [
   // createFixedBlock(),
   {
-    type: "todo-list",
+    type: "paragraph",
+    children: [{ text: "\n\n" }],
+  },
+  {
+    type: "table",
     children: [
       {
-        type: "todo-item",
+        type: "table-row",
         children: [
           {
-            text: "{36hours}",
+            type: "table-cell",
+            autoFocus: true,
+            children: [{ type: "paragraph", children: [{ text: "" }] }],
+          },
+          {
+            type: "table-cell",
+            children: [{ type: "paragraph", children: [{ text: "" }] }],
+          },
+          {
+            type: "table-cell",
+            children: [{ type: "paragraph", children: [{ text: "" }] }],
+          },
+        ],
+      },
+      {
+        type: "table-row",
+        children: [
+          {
+            type: "table-cell",
+            autoFocus: true,
+            children: [{ type: "paragraph", children: [{ text: "" }] }],
+          },
+          {
+            type: "table-cell",
+            children: [{ type: "paragraph", children: [{ text: "" }] }],
+          },
+          {
+            type: "table-cell",
+            children: [{ type: "paragraph", children: [{ text: "" }] }],
           },
         ],
       },
