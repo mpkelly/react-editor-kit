@@ -48,7 +48,7 @@
     "slate": "github:mpkelly/slate#slate-v0.57.3-gitpkg",
     "slate-history": "^0.57.1",
     "slate-hyperscript": "^0.57.1",
-    "slate-react": "github:mpkelly/slate#slate-react-v0.57.4-gitpkg",
+    "slate-react": "github:mpkelly/slate#slate-react-v0.57.5-gitpkg",
     "source-map-loader": "^0.2.4",
     "stylis": "^4.0.0",
     "terser-webpack-plugin": "^2.2.1",
