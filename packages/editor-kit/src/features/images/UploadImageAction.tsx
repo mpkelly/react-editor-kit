@@ -1,10 +1,13 @@
 import React, { FunctionComponent, ReactNode, Fragment } from "react";
+
+import { Transforms } from "slate";
 import { ReactEditor } from "slate-react";
 import { useEditorKit, UploadId } from "../../editor/EditorKit";
 import { Action } from "../actions/Action";
 import { blockEvent } from "../../ui/Utils";
 import { ImageExtensions } from "./ImageExtensions";
 import { insertImage } from "./ImagePlugin";
+import { useLastFocused } from "../../editor/LastFocusedNode";
 
 export interface UploadImageActionProps {
   children: ReactNode;
@@ -16,8 +19,12 @@ export const UploadImageAction: FunctionComponent<UploadImageActionProps> = (
 ) => {
   const { children } = props;
   const { editor } = useEditorKit();
+  const { point } = useLastFocused(editor);
 
   const handleFiles = (files: File[]): void => {
+    if (point) {
+      Transforms.select(editor, point);
+    }
     files.forEach((file) => {
       createSlateImage(file, editor);
     });

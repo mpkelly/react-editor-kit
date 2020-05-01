@@ -8,6 +8,8 @@ import { ModalPopup } from "../popup/HtmlElementModalPopup";
 import { Labels } from "../i18n/LabelsPlugin";
 import { SaveDialog } from "../../ui/SaveDialog";
 import { usePlugin } from "../../plugins/usePlugin";
+import { Transforms } from "slate";
+import { useLastFocused } from "../../editor/LastFocusedNode";
 
 export interface UploadImageActionProps {
   children: ReactNode;
@@ -21,9 +23,13 @@ export const InsertImageByUrlAction: FunctionComponent<UploadImageActionProps> =
   const { editor } = useEditorKit();
   const { data: labels } = usePlugin("labels") as Labels;
   const [show, setShow] = useState(false);
+  const { point } = useLastFocused(editor);
 
   const handleSave = (url: string): void => {
     if (isImageUrl(url)) {
+      if (point) {
+        Transforms.select(editor, point);
+      }
       insertImage(editor, url);
     }
     toggleShow();
