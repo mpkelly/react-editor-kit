@@ -1,0 +1,1 @@
+export declare const FixedTitleEditorStyle = "  \n  .rek-fixed-title.rek-empty:before {\n    content: attr(placeholder);\n    opacity:0.2;\n    position:absolute;\n    display: block; /* For Firefox */\n  }\n";

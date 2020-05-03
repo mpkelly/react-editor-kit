@@ -1,7 +1,6 @@
-/// <reference types="react" />
+import React from "react";
 export interface HeadingActionProps {
     heading: string;
-    text?: string;
-    children?: JSX.Element;
+    children: React.ReactNode;
 }
 export declare const HeadingAction: (props: HeadingActionProps) => JSX.Element;

@@ -1,6 +1,7 @@
 import React from "react";
 import { ReactEditor } from "slate-react";
 import { Plugin } from "../plugins/Plugin";
+import { PluginActionArgs } from "../plugins/PluginAction";
 export interface EditorKitValue {
     editor: ReactEditor;
     plugins: Plugin[];
@@ -13,6 +14,7 @@ export interface EditorKitValue {
     enableSpellCheck(): void;
     delaySpellCheck(): void;
     id: string;
+    executeAction(plugin: string, args?: PluginActionArgs, name?: string): void;
 }
 export declare const useEditorKit: () => EditorKitValue;
 export interface EditorKitProps {

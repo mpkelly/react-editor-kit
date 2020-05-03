@@ -1,9 +1,4 @@
-/// <reference types="react" />
-import { RenderElementProps } from "slate-react";
 import { Plugin } from "../../plugins/Plugin";
-import { Icons } from "../icons/IconProviderPlugin";
-export interface AlertProps extends RenderElementProps {
-    iconName: keyof Icons;
-}
-export declare const Alert: (props: AlertProps) => JSX.Element;
-export declare const createAlertPlugin: (iconName: "link" | "delete" | "unlink" | "openLink" | "errorAlert" | "warningAlert" | "infoAlert" | "settings" | "dropdownIcon" | "moreIcon" | "moreVertIcon" | "checkIcon" | "dateIcon", alertName: string, iconColor: string, backgroundColor: string, triggerName: string) => Plugin;
+import { PluginAction } from "../../plugins/PluginAction";
+export declare const AlertActions: PluginAction[];
+export declare const createAlertPlugin: (icon: "link" | "delete" | "error" | "unlink" | "openLink" | "warning" | "info" | "settings" | "dropdownIcon" | "moreIcon" | "moreVertIcon" | "checkIcon" | "dateIcon" | "plusIcon", name: string, iconColor: string, backgroundColor: string, trigger: string) => Plugin;

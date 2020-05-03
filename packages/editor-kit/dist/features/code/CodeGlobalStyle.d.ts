@@ -1,0 +1,1 @@
+export declare const CodeGlobalStyle = "\n.rek-code-block-toolbar {\n\n  input {\n    padding:4px;\n    height:30px;\n  }\n\n  .rek-icon.rek-delete-icon path {\n    cursor:pointer;\n    fill:var(--secondary-text-color);      \n  }\n\n  .rek-icon.rek-delete-icon:hover path {\n    fill:var(--danger-color);\n  }\n}\n";

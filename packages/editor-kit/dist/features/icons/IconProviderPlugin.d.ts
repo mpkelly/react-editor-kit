@@ -1,23 +1,8 @@
 import { Plugin } from "../../plugins/Plugin";
-import { EditorIcon } from "./Icon";
+import { Icons } from "./Icons";
 export interface IconProvider extends Plugin {
-    data: Icons;
     name: "icon-provider";
+    icons: Icons;
 }
-export interface Icons {
-    delete: EditorIcon;
-    link: EditorIcon;
-    unlink: EditorIcon;
-    openLink: EditorIcon;
-    errorAlert: EditorIcon;
-    warningAlert: EditorIcon;
-    infoAlert: EditorIcon;
-    settings: EditorIcon;
-    dropdownIcon: EditorIcon;
-    moreIcon: EditorIcon;
-    moreVertIcon: EditorIcon;
-    checkIcon: EditorIcon;
-    dateIcon: EditorIcon;
-}
-export declare const createIconProviderPlugin: (data: Icons) => IconProvider;
+export declare const createIconProviderPlugin: (icons: Icons) => IconProvider;
 export declare const IconProviderPlugin: IconProvider;

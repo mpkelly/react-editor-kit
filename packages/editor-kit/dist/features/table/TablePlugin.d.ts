@@ -5,7 +5,9 @@ import { Plugin } from "../../plugins/Plugin";
 export interface TablePluginOptions {
     defaultTable: Node[];
 }
-export declare const createTablePlugin: (options: TablePluginOptions) => Plugin;
+export interface TablePlugin extends Plugin, TablePluginOptions {
+}
+export declare const createTablePlugin: (options: TablePluginOptions) => TablePlugin;
 export declare const cell: (props?: any) => any;
 export declare const DefaultTable: {
     type: string;
@@ -15,5 +17,5 @@ export declare const DefaultTable: {
         children: any[];
     }[];
 }[];
-export declare const TablePlugin: Plugin;
+export declare const TablePlugin: TablePlugin;
 export declare const renderTable: (props: RenderElementProps) => JSX.Element;

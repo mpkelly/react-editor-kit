@@ -1,0 +1,1 @@
+export declare const MentionEditorStyle = "\n  .rek-mention {\n    display:inline-flex;\n    background-color: var(--gray-light2-color);\n    padding: 1px 3px;\n    border-radius: 2px;\n    white-space: nowrap;\n  }\n";

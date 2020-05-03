@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { ReactEditor } from "slate-react";
+import { EditorState } from "../../editor/EditorState";
 export interface ContextMenuContribution {
     trigger?: ContextMenuTrigger;
     items: ReactNode[];
@@ -8,7 +8,7 @@ export interface ContextMenuTrigger {
     node?: string;
     mark?: string;
     selectionExpanded?: boolean;
-    matched?(editor: ReactEditor): boolean;
+    matched?(editor: EditorState): boolean;
 }
 export interface ContextMenuProps {
     items: ReactNode[];

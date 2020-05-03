@@ -1,0 +1,1 @@
+export declare const InlineCodeEditorStyle = "\nspan code {\n  font-family:inherit;\n  background-color: rgba(9, 30, 66, 0.08);\n  box-shadow: rgba(9, 30, 66, 0.08) -4px 0px 0px 0px, rgba(9, 30, 66, 0.08) 4px 0px 0px 0px;\n  padding: 2px 0px;\n  border-radius: 3px;\n  border-style: none;\n  margin: 0px 4px;\n}\n";

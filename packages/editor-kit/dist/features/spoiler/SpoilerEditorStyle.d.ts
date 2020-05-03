@@ -1,0 +1,1 @@
+export declare const SpoilerEditorStyle = "\n.rek-spoiler {\n  background-color: rgba(0,0,0,.95);\n  display:inline-block;\n  color: white;\n}\n\n.rek-spoiler.showspoiler {\n  background-color: unset;\n  color: var(--primary-text-color);\n}\n\n.rek-spoiler.hidespoiler {\n  background-color: rgba(0,0,0,.95);\n  color: transparent;\n  pointer:cursor;\n}\n";
