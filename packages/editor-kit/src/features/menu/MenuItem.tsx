@@ -2,13 +2,14 @@ import React, { CSSProperties, useState, useCallback, ReactNode } from "react";
 import { ReactEditor } from "slate-react";
 import { EditorIcon, Icon } from "../icons/Icon";
 import { usePlugin } from "../../plugins/usePlugin";
-import { Labels, EditorLabels } from "../i18n/LabelsPlugin";
+import { LabelsPlugin } from "../i18n/LabelsPlugin";
 import { useEditorKit } from "../../editor/EditorKit";
 import { blockEvent } from "../../ui/Utils";
 import { IconProvider } from "../icons/IconProviderPlugin";
 import { Show } from "../../ui/Show";
 import { getPosition } from "../popup/Popups";
 import { Menu } from "./Menu";
+import { EditorLabels } from "../i18n/EditorLabels";
 
 export interface MenuItemProps {
   icon?: EditorIcon | ReactNode;
@@ -36,8 +37,8 @@ export const MenuItem = (props: MenuItemProps) => {
     disabled,
     ...rest
   } = props;
-  const { data: labels } = usePlugin("labels") as Labels;
-  const { data: icons } = usePlugin("icon-provider") as IconProvider;
+  const { labels } = usePlugin<LabelsPlugin>("labels-provider");
+  const { icons } = usePlugin<IconProvider>("icon-provider");
   const { editor } = useEditorKit();
   const [element, setElement] = useState<HTMLElement>();
   const [childMenuElement, setChildMenuElement] = useState<HTMLElement>();

@@ -2,9 +2,11 @@ import React from "react";
 import { Range, Transforms } from "slate";
 import { Plugin } from "../../plugins/Plugin";
 import { clone } from "../../ui/Utils";
-import { RenderLeafProps, ReactEditor } from "slate-react";
+import { RenderLeafProps } from "slate-react";
+import { SelectionPluginEditorStyles } from "./SelectionPluginEditorStyle";
 
 export const SelectionExtensionsPlugin: Plugin = {
+  name: "selection-extension",
   withPlugin: (editor) => {
     editor.markSelection = () => {
       const { selection } = editor;
@@ -23,7 +25,7 @@ export const SelectionExtensionsPlugin: Plugin = {
     };
     return editor;
   },
-  onClick: (event: React.MouseEvent, editor: ReactEditor) => {
+  onClick: (event, { editor }) => {
     editor.lastSelection = null;
   },
   renderLeaf: (props: RenderLeafProps) => {
@@ -37,20 +39,13 @@ export const SelectionExtensionsPlugin: Plugin = {
     }
     return undefined;
   },
-  onKeyDown: (event: React.KeyboardEvent<HTMLElement>, editor: ReactEditor) => {
+  onKeyDown: (event: React.KeyboardEvent<HTMLElement>, { editor }) => {
     if (editor.nextMark) {
       const { key, value } = editor.nextMark;
       editor.addMark(key, value);
       editor.nextMark = undefined;
     }
-    return undefined;
+    return false;
   },
-  editorStyles: () => EditorStyles,
+  editorStyle: SelectionPluginEditorStyles,
 };
-
-const EditorStyles = `
-  .rek-selection-marker {
-    background-color: var(--selection-color);
-    padding: 8px 0;
-  }
-`;

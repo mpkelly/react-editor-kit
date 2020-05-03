@@ -5,7 +5,7 @@ import { useLastFocused } from "../../editor/LastFocusedNode";
 
 export const ImageButton = (props: MenuButtonProps) => {
   const { editor } = useEditorKit();
-  const { node } = useLastFocused(editor);
+  const { element: node } = useLastFocused(editor);
   const enabled = editor.isNodeSupported("image", node);
   return <MenuButton {...props} disabled={!enabled} data-image-button />;
 };

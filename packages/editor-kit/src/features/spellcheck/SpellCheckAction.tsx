@@ -21,8 +21,8 @@ export const SpellCheckAction = (props: SpellCheckActionProps) => {
     }
   };
   return (
-    <Action onMouseDown={onMouseDown} isActive={isActive}>
+    <div onMouseDown={onMouseDown} className={spellCheck ? "rek-active" : ""}>
       {children}
-    </Action>
+    </div>
   );
 };

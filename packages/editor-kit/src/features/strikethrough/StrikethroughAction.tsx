@@ -1,10 +1,10 @@
 import React from "react";
-import { MarkAction } from "../marks/MarkAction";
+import { Action } from "../actions/Action";
 
 export interface StrikethroughActionProps {
   children: React.ReactNode;
 }
 
 export const StrikethroughAction = (props: StrikethroughActionProps) => {
-  return <MarkAction {...props} type="strikethrough" />;
+  return <Action {...props} plugin="strikethrough" />;
 };

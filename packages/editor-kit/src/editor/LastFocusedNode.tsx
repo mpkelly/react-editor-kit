@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Point, Range, Editor, Node } from "slate";
+import { useEffect, useState } from "react";
+import { Point, Range, Editor, Element } from "slate";
 import { ReactEditor } from "slate-react";
 import { getActiveNodeType } from "./Editor";
 import { clone } from "../ui/Utils";
 
 export const useLastFocused = (editor: ReactEditor) => {
-  const [state, setState] = useState<State>({
-    node: null,
-    point: null,
-    selection: null
+  const [state, setState] = useState<LastFocusedState>({
+    element: undefined,
+    point: undefined,
+    selection: undefined,
   });
   const { selection } = editor;
   const current = getActiveNodeType(editor);
@@ -22,16 +22,20 @@ export const useLastFocused = (editor: ReactEditor) => {
     }
     if (current) {
       const point = selection.focus;
-      const [node] = Editor.parent(editor, point);
-      setState({ node, point, selection: clone(selection) });
+      const [element] = Editor.parent(editor, point);
+      setState({
+        element: element,
+        point,
+        selection: clone(selection),
+      });
     }
   }, [current, selection]);
 
   return state;
 };
 
-interface State {
-  node: Node | null;
-  point: Point | null;
-  selection: Range | null;
+export interface LastFocusedState {
+  element?: Element;
+  point?: Point;
+  selection?: Range;
 }

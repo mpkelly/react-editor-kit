@@ -1,10 +1,10 @@
 import React from "react";
-import { MarkAction } from "../marks/MarkAction";
+import { Action } from "../actions/Action";
 
 export interface BoldActionProps {
   children: React.ReactNode;
 }
 
 export const BoldAction = (props: BoldActionProps) => {
-  return <MarkAction {...props} type="bold" />;
+  return <Action {...props} plugin="bold" />;
 };

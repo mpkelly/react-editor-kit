@@ -1,10 +1,10 @@
 import React from "react";
-import { MarkAction } from "../marks/MarkAction";
+import { Action } from "../actions/Action";
 
 export interface SuperscriptActionProps {
   children: React.ReactNode;
 }
 
 export const SuperscriptAction = (props: SuperscriptActionProps) => {
-  return <MarkAction {...props} type="super" />;
+  return <Action {...props} plugin="superscript" />;
 };

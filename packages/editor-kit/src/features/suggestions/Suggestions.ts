@@ -1,5 +1,5 @@
 import { RenderElementProps } from "slate-react";
-import { Trigger } from "../../plugins/Plugin";
+import { Trigger } from "../../plugins/Trigger";
 
 export interface Suggestions {
   getSuggestions(match: string): Promise<any[]>;

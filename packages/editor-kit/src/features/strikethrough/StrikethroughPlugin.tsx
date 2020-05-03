@@ -1,17 +1,14 @@
 import { Plugin } from "../../plugins/Plugin";
-import { RenderLeafProps, ReactEditor } from "slate-react";
+import { RenderLeafProps } from "slate-react";
 import { renderLeaf } from "../leafs/LeafRenderer";
-import { MatchResult } from "../../Index";
-import { applyRegexMark } from "../marks/Marks";
+import { StrikethroughMarkdownTrigger } from "./StrikethroughMarkdownTrigger";
+import { StrikethroughPluginAction } from "./StrikethroughPluginAction";
 
 export const StrikethroughPlugin: Plugin = {
-  triggers: [{ pattern: /(\~~)(.{1,})\1/, range: "block" }],
-  onTrigger: (editor: ReactEditor, matches: MatchResult[]) => {
-    if (editor.isMarkSupported("strikethrough")) {
-      applyRegexMark(editor, matches[0], "strikethrough");
-    }
-  },
+  name: "strikethrough",
+  triggers: [StrikethroughMarkdownTrigger],
+  actions: [StrikethroughPluginAction],
   renderLeaf: (props: RenderLeafProps) => {
     return renderLeaf(props, "strikethrough", "del");
-  }
+  },
 };

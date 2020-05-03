@@ -1,5 +1,5 @@
 import React from "react";
-import { BlockAction } from "../blocks/BlockAction";
+import { Action } from "../actions/Action";
 
 export interface AlertActionProps {
   children: React.ReactNode;
@@ -8,6 +8,5 @@ export interface AlertActionProps {
 
 export const AlertAction = (props: AlertActionProps) => {
   const { children, type } = props;
-
-  return <BlockAction type={type}>{children}</BlockAction>;
+  return <Action plugin={type}>{children}</Action>;
 };

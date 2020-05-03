@@ -1,10 +1,10 @@
 import React from "react";
-import { MarkAction } from "../marks/MarkAction";
+import { Action } from "../actions/Action";
 
 export interface SubscriptActionProps {
   children: React.ReactNode;
 }
 
 export const SubscriptAction = (props: SubscriptActionProps) => {
-  return <MarkAction {...props} type="sub" />;
+  return <Action {...props} plugin="subscript" />;
 };

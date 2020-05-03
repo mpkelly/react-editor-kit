@@ -41,6 +41,7 @@
     "is-hotkey": "^0.1.6",
     "is-url": "^1.2.4",
     "prismjs": "^1.19.0",
+    "raw-loader": "^4.0.1",
     "react": "16.8.5",
     "react-dom": "^16.8.5",
     "react-player": "^1.14.2",

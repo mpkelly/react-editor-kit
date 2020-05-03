@@ -1,10 +1,10 @@
 import React from "react";
-import { MarkAction } from "../marks/MarkAction";
+import { Action } from "../actions/Action";
 
 export interface UnderlineActionProps {
   children: React.ReactNode;
 }
 
 export const UnderlineAction = (props: UnderlineActionProps) => {
-  return <MarkAction {...props} type="underline" />;
+  return <Action {...props} plugin="underline" />;
 };

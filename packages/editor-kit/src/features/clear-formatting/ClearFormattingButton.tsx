@@ -1,16 +1,6 @@
 import React from "react";
-import { IconProps, IconButton } from "../buttons/IconButton";
-import { ClearFormattingAction } from "./ClearFormattingAction";
+import { ActionButton, ActionButtonProps } from "../actions/ActionButton";
 
-export interface ClearFormattingButtonProps extends IconProps {
-  formats?: string[];
-}
-
-export const ClearFormattingButton = (props: ClearFormattingButtonProps) => {
-  const { formats, ...rest } = props;
-  return (
-    <ClearFormattingAction {...formats}>
-      <IconButton {...rest} />
-    </ClearFormattingAction>
-  );
+export const ClearFormattingButton = (props: ActionButtonProps) => {
+  return <ActionButton {...props} plugin="clear-formatting" />;
 };

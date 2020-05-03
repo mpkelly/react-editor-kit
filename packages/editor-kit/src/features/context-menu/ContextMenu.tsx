@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
-import { ReactEditor } from "slate-react";
 import { Menu } from "../menu/Menu";
 import { Overlay } from "../../ui/Popup";
+import { EditorState } from "../../editor/EditorState";
 
 export interface ContextMenuContribution {
   trigger?: ContextMenuTrigger;
@@ -12,7 +12,7 @@ export interface ContextMenuTrigger {
   node?: string;
   mark?: string;
   selectionExpanded?: boolean;
-  matched?(editor: ReactEditor): boolean;
+  matched?(editor: EditorState): boolean;
 }
 
 export interface ContextMenuProps {

@@ -1,17 +1,16 @@
-import React, { memo } from "react";
+import React from "react";
 import { RenderElementProps } from "slate-react";
-import { Trigger } from "../../plugins/Plugin";
 import {
   createSuggestionsPlugin,
   SuggestionPluginOptions,
 } from "../suggestions/SuggestionsPlugin";
 import { Suggestions } from "../suggestions/Suggestions";
-
-export interface Mention {
-  name: string;
-  imageUrl?: string;
-  subText?: string;
-}
+import { MentionGlobalStyle } from "./MentionGlobalStyle";
+import { MentionEditorStyle } from "./MentionEditorStyle";
+import { MentionElement } from "./MentionElement";
+import { Mention } from "./Mention";
+import { MentionChoice } from "./MentionChoice";
+import { Trigger } from "../../plugins/Trigger";
 
 export interface StaticMentionOptions {
   mentions: Mention[];
@@ -44,72 +43,9 @@ export const createStaticMentions = (options: StaticMentionOptions) => {
   const suggestionsOptions: SuggestionPluginOptions = {
     type: "mention",
     suggestions,
-    globalStyle: GlobalStyle,
-    editorStyle: EditorStyle,
+    globalStyle: MentionGlobalStyle,
+    editorStyle: MentionEditorStyle,
   };
 
   return createSuggestionsPlugin(suggestionsOptions);
 };
-
-export interface MentionChoiceProps {
-  choice: Mention;
-}
-
-export const MentionChoice = memo((props: MentionChoiceProps) => {
-  const { choice } = props;
-  return (
-    <div className="rek-mention-choice">
-      {choice.imageUrl && <img src={choice.imageUrl} />}
-      <span className={"rek-mention-name"}>{choice.name}</span>
-      {choice.subText && (
-        <span className={"rek-mention-subtext"}>{choice.subText}</span>
-      )}
-    </div>
-  );
-});
-
-export const MentionElement = (props: RenderElementProps) => {
-  const { attributes, element, children } = props;
-  return (
-    <div
-      {...attributes}
-      contentEditable={false}
-      className={"rek-mention"}
-      data-id-mention={element.name}
-    >
-      @{element.value.name}
-      {children}
-    </div>
-  );
-};
-
-export const GlobalStyle = `
-  .rek-mention-choice {
-    display:flex;
-    align-items:center;
-    padding:4px;
-    
-    img {
-      border-radius:50%;
-      height:30px;
-      width:30px;
-      margin-right:16px;
-    } 
-
-    .rek-mention-subtext {
-      margin-left:8px;
-      color:var(--secondary-text-color);
-      font-size:smaller;
-    }
-  }
-`;
-
-export const EditorStyle = `
-  .rek-mention {
-    display:inline-flex;
-    background-color: var(--gray-light2-color);
-    padding: 1px 3px;
-    border-radius: 2px;
-    white-space: nowrap;
-  }
-`;

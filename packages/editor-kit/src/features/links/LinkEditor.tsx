@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { stopEvent } from "../../ui/Utils";
-import { Labels } from "../i18n/LabelsPlugin";
+import { LabelsPlugin } from "../i18n/LabelsPlugin";
 import { usePlugin } from "../../plugins/usePlugin";
 
 export interface LinkEditorProps {
@@ -14,7 +14,7 @@ export interface LinkModel {
 }
 
 export const LinkEditor = (props: LinkEditorProps) => {
-  const { data: labels } = usePlugin("labels") as Labels;
+  const { labels } = usePlugin<LabelsPlugin>("labels-provider");
   const { handleUrlChange, handleDisplayNameChange, link } = useLinkEditor(
     props
   );

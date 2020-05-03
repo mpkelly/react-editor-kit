@@ -1,12 +1,8 @@
 import React from "react";
-import { IconProps, IconButton } from "../buttons/IconButton";
-import { VideoAction } from "./VideoAction";
+import { IconProps } from "../buttons/IconButton";
 import { TooltipContentProps } from "../popup/Tooltip";
+import { ActionButton } from "../actions/ActionButton";
 
 export const VideoButton = (props: IconProps & TooltipContentProps) => {
-  return (
-    <VideoAction>
-      <IconButton {...props} />
-    </VideoAction>
-  );
+  return <ActionButton plugin="video" {...props} />;
 };

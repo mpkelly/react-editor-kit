@@ -1,16 +1,8 @@
 import React from "react";
-import { IconProps, IconButton } from "../buttons/IconButton";
-import { LinkAction } from "./LinkAction";
+import { IconProps } from "../buttons/IconButton";
+import { ActionButton } from "../actions/ActionButton";
+import { TooltipContentProps } from "../popup/Tooltip";
 
-export const LinkButton = (props: IconProps) => {
-  const { className, ligature } = props;
-  return (
-    <LinkAction>
-      <IconButton
-        className={className}
-        ligature={ligature}
-        data-inline-button="link"
-      />
-    </LinkAction>
-  );
+export const LinkButton = (props: IconProps & TooltipContentProps) => {
+  return <ActionButton plugin="link" {...props} />;
 };

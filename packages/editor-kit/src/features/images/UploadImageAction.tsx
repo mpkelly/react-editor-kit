@@ -3,10 +3,8 @@ import React, { FunctionComponent, ReactNode, Fragment } from "react";
 import { Transforms } from "slate";
 import { ReactEditor } from "slate-react";
 import { useEditorKit, UploadId } from "../../editor/EditorKit";
-import { Action } from "../actions/Action";
 import { blockEvent } from "../../ui/Utils";
 import { ImageExtensions } from "./ImageExtensions";
-import { insertImage } from "./ImagePlugin";
 import { useLastFocused } from "../../editor/LastFocusedNode";
 
 export interface UploadImageActionProps {
@@ -18,7 +16,7 @@ export const UploadImageAction: FunctionComponent<UploadImageActionProps> = (
   props: UploadImageActionProps
 ) => {
   const { children } = props;
-  const { editor } = useEditorKit();
+  const { editor, executeAction } = useEditorKit();
   const { point } = useLastFocused(editor);
 
   const handleFiles = (files: File[]): void => {
@@ -29,32 +27,26 @@ export const UploadImageAction: FunctionComponent<UploadImageActionProps> = (
       createSlateImage(file, editor);
     });
   };
+
+  const createSlateImage = (file: File, editor: ReactEditor) => {
+    const reader = new FileReader();
+    const [mime] = file.type.split("/");
+
+    if (mime === "image") {
+      reader.addEventListener("load", () => {
+        const url = reader.result as string;
+        executeAction("image", { url });
+      });
+      reader.readAsDataURL(file);
+    }
+  };
   const { openFileBrowser } = useUpload(handleFiles, props.extensions || []);
 
   const onMouseDown = (event?: React.MouseEvent) => {
     blockEvent(event as React.MouseEvent);
     openFileBrowser();
   };
-  return (
-    <Fragment>
-      <Action isActive={() => false} onMouseDown={onMouseDown}>
-        {children}
-      </Action>
-    </Fragment>
-  );
-};
-
-const createSlateImage = (file: File, editor: ReactEditor) => {
-  const reader = new FileReader();
-  const [mime] = file.type.split("/");
-
-  if (mime === "image") {
-    reader.addEventListener("load", () => {
-      const url = reader.result as string;
-      insertImage(editor, url);
-    });
-    reader.readAsDataURL(file);
-  }
+  return <div onMouseDown={onMouseDown}>{children}</div>;
 };
 
 UploadImageAction.defaultProps = {

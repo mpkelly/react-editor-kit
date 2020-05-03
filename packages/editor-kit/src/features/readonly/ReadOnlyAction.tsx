@@ -1,5 +1,4 @@
 import React from "react";
-import { Action } from "../actions/Action";
 import { blockEvent } from "../../ui/Utils";
 import { useEditorKit } from "../../editor/EditorKit";
 
@@ -21,8 +20,8 @@ export const ReadOnlyAction = (props: ReadOnlyActionProps) => {
     }
   };
   return (
-    <Action onMouseDown={onMouseDown} isActive={isActive}>
+    <div onMouseDown={onMouseDown} className={isActive() ? "rek-active" : ""}>
       {children}
-    </Action>
+    </div>
   );
 };

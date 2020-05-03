@@ -17,7 +17,7 @@ var config = {
     umdNamedDefine: true,
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".json", ".styl"],
   },
   optimization: {
     minimize: true,
@@ -34,7 +34,13 @@ var config = {
     ],
   },
   module: {
-    rules: [{ test: /\.tsx?$/, loader: "awesome-typescript-loader" }],
+    rules: [
+      { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+      {
+        test: /\.styl$/i,
+        use: "raw-loader",
+      },
+    ],
   },
   plugins: [
     new CleanWebpackPlugin({

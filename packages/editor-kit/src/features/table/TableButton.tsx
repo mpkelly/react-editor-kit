@@ -1,11 +1,8 @@
 import React from "react";
-import { IconProps, IconButton } from "../buttons/IconButton";
-import { TableAction } from "./TableAction";
+import { IconProps } from "../buttons/IconButton";
+import { ActionButton } from "../actions/ActionButton";
+import { TooltipContentProps } from "../popup/Tooltip";
 
-export const TableButton = (props: IconProps) => {
-  return (
-    <TableAction>
-      <IconButton {...props} data-block-button="table" />
-    </TableAction>
-  );
+export const TableButton = (props: IconProps & TooltipContentProps) => {
+  return <ActionButton plugin="table" {...props} />;
 };

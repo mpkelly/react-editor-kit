@@ -16,13 +16,17 @@ import { Plugin } from "../plugins/Plugin";
 import { DefaultThemePlugin } from "../features/theme/DefaultThemePlugin";
 import { SelectionExtensionsPlugin } from "../features/selection/SelectionExtensionsPlugin";
 import { IconProviderPlugin } from "../features/icons/IconProviderPlugin";
-import { ConstraintsPlugin } from "../features/constraints/ConstraintsPlugin";
+import { ConstraintsPlugin } from "../features/constraints/ConstraintsPluginREPLACE";
 import { deleteBackward } from "./Editor";
-import { LabelsPlugin } from "../features/i18n/LabelsPlugin";
+import { createLabelsPlugin } from "../features/i18n/LabelsPlugin";
 import { useSpellcheck } from "../features/spellcheck/SpellCheck";
 import { AutoFocusPlugin } from "../features/auto-focus/AutoFocusPlugin";
-import { DeleteKeyHandlerPlugin } from "../features/delete-key/DeleteKeyHandlerPlugin";
-import { EnterKeyHandlerPlugin } from "../features/enter-key/EnterKeyHandlerPlugin";
+import { BackspaceKeyPlugin } from "../features/backspace/BackspaceKeyPlugin";
+import { EnterKeyPlugin } from "../features/enter/EnterKeyPlugin";
+import { PluginActionArgs, PluginAction } from "../plugins/PluginAction";
+import { usePlugin } from "../plugins/usePlugin";
+import { useLastFocused } from "./LastFocusedNode";
+import { createEditorState } from "./EditorState";
 
 //Typings do not seem to match exported object :/
 const Stylis: any = StylisDefault;
@@ -34,10 +38,10 @@ const InternalPlugins: Plugin[] = [
   IconProviderPlugin,
   SelectionExtensionsPlugin,
   ConstraintsPlugin,
-  LabelsPlugin,
+  createLabelsPlugin(),
   AutoFocusPlugin,
-  DeleteKeyHandlerPlugin,
-  EnterKeyHandlerPlugin,
+  BackspaceKeyPlugin,
+  EnterKeyPlugin,
 ];
 
 export interface EditorKitValue {
@@ -52,6 +56,7 @@ export interface EditorKitValue {
   enableSpellCheck(): void;
   delaySpellCheck(): void;
   id: string;
+  executeAction(plugin: string, args?: PluginActionArgs, name?: string): void;
 }
 const Context = createContext<EditorKitValue>({} as EditorKitValue);
 
@@ -78,6 +83,10 @@ export const EditorKit = memo((props: EditorKitProps) => {
   const editor: ReactEditor = createEditor(plugins);
   const [, forceUpdate] = useState({});
   const [readOnly, setReadOnly] = useState(Boolean(props.readOnly));
+
+  const last = useLastFocused(editor);
+  const state = createEditorState(last, editor);
+
   useEffect(() => {
     generateStyle(plugins, id);
   }, [props.plugins]);
@@ -97,6 +106,31 @@ export const EditorKit = memo((props: EditorKitProps) => {
     setReadOnly(true);
   };
 
+  const executeAction = (
+    pluginName: string,
+    args?: PluginActionArgs,
+    name?: string
+  ) => {
+    const plugin = usePlugin(pluginName);
+    if (!plugin) {
+      throw Error(`No plugin is registered with name ${pluginName}`);
+    }
+    if (!plugin.actions) {
+      throw Error(`No actions are available on plugin ${pluginName}`);
+    }
+    let action: PluginAction | undefined = plugin.actions && plugin.actions[0];
+
+    if (name) {
+      action = plugin.actions.find((plugin) => (plugin.name = name));
+      if (action) {
+        throw Error(
+          `No action found on plugin ${pluginName} with name ${name}`
+        );
+      }
+    }
+    action?.action(state, plugin, args);
+  };
+
   const {
     spellCheck,
     disableSpellCheck,
@@ -113,7 +147,7 @@ export const EditorKit = memo((props: EditorKitProps) => {
     };
   }, []);
 
-  const context = {
+  const value = {
     editor,
     plugins,
     render,
@@ -125,10 +159,11 @@ export const EditorKit = memo((props: EditorKitProps) => {
     enableSpellCheck,
     delaySpellCheck,
     id,
+    executeAction,
   };
 
   return (
-    <Context.Provider value={context}>
+    <Context.Provider value={value}>
       <Fragment>{children}</Fragment>
       <FileUpload />
     </Context.Provider>
@@ -170,11 +205,11 @@ const generateStyle = (plugins: Plugin[], id: string) => {
   const globalStyles: string[] = [];
 
   plugins.forEach((plugin) => {
-    if (plugin.editorStyles) {
-      editorStyles.push(plugin.editorStyles());
+    if (plugin.editorStyle) {
+      editorStyles.push(plugin.editorStyle);
     }
-    if (plugin.globalStyles) {
-      globalStyles.push(plugin.globalStyles());
+    if (plugin.globalStyle) {
+      globalStyles.push(plugin.globalStyle);
     }
   });
   let editorStyle = "";
@@ -226,10 +261,7 @@ const maybeConfigureTesting = (editor: ReactEditor, forceUpdate: Function) => {
       Transforms.insertNodes(editor, value);
     };
 
-    global.focusNode = (
-      node: HTMLElement,
-      point: "start" | "end" = "start"
-    ) => {
+    global.focusNode = (node: HTMLElement) => {
       const slateNode = ReactEditor.toSlateNode(editor, node);
       if (slateNode) {
         Transforms.select(editor, ReactEditor.findPath(editor, slateNode));

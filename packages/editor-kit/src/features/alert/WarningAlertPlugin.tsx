@@ -1,7 +1,7 @@
 import { createAlertPlugin } from "./AlertPlugin";
 
 export const WarningAlertPlugin = createAlertPlugin(
-  "warningAlert",
+  "warning",
   "warning-alert",
   "orange",
   "#ffdea1",

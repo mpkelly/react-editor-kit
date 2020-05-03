@@ -2,16 +2,18 @@ import React from "react";
 import { Plugin } from "../../plugins/Plugin";
 import { ReactEditor, RenderElementProps } from "slate-react";
 import isUrl from "is-url";
-import { Image } from "./Image";
+import { ImageElement } from "./ImageElement";
 import { Transforms } from "slate";
 import { ImageExtensions } from "./ImageExtensions";
+import { ImageEditorStyles } from "./ImageEditorStyles";
+import { registerVoid } from "../void/VoidElement";
+import { InsertImagePluginAction } from "./InsertImagePluginAction";
 
 export const ImagePlugin: Plugin = {
+  name: "image",
   withPlugin: (editor: ReactEditor) => {
-    const { insertData, isVoid } = editor;
-    editor.isVoid = (element) => {
-      return element.type === "image" ? true : isVoid(element);
-    };
+    const { insertData } = editor;
+    editor = registerVoid(editor, "image");
     editor.insertData = (data) => {
       const text = data.getData("text/plain");
       const { files } = data;
@@ -39,13 +41,14 @@ export const ImagePlugin: Plugin = {
     };
     return editor;
   },
+  actions: [InsertImagePluginAction],
   renderElement: (props: RenderElementProps) => {
     const { element } = props;
     if (element.type === "image") {
-      return <Image {...props} />;
+      return <ImageElement {...props} />;
     }
   },
-  editorStyles: () => EditorStyles,
+  editorStyle: ImageEditorStyles,
 };
 
 export const isImageUrl = (url: string, extensions = ImageExtensions) => {
@@ -54,21 +57,8 @@ export const isImageUrl = (url: string, extensions = ImageExtensions) => {
   const ext = new URL(url).pathname.split(".").pop() as string;
   return extensions.includes(ext);
 };
-
-export const insertImage = (editor: ReactEditor, url: string) => {
-  const text = { text: "" };
-  const image = { type: "image", url, children: [text] };
+//TODO This should be removed and the above code should use the PluginAction
+const insertImage = (editor: ReactEditor, url: string) => {
+  const image = { type: "image", url, children: [{ text: "" }] };
   Transforms.insertNodes(editor, image);
 };
-
-const EditorStyles = `
-  .rek-image {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .rek-image.focused {
-    box-shadow:0 0 0 3px #B4D5FF;
-  }
-`;

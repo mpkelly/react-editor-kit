@@ -7,7 +7,7 @@ export const isInside = (rect: ClientRect, x: number, y: number) => {
   );
 };
 
-export const isDeleting = (event: React.KeyboardEvent) => {
+export const isDeleting = (event: React.KeyboardEvent | KeyboardEvent) => {
   return event.keyCode == 8 || event.keyCode == 46;
 };
 

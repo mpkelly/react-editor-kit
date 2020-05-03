@@ -15,7 +15,7 @@ export const HeadingSelect: FunctionComponent<HeadingSelectProps> = (
   const { types, ...rest } = props;
 
   const { editor } = useEditorKit();
-  const { node, selection } = useLastFocused(editor);
+  const { element: node, selection } = useLastFocused(editor);
 
   const items: SelectItem[] = (types || []).map((type) => ({
     text: type.name,

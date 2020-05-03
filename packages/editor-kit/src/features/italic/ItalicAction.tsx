@@ -1,10 +1,10 @@
 import React from "react";
-import { MarkAction } from "../marks/MarkAction";
+import { Action } from "../actions/Action";
 
 export interface ItalicActionProps {
   children: React.ReactNode;
 }
 
 export const ItalicAction = (props: ItalicActionProps) => {
-  return <MarkAction {...props} type="italic" />;
+  return <Action {...props} plugin="italic" />;
 };

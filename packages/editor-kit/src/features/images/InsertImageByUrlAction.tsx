@@ -1,11 +1,10 @@
 import React, { FunctionComponent, ReactNode, Fragment, useState } from "react";
 import { useEditorKit } from "../../editor/EditorKit";
-import { Action } from "../actions/Action";
 import { blockEvent } from "../../ui/Utils";
 import { ImageExtensions } from "./ImageExtensions";
-import { insertImage, isImageUrl } from "./ImagePlugin";
+import { isImageUrl } from "./ImagePlugin";
 import { ModalPopup } from "../popup/HtmlElementModalPopup";
-import { Labels } from "../i18n/LabelsPlugin";
+import { LabelsPlugin } from "../i18n/LabelsPlugin";
 import { SaveDialog } from "../../ui/SaveDialog";
 import { usePlugin } from "../../plugins/usePlugin";
 import { Transforms } from "slate";
@@ -20,8 +19,8 @@ export const InsertImageByUrlAction: FunctionComponent<UploadImageActionProps> =
   props: UploadImageActionProps
 ) => {
   const { children } = props;
-  const { editor } = useEditorKit();
-  const { data: labels } = usePlugin("labels") as Labels;
+  const { editor, executeAction } = useEditorKit();
+  const { labels } = usePlugin<LabelsPlugin>("labels-provider");
   const [show, setShow] = useState(false);
   const { point } = useLastFocused(editor);
 
@@ -30,7 +29,7 @@ export const InsertImageByUrlAction: FunctionComponent<UploadImageActionProps> =
       if (point) {
         Transforms.select(editor, point);
       }
-      insertImage(editor, url);
+      executeAction("image", { url });
     }
     toggleShow();
   };
@@ -45,9 +44,7 @@ export const InsertImageByUrlAction: FunctionComponent<UploadImageActionProps> =
   };
   return (
     <Fragment>
-      <Action isActive={() => false} onMouseDown={onMouseDown}>
-        {children}
-      </Action>
+      <div onMouseDown={onMouseDown}>{children}</div>
       <ModalPopup
         show={show}
         element={document.body}

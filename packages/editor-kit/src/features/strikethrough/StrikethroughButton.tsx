@@ -1,8 +1,8 @@
 import React from "react";
-import { MarkButton } from "../marks/MarkButton";
 import { TooltipContentProps } from "../popup/Tooltip";
 import { IconProps } from "../buttons/IconButton";
+import { ActionButton } from "../actions/ActionButton";
 
 export const StrikethroughButton = (props: IconProps & TooltipContentProps) => {
-  return <MarkButton {...props} type="strikethrough" />;
+  return <ActionButton {...props} plugin="strikethrough" />;
 };

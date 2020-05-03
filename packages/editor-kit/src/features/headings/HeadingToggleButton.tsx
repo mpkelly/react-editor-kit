@@ -1,7 +1,7 @@
-import React, { memo } from "react";
-import { IconButton, IconProps } from "../buttons/IconButton";
-import { HeadingToggleAction } from "./HeadingToggleAction";
+import React from "react";
+import { IconProps } from "../buttons/IconButton";
 import { TooltipContentProps } from "../popup/Tooltip";
+import { ActionButton } from "../actions/ActionButton";
 
 export interface HeadingToggleButtonProps
   extends IconProps,
@@ -11,9 +11,5 @@ export interface HeadingToggleButtonProps
 
 export const HeadingToggleButton = (props: HeadingToggleButtonProps) => {
   const { heading, ...rest } = props;
-  return (
-    <HeadingToggleAction heading={heading}>
-      <IconButton {...rest} />
-    </HeadingToggleAction>
-  );
+  return <ActionButton plugin="heading-toggle" args={{ heading }} {...rest} />;
 };
