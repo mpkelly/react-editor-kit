@@ -17,14 +17,14 @@ import {
   OrderedListButton,
   UnorderedListButton,
   HeadingToggleButton,
-  QuoteButton,
   TableButton,
   VideoButton,
   LinkPlugin,
   InlineCodePlugin,
   OrderedListPlugin,
   UnorderedListPlugin,
-  QuotePlugin,
+  BlockquoteButton,
+  BlockquotePlugin,
   H1Plugin,
   H2Plugin,
   H3Plugin,
@@ -34,12 +34,13 @@ import {
   SuperscriptPlugin,
   VideoPlugin,
   TablePlugin,
-  CodeHighlighterPlugin,
+  CodePlugin,
   LabelsPlugin,
   HeadingSelect,
   FontSizeSelect,
   FontSelect,
-  StylePlugin,
+  FontsPlugin,
+  ColorPlugin,
   Divider,
   TextAlignLeftButton,
   TextAlignRightButton,
@@ -59,8 +60,6 @@ import {
   TextAlignPlugin,
   SpellCheckButton,
   ReadOnlyButton,
-  Rule,
-  RulePlugin,
   Resizable,
   ImagePlugin,
   InfoAlertPlugin,
@@ -68,12 +67,16 @@ import {
   WarningAlertPlugin,
   createInitialLetterPlugin,
   createFixedTitlePlugin,
-  createFixedBlock,
+  createEmptyFixedBlock,
   createOutline,
   OutlineEntry,
   ImageButton,
   UploadImageMenuItem,
   InsertImageByUrlMenuItem,
+  createLabelsPlugin,
+  HeadingTogglePlugin,
+  createClearFormattingPlugin,
+  ClearFormattingAction,
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 import { createStaticHashtags } from "./HashtagSuggestionPlugin";
@@ -82,6 +85,7 @@ import { InsertContextMenuPlugin } from "./InsertContextMenuPlugin";
 import { FormatContextMenuPlugin } from "./FormatContextMenuPlugin";
 
 const GoogleDocsStylePlugin: Plugin = {
+  name: "google-docs-style",
   globalStyles: () => `
     .rek-editor-toolbar .rek-icon-button {
       color: rgba(0,0,0,.6);
@@ -96,7 +100,8 @@ const plugins: Plugin[] = [
   StrikethroughPlugin,
   InlineCodePlugin,
   UnderlinePlugin,
-  QuotePlugin,
+  BlockquotePlugin,
+  createClearFormattingPlugin(),
   H1Plugin,
   H2Plugin,
   H3Plugin,
@@ -108,13 +113,15 @@ const plugins: Plugin[] = [
   UnorderedListPlugin,
   VideoPlugin,
   TextAlignPlugin,
+  HeadingTogglePlugin,
   TablePlugin,
-  CodeHighlighterPlugin,
-  LabelsPlugin,
+  CodePlugin,
+  createLabelsPlugin(),
   createStaticMentions({
     mentions: MentionsItems,
   }),
-  StylePlugin,
+  FontsPlugin,
+  ColorPlugin,
   GoogleDocsStylePlugin,
   createBreakoutPlugin(),
   DividerPlugin,
@@ -122,8 +129,6 @@ const plugins: Plugin[] = [
   ConstraintsPlugin,
   SelectionToolbarPlugin,
   EditorToolbarPlugin,
-
-  RulePlugin,
   ImagePlugin,
   InfoAlertPlugin,
   WarningAlertPlugin,
@@ -138,8 +143,12 @@ const plugins: Plugin[] = [
       "#purple",
     ],
   }),
-  createEmoticonSuggestions(),
-  // createInitialLetterPlugin(),
+  createClearFormattingPlugin(),
+
+  //TODO fix empticons so they work with other :.. triggers
+  //createEmoticonSuggestions(),
+
+  createInitialLetterPlugin(),
   // InsertContextMenuPlugin,
   // FormatContextMenuPlugin,
   // createFixedTitlePlugin(),
@@ -292,7 +301,7 @@ export const GoogleDocsEditor = () => {
             className="material-icons-round"
             ligature="format_size"
           />
-          <QuoteButton
+          <BlockquoteButton
             className="material-icons-round"
             ligature="format_quote"
           />

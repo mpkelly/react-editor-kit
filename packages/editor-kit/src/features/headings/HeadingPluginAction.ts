@@ -1,4 +1,4 @@
-import { isElementActive } from "../blocks/Elements";
+import { isElementActive } from "../elements/Elements";
 import { PluginAction } from "../../plugins/PluginAction";
 import { Transforms } from "slate";
 

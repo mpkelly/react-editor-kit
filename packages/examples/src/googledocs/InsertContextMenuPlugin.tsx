@@ -4,13 +4,14 @@ import {
   MenuItem,
   TableMenuItem,
   AlertMenuItem,
-  CodeBlockMenuItem,
+  CodeMenuItem,
   VideoMenuItem,
   HeadingMenuItem,
-  QuoteMenuItem,
+  BlockquoteMenuItem,
 } from "@mpkelly/react-editor-kit";
 
 export const InsertContextMenuPlugin: Plugin = {
+  name: "insert-context-menu",
   contextMenu: [
     {
       //No trigger - always allowed
@@ -25,8 +26,8 @@ export const InsertContextMenuPlugin: Plugin = {
             <HeadingMenuItem type="h6" text="Heading 6" />
           </MenuItem>
           <div className="rek-h-divider" />
-          <QuoteMenuItem text="Blockquote" />
-          <CodeBlockMenuItem text="Code Block" />
+          <BlockquoteMenuItem text="Blockquote" />
+          <CodeMenuItem text="Code Block" />
           <TableMenuItem text="Table" />
           <VideoMenuItem text="Video" />
           <div className="rek-h-divider" />

@@ -12,6 +12,7 @@ import {
 } from "@mpkelly/react-editor-kit";
 
 export const FormatContextMenuPlugin: Plugin = {
+  name: "format-context-menu",
   contextMenu: [
     {
       //No trigger - always allowed

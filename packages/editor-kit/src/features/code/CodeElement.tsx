@@ -55,7 +55,7 @@ export interface ToolbarProps extends RenderElementProps {
 const Toolbar = (props: ToolbarProps) => {
   const { onFocus, onClose, element } = props;
   const { editor } = useEditorKit();
-  const { data } = usePlugin("icon-provider") as IconProvider;
+  const { icons } = usePlugin<IconProvider>("icon-provider");
   const selected =
     Items.find((items) => items.text === element.lang) || Items[0];
   const [value, setValue] = useState(selected.text);
@@ -88,7 +88,7 @@ const Toolbar = (props: ToolbarProps) => {
         editable
       />
       <div className="rek-v-toolbar-divider" />
-      <Icon icon={data.delete} onClick={handleDelete} />
+      <Icon icon={icons.delete} onClick={handleDelete} />
     </div>
   );
 };

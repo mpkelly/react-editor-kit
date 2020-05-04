@@ -22,13 +22,13 @@ describe("Strikethrough feature", () => {
   });
 
   it("works with buttons", () => {
-    cy.clickMarkButton("strikethrough");
+    cy.clickButton("strikethrough");
     cy.enterText("strikethrough");
-    cy.clickMarkButton("strikethrough");
+    cy.clickButton("strikethrough");
     cy.enterText(" plain ");
-    cy.clickMarkButton("strikethrough");
+    cy.clickButton("strikethrough");
     cy.enterText("strikethrough");
-    cy.clickMarkButton("strikethrough");
+    cy.clickButton("strikethrough");
     cy.enterText(" ");
     cy.check(output);
   });

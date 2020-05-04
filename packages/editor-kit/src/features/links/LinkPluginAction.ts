@@ -1,5 +1,5 @@
 import { Transforms, Range, Editor } from "slate";
-import { isElementActive } from "../blocks/Elements";
+import { isElementActive } from "../elements/Elements";
 import { PluginAction } from "../../plugins/PluginAction";
 
 export const LinkPluginAction: PluginAction = {

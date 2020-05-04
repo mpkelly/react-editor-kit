@@ -1,5 +1,5 @@
 import { PluginAction } from "../../plugins/PluginAction";
-import { toggleElement } from "../blocks/Elements";
+import { toggleElement } from "../elements/Elements";
 
 export const BlockquotePluginAction: PluginAction = {
   action: ({ editor }) => {

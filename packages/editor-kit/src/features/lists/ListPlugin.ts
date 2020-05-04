@@ -1,12 +1,13 @@
-import { Transforms, Editor, Node, Element } from "slate";
+import { Transforms, Editor } from "slate";
 import { Plugin } from "../../plugins/Plugin";
 import { RenderElementProps, ReactEditor } from "slate-react";
 import { renderElement } from "../elements/ElementRenderer";
-import { isElementActive, isElementEmpty } from "../blocks/Elements";
+import { isElementActive } from "../elements/Elements";
 import { ListPluginAction } from "./ListPluginAction";
 import { Trigger } from "../../plugins/Trigger";
 import { ListEnterKeyHandler } from "./ListEnterKeyHandler";
 import { ListTabKeyHandler } from "./ListTabKeyHandler";
+import { LisShiftTabKeyHandler } from "./ListShiftTabKeyHandler";
 
 export const createListPlugin = (
   type: string,
@@ -44,7 +45,7 @@ export const createListPlugin = (
           return renderElement(props, "list-item", "li");
       }
     },
-    onKey: [ListEnterKeyHandler, ListTabKeyHandler],
+    onKey: [ListEnterKeyHandler, LisShiftTabKeyHandler, ListTabKeyHandler],
     editorStyle,
   };
 };

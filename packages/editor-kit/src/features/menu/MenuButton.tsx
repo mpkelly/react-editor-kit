@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useRef, FunctionComponent } from "react";
 import { MenuProps, Menu } from "./Menu";
 import { IconProps, IconButton } from "../buttons/IconButton";
-import { ModalPopup } from "../popup/HTMLElementModalPopup";
+import { HtmlElementModalPopup } from "../popup/HTMLElementModalPopup";
 
 export interface MenuButtonProps
   extends IconProps,
@@ -31,7 +31,7 @@ export const MenuButton: FunctionComponent<MenuButtonProps> = (
         disabled={disabled}
         onRef={(node) => (element.current = node)}
       />
-      <ModalPopup
+      <HtmlElementModalPopup
         element={element.current as HTMLElement}
         show={show}
         onClickOutside={toggleShow}
@@ -39,7 +39,7 @@ export const MenuButton: FunctionComponent<MenuButtonProps> = (
         <Menu style={style} className={"rek-menu-button-menu " + menuClassName}>
           {children}
         </Menu>
-      </ModalPopup>
+      </HtmlElementModalPopup>
     </Fragment>
   );
 };

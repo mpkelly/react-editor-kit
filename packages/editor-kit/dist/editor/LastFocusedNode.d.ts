@@ -4,5 +4,5 @@ export declare const useLastFocused: (editor: ReactEditor) => LastFocusedState;
 export interface LastFocusedState {
     element?: Element;
     point?: Point;
-    selection?: Range;
+    selection?: Range | null;
 }

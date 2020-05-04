@@ -4,5 +4,5 @@ import { TooltipContentProps } from "../popup/Tooltip";
 import { ActionButton } from "../actions/ActionButton";
 
 export const SuperscriptButton = (props: IconProps & TooltipContentProps) => {
-  return <ActionButton {...props} plugin="super" />;
+  return <ActionButton {...props} plugin="superscript" />;
 };

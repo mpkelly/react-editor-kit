@@ -30,8 +30,8 @@ describe("Lists feature", () => {
     cy.enterText("Item 2");
     cy.get("ol > li").should("have.length", 2);
     cy.get("[data-slate-editor=true]").type("{selectAll}");
-    cy.get(".more-icon").click();
-    cy.get("[data-id-button-unordered-list]").click();
+    cy.get("[data-id=toolbar-overflow-button]").click();
+    cy.clickButton("unordered-list")
     cy.get("ul > li").should("have.length", 2);
   });
 
@@ -40,10 +40,11 @@ describe("Lists feature", () => {
     cy.get("li").type("{enter}");
     cy.enterText("Item 2");
     cy.get("body").tab();    
+    console.log("tabbed")
     cy.get("ol > li").should("have.length", 2);
     cy.get("ol").should("have.length", 2);
-    cy.get(".more-icon").click();
-    cy.get("[data-id-button-unordered-list=true]").click();    
+    cy.get("[data-id=toolbar-overflow-button]").click();
+    cy.clickButton("unordered-list")
     cy.get("ol").should("have.length", 1);
     cy.get("ul").should("have.length", 1);
     cy.get("ul > li span span span").click();

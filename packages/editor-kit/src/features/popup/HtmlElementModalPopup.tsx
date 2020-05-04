@@ -5,7 +5,7 @@ import { Overlay } from "../../ui/Popup";
 import { getPosition, Location, Offsets } from "./Popups";
 import { Portal } from "./Portal";
 
-export interface ModalPopupProps {
+export interface HtmlElementModalPopupProps {
   element: HTMLElement | null;
   children: React.ReactNode;
   location?: Location;
@@ -14,7 +14,7 @@ export interface ModalPopupProps {
   offsets?: Offsets;
 }
 
-export const ModalPopup = (props: ModalPopupProps) => {
+export const HtmlElementModalPopup = (props: HtmlElementModalPopupProps) => {
   const { element, location, children, onClickOutside, show, offsets } = props;
   const [domElement, setDomElement] = useState<HTMLElement | null>(null);
   const [, update] = useState({});

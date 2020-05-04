@@ -7,14 +7,14 @@ import { Show } from "../../ui/Show";
 import { usePlugin } from "../../plugins/usePlugin";
 import { IconProvider } from "../icons/IconProviderPlugin";
 import { useTables } from "./Tables";
-import { ModalPopup } from "../popup/HtmlElementModalPopup";
+import { HtmlElementModalPopup } from "../popup/HtmlElementModalPopup";
 import { ElementToolbar } from "../toolbar/ElementToolbar";
 import { MenuItem } from "../menu/MenuItem";
 import { Menu } from "../menu/Menu";
 
 export const TableCellElement = (props: RenderElementProps) => {
   const { attributes, children, element, ...rest } = props;
-  const { data: icons } = usePlugin("icon-provider") as IconProvider;
+  const { icons } = usePlugin<IconProvider>("icon-provider");
   const { editor } = useEditorKit();
   const { addColumn, addRow, deleteRow, deleteColumn } = useTables();
 
@@ -72,7 +72,7 @@ export const TableCellElement = (props: RenderElementProps) => {
                 contentEditable={false}
                 onClick={() => addRow(element)}
               >
-                {icons.plusIcon}
+                {icons.plus}
               </div>
             </div>
             <div
@@ -98,7 +98,7 @@ export const TableCellElement = (props: RenderElementProps) => {
                 contentEditable={false}
                 onClick={() => addColumn(element)}
               >
-                {icons.plusIcon}
+                {icons.plus}
               </div>
             </div>
             <div
@@ -109,7 +109,7 @@ export const TableCellElement = (props: RenderElementProps) => {
         </Show>
         {children}
       </td>
-      <ModalPopup
+      <HtmlElementModalPopup
         show={showRowToolbar}
         element={rowButton as HTMLElement}
         onClickOutside={toggleRowToolbar}
@@ -119,8 +119,8 @@ export const TableCellElement = (props: RenderElementProps) => {
         <ElementToolbar onMouseDown={() => deleteRow(element)}>
           {icons.delete}
         </ElementToolbar>
-      </ModalPopup>
-      <ModalPopup
+      </HtmlElementModalPopup>
+      <HtmlElementModalPopup
         show={showColumnToolbar}
         element={columnButton as HTMLElement}
         onClickOutside={toggleColumnToolbar}
@@ -130,8 +130,8 @@ export const TableCellElement = (props: RenderElementProps) => {
         <ElementToolbar onMouseDown={() => deleteColumn(element)}>
           {icons.delete}
         </ElementToolbar>
-      </ModalPopup>
-      <ModalPopup
+      </HtmlElementModalPopup>
+      <HtmlElementModalPopup
         show={showTableMenu}
         element={tableButton as HTMLElement}
         onClickOutside={toggleTableMenu}
@@ -142,7 +142,7 @@ export const TableCellElement = (props: RenderElementProps) => {
           <MenuItem icon={icons.checkIcon} text={"Header column"} />
           <MenuItem text={"Borderless"} />
         </Menu>
-      </ModalPopup>
+      </HtmlElementModalPopup>
     </Fragment>
   );
 };

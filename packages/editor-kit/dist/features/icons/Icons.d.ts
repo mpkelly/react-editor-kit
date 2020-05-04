@@ -8,10 +8,10 @@ export interface Icons {
     warning: EditorIcon;
     info: EditorIcon;
     settings: EditorIcon;
-    dropdownIcon: EditorIcon;
-    moreIcon: EditorIcon;
-    moreVertIcon: EditorIcon;
+    dropdown: EditorIcon;
+    more: EditorIcon;
+    moreVert: EditorIcon;
     checkIcon: EditorIcon;
-    dateIcon: EditorIcon;
-    plusIcon: EditorIcon;
+    date: EditorIcon;
+    plus: EditorIcon;
 }

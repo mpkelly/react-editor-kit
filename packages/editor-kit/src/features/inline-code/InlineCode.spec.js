@@ -22,13 +22,13 @@ describe("Inline code feature", () => {
   });
 
   it("works with buttons", () => {
-    cy.clickMarkButton("inline-code");
+    cy.clickButton("inline-code");
     cy.enterText("code");
-    cy.clickMarkButton("inline-code");
+    cy.clickButton("inline-code");
     cy.enterText(" plain ");
-    cy.clickMarkButton("inline-code");
+    cy.clickButton("inline-code");
     cy.enterText("code");
-    cy.clickMarkButton("inline-code");
+    cy.clickButton("inline-code");
     cy.enterText(" ");
     cy.check(output);
   });

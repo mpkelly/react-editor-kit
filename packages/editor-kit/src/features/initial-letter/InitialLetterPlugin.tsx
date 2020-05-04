@@ -4,6 +4,7 @@ import "./Dropcaps";
 import { Plugin } from "../../plugins/Plugin";
 import { EditorIcon } from "../icons/Icon";
 import { createInitialLetterContextMenu } from "./InitialLetterContextMenu";
+import { InitialLetterPluginAction } from "./InitialLetterPluginAction";
 
 export interface InitialLetterPluginOptions {
   style: string;
@@ -38,20 +39,11 @@ export const createInitialLetterPlugin = (
   return {
     name: "initial-letter",
     ...options,
-    withPlugin: (editor) => {
-      const { normalizeNode } = editor;
-      editor.normalizeNode = ([node, path]) => {
-        if (node.children && node.children.length) {
-          //TODO force initial letter to be first char
-        }
-        return normalizeNode([node, path]);
-      };
-      return editor;
-    },
+    actions: [InitialLetterPluginAction],
     onContextMenu: createInitialLetterContextMenu(options),
     renderLeaf: (props: RenderLeafProps) => {
       const { leaf, children, attributes } = props;
-      if (leaf.initialLetter) {
+      if (leaf["initial-letter"]) {
         setTimeout(() => {
           const dropcaps = document.querySelectorAll(".rek-initial-letter");
           (window as any).Dropcap.layout(dropcaps, 3);

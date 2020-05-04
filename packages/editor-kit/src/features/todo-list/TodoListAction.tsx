@@ -1,6 +1,6 @@
 import { PluginAction } from "../../plugins/PluginAction";
 import { Transforms } from "slate";
-import { isElementActive } from "../blocks/Elements";
+import { isElementActive } from "../elements/Elements";
 
 export const defaultTodoItem = (props = {}) => ({
   type: "todo-item",

@@ -1,6 +1,6 @@
 import React from "react";
 import { Location, Offsets } from "./Popups";
-export interface ModalPopupProps {
+export interface HtmlElementModalPopupProps {
     element: HTMLElement | null;
     children: React.ReactNode;
     location?: Location;
@@ -8,4 +8,4 @@ export interface ModalPopupProps {
     show: boolean;
     offsets?: Offsets;
 }
-export declare const ModalPopup: (props: ModalPopupProps) => JSX.Element;
+export declare const HtmlElementModalPopup: (props: HtmlElementModalPopupProps) => JSX.Element;

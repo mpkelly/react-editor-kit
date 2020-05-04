@@ -11,13 +11,13 @@ export const SelectionExtensionsPlugin: Plugin = {
     editor.markSelection = () => {
       const { selection } = editor;
       if (selection && Range.isExpanded(selection)) {
-        editor.lastSelection = clone(selection);
+        editor.markedSelection = clone(selection);
       }
     };
     editor.addSelectionMark = (key: string, value: any) => {
-      if (editor.lastSelection) {
-        Transforms.select(editor, editor.lastSelection);
-        editor.lastSelection = null;
+      if (editor.markedSelection) {
+        Transforms.select(editor, editor.markedSelection);
+        editor.markedSelection = null;
         editor.addMark(key, value);
       } else {
         editor.nextMark = { key, value };
@@ -26,7 +26,7 @@ export const SelectionExtensionsPlugin: Plugin = {
     return editor;
   },
   onClick: (event, { editor }) => {
-    editor.lastSelection = null;
+    editor.markedSelection = null;
   },
   renderLeaf: (props: RenderLeafProps) => {
     const { attributes, leaf, children } = props;

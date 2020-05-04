@@ -1,5 +1,5 @@
 import { ReactEditor } from "slate-react";
-import { isElementActive } from "../blocks/Elements";
+import { isElementActive } from "../elements/Elements";
 import { Editor, Transforms, Range, Node } from "slate";
 
 export const toggleInline = (

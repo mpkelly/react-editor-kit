@@ -44,7 +44,9 @@ export const IconButton = (props: IconButtonProps) => {
   );
   const hasTooltip = tooltipText || tooltipComponent;
 
-  const editorIcon: EditorIcon = icon ? icon : { className, ligature };
+  const editorIcon: EditorIcon = icon
+    ? icon
+    : ({ className, ligature } as EditorIcon);
 
   return (
     <Fragment>

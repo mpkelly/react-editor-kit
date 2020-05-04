@@ -1,4 +1,4 @@
-import { toggleElement, isElementActive } from "../blocks/Elements";
+import { toggleElement, isElementActive } from "../elements/Elements";
 import { PluginAction } from "../../plugins/PluginAction";
 
 export const HeadingTogglePluginAction: PluginAction = {

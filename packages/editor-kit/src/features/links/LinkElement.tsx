@@ -8,7 +8,7 @@ import { ModalPopup } from "../popup/ElementModalPopup";
 import { LinkEditor, LinkModel } from "./LinkEditor";
 import { useEditorKit } from "../../editor/EditorKit";
 import { Show } from "../../ui/Show";
-import { isElementActive } from "../blocks/Elements";
+import { isElementActive } from "../elements/Elements";
 
 export interface LinkProps extends RenderElementProps {}
 

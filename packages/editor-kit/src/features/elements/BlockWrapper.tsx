@@ -3,13 +3,13 @@ import { RenderElementProps } from "slate-react";
 import { useFocused } from "../../editor/Focus";
 import { Show } from "../../ui/Show";
 
-export interface BlockWrapperProps extends RenderElementProps {
+export interface ElementWrapperProps extends RenderElementProps {
   className?: string;
   focusToolbar?: JSX.Element | JSX.Element[];
   inline?: boolean;
 }
 
-export const BlockWrapper = (props: BlockWrapperProps) => {
+export const ElementWrapper = (props: ElementWrapperProps) => {
   const { children, element, focusToolbar, inline, ...rest } = props;
   const { isFocusedWithin } = useFocused(element);
   const [inside, setInside] = useState(false);
@@ -26,10 +26,10 @@ export const BlockWrapper = (props: BlockWrapperProps) => {
 
   return (
     <div
-      className={`rek-block-wrapper ${inlineClassName} ${focusClassName} ${className}`}
+      className={`rek-element-wrapper ${inlineClassName} ${focusClassName} ${className}`}
       data-slate-zero-width="z"
     >
-      <div className="rek-block-wrapper-content">{children}</div>
+      <div className="rek-element-wrapper-content">{children}</div>
       <Show when={isFocusedWithin || inside}>
         <div
           contentEditable={false}

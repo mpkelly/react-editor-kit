@@ -1,13 +1,13 @@
 import React, { Fragment, useState } from "react";
 import { Element, Transforms } from "slate";
 import { RenderElementProps, ReactEditor } from "slate-react";
-import { DeletableBlock } from "../blocks/DeletableBlock";
+import { DeletableElement } from "../elements/DeletableElement";
 import { usePlugin } from "../../plugins/usePlugin";
 import { useEditorKit } from "../../editor/EditorKit";
 import { LabelsPlugin } from "../i18n/LabelsPlugin";
 import { IconProvider } from "../icons/IconProviderPlugin";
 import { Icon } from "../icons/Icon";
-import { ModalPopup } from "../popup/HTMLElementModalPopup";
+import { HtmlElementModalPopup } from "../popup/HTMLElementModalPopup";
 import { Checkbox } from "../../ui/Checkbox";
 import { blockEvent, stopEvent } from "../../ui/Utils";
 import { useFocused } from "../../editor/Focus";
@@ -15,7 +15,7 @@ import { useTables } from "./Tables";
 
 export const TableElement = (props: RenderElementProps) => {
   const { attributes, element, children } = props;
-  const { data: icons } = usePlugin("icon-provider") as IconProvider;
+  const { icons } = usePlugin<IconProvider>("icon-provider");
   const { addRow, addColumn } = useTables();
 
   const classes: string[] = ["rek-table"];
@@ -46,7 +46,7 @@ export const TableElement = (props: RenderElementProps) => {
   }
 
   return (
-    <DeletableBlock {...props} toolbarContent={<Toolbar element={element} />}>
+    <DeletableElement {...props} toolbarContent={<Toolbar element={element} />}>
       <div className="rek-table-wrapper">
         <div className="rek-table-wrapper-body">
           <table tabIndex={1} className={classes.join(" ")}>
@@ -57,7 +57,7 @@ export const TableElement = (props: RenderElementProps) => {
             className="rek-table-right"
             onClick={handleAddColumn}
           >
-            {icons.plusIcon}
+            {icons.plus}
           </div>
         </div>
         <div
@@ -65,21 +65,21 @@ export const TableElement = (props: RenderElementProps) => {
           className="rek-table-bottom"
           onClick={handleAddRow}
         >
-          {icons.plusIcon}
+          {icons.plus}
         </div>
       </div>
-    </DeletableBlock>
+    </DeletableElement>
   );
 };
 
-export interface ToolbarProps {
+interface ToolbarProps {
   element: Element;
 }
 
 const Toolbar = (props: ToolbarProps) => {
   const { element } = props;
-  const { data } = usePlugin<IconProvider>("icon-provider");
-  const { data: labels } = usePlugin<LabelsPlugin>("label-provider");
+  const { icons } = usePlugin<IconProvider>("icon-provider");
+  const { labels } = usePlugin<LabelsPlugin>("label-provider");
   const { editor } = useEditorKit();
   const [toolbar, setToolbar] = useState<HTMLElement>();
 
@@ -100,7 +100,6 @@ const Toolbar = (props: ToolbarProps) => {
   const handleDelete = () => {
     Transforms.delete(editor, { at: ReactEditor.findPath(editor, element) });
   };
-
   return (
     <Fragment>
       <div
@@ -108,11 +107,11 @@ const Toolbar = (props: ToolbarProps) => {
         onMouseDown={stopEvent}
         onClick={blockEvent}
       >
-        <Icon icon={data.settings} onClick={handleSettings} />
+        <Icon icon={icons.settings} onClick={handleSettings} />
         <div className="rek-v-toolbar-divider" />
-        <Icon icon={data.delete} onClick={handleDelete} />
+        <Icon icon={icons.delete} onClick={handleDelete} />
       </div>
-      <ModalPopup
+      <HtmlElementModalPopup
         show={Boolean(toolbar)}
         location="top"
         offsets={{ v: -8 }}
@@ -136,7 +135,7 @@ const Toolbar = (props: ToolbarProps) => {
             onChange={(checked) => handleChange("borderless", checked)}
           />
         </div>
-      </ModalPopup>
+      </HtmlElementModalPopup>
     </Fragment>
   );
 };

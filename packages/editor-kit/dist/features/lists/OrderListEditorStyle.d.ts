@@ -1,0 +1,1 @@
+export declare const OrderedListEditorStyle = "\n  ol ol ol ol, \n  ol {\n    list-style: decimal outside none;\n  }\n\n  ol ol ol ol ol,\n  ol ol {\n    list-style: lower-latin outside none;\n  }\n\n  ol ol ol ol ol ol,\n  ol ol ol {\n    list-style: lower-roman outside none;\n  }\n";

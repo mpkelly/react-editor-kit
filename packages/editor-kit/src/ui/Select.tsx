@@ -7,7 +7,7 @@ import React, {
   Fragment,
 } from "react";
 import { List, ListItem } from "./List";
-import { ModalPopup } from "../features/popup/HtmlElementModalPopup";
+import { HtmlElementModalPopup } from "../features/popup/HtmlElementModalPopup";
 import { usePlugin } from "../plugins/usePlugin";
 import { IconProvider } from "../features/icons/IconProviderPlugin";
 import { blockEvent } from "./Utils";
@@ -66,7 +66,7 @@ export const Select = (props: SelectProps) => {
     handleBlur,
   } = useSelect(props, editorElement);
   const disabled = !items.find((item) => !item.disabled);
-  const { data: icons } = usePlugin("icon-provider") as IconProvider;
+  const { icons } = usePlugin<IconProvider>("icon-provider");
   const focusClass = show ? "focus" : "";
   const disabledClass = disabled ? "rek-disabled" : "";
   const className = `${
@@ -103,8 +103,8 @@ export const Select = (props: SelectProps) => {
           type={props.type}
           onClick={handleFocus}
         />
-        {icons.dropdownIcon}
-        <ModalPopup
+        {icons.dropdown}
+        <HtmlElementModalPopup
           show={show}
           element={element as HTMLElement}
           onClickOutside={hideChoices}
@@ -115,7 +115,7 @@ export const Select = (props: SelectProps) => {
             className="rek-select-list"
             style={getStyle(element)}
           />
-        </ModalPopup>
+        </HtmlElementModalPopup>
       </div>
     </Fragment>
   );

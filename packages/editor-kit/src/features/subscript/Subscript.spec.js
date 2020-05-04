@@ -5,9 +5,9 @@ import { jsx } from "slate-hyperscript";
 const output = (
   <fragment>
     <element type="paragraph">
-      <text sub={true}>subscript</text>
+      <text subscript={true}>subscript</text>
       <text> plain </text>
-      <text sub={true}>subscript</text>
+      <text subscript={true}>subscript</text>
       <text> </text>
     </element>
   </fragment>
@@ -22,13 +22,13 @@ describe("Subscript feature", () => {
   });
 
   it("works with buttons", () => {
-    cy.clickMarkButton("sub");
+    cy.clickButton("subscript");
     cy.enterText("subscript");
-    cy.clickMarkButton("sub");
+    cy.clickButton("subscript");
     cy.enterText(" plain ");
-    cy.clickMarkButton("sub");
+    cy.clickButton("subscript");
     cy.enterText("subscript");
-    cy.clickMarkButton("sub");
+    cy.clickButton("subscript");
     cy.enterText(" ");
     cy.check(output);
   });

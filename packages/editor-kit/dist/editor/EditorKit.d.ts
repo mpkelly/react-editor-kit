@@ -15,6 +15,7 @@ export interface EditorKitValue {
     delaySpellCheck(): void;
     id: string;
     executeAction(plugin: string, args?: PluginActionArgs, name?: string): void;
+    isActionActive(plugin: string, args?: PluginActionArgs, name?: string): boolean;
 }
 export declare const useEditorKit: () => EditorKitValue;
 export interface EditorKitProps {

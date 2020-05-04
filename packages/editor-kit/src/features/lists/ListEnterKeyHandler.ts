@@ -1,5 +1,5 @@
 import { Transforms, Editor, Element } from "slate";
-import { isElementEmpty } from "../blocks/Elements";
+import { isElementEmpty } from "../elements/Elements";
 import { getActiveNode, getAncestor } from "../../editor/Editor";
 import { KeyHandler } from "../../plugins/KeyHandler";
 import { toggleList } from "./ListPlugin";

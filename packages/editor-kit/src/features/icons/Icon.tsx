@@ -1,7 +1,7 @@
-import React, { ReactNode, forwardRef } from "react";
+import React, { forwardRef, FunctionComponent, ReactNode } from "react";
 import { stopEvent } from "../../ui/Utils";
 
-export type EditorIcon = CssIcon | ReactNode;
+export type EditorIcon = CssIcon | FunctionComponent | JSX.Element;
 
 export interface CssIcon {
   className: string;
@@ -36,7 +36,12 @@ export const Icon = forwardRef<HTMLDivElement, ReactIconProps>(
         />
       );
     }
-    const reactIcon = icon as JSX.Element;
+    let body = icon;
+    if (typeof icon === "function") {
+      const SVG = icon;
+      body = <SVG />;
+    }
+
     return (
       <div
         ref={ref}
@@ -45,8 +50,12 @@ export const Icon = forwardRef<HTMLDivElement, ReactIconProps>(
         className={`rek-icon ${className}`}
         {...rest}
       >
-        {reactIcon}
+        {body}
       </div>
     );
   }
 );
+
+Icon.defaultProps = {
+  className: "",
+};

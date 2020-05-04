@@ -1,3 +1,4 @@
 /// <reference types="react" />
-import { ActionButtonProps } from "../actions/ActionButton";
-export declare const ClearFormattingButton: (props: ActionButtonProps) => JSX.Element;
+import { IconProps } from "../buttons/IconButton";
+import { TooltipContentProps } from "../popup/Tooltip";
+export declare const ClearFormattingButton: (props: IconProps & TooltipContentProps) => JSX.Element;

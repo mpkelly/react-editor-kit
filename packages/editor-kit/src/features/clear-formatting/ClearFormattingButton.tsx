@@ -1,6 +1,10 @@
 import React from "react";
-import { ActionButton, ActionButtonProps } from "../actions/ActionButton";
+import { ActionButton } from "../actions/ActionButton";
+import { IconProps } from "../buttons/IconButton";
+import { TooltipContentProps } from "../popup/Tooltip";
 
-export const ClearFormattingButton = (props: ActionButtonProps) => {
+export const ClearFormattingButton = (
+  props: IconProps & TooltipContentProps
+) => {
   return <ActionButton {...props} plugin="clear-formatting" />;
 };

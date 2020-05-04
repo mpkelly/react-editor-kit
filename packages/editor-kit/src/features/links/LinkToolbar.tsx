@@ -17,7 +17,7 @@ export const LinkToolbar = (props: LinkToolbarProps) => {
     props
   );
   const { icons } = usePlugin<IconProvider>("icon-provider");
-  const { labels } = usePlugin<LabelsPlugin>("labels-provider");
+  const { labels } = usePlugin<LabelsPlugin>("label-provider");
 
   return (
     <div className="rek-link-toolbar rek-panel">

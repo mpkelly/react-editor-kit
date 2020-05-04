@@ -22,13 +22,13 @@ describe("Bold feature", () => {
   });
 
   it("works with buttons", () => {
-    cy.clickMarkButton("bold");
+    cy.clickButton("bold");
     cy.enterText("bold");
-    cy.clickMarkButton("bold");
+    cy.clickButton("bold");
     cy.enterText(" plain ");
-    cy.clickMarkButton("bold");
+    cy.clickButton("bold");
     cy.enterText("bold");
-    cy.clickMarkButton("bold");
+    cy.clickButton("bold");
     cy.enterText(" ");
     cy.check(output);
   });

@@ -7,7 +7,7 @@ export interface EditorState {
     elementType?: string;
     point?: Point;
     isElementEmpty: boolean;
-    selection?: Range;
+    selection?: Range | null;
     isSelectionCollapsed: boolean;
     isSelectionExpanded: boolean;
 }

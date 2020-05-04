@@ -57,6 +57,11 @@ export interface EditorKitValue {
   delaySpellCheck(): void;
   id: string;
   executeAction(plugin: string, args?: PluginActionArgs, name?: string): void;
+  isActionActive(
+    plugin: string,
+    args?: PluginActionArgs,
+    name?: string
+  ): boolean;
 }
 const Context = createContext<EditorKitValue>({} as EditorKitValue);
 
@@ -106,12 +111,8 @@ export const EditorKit = memo((props: EditorKitProps) => {
     setReadOnly(true);
   };
 
-  const executeAction = (
-    pluginName: string,
-    args?: PluginActionArgs,
-    name?: string
-  ) => {
-    const plugin = usePlugin(pluginName);
+  const resolveAction = (pluginName: string, name?: string) => {
+    const plugin = plugins.find((plugin) => plugin.name === pluginName);
     if (!plugin) {
       throw Error(`No plugin is registered with name ${pluginName}`);
     }
@@ -122,13 +123,29 @@ export const EditorKit = memo((props: EditorKitProps) => {
 
     if (name) {
       action = plugin.actions.find((plugin) => (plugin.name = name));
-      if (action) {
-        throw Error(
-          `No action found on plugin ${pluginName} with name ${name}`
-        );
-      }
     }
-    action?.action(state, plugin, args);
+    if (!action) {
+      throw Error(`No action found on plugin ${pluginName} with name ${name}`);
+    }
+    return { plugin, action };
+  };
+
+  const isActionActive = (
+    pluginName: string,
+    args?: PluginActionArgs,
+    name?: string
+  ) => {
+    const { plugin, action } = resolveAction(pluginName, name);
+    return action.isActionActive(state, plugin, args);
+  };
+
+  const executeAction = (
+    pluginName: string,
+    args?: PluginActionArgs,
+    name?: string
+  ) => {
+    const { plugin, action } = resolveAction(pluginName, name);
+    action.action(state, plugin, args);
   };
 
   const {
@@ -160,6 +177,7 @@ export const EditorKit = memo((props: EditorKitProps) => {
     delaySpellCheck,
     id,
     executeAction,
+    isActionActive,
   };
 
   return (

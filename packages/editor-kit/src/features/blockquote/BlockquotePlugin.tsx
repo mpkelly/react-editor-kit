@@ -2,7 +2,7 @@ import React from "react";
 import { Plugin } from "../../plugins/Plugin";
 import { RenderElementProps } from "slate-react";
 import { renderElement } from "../elements/ElementRenderer";
-import { DeletableBlock } from "../blocks/DeletableBlock";
+import { DeletableElement } from "../elements/DeletableElement";
 import { BlockquoteMarkdownTrigger } from "./BlockquoteMarkdownTrigger";
 import { BlockquoteNamedTrigger } from "./BlockquoteNamedTrigger";
 import { BlockquoteEditorStyles } from "./BlockquoteEditorStyle";
@@ -15,9 +15,9 @@ export const BlockquotePlugin: Plugin = {
   renderElement: (props: RenderElementProps) => {
     if (props.element.type === "blockquote") {
       return (
-        <DeletableBlock {...props}>
+        <DeletableElement {...props}>
           {renderElement(props, "blockquote", "blockquote")}
-        </DeletableBlock>
+        </DeletableElement>
       );
     }
   },

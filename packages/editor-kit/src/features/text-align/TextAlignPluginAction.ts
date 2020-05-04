@@ -51,7 +51,7 @@ export const getTextAlign = (editor: ReactEditor) => {
   const { selection } = editor;
   if (selection) {
     const [node] = Editor.nodes(editor, {
-      match: (node) => node.type === "aligned-block",
+      match: (node) => node.textAlign,
     });
     if (node && node[0].textAlign) {
       return node[0].textAlign;

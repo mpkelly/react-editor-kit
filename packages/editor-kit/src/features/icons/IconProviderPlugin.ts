@@ -11,6 +11,6 @@ export const createIconProviderPlugin = (icons: Icons): IconProvider => {
   return { icons, name: "icon-provider" };
 };
 
-export const IconProviderPlugin = createIconProviderPlugin(
-  MaterialRegularIcons
-);
+export const IconProviderPlugin = createIconProviderPlugin({
+  ...MaterialRegularIcons,
+});

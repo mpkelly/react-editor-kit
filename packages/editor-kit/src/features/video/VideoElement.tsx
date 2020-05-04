@@ -1,7 +1,7 @@
 import React, { useState, useCallback, memo } from "react";
 import { RenderElementProps, ReactEditor } from "slate-react";
 import ReactPlayer from "react-player";
-import { DeletableBlock } from "../blocks/DeletableBlock";
+import { DeletableElement } from "../elements/DeletableElement";
 import { usePlugin } from "../../plugins/usePlugin";
 import { Icon } from "../icons/Icon";
 import { ModalPopup } from "../popup/ElementModalPopup";
@@ -30,7 +30,7 @@ export const VideoElement = memo((props: RenderElementProps) => {
   const urlClass = element.url ? "" : "rek-no-url";
 
   return (
-    <DeletableBlock
+    <DeletableElement
       {...props}
       toolbarContent={
         <div className="rek-video-toolbar rek-panel" data-slate-zero-width="z">
@@ -59,7 +59,7 @@ export const VideoElement = memo((props: RenderElementProps) => {
         </ModalPopup>
         {children}
       </div>
-    </DeletableBlock>
+    </DeletableElement>
   );
 });
 
@@ -68,7 +68,7 @@ export interface VideoSettingsProps extends RenderElementProps {}
 export const VideoSettings = memo((props: VideoSettingsProps) => {
   const { element } = props;
   const { editor } = useEditorKit();
-  const { labels } = usePlugin<LabelsPlugin>("labels-provider");
+  const { labels } = usePlugin<LabelsPlugin>("label-provider");
   const handleSave = (url: string) => {
     Transforms.setNodes(
       editor,

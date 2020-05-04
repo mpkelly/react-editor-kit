@@ -1,5 +1,5 @@
 import { Plugin } from "../../plugins/Plugin";
-import { toggleElement, isElementActive } from "../blocks/Elements";
+import { toggleElement, isElementActive } from "../elements/Elements";
 import { PluginAction } from "../../plugins/PluginAction";
 import { EditorState } from "../../editor/EditorState";
 

@@ -3,7 +3,7 @@ import { ReactEditor } from "slate-react";
 import { EditorIcon } from "../icons/Icon";
 import { EditorLabels } from "../i18n/EditorLabels";
 export interface MenuItemProps {
-    icon?: EditorIcon | ReactNode;
+    icon?: EditorIcon;
     text?: string;
     labelKey?: keyof EditorLabels;
     rightText?: string;

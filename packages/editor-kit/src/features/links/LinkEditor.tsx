@@ -14,7 +14,7 @@ export interface LinkModel {
 }
 
 export const LinkEditor = (props: LinkEditorProps) => {
-  const { labels } = usePlugin<LabelsPlugin>("labels-provider");
+  const { labels } = usePlugin<LabelsPlugin>("label-provider");
   const { handleUrlChange, handleDisplayNameChange, link } = useLinkEditor(
     props
   );

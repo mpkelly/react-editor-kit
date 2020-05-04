@@ -4,7 +4,7 @@ import { ColorPicker, getCssColor } from "./ColorPicker";
 import { useEditorKit } from "../../editor/EditorKit";
 import { marks } from "../marks/Marks";
 import { blockEvent } from "../../ui/Utils";
-import { ModalPopup } from "../popup/HtmlElementModalPopup";
+import { HtmlElementModalPopup } from "../popup/HtmlElementModalPopup";
 import { DefaultColors } from "./ColorPickerButton";
 
 export interface ColorPickerActionProps {
@@ -77,7 +77,7 @@ export const ColorPickerAction: FunctionComponent<ColorPickerActionProps> = (
           {children}
         </div>
       </div>
-      <ModalPopup
+      <HtmlElementModalPopup
         show={show}
         element={element.current as HTMLElement}
         onClickOutside={toggleShow}
@@ -90,7 +90,7 @@ export const ColorPickerAction: FunctionComponent<ColorPickerActionProps> = (
           onBackgroundColorChange={handleBackgroundColorChange}
           colors={colors || DefaultColors}
         />
-      </ModalPopup>
+      </HtmlElementModalPopup>
     </Fragment>
   );
 };

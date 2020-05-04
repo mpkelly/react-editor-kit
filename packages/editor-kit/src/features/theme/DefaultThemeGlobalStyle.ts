@@ -6,7 +6,7 @@ import {
   MenuLayer,
   MenuItemLayer,
   HoverItemLayer,
-} from "../../Index";
+} from "../../ui/Layers";
 
 export const DefaultThemeGlobalStyle = `
 :root {

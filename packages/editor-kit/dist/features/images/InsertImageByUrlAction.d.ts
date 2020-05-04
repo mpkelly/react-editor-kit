@@ -1,6 +1,6 @@
 import { FunctionComponent, ReactNode } from "react";
-export interface UploadImageActionProps {
+export interface InsertImageByUrlActionProps {
     children: ReactNode;
     extensions?: string[];
 }
-export declare const InsertImageByUrlAction: FunctionComponent<UploadImageActionProps>;
+export declare const InsertImageByUrlAction: FunctionComponent<InsertImageByUrlActionProps>;

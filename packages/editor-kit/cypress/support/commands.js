@@ -29,8 +29,8 @@ Cypress.Commands.add("setEditorValue", (value) => {
   });
 });
 
-Cypress.Commands.add("clickMarkButton", (type) => {
-  cy.get(`[data-mark-button=${type}]`).click();
+Cypress.Commands.add("clickButton", (type) => {
+  cy.get(`[data-action-button=${type}]`).click();
 });
 
 Cypress.Commands.add("enterText", (text) => {
@@ -46,9 +46,9 @@ Cypress.Commands.add("enterText", (text) => {
 Cypress.Commands.add("check", (value) => {
   cy.window().then((window) => {
     const { editor } = window;
-    // console.log(editor.children, value);
-    // console.log(JSON.stringify(editor.children));
-    // console.log(JSON.stringify(value));
+    console.log(editor.children, value);
+    console.log(JSON.stringify(editor.children));
+    console.log(JSON.stringify(value));
     expect(editor.children).to.deep.equal(value);
   });
 });

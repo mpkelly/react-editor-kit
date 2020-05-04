@@ -15,7 +15,7 @@ export interface ColorPickerProps {
 
 export const ColorPicker = (props: ColorPickerProps) => {
   const { color, onColorChange, onBackgroundColorChange, colors } = props;
-  const { labels } = usePlugin<LabelsPlugin>("labels-provider");
+  const { labels } = usePlugin<LabelsPlugin>("label-provider");
 
   return (
     <div className="rek-color-picker rek-panel">

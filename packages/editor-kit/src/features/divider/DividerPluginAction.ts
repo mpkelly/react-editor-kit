@@ -1,6 +1,6 @@
 import { Transforms } from "slate";
 import { PluginAction } from "../../plugins/PluginAction";
-import { isElementActive } from "../blocks/Elements";
+import { isElementActive } from "../elements/Elements";
 
 export const DividerPluginAction: PluginAction = {
   action: ({ editor }, plugin, args) => {

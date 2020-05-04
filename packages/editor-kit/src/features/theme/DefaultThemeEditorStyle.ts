@@ -10,7 +10,7 @@ export const DefaultThemeEditorStyle = `
     box-sizing: border-box;
   }
 
-  .rek-block-wrapper {
+  .rek-element-wrapper {
     display:flex;
     flex-direction:column;
     align-items:center;    
@@ -20,7 +20,7 @@ export const DefaultThemeEditorStyle = `
     .rek-toolbar {
       position:absolute;
       bottom:-40px;
-      .rek-svg-icon {
+      svg.rek-icon {
         fill:var(--secondary-text-color);        
         &:hover {
           fill:var(--action-color);     
@@ -34,36 +34,36 @@ export const DefaultThemeEditorStyle = `
     padding:4px;
   }
 
-  .rek-block-wrapper:not(.inline) .rek-block-wrapper-content {
+  .rek-element-wrapper:not(.inline) .rek-element-wrapper-content {
     width:100%;
   }
 
-  .rek-block-wrapper-content {
+  .rek-element-wrapper-content {
     outline:none;    
     &:focus {
       outline:none;
     }
   }
 
-  .rek-block-wrapper.inline {
+  .rek-element-wrapper.inline {
     display:inline-flex;
   }
 
-  .rek-block-wrapper.rek-focused {
+  .rek-element-wrapper.rek-focused {
     z-index: ${FocusedLayer};
     border: 2px solid var(--focus-color);
   }
         
-  .rek-block-wrapper.deletable .rek-delete-icon {
+  .rek-element-wrapper.deletable .rek-delete-icon {
     cursor: pointer;
     z-index: ${FocusedLayer};
   }
 
-  .rek-block-wrapper.deletable .rek-delete-icon path {
+  .rek-element-wrapper.deletable .rek-delete-icon path {
     fill: var(--secondary-text-color);           
   }
 
-  .rek-block-wrapper.deletable .rek-delete-icon:hover path {
+  .rek-element-wrapper.deletable .rek-delete-icon:hover path {
     fill: var(--danger-color);      
   }
 

@@ -1,3 +1,4 @@
+import React from "react";
 import { Icons } from "../Icons";
 import { DeleteIcon } from "./DeleteIcon";
 import { LinkIcon } from "./LinkIcon";
@@ -6,13 +7,13 @@ import { LaunchIcon } from "./LaunchIcon";
 import { ErrorAlertIcon } from "./ErrorAlertIcon";
 import { WarningAlertIcon } from "./WarningAlertIcon";
 import { InfoAlertIcon } from "./InfoAlertIcon";
-import { SettingsIcon } from "./SettingsIcon";
 import { DropdownIcon } from "./DropdownIcon";
 import { MoreIcon } from "./MoreIcon";
 import { CheckIcon } from "./CheckIcon";
 import { MoreVertIcon } from "./MoreVertIcon";
 import { DateIcon } from "./DateIcon";
 import { PlusIcon } from "./PlusIcon";
+import { SettingsIcon } from "./SettingsIcon";
 
 export const MaterialRegularIcons: Icons = {
   delete: DeleteIcon,
@@ -23,10 +24,10 @@ export const MaterialRegularIcons: Icons = {
   warning: WarningAlertIcon,
   info: InfoAlertIcon,
   settings: SettingsIcon,
-  dropdownIcon: DropdownIcon,
-  moreIcon: MoreIcon,
-  moreVertIcon: MoreVertIcon,
+  dropdown: DropdownIcon,
+  more: MoreIcon,
+  moreVert: MoreVertIcon,
   checkIcon: CheckIcon,
-  dateIcon: DateIcon,
-  plusIcon: PlusIcon,
+  date: DateIcon,
+  plus: PlusIcon,
 };

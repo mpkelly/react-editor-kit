@@ -7,7 +7,7 @@ import { registerInline } from "../inlines/Inlines";
 import { LinkPluginAction } from "./LinkPluginAction";
 
 export const LinkPlugin: Plugin = {
-  name: "links",
+  name: "link",
   withPlugin: (editor) => registerInline(editor, "link"),
   actions: [LinkPluginAction],
   renderElement: (props: RenderElementProps) => {

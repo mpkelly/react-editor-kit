@@ -5,15 +5,17 @@ import { ReactEditor } from "slate-react";
 import { toggleList } from "./ListPlugin";
 
 export const ListPluginAction: PluginAction = {
-  action: ({ editor, element }, plugin) => {
+  action: ({ editor, element, elementType }, plugin) => {
+    if (elementType === "list-item") {
+      element = getAncestor(editor, element as Element, 1) as Element;
+    }
     const other =
       plugin.name === "ordered-list" ? "unordered-list" : "ordered-list";
-    const parent = getAncestor(editor, element as Element, 1);
-    if (parent && parent.type == other) {
+    if (element && element.type == other) {
       Transforms.setNodes(
         editor,
         { type: plugin.name, children: [] },
-        { at: ReactEditor.findPath(editor, parent) }
+        { at: ReactEditor.findPath(editor, element) }
       );
     } else {
       return toggleList(editor, plugin.name);

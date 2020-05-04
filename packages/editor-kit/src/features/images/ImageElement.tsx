@@ -5,7 +5,7 @@ import {
   useFocused,
   ReactEditor,
 } from "slate-react";
-import { DeletableBlock } from "../blocks/DeletableBlock";
+import { DeletableElement } from "../elements/DeletableElement";
 import { useEditorKit } from "../../editor/EditorKit";
 import { Transforms } from "slate";
 
@@ -22,11 +22,11 @@ export const ImageElement = (props: RenderElementProps) => {
   const focusedClass = selected && focused ? "rek-focused" : "";
 
   return (
-    <DeletableBlock {...props}>
+    <DeletableElement {...props}>
       <div contentEditable={false} onClick={handleClick} {...rest}>
         <img src={element.url} className={`rek-image ${focusedClass}`} />
       </div>
       {children}
-    </DeletableBlock>
+    </DeletableElement>
   );
 };

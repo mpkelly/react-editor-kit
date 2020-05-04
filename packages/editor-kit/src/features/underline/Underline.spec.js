@@ -22,13 +22,13 @@ describe("Underline feature", () => {
   });
 
   it("works with buttons", () => {
-    cy.clickMarkButton("underline");
+    cy.clickButton("underline");
     cy.enterText("underline");
-    cy.clickMarkButton("underline");
+    cy.clickButton("underline");
     cy.enterText(" plain ");
-    cy.clickMarkButton("underline");
+    cy.clickButton("underline");
     cy.enterText("underline");
-    cy.clickMarkButton("underline");
+    cy.clickButton("underline");
     cy.enterText(" ");
     cy.check(output);
   });

@@ -1,15 +1,15 @@
 import React from "react";
-import { Editor, Transforms, Node } from "slate";
+import { Transforms, Node } from "slate";
 import { RenderElementProps } from "slate-react";
 import { TableCellElement } from "./TableCellElement";
 import { Plugin } from "../../plugins/Plugin";
 import { TableElement } from "./TableElement";
-import { isDeletingElementContents } from "../blocks/Elements";
 import { TabledNamedTrigger } from "./TableNamedTrigger";
 import { TableGlobalStyle } from "./TableGlobalStyle";
 import { TableEditorStyle } from "./TableEditorStyle";
 import { TableEnterKeyHandler } from "./TableEnterKeyHandle";
 import { TableKeyDownHandler } from "./TableKeyDownHandler";
+import { TablePluginAction } from "./TablePluginAction";
 
 export interface TablePluginOptions {
   defaultTable: Node[];
@@ -39,6 +39,7 @@ export const createTablePlugin = (options: TablePluginOptions): TablePlugin => {
       return editor;
     },
     triggers: [TabledNamedTrigger],
+    actions: [TablePluginAction],
     onKey: [TableEnterKeyHandler],
     onKeyDown: TableKeyDownHandler,
     renderElement: (props: RenderElementProps) => {

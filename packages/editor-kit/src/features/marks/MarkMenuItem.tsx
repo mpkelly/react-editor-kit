@@ -21,7 +21,7 @@ export const MarkMenuItem = (props: MarkMenuItemProps) => {
 
 const MenuItemBody = (props: MarkMenuItemProps & ActionChildProps) => {
   let { type, icon, hideOnIcon, active, ...rest } = props;
-  const { icons } = usePlugin("icon-provider") as IconProvider;
+  const { icons } = usePlugin<IconProvider>("icon-provider");
   if (!icon && !hideOnIcon && active) {
     icon = icons.checkIcon;
   }

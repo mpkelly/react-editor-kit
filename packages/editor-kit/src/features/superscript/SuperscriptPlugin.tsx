@@ -9,6 +9,6 @@ export const SuperscriptPlugin: Plugin = {
   triggers: [SuperscriptMarkdownTrigger],
   actions: [SuperscriptPluginAction],
   renderLeaf: (props: RenderLeafProps) => {
-    return renderLeaf(props, "super", "sup");
+    return renderLeaf(props, "superscript", "sup");
   },
 };

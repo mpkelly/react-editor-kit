@@ -1,5 +1,5 @@
 import { KeyHandler } from "../../plugins/KeyHandler";
-import { isElementActive } from "../blocks/Elements";
+import { isElementActive } from "../elements/Elements";
 import { ReactEditor } from "slate-react";
 import { Element, Transforms } from "slate";
 import { defaultTodoItem } from "./TodoListAction";

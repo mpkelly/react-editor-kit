@@ -17,8 +17,8 @@ import {
   InlineCodeButton,
   OrderedListButton,
   UnorderedListButton,
-  QuoteButton,
-  QuotePlugin,
+  BlockquoteButton,
+  BlockquotePlugin,
   OrderedListPlugin,
   UnorderedListPlugin,
   IconProviderPlugin,
@@ -33,13 +33,32 @@ import {
   TableButton,
   SpoilerPlugin,
   SpoilerButton,
-  CodeHighlighterPlugin,
+  CodePlugin,
   createStaticMentions,
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 
+const GlobalStyle = `
+
+  .rek-icon-button {
+    height: 28px;
+    width: 28px;
+    border-radius: 4px;
+  }
+
+  .rek-icon-button:hover {
+    background-color: rgba(26, 26, 27, 0.1);
+  }
+
+  .rek-icon-button.rek-css-icon {
+    color: rgb(135, 138, 140) !important;
+    font-size: 20px !important;
+  }
+`;
+
 const RedditStylePlugin: Plugin = {
-  globalStyles: () => GlobalStyle,
+  name: "custom-style",
+  globalStyle: GlobalStyle,
 };
 
 const plugins: Plugin[] = [
@@ -51,7 +70,7 @@ const plugins: Plugin[] = [
   InlineCodePlugin,
   OrderedListPlugin,
   UnorderedListPlugin,
-  QuotePlugin,
+  BlockquotePlugin,
   RedditStylePlugin,
   IconProviderPlugin,
   H1Plugin,
@@ -60,9 +79,8 @@ const plugins: Plugin[] = [
   UnorderedListPlugin,
   VideoPlugin,
   TablePlugin,
-  LabelsPlugin,
   SpoilerPlugin,
-  CodeHighlighterPlugin,
+  CodePlugin,
   createStaticMentions({
     mentions: MentionsItems,
   }),
@@ -129,7 +147,10 @@ export const RedditEditor = () => {
           className="material-icons-round"
           ligature="format_size"
         />
-        <QuoteButton className="material-icons-round" ligature="format_quote" />
+        <BlockquoteButton
+          className="material-icons-round"
+          ligature="format_quote"
+        />
         <TableButton className="material-icons-round" ligature="grid_on" />
         <VideoButton className="material-icons-round" ligature="videocam" />
       </div>
@@ -137,21 +158,3 @@ export const RedditEditor = () => {
     </EditorKit>
   );
 };
-
-const GlobalStyle = `
-
-  .rek-icon-button {
-    height: 28px;
-    width: 28px;
-    border-radius: 4px;
-  }
-
-  .rek-icon-button:hover {
-    background-color: rgba(26, 26, 27, 0.1);
-  }
-
-  .rek-icon-button.rek-css-icon {
-    color: rgb(135, 138, 140) !important;
-    font-size: 20px !important;
-  }
-`;

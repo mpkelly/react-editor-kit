@@ -12,7 +12,7 @@ import { Menu } from "./Menu";
 import { EditorLabels } from "../i18n/EditorLabels";
 
 export interface MenuItemProps {
-  icon?: EditorIcon | ReactNode;
+  icon?: EditorIcon;
   text?: string;
   labelKey?: keyof EditorLabels;
   rightText?: string;
@@ -37,7 +37,7 @@ export const MenuItem = (props: MenuItemProps) => {
     disabled,
     ...rest
   } = props;
-  const { labels } = usePlugin<LabelsPlugin>("labels-provider");
+  const { labels } = usePlugin<LabelsPlugin>("label-provider");
   const { icons } = usePlugin<IconProvider>("icon-provider");
   const { editor } = useEditorKit();
   const [element, setElement] = useState<HTMLElement>();
@@ -91,7 +91,7 @@ export const MenuItem = (props: MenuItemProps) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={(event) => {
-        blockEvent(event);
+        // blockEvent(event);
         onClick && onClick(editor);
       }}
       {...rest}
@@ -101,7 +101,7 @@ export const MenuItem = (props: MenuItemProps) => {
       <div className="rek-menu-item-right">
         {rightText && <span>{rightText}</span>}
       </div>
-      <Show when={children}>{icons.dropdownIcon}</Show>
+      <Show when={children}>{icons.dropdown}</Show>
       <Show when={Boolean(element)}>
         <Menu ref={handleNestedRef} style={style}>
           {children}

@@ -6,10 +6,12 @@ import { useFocused } from "../../editor/Focus";
 import { IconProvider } from "../icons/IconProviderPlugin";
 import { usePlugin } from "../../plugins/usePlugin";
 import { Checkbox } from "../../ui/Checkbox";
-import { IconButton, Show, MenuItem } from "../../Index";
 import { stopEvent } from "../../ui/Utils";
 import { MenuButton } from "../menu/MenuButton";
 import { LabelsPlugin } from "../i18n/LabelsPlugin";
+import { Show } from "../../ui/Show";
+import { MenuItem } from "../menu/MenuItem";
+import { IconButton } from "../buttons/IconButton";
 
 export interface TodoItemElementProps extends RenderElementProps {
   placeholder: string;
@@ -21,7 +23,7 @@ export const TodoItemElement = (props: TodoItemElementProps) => {
   const { editor } = useEditorKit();
 
   const { icons } = usePlugin<IconProvider>("icon-provider");
-  const { labels } = usePlugin<LabelsPlugin>("labels-provider");
+  const { labels } = usePlugin<LabelsPlugin>("label-provider");
 
   const handleChange = useCallback(() => {
     Transforms.setNodes(
@@ -83,21 +85,18 @@ export const TodoItemElement = (props: TodoItemElementProps) => {
       <div className="rek-todo-item-due-date">
         {element.dueDate && (
           <IconButton
-            icon={icons.dateIcon}
+            icon={icons.date}
             tooltipText={dateFormatter(element.dueDate)}
             tooltipOffsets={{ v: 8 }}
           />
         )}
       </div>
       <div contentEditable="false" onMouseDown={stopEvent}>
-        <MenuButton
-          icon={icons.moreVertIcon}
-          menuClassName="rek-todo-item-menu"
-        >
+        <MenuButton icon={icons.moreVert} menuClassName="rek-todo-item-menu">
           <Show when={element.dueDate}>
             <MenuItem
               text={labels.removeDueDate}
-              icon={icons.dateIcon}
+              icon={icons.date}
               onClick={handleRemoveDate}
             />
           </Show>

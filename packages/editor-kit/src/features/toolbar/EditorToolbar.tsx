@@ -5,7 +5,7 @@ import { Show } from "../../ui/Show";
 import { usePlugin } from "../../plugins/usePlugin";
 import { IconProvider } from "../icons/IconProviderPlugin";
 import { Icon } from "../icons/Icon";
-import { ModalPopup } from "../popup/HtmlElementModalPopup";
+import { HtmlElementModalPopup } from "../popup/HtmlElementModalPopup";
 import { blockEvent } from "../../ui/Utils";
 import { useEditorKit } from "../../editor/EditorKit";
 
@@ -110,7 +110,7 @@ const Overflow = (props: OverflowProps) => {
   const { children, maxWidth } = props;
   const [show, setShow] = useState(false);
   const element = useRef<HTMLElement | null>(null);
-  const { data: icons } = usePlugin("icon-provider") as IconProvider;
+  const { icons } = usePlugin<IconProvider>("icon-provider");
   const toggleShow = () => {
     setShow((show) => !show);
   };
@@ -124,11 +124,11 @@ const Overflow = (props: OverflowProps) => {
       <div className="rek-icon-button">
         <Icon
           data-id="toolbar-overflow-button"
-          icon={icons.moreIcon}
+          icon={icons.more}
           onClick={toggleShow}
         />
       </div>
-      <ModalPopup
+      <HtmlElementModalPopup
         element={element.current}
         show={show}
         location="bottom"
@@ -138,7 +138,7 @@ const Overflow = (props: OverflowProps) => {
         <div className="rek-panel" style={{ maxWidth }}>
           {children}
         </div>
-      </ModalPopup>
+      </HtmlElementModalPopup>
     </div>
   );
 };

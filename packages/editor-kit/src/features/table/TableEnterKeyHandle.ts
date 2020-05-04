@@ -1,6 +1,6 @@
 import { Transforms } from "slate";
 import { KeyHandler } from "../../plugins/KeyHandler";
-import { isElementActive } from "../blocks/Elements";
+import { isElementActive } from "../elements/Elements";
 
 export const TableEnterKeyHandler: KeyHandler = {
   pattern: "enter",

@@ -22,13 +22,13 @@ describe("Italic feature", () => {
   });
 
   it("works with buttons", () => {
-    cy.clickMarkButton("italic");
+    cy.clickButton("italic");
     cy.enterText("italic");
-    cy.clickMarkButton("italic");
+    cy.clickButton("italic");
     cy.enterText(" plain ");
-    cy.clickMarkButton("italic");
+    cy.clickButton("italic");
     cy.enterText("italic");
-    cy.clickMarkButton("italic");
+    cy.clickButton("italic");
     cy.enterText(" ");
     cy.check(output);
   });

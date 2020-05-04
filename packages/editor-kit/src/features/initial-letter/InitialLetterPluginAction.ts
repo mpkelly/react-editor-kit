@@ -10,15 +10,17 @@ export const InitialLetterPluginAction: PluginAction = {
     const range = findInitialLetterRange(editor);
     if (range) {
       Transforms.setSelection(editor, range);
-      toggleMark(editor, "initial-letter", true);
+      toggleMark(editor, "initial-letter");
       Transforms.collapse(editor, { edge: "end" });
     } else {
       if (element) {
-        const child = element.children.find((text: Node) => text.initialLetter);
+        const child = element.children.find(
+          (text: Node) => text["initial-letter"]
+        );
         if (child) {
           Transforms.setNodes(
             editor,
-            { initialLetter: undefined },
+            { ["initial-letter"]: undefined },
             { at: ReactEditor.findPath(editor, child) }
           );
         }
@@ -32,7 +34,7 @@ export const isInitialLetterActive = (editor: ReactEditor) => {
   const range = findInitialLetterRange(editor);
   if (range) {
     const [node] = Editor.node(editor, range);
-    return node.initialLetter;
+    return node["initial-letter"];
   }
   return false;
 };

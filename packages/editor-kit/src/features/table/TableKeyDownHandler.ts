@@ -1,6 +1,6 @@
 import { Editor } from "slate";
 import { EditorState } from "../../editor/EditorState";
-import { isDeletingElementContents } from "../blocks/Elements";
+import { isDeletingElementContents } from "../elements/Elements";
 
 export const TableKeyDownHandler = (
   event: React.KeyboardEvent,

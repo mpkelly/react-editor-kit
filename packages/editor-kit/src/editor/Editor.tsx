@@ -30,7 +30,7 @@ import { ContextMenu } from "../features/context-menu/ContextMenu";
 import { Show } from "../ui/Show";
 import isHotkey from "is-hotkey";
 import { EditorState, createEditorState } from "./EditorState";
-import { useLastFocused } from "./LastFocusedNode";
+import { useLastFocused, LastFocusedState } from "./LastFocusedNode";
 
 export interface EditorProps {
   value: Node[];
@@ -59,15 +59,22 @@ export const Editor = memo((props: EditorProps) => {
     y: number;
   }>({ items: [], x: 0, y: 0 });
 
-  const last = useLastFocused(editor);
-  const state = createEditorState(last, editor);
+  useLastFocused(editor);
+
+  const createState = () => {
+    const { selection } = editor;
+    const point = selection ? selection.focus : undefined;
+    const [element] = point ? SlateEditor.parent(editor, point) : [];
+
+    return createEditorState({ selection, point, element }, editor);
+  };
 
   const renderElement = useCallback(
     (props: RenderElementProps) => handleRenderElement(props, plugins),
     [plugins]
   );
   const renderLeaf = useCallback(
-    (props: RenderLeafProps) => handleRenderLeaf(props, plugins, state),
+    (props: RenderLeafProps) => handleRenderLeaf(props, plugins, createState()),
     [plugins]
   );
 
@@ -80,14 +87,14 @@ export const Editor = memo((props: EditorProps) => {
     (event: React.KeyboardEvent<HTMLDivElement>) => {
       delaySpellCheck();
       handleCloseMenu();
-      handleKeyDown(event, plugins, state);
+      handleKeyDown(event, plugins, createState());
     },
     [spellCheck, plugins]
   );
 
   const keyUp = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
-      handleKeyUp(event, plugins, state);
+      handleKeyUp(event, plugins, createState());
     },
     [plugins]
   );
@@ -95,14 +102,14 @@ export const Editor = memo((props: EditorProps) => {
   const click = useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
       handleCloseMenu();
-      handleClick(event, plugins, state);
+      handleClick(event, plugins, createState());
     },
     [plugins]
   );
 
   const contextMenu = useCallback(
     (event: React.MouseEvent) => {
-      const items = handleContextMenu(event, plugins, state);
+      const items = handleContextMenu(event, plugins, createState());
       const x = event.clientX;
       const y = event.clientY;
       if (items.length) {
@@ -248,6 +255,11 @@ const handleKeyUp = (
               //If onMatch is not set then execte the default PlgunAction
               plugin.actions[0].action(state, plugin);
             }
+            if (trigger.clear == undefined || trigger.clear) {
+              const range = matches[0].range;
+              const length = range.focus.offset - range.anchor.offset;
+              deleteBackward(editor, length);
+            }
           }
         }
       }
@@ -260,12 +272,9 @@ const handleContextMenu = (
   plugins: Plugin[],
   state: EditorState
 ) => {
+  const { element, selection, editor } = state;
   let items: ReactNode[] = [];
-  const { editor } = state;
-  const node = getActiveNode(editor);
-  const { selection } = editor;
   const marks = editor.marks || {};
-
   for (let plugin of plugins) {
     if (plugin.onContextMenu) {
       for (let choice of plugin.onContextMenu)
@@ -274,10 +283,10 @@ const handleContextMenu = (
         } else {
           const { trigger } = choice;
           if (trigger.node !== undefined) {
-            if (!node) {
+            if (!element) {
               continue;
             }
-            if (node.type !== trigger.node) {
+            if (element.type !== trigger.node) {
               continue;
             }
           }

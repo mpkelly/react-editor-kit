@@ -37,5 +37,5 @@ export const useLastFocused = (editor: ReactEditor) => {
 export interface LastFocusedState {
   element?: Element;
   point?: Point;
-  selection?: Range;
+  selection?: Range | null;
 }

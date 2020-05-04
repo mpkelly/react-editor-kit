@@ -8,7 +8,7 @@ import {
   ItalicPlugin,
   BoldButton,
   ItalicButton,
-  EnterKeyHandlerPlugin,
+  EnterKeyPlugin,
   StrikethroughButton,
   UnderlinePlugin,
   UnderlineButton,
@@ -20,14 +20,14 @@ import {
   OrderedListButton,
   UnorderedListButton,
   HeadingToggleButton,
-  QuoteButton,
+  BlockquoteButton,
   TableButton,
   VideoButton,
   LinkPlugin,
   InlineCodePlugin,
   OrderedListPlugin,
   UnorderedListPlugin,
-  QuotePlugin,
+  BlockquotePlugin,
   H1Plugin,
   H2Plugin,
   H3Plugin,
@@ -38,11 +38,12 @@ import {
   SuperscriptPlugin,
   VideoPlugin,
   TablePlugin,
-  CodeHighlighterPlugin,
+  CodePlugin,
   HeadingSelect,
   FontSizeSelect,
   FontSelect,
-  StylePlugin,
+  FontsPlugin,
+  ColorPlugin,
   Divider,
   TextAlignLeftButton,
   TextAlignRightButton,
@@ -62,10 +63,13 @@ import {
   TextAlignPlugin,
   ImagePlugin,
   createInitialLetterPlugin,
+  HeadingTogglePlugin,
+  createClearFormattingPlugin,
 } from "../src/Index";
 import ReactDOM from "react-dom";
 
 const TestEditorStylePlugin: Plugin = {
+  name: "editor-styles",
   globalStyles: () => `
     .rek-editor-toolbar-wrapper {
       flex:none;
@@ -89,7 +93,7 @@ const plugins: Plugin[] = [
   UnderlinePlugin,
   OrderedListPlugin,
   UnorderedListPlugin,
-  QuotePlugin,
+  BlockquotePlugin,
   H1Plugin,
   H2Plugin,
   H3Plugin,
@@ -102,10 +106,9 @@ const plugins: Plugin[] = [
   UnorderedListPlugin,
   VideoPlugin,
   TablePlugin,
-  CodeHighlighterPlugin,
-  StylePlugin,
+  CodePlugin,
   TestEditorStylePlugin,
-  CodeHighlighterPlugin,
+  CodePlugin,
   createBreakoutPlugin(),
   DividerPlugin,
   HistoryPlugin,
@@ -122,8 +125,10 @@ const plugins: Plugin[] = [
       { name: "Dave Jones" },
     ],
   }),
-  EnterKeyHandlerPlugin,
+  EnterKeyPlugin,
+  HeadingTogglePlugin,
   createInitialLetterPlugin(),
+  createClearFormattingPlugin(),
 ];
 
 const initialValue = [
@@ -247,7 +252,7 @@ export const TestEditor = () => {
             className="material-icons-round"
             ligature="format_size"
           />
-          <QuoteButton
+          <BlockquoteButton
             className="material-icons-round"
             ligature="format_quote"
           />

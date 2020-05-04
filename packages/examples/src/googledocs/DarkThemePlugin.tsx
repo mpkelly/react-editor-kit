@@ -1,6 +1,7 @@
 import { Plugin } from "@mpkelly/react-editor-kit";
 
 export const DarkThemePlugin: Plugin = {
+  name: "dark-theme",
   globalStyles: () => `  
   
      #root {
@@ -36,7 +37,7 @@ export const DarkThemePlugin: Plugin = {
       }      
     }
 
-    .rek-svg-icon path {
+    svg.rek-icon path {
       fill:var(--secondary-text-color); 
     }
     
