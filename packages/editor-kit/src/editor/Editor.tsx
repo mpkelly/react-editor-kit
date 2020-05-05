@@ -252,7 +252,7 @@ const handleKeyUp = (
             if (trigger.onMatch) {
               trigger.onMatch(state, matches, plugin);
             } else if (plugin.actions) {
-              //If onMatch is not set then execte the default PlgunAction
+              //If onMatch is not set then execute the default PluginAction
               plugin.actions[0].action(state, plugin);
             }
             if (trigger.clear == undefined || trigger.clear) {

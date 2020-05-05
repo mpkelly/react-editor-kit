@@ -2,7 +2,6 @@ import React from "react";
 
 export const PlusIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
     className="rek-icon"
     width="24"
     height="24"

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useCallback } from "react";
 import { Element, Transforms } from "slate";
 import { RenderElementProps, ReactEditor } from "slate-react";
 import { DeletableElement } from "../elements/DeletableElement";
@@ -12,6 +12,7 @@ import { Checkbox } from "../../ui/Checkbox";
 import { blockEvent, stopEvent } from "../../ui/Utils";
 import { useFocused } from "../../editor/Focus";
 import { useTables } from "./Tables";
+import { Show } from "../../ui/Show";
 
 export const TableElement = (props: RenderElementProps) => {
   const { attributes, element, children } = props;
@@ -20,17 +21,17 @@ export const TableElement = (props: RenderElementProps) => {
 
   const classes: string[] = ["rek-table"];
 
-  const handleAddRow = () => {
+  const handleAddRow = useCallback(() => {
     const lastRow = element.children[element.children.length - 1];
     const cell = lastRow.children[0];
     addRow(cell);
-  };
+  }, [element]);
 
-  const handleAddColumn = () => {
+  const handleAddColumn = useCallback(() => {
     const row = element.children[0];
     const lastCell = row.children[row.children.length - 1];
     addColumn(lastCell);
-  };
+  }, [element]);
 
   if (element.headerRow) {
     classes.push("rek-header-row");
@@ -44,7 +45,6 @@ export const TableElement = (props: RenderElementProps) => {
   if (element.borderless && !isFocusedWithin) {
     classes.push("rek-borderless");
   }
-
   return (
     <DeletableElement {...props} toolbarContent={<Toolbar element={element} />}>
       <div className="rek-table-wrapper">
@@ -52,21 +52,25 @@ export const TableElement = (props: RenderElementProps) => {
           <table tabIndex={1} className={classes.join(" ")}>
             <tbody {...attributes}>{children}</tbody>
           </table>
+          <Show when={isFocusedWithin}>
+            <div
+              contentEditable={false}
+              className="rek-table-right"
+              onMouseDown={handleAddColumn}
+            >
+              <Icon icon={icons.plus} />
+            </div>
+          </Show>
+        </div>
+        <Show when={isFocusedWithin}>
           <div
             contentEditable={false}
-            className="rek-table-right"
-            onClick={handleAddColumn}
+            className="rek-table-bottom"
+            onMouseDown={handleAddRow}
           >
-            {icons.plus}
+            <Icon icon={icons.plus} />
           </div>
-        </div>
-        <div
-          contentEditable={false}
-          className="rek-table-bottom"
-          onClick={handleAddRow}
-        >
-          {icons.plus}
-        </div>
+        </Show>
       </div>
     </DeletableElement>
   );

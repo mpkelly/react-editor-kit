@@ -13,6 +13,13 @@ import { TablePluginAction } from "./TablePluginAction";
 
 export interface TablePluginOptions {
   defaultTable: Node[];
+  tableSettings: TableSettings;
+}
+
+export interface TableSettings {
+  allowHeaderRow: boolean;
+  allowheaderColumn: boolean;
+  allowBorderless: boolean;
 }
 
 export interface TablePlugin extends Plugin, TablePluginOptions {}
@@ -66,7 +73,7 @@ export const cell = (props: any = {}) => ({
 export const DefaultTable = [
   {
     type: "table",
-    headerRow: "true",
+    headerRow: true,
     children: [
       {
         type: "table-row",
@@ -84,7 +91,14 @@ export const DefaultTable = [
   },
 ];
 
-export const TablePlugin = createTablePlugin({ defaultTable: DefaultTable });
+export const TablePlugin = createTablePlugin({
+  defaultTable: DefaultTable,
+  tableSettings: {
+    allowBorderless: true,
+    allowheaderColumn: true,
+    allowHeaderRow: true,
+  },
+});
 
 export const renderTable = (props: RenderElementProps) => {
   const { element, attributes, children } = props;

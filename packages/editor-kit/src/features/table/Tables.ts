@@ -7,20 +7,25 @@ import { getAncestor } from "../../editor/Editor";
 export const useTables = () => {
   const { editor } = useEditorKit();
 
-  const addColumn = (element: Element) => {
+  const addColumn = (element: Element, before = false) => {
     const [row, rowPath] = findRow(editor, element);
     const index = row.children.indexOf(element);
     const [table] = Editor.parent(editor, rowPath);
     table.children.forEach((row) => {
       const path = ReactEditor.findPath(editor, row.children[index]);
-      path[path.length - 1]++;
+      if (!before) {
+        path[path.length - 1]++;
+      }
       Transforms.insertNodes(editor, cell(), { at: path });
     });
   };
 
-  const addRow = (element: Element) => {
+  const addRow = (element: Element, before = false) => {
     const [row, rowPath] = findRow(editor, element);
-    rowPath[rowPath.length - 1]++;
+    if (!before) {
+      rowPath[rowPath.length - 1]++;
+    }
+
     const children = Array.from({ length: row.children.length }).map(() =>
       cell()
     );

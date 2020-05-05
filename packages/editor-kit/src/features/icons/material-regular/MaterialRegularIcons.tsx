@@ -27,7 +27,7 @@ export const MaterialRegularIcons: Icons = {
   dropdown: DropdownIcon,
   more: MoreIcon,
   moreVert: MoreVertIcon,
-  checkIcon: CheckIcon,
+  check: CheckIcon,
   date: DateIcon,
   plus: PlusIcon,
 };

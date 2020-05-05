@@ -23,7 +23,7 @@ const MenuItemBody = (props: MarkMenuItemProps & ActionChildProps) => {
   let { type, icon, hideOnIcon, active, ...rest } = props;
   const { icons } = usePlugin<IconProvider>("icon-provider");
   if (!icon && !hideOnIcon && active) {
-    icon = icons.checkIcon;
+    icon = icons.check;
   }
   return (
     <MenuItem

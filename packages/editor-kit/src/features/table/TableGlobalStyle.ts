@@ -27,4 +27,10 @@ export const TableGlobalStyle = `
       margin-bottom:4px;
     }
   }
+
+  .rek-table-menu {
+    .rek-menu-item-right  {
+      display:none;
+    }    
+  }
 `;

@@ -1,25 +1,34 @@
 import { EditorLabels } from "./EditorLabels";
 
 export const EnglishLabels: EditorLabels = {
-  addColumn: "Add column",
-  deleteColumn: "Delete column",
-  addRow: "Add row",
-  deleteRow: "Delete row",
+  //General
+  save: "Save",
+  delete: "Delete",
+
+  //ColorPickerButton
+  textColor: "Text Color",
+  backgroundColor: "Background Color",
+
+  //Video plugin
+  validVideoUrl: "A valid video URL",
+  //Image plugin
+  validImageUrl: "A valid image URL",
+
+  //Link plugin
   enterUrl: "Enter URL",
   enterDisplayText: "Enter display text",
   editLink: "Edit link",
-  textColor: "Text Color",
-  backgroundColor: "Background Color",
-  headerRow: "Header row",
-  headerColumn: "Header column",
-  numberedColumn: "Numbered column",
-  borderless: "Borderless",
-  save: "Save",
-  validVideoUrl: "A valid video URL",
-  validImageUrl: "A valid image URL",
+
+  //InitialLetter plugin
   initialLetterOn: "Initial letter on",
   initialLetterOff: "Initial letter off",
+
+  //TodoList plugin
   removeDueDate: "Remove due date",
   moveToTop: "Move to top",
-  delete: "Delete",
+
+  //Table plugin
+  headerRow: "Header row",
+  headerColumn: "Header column",
+  borderless: "Borderless",
 };

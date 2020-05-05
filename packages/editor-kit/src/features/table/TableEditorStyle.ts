@@ -1,6 +1,7 @@
 export const TableEditorStyle = `
   .rek-table-wrapper {
     padding:20px;
+    padding-top: 36px;
     display:flex;
     flex-direction:column;
     padding-right:0;
@@ -117,6 +118,10 @@ export const TableEditorStyle = `
     justify-content:center;
   }
 
+  .rek-table-column-insert.rek-start {
+    left: -1px;
+  }
+
   .rek-table-column-insert-button {
     display:flex;
     justify-content:center;
@@ -168,6 +173,10 @@ export const TableEditorStyle = `
     position: absolute;
     display:flex;
     align-items:center;
+  }
+
+  .rek-table-row-insert.rek-start {
+    top: -1px;
   }
 
   .rek-table-row-insert-button {

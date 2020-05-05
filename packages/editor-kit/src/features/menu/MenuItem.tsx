@@ -4,7 +4,6 @@ import { EditorIcon, Icon } from "../icons/Icon";
 import { usePlugin } from "../../plugins/usePlugin";
 import { LabelsPlugin } from "../i18n/LabelsPlugin";
 import { useEditorKit } from "../../editor/EditorKit";
-import { blockEvent } from "../../ui/Utils";
 import { IconProvider } from "../icons/IconProviderPlugin";
 import { Show } from "../../ui/Show";
 import { getPosition } from "../popup/Popups";
@@ -20,6 +19,7 @@ export interface MenuItemProps {
   group?: string;
   children?: ReactNode;
   onClick?(editor: ReactEditor): void;
+  onMouseDown?(event: React.MouseEvent): void;
   active?: boolean;
   disabled?: boolean;
 }
@@ -33,6 +33,7 @@ export const MenuItem = (props: MenuItemProps) => {
     rightLabelKey,
     children,
     onClick,
+    onMouseDown,
     active,
     disabled,
     ...rest
@@ -90,8 +91,10 @@ export const MenuItem = (props: MenuItemProps) => {
       data-name={text}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onMouseDown={(event) => {
+        onMouseDown && onMouseDown(event);
+      }}
       onClick={(event) => {
-        // blockEvent(event);
         onClick && onClick(editor);
       }}
       {...rest}

@@ -25,5 +25,5 @@ export const useFocused = (node?: Node) => {
     setFocus({ isFocused, isFocusedWithin });
   }, [node, selection]);
 
-  return { ...focus };
+  return focus;
 };
