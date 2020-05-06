@@ -316,3 +316,6 @@ export * from "./editor/Matching";
 export * from "./editor/EditorKit";
 export * from "./editor/EditorState";
 export * from "./editor/LastFocusedNode";
+export { Editor as SlateEditor, NodeEntry, Node, Text, Element, Transforms, Range, Path, Point, Location, } from "slate";
+export { ReactEditor, RenderElementProps, RenderLeafProps } from "slate-react";
+export { isHotkey } from "is-hotkey";
