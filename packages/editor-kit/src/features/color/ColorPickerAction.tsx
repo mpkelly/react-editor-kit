@@ -6,6 +6,7 @@ import { marks } from "../marks/Marks";
 import { blockEvent } from "../../ui/Utils";
 import { HtmlElementModalPopup } from "../popup/HtmlElementModalPopup";
 import { DefaultColors } from "./ColorPickerButton";
+import { useLastFocused } from "../../editor/LastFocusedNode";
 
 export interface ColorPickerActionProps {
   children: React.ReactNode;
@@ -22,6 +23,7 @@ export const ColorPickerAction: FunctionComponent<ColorPickerActionProps> = (
 ) => {
   const { children, colors } = props;
   const { editor } = useEditorKit();
+  const { element: lastElement } = useLastFocused(editor);
 
   const [show, setShow] = useState(false);
   const element = useRef<HTMLElement | null>();
@@ -60,7 +62,7 @@ export const ColorPickerAction: FunctionComponent<ColorPickerActionProps> = (
     ? backgroundColorMark.value
     : "blue";
 
-  const enabled = editor.isContentAllowed("fontColor");
+  const enabled = editor.isContentAllowed("fontColor", lastElement);
   const className = !enabled ? "rek-disabled" : "";
   return (
     <Fragment>

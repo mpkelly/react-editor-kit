@@ -30,7 +30,7 @@ export const FontSizeSelect: FunctionComponent<FontSizeSelectProps> = (
   const items: SelectItem[] = (fontSizes || []).map((size) => ({
     text: String(size),
     value: size,
-    disabled: !editor.isMarkSupported("fontSize", node),
+    disabled: !editor.isContentAllowed("fontSize", node),
   }));
 
   const currentSize = getFontSize(editor);

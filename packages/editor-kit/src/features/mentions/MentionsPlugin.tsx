@@ -21,7 +21,6 @@ export interface StaticMentionOptions {
 export const createStaticMentions = (options: StaticMentionOptions) => {
   const suggestions: Suggestions = {
     getSuggestions: (match: string) => {
-      console.log("Get", match);
       const lower = match.toLowerCase().substring(1);
       return Promise.resolve(
         options.mentions.filter((mention) =>

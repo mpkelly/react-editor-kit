@@ -23,7 +23,6 @@ export const HeadingSelect: FunctionComponent<HeadingSelectProps> = (
   }));
 
   const handleChange = (item: SelectItem) => {
-    console.log(element, item);
     if (element && item.value.type !== element.type) {
       Transforms.setNodes(
         editor,
