@@ -40,6 +40,7 @@ export const ColorPickerAction: FunctionComponent<ColorPickerActionProps> = (
   };
 
   const handleColorChange = (color: Color) => {
+    console.log("C", color);
     editor.addMark("color", getCssColor(color));
     setShow(false);
   };
@@ -64,13 +65,15 @@ export const ColorPickerAction: FunctionComponent<ColorPickerActionProps> = (
 
   const enabled = editor.isContentAllowed("fontColor", lastElement);
   const className = !enabled ? "rek-disabled" : "";
+
   return (
     <Fragment>
-      <div ref={handleRef}>
-        <div onMouseDown={handleMouseDown} className={className}>
+      <div className={className} ref={handleRef}>
+        <Action onMouseDown={handleMouseDown} disabled={!enabled}>
           {children}
-        </div>
+        </Action>
       </div>
+
       <HtmlElementModalPopup
         show={show}
         element={element.current as HTMLElement}

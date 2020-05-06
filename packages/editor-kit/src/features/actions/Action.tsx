@@ -10,7 +10,7 @@ export interface ActionProps {
   /**
    * The name of the plugin which contain the PluginAction to call
    */
-  plugin: string;
+  plugin?: string;
 
   /**
    * Any argugments to pass to the Action - mostly empty.
@@ -19,6 +19,13 @@ export interface ActionProps {
 
   //Typically not required as most Plugins only have a single PluginAction
   action?: string;
+
+  /**
+   * If no plugin is specfied, a mousedown handler can be set instead
+   */
+  onMouseDown?(event: ReactMouseEvent<HTMLElement, MouseEvent>): void;
+  active?: boolean;
+  disabled?: boolean;
 }
 
 /**
@@ -28,25 +35,39 @@ export interface ActionProps {
  */
 export interface ActionChildProps {
   active?: boolean;
-  onMouseDown?(event: ReactMouseEvent<HTMLElement, MouseEvent>): void;
   disabled?: boolean;
+  onMouseDown?(event: ReactMouseEvent<HTMLElement, MouseEvent>): void;
 }
 
 export const Action = (props: ActionProps) => {
-  const { children, plugin, action, args } = props;
+  const {
+    children,
+    plugin,
+    action,
+    args,
+    onMouseDown,
+    active,
+    disabled,
+  } = props;
   const { editor, executeAction, isActionActive } = useEditorKit();
   const { element: lastElement } = useLastFocused(editor);
   const enabled = editor.isContentAllowed(plugin, lastElement);
-  const buttonProps: ActionChildProps = {
-    onMouseDown: (event: ReactMouseEvent<HTMLElement, MouseEvent>) => {
-      event.preventDefault();
-      if (enabled) {
-        executeAction(plugin, args, action);
-      }
-    },
-    active: isActionActive(plugin, args, name),
-    disabled: !enabled,
-  };
+  let buttonProps: ActionChildProps | null = null;
+
+  if (plugin) {
+    buttonProps = {
+      onMouseDown: (event: ReactMouseEvent<HTMLElement, MouseEvent>) => {
+        event.preventDefault();
+        if (enabled) {
+          executeAction(plugin, args, action);
+        }
+      },
+      active: isActionActive(plugin, args, name),
+      disabled: !enabled,
+    };
+  } else {
+    buttonProps = { onMouseDown, active, disabled };
+  }
 
   let element: JSX.Element | null = null;
   if (typeof children == "string") {

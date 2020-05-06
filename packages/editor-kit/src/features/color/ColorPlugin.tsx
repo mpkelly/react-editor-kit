@@ -9,7 +9,7 @@ export const ColorPlugin: Plugin = {
     const { leaf, attributes, children } = props;
     const style: CSSProperties = {};
     if (leaf.color) {
-      style.fontSize = leaf.color;
+      style.color = leaf.color;
     }
     if (leaf.backgroundColor) {
       style.backgroundColor = leaf.backgroundColor;
