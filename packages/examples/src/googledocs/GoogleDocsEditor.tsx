@@ -86,7 +86,7 @@ import { FormatContextMenuPlugin } from "./FormatContextMenuPlugin";
 
 const GoogleDocsStylePlugin: Plugin = {
   name: "google-docs-style",
-  globalStyles: () => `
+  globalStyle: `
     .rek-editor-toolbar .rek-icon-button {
       color: rgba(0,0,0,.6);
     }
