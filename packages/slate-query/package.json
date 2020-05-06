@@ -1,6 +1,6 @@
 {
   "name": "slate-query",
-  "version": "0.0.58",
+  "version": "0.0.59",
   "description": "A small library for querying Slate's data model which is an alternative to the Path-based API.",
   "keywords": [
     "Slate",
