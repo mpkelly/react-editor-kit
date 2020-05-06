@@ -10,13 +10,13 @@ export const useLastFocused = (editor: ReactEditor) => {
     point: undefined,
     selection: undefined,
   });
-  const { selection } = editor;
   const current = getActiveNodeType(editor);
 
   useEffect(() => {
     if (!ReactEditor.isFocused(editor)) {
       return;
     }
+    const { selection } = editor;
     if (!selection) {
       return;
     }
@@ -29,7 +29,7 @@ export const useLastFocused = (editor: ReactEditor) => {
         selection: clone(selection),
       });
     }
-  }, [current, selection]);
+  }, [current]);
 
   return state;
 };
