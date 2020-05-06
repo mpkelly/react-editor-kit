@@ -20,7 +20,7 @@ import {
   TextAlignJustifiedButton,
   OrderedListButton,
   UnorderedListButton,
-  QuoteButton,
+  BlockquoteButton,
   Editor,
   DefaultThemePlugin,
   BoldPlugin,
@@ -30,7 +30,7 @@ import {
   InlineCodePlugin,
   OrderedListPlugin,
   UnorderedListPlugin,
-  QuotePlugin,
+  BlockquotePlugin,
   IconProviderPlugin,
   H1Plugin,
   H2Plugin,
@@ -41,9 +41,7 @@ import {
   SuperscriptPlugin,
   VideoPlugin,
   TablePlugin,
-  CodeHighlighterPlugin,
-  LabelsPlugin,
-  StylePlugin,
+  CodePlugin,
   EditorToolbar,
   EditorToolbarPlugin,
   HistoryPlugin,
@@ -51,6 +49,9 @@ import {
   InlineCodeButton,
   TextAlignPlugin,
   createStaticMentions,
+  createLabelsPlugin,
+  FontsPlugin,
+  ColorPlugin,
 } from "@mpkelly/react-editor-kit";
 
 export const IntroEditor = () => {
@@ -116,7 +117,7 @@ export const IntroEditor = () => {
               ligature="format_list_bulleted"
             />
             <Divider />
-            <QuoteButton
+            <BlockquoteButton
               className="material-icons-round"
               ligature="format_quote"
             />
@@ -129,6 +130,7 @@ export const IntroEditor = () => {
 };
 
 const IntroEditorPlugin: Plugin = {
+  name: "intro-style",
   globalStyles: () => `
 
   .rek-editor-toolbar-overflow,
@@ -236,7 +238,7 @@ const plugins: Plugin[] = [
   InlineCodePlugin,
   OrderedListPlugin,
   UnorderedListPlugin,
-  QuotePlugin,
+  BlockquotePlugin,
   IconProviderPlugin,
   H1Plugin,
   H2Plugin,
@@ -249,9 +251,10 @@ const plugins: Plugin[] = [
   UnorderedListPlugin,
   VideoPlugin,
   TablePlugin,
-  CodeHighlighterPlugin,
-  LabelsPlugin,
-  StylePlugin,
+  CodePlugin,
+  createLabelsPlugin(),
+  FontsPlugin,
+  ColorPlugin,
   HistoryPlugin,
   IntroEditorPlugin,
   EditorToolbarPlugin,
