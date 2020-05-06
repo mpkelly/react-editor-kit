@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { RenderElementProps, ReactEditor } from "slate-react";
-import { ElementWrapper } from "./BlockWrapper";
+import { ElementWrapper } from "./ElementWrapper";
 import { IconProvider } from "../icons/IconProviderPlugin";
 import { usePlugin } from "../../plugins/usePlugin";
 import { Icon } from "../icons/Icon";
@@ -57,5 +57,7 @@ interface ToolbarProps {
 const Toolbar = (props: ToolbarProps) => {
   const { onDelete } = props;
   const { icons } = usePlugin<IconProvider>("icon-provider");
-  return <Icon icon={icons.delete} onMouseDown={onDelete} />;
+  return (
+    <Icon icon={icons.delete} className="rek-delete" onMouseDown={onDelete} />
+  );
 };

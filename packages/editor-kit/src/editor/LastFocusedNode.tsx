@@ -29,7 +29,7 @@ export const useLastFocused = (editor: ReactEditor) => {
         selection: clone(selection),
       });
     }
-  }, [current]);
+  }, [current, editor.operations]);
 
   return state;
 };

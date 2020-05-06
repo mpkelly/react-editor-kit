@@ -472,13 +472,23 @@ input[type=number] {
   .rek-element-toolbar {
     display: flex;
     align-items:center;
-    padding:8px;
+    padding:4px 8px;
     border-radius:4px;
     background-color: var(--content-background);
     color:var(--secondary-text-color);
     border: 1px solid var(--gray-light2-color);
+    margin: 8px 0;
+    .rek-icon:hover:not(.rek-disabled) {
+      color: var(--action-color);
+    }        
     * {
       cursor:pointer;
+    }
+  }
+
+  .rek-delete {
+    .rek-icon:hover:not(.rek-disabled) {
+      color: var(--danger-color);
     }
   }
 

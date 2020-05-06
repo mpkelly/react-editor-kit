@@ -1,14 +1,14 @@
 import React from "react";
 import { RenderElementProps } from "slate-react";
-import { DeletableElement } from "../elements/DeletableElement";
+import { ResizableElement } from "../elements/ResizableElement";
 
 export const TodoListElement = (props: RenderElementProps) => {
   const { children, attributes } = props;
   return (
-    <DeletableElement {...props}>
+    <ResizableElement {...props}>
       <div className="rek-todo-list" {...attributes}>
         {children}
       </div>
-    </DeletableElement>
+    </ResizableElement>
   );
 };

@@ -1,26 +1,31 @@
 import { Transforms, Editor, Node } from "slate";
 import { ReactEditor, RenderElementProps } from "slate-react";
 import { Plugin } from "../../plugins/Plugin";
-import { BreakoutEnterHotKey } from "./BreakoutEnterKeyHandler";
-import { BreakoutUpHotKey } from "./BreakoutUpKeyHandler";
-import { BreakoutDownHotKey } from "./BreakoutDownKeyHandler";
+import { BreakoutEnterKeyHandler } from "./BreakoutEnterKeyHandler";
+import { BreakoutUpKeyHandler } from "./BreakoutUpKeyHandler";
+import { BreakoutDownKeyHandler } from "./BreakoutDownKeyHandler";
 
 export interface BreakoutPluginOptions {
-  breakoutBlocks: string[];
-  paddedBlocks: string[];
+  /**
+   * Element that gets padded top and bottom by 1px high paragraphs so
+   * users can 'breakout' of these blocks
+   */
+  paddedElements: string[];
 }
 
 export const DefaultOptions: BreakoutPluginOptions = {
-  breakoutBlocks: [
-    "code-block",
-    "quote",
+  paddedElements: [
+    "divider",
+    "video",
+    "image",
+    "table",
+    "todo-list",
+    "blockquote",
+    "code",
     "info-alert",
     "warning-alert",
     "error-alert",
-    "video",
-    "divider",
   ],
-  paddedBlocks: ["table", "todo-list"],
 };
 
 export const createBreakoutPlugin = (options = DefaultOptions): Plugin => {
@@ -28,7 +33,11 @@ export const createBreakoutPlugin = (options = DefaultOptions): Plugin => {
     name: "breakout",
     ...options,
     withPlugin: (editor) => breakoutEditorExtension(editor, options),
-    onHotKey: [BreakoutEnterHotKey, BreakoutUpHotKey, BreakoutDownHotKey],
+    onKey: [
+      BreakoutEnterKeyHandler,
+      BreakoutDownKeyHandler,
+      BreakoutUpKeyHandler,
+    ],
     styleElement: (props: RenderElementProps) => {
       const { element } = props;
       if (
@@ -54,7 +63,7 @@ export const breakoutEditorExtension = (
     if (count !== editor.childrenCount) {
       editor.childrenCount = count;
       for (let [node, path] of Editor.nodes(editor)) {
-        if (options.paddedBlocks.includes(node.type)) {
+        if (options.paddedElements.includes(node.type)) {
           const index = editor.children.indexOf(node);
           if (index === 0) {
             Transforms.insertNodes(

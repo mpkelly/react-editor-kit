@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { RenderElementProps } from "slate-react";
 import { useFocused } from "../../editor/Focus";
 import { Show } from "../../ui/Show";
+import { ElementToolbar } from "../toolbar/ElementToolbar";
 
 export interface ElementWrapperProps extends RenderElementProps {
   className?: string;
@@ -33,11 +34,10 @@ export const ElementWrapper = (props: ElementWrapperProps) => {
       <Show when={isFocusedWithin || inside}>
         <div
           contentEditable={false}
-          className="rek-toolbar rek-panel"
           onMouseEnter={handleEnter}
           onMouseLeave={handleLeave}
         >
-          {focusToolbar}
+          <ElementToolbar>{focusToolbar}</ElementToolbar>
         </div>
       </Show>
     </div>

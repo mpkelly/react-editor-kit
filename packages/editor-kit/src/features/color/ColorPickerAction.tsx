@@ -40,7 +40,6 @@ export const ColorPickerAction: FunctionComponent<ColorPickerActionProps> = (
   };
 
   const handleColorChange = (color: Color) => {
-    console.log("C", color);
     editor.addMark("color", getCssColor(color));
     setShow(false);
   };

@@ -5,7 +5,16 @@ export const DefaultThemeEditorStyle = `
   color: var(--primary-text-color);
   box-sizing: border-box;
 
-  * {
+  p
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  code,
+  pre
+  {
     line-height:1.4;
     box-sizing: border-box;
   }
@@ -28,10 +37,9 @@ export const DefaultThemeEditorStyle = `
       }
     }
   }
-  .rek-block-toolbar {
+  .rek-element-toolbar {
     display:flex;
     align-items:center;
-    padding:4px;
   }
 
   .rek-element-wrapper:not(.inline) .rek-element-wrapper-content {

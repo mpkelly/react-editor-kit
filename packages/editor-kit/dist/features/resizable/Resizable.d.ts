@@ -1,5 +1,6 @@
 import React, { CSSProperties } from "react";
-export interface ResizableProps {
+import { RenderElementProps } from "slate-react";
+export interface ResizableProps extends Partial<RenderElementProps> {
     children: React.ReactNode;
     style?: CSSProperties;
     initialWidth: string | number;

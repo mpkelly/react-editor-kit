@@ -1,2 +1,2 @@
 import { KeyHandler } from "../../plugins/KeyHandler";
-export declare const BreakoutEnterHotKey: KeyHandler;
+export declare const BreakoutEnterKeyHandler: KeyHandler;

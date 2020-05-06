@@ -187,7 +187,7 @@ export * from "./features/headings/HeadingTogglePlugin";
 export * from "./features/headings/HeadingSelect";
 export * from "./features/headings/H5Action";
 export * from "./features/headings/H2Plugin";
-export * from "./features/elements/BlockWrapper";
+export * from "./features/elements/ElementWrapper";
 export * from "./features/elements/ElementRenderer";
 export * from "./features/elements/DeletableElement";
 export * from "./features/elements/Elements";

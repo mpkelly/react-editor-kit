@@ -9,8 +9,13 @@ export const ListPluginAction: PluginAction = {
     if (elementType === "list-item") {
       element = getAncestor(editor, element as Element, 1) as Element;
     }
+    if (!element) {
+      return;
+    }
+
     const other =
       plugin.name === "ordered-list" ? "unordered-list" : "ordered-list";
+
     if (element && element.type == other) {
       Transforms.setNodes(
         editor,

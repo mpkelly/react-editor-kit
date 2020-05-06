@@ -33,10 +33,14 @@ export const VideoElement = memo((props: RenderElementProps) => {
     <DeletableElement
       {...props}
       toolbarContent={
-        <div className="rek-video-toolbar rek-panel" data-slate-zero-width="z">
+        <div className="rek-video-toolbar" data-slate-zero-width="z">
           <Icon icon={icons.settings} onClick={handleShowSettings} />
           <div className="rek-v-toolbar-divider" />
-          <Icon icon={icons.delete} onClick={handleDelete} />
+          <Icon
+            icon={icons.delete}
+            className="rek-delete"
+            onClick={handleDelete}
+          />
         </div>
       }
     >

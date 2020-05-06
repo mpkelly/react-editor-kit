@@ -46,7 +46,7 @@ export const TableElement = (props: RenderElementProps) => {
     classes.push("rek-borderless");
   }
   return (
-    <DeletableElement {...props} toolbarContent={<Toolbar element={element} />}>
+    <DeletableElement {...props}>
       <div className="rek-table-wrapper">
         <div className="rek-table-wrapper-body">
           <table tabIndex={1} className={classes.join(" ")}>
@@ -73,73 +73,5 @@ export const TableElement = (props: RenderElementProps) => {
         </Show>
       </div>
     </DeletableElement>
-  );
-};
-
-interface ToolbarProps {
-  element: Element;
-}
-
-const Toolbar = (props: ToolbarProps) => {
-  const { element } = props;
-  const { icons } = usePlugin<IconProvider>("icon-provider");
-  const { labels } = usePlugin<LabelsPlugin>("label-provider");
-  const { editor } = useEditorKit();
-  const [toolbar, setToolbar] = useState<HTMLElement>();
-
-  const handleChange = (key: string, checked: boolean) => {
-    Transforms.setNodes(
-      editor,
-      { [key]: checked },
-      { at: ReactEditor.findPath(editor, element) }
-    );
-  };
-
-  const handleSettings = (event: React.MouseEvent) => {
-    setToolbar(event.currentTarget.parentElement as HTMLElement);
-  };
-
-  const hideSettings = () => setToolbar(undefined);
-
-  const handleDelete = () => {
-    Transforms.delete(editor, { at: ReactEditor.findPath(editor, element) });
-  };
-  return (
-    <Fragment>
-      <div
-        className="rek-block-toolbar rek-panel"
-        onMouseDown={stopEvent}
-        onClick={blockEvent}
-      >
-        <Icon icon={icons.settings} onClick={handleSettings} />
-        <div className="rek-v-toolbar-divider" />
-        <Icon icon={icons.delete} onClick={handleDelete} />
-      </div>
-      <HtmlElementModalPopup
-        show={Boolean(toolbar)}
-        location="top"
-        offsets={{ v: -8 }}
-        element={toolbar as HTMLElement}
-        onClickOutside={hideSettings}
-      >
-        <div className="rek-panel rek-table-settings" onClick={blockEvent}>
-          <Checkbox
-            label={labels.headerRow}
-            checked={element.headerRow}
-            onChange={(checked) => handleChange("headerRow", checked)}
-          />
-          <Checkbox
-            label={labels.headerColumn}
-            checked={element.headerColumn}
-            onChange={(checked) => handleChange("headerColumn", checked)}
-          />
-          <Checkbox
-            label={labels.borderless}
-            checked={element.borderless}
-            onChange={(checked) => handleChange("borderless", checked)}
-          />
-        </div>
-      </HtmlElementModalPopup>
-    </Fragment>
   );
 };

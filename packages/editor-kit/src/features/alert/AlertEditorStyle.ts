@@ -8,8 +8,8 @@ export const alertEditorStyle = (
   align-items:center;
   background-color:${backgroundColor};
   padding:8px;
-  width:100%;
-  div {
+  width:100%;  
+  .rek-alert-content {
     flex-grow:1;
   }
 }
@@ -17,6 +17,7 @@ export const alertEditorStyle = (
 .rek-alert-icon.${alertName} {
   margin-right:8px;
 }
+
 
 .rek-alert-icon.${alertName} {
   color:${iconColor};

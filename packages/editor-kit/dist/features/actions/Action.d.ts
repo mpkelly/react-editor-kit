@@ -5,12 +5,18 @@ export interface ActionProps {
     /**
      * The name of the plugin which contain the PluginAction to call
      */
-    plugin: string;
+    plugin?: string;
     /**
      * Any argugments to pass to the Action - mostly empty.
      */
     args?: PluginActionArgs;
     action?: string;
+    /**
+     * If no plugin is specfied, a mousedown handler can be set instead
+     */
+    onMouseDown?(event: ReactMouseEvent<HTMLElement, MouseEvent>): void;
+    active?: boolean;
+    disabled?: boolean;
 }
 /**
  * The child is cloned and passed these props. TypeScript users
@@ -19,7 +25,7 @@ export interface ActionProps {
  */
 export interface ActionChildProps {
     active?: boolean;
-    onMouseDown?(event: ReactMouseEvent<HTMLElement, MouseEvent>): void;
     disabled?: boolean;
+    onMouseDown?(event: ReactMouseEvent<HTMLElement, MouseEvent>): void;
 }
 export declare const Action: (props: ActionProps) => JSX.Element;

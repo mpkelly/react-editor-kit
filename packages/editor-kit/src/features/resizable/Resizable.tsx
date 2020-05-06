@@ -9,8 +9,9 @@ import React, {
 import { Overlay } from "../../ui/Popup";
 import { Show } from "../../ui/Show";
 import ReactDOM from "react-dom";
+import { RenderElementProps } from "slate-react";
 
-export interface ResizableProps {
+export interface ResizableProps extends Partial<RenderElementProps> {
   children: React.ReactNode;
   style?: CSSProperties;
   initialWidth: string | number;
@@ -18,7 +19,7 @@ export interface ResizableProps {
 }
 
 export const Resizable = (props: ResizableProps) => {
-  const { initialWidth, children, onChange, style } = props;
+  const { initialWidth, children, onChange, style, ...rest } = props;
   const [state, setState] = useState({ width: initialWidth, down: -1 });
   const element = useRef<HTMLElement | null>(null);
   const multiplier = useRef(1);
@@ -68,7 +69,7 @@ export const Resizable = (props: ResizableProps) => {
 
   return (
     <Fragment>
-      <div className="rek-resizable" style={allStyle} ref={handleRef}>
+      <div className="rek-resizable" style={allStyle} ref={handleRef} {...rest}>
         <div
           className="rek-resize-handle rek-resize-handle-start"
           onMouseDown={handleDown}

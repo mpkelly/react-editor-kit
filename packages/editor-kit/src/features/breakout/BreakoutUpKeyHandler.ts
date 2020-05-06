@@ -2,11 +2,15 @@ import { Transforms, Editor } from "slate";
 import { ReactEditor } from "slate-react";
 import { KeyHandler } from "../../plugins/KeyHandler";
 
-export const BreakoutUpHotKey: KeyHandler = {
-  pattern: "UpArrow",
+export const BreakoutUpKeyHandler: KeyHandler = {
+  pattern: "ArrowUp",
   handle: (state, event, plugin) => {
-    const { editor, element } = state;
-    if (element && plugin.breakoutBlocks.includes(element.type)) {
+    const { editor, element, elementType } = state;
+    if (
+      element &&
+      plugin.paddedBlocks &&
+      plugin.paddedBlocks.includes(elementType)
+    ) {
       const path = ReactEditor.findPath(editor, element);
       if (event.keyCode === 38) {
         //ArrowUp

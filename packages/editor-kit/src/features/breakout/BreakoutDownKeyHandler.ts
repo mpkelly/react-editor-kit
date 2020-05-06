@@ -3,11 +3,15 @@ import { ReactEditor } from "slate-react";
 import { moveToEndOfBlock } from "../../editor/Editor";
 import { KeyHandler } from "../../plugins/KeyHandler";
 
-export const BreakoutDownHotKey: KeyHandler = {
-  pattern: "DownArrow",
+export const BreakoutDownKeyHandler: KeyHandler = {
+  pattern: "ArrowDown",
   handle: (state, event, plugin) => {
     const { editor, element } = state;
-    if (element && plugin.breakoutBlocks.includes(element.type)) {
+    if (
+      element &&
+      plugin.paddedBlocks &&
+      plugin.paddedBlocks.includes(element.type)
+    ) {
       const path = ReactEditor.findPath(editor, element);
       const next = Editor.next(editor, { at: path });
       if (!next || next[0].type !== "paragraph") {

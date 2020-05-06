@@ -16,7 +16,6 @@ export const VideoEditorStyle = `
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:4px;
   }
 
   .rek-video-toolbar .settings-icon {

@@ -1,8 +1,11 @@
 import { ReactEditor } from "slate-react";
 import { Plugin } from "../../plugins/Plugin";
 export interface BreakoutPluginOptions {
-    breakoutBlocks: string[];
-    paddedBlocks: string[];
+    /**
+     * Element that gets padded top and bottom by 1px high paragraphs so
+     * users can 'breakout' of these blocks
+     */
+    paddedElements: string[];
 }
 export declare const DefaultOptions: BreakoutPluginOptions;
 export declare const createBreakoutPlugin: (options?: BreakoutPluginOptions) => Plugin;
