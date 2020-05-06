@@ -8,41 +8,51 @@ describe("Tables feature", () => {
   it("Adds and removes columns", () => {
     addTable();
 
-    cy.focusNode("tr:nth-child(1) > td:nth-child(1) span span span");
-
-    cy.get(".rek-table-cell-menu").click();
-    cy.get(".rek-floating-content").contains("Add column").click();
+    cy.get(".rek-table-right").click();
 
     cy.get("table").find("tr").should("have.length", 3);
     cy.get("table").find("td").should("have.length", 12);
 
-    cy.focusNode("tr:nth-child(1) > td:nth-child(1) span span span");
-
-    cy.get(".rek-table-cell-menu").click();
-
-    cy.get(".rek-floating-content").contains("Delete column").click();
+    cy.get("td:first-child .rek-table-column-button").click();
+    cy.get(".rek-table-cell-toolbar .rek-icon").trigger("mousedown");
 
     checkInitial();
+  });
+
+  it("Inserts columns", () => {
+    addTable();
+
+    cy.get(".rek-table-column-insert-button-inner .rek-icon")
+      .first()
+      .trigger("mousedown", { force: true });
+
+    cy.get("table").find("tr").should("have.length", 3);
+    cy.get("table").find("td").should("have.length", 12);
   });
 
   it("Adds and removes rows", () => {
     addTable();
 
-    cy.focusNode("tr:nth-child(1) > td:nth-child(1) span span span");
-
-    cy.get(".rek-table-cell-menu").click();
-    cy.get(".rek-floating-content").contains("Add row").click();
+    cy.get(".rek-table-bottom").click();
 
     cy.get("table").find("tr").should("have.length", 4);
     cy.get("table").find("td").should("have.length", 12);
 
-    cy.focusNode("tr:nth-child(1) > td:nth-child(1) span span span");
-
-    cy.get(".rek-table-cell-menu").click();
-
-    cy.get(".rek-floating-content").contains("Delete row").click();
+    cy.get(".rek-table-row-button").first().click();
+    cy.get(".rek-table-cell-toolbar .rek-icon").trigger("mousedown");
 
     checkInitial();
+  });
+
+  it("Inserts rows", () => {
+    addTable();
+
+    cy.get(".rek-table-row-insert-button-inner .rek-icon")
+      .first()
+      .trigger("mousedown", { force: true });
+
+    cy.get("table").find("tr").should("have.length", 4);
+    cy.get("table").find("td").should("have.length", 12);
   });
 });
 

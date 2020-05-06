@@ -9,6 +9,7 @@ import { MatchResult } from "../../editor/Matching";
 import { createSuggestionGlobalStyle } from "./SuggestionsGlobalStyle";
 import { registerVoid } from "../void/VoidElement";
 import { registerInline } from "../inlines/Inlines";
+import { SuggestionsPluginAction } from "./SuggestionsPluginAction";
 
 export interface SuggestionPluginOptions {
   type: string;
@@ -25,9 +26,7 @@ export const createSuggestionsPlugin = (
     withPlugin: (editor) =>
       registerInline(registerVoid(editor, options.type), options.type),
     triggers: options.suggestions.triggers,
-    onTrigger: (editor: ReactEditor, matches: MatchResult[]) => {
-      handleTrigger(editor, matches[0].range, options.type);
-    },
+    actions: [SuggestionsPluginAction],
     renderLeaf: (props: RenderLeafProps, { editor }) => {
       const { leaf } = props;
       const handleChoice = (choice?: any) => {
@@ -67,11 +66,4 @@ export const createSuggestionsPlugin = (
     globalStyle: createSuggestionGlobalStyle(options.globalStyle),
     editorStyle: options.editorStyle || "",
   };
-};
-
-const handleTrigger = (editor: ReactEditor, range: Range, type: string) => {
-  const { selection } = editor;
-  if (selection) {
-    addMarkAtRange(editor, range, `${type}-marker`, range);
-  }
 };

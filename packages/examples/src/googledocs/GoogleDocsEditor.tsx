@@ -51,7 +51,6 @@ import {
   ClearFormattingButton,
   DividerPlugin,
   createBreakoutPlugin,
-  ConstraintsPlugin,
   SelectionToolbarPlugin,
   SelectionToolbar,
   EditorToolbar,
@@ -77,6 +76,7 @@ import {
   HeadingTogglePlugin,
   createClearFormattingPlugin,
   ClearFormattingAction,
+  createTodoListPlugin,
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 import { createStaticHashtags } from "./HashtagSuggestionPlugin";
@@ -126,7 +126,6 @@ const plugins: Plugin[] = [
   createBreakoutPlugin(),
   DividerPlugin,
   HistoryPlugin,
-  ConstraintsPlugin,
   SelectionToolbarPlugin,
   EditorToolbarPlugin,
   ImagePlugin,
@@ -144,7 +143,7 @@ const plugins: Plugin[] = [
     ],
   }),
   createClearFormattingPlugin(),
-
+  createTodoListPlugin(),
   //TODO fix empticons so they work with other :.. triggers
   //createEmoticonSuggestions(),
 
@@ -158,48 +157,7 @@ const initialValue = [
   // createFixedBlock(),
   {
     type: "paragraph",
-    children: [{ text: "\n\n" }],
-  },
-  {
-    type: "table",
-    children: [
-      {
-        type: "table-row",
-        children: [
-          {
-            type: "table-cell",
-            autoFocus: true,
-            children: [{ type: "paragraph", children: [{ text: "" }] }],
-          },
-          {
-            type: "table-cell",
-            children: [{ type: "paragraph", children: [{ text: "" }] }],
-          },
-          {
-            type: "table-cell",
-            children: [{ type: "paragraph", children: [{ text: "" }] }],
-          },
-        ],
-      },
-      {
-        type: "table-row",
-        children: [
-          {
-            type: "table-cell",
-            autoFocus: true,
-            children: [{ type: "paragraph", children: [{ text: "" }] }],
-          },
-          {
-            type: "table-cell",
-            children: [{ type: "paragraph", children: [{ text: "" }] }],
-          },
-          {
-            type: "table-cell",
-            children: [{ type: "paragraph", children: [{ text: "" }] }],
-          },
-        ],
-      },
-    ],
+    children: [{ text: "" }],
   },
 ];
 
@@ -366,7 +324,7 @@ export const GoogleDocsEditor = () => {
           </Resizable>
         </div>
       </div>
-      <SimpleOutline nodes={value} />
+      {/* <SimpleOutline nodes={value} /> */}
     </EditorKit>
   );
 };

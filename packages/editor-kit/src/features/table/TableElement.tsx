@@ -56,7 +56,7 @@ export const TableElement = (props: RenderElementProps) => {
             <div
               contentEditable={false}
               className="rek-table-right"
-              onMouseDown={handleAddColumn}
+              onMouseDown={(event) => blockEvent(event) && handleAddColumn()}
             >
               <Icon icon={icons.plus} />
             </div>
@@ -66,7 +66,7 @@ export const TableElement = (props: RenderElementProps) => {
           <div
             contentEditable={false}
             className="rek-table-bottom"
-            onMouseDown={handleAddRow}
+            onMouseDown={(event) => blockEvent(event) && handleAddRow()}
           >
             <Icon icon={icons.plus} />
           </div>

@@ -16,7 +16,6 @@ import { Plugin } from "../plugins/Plugin";
 import { DefaultThemePlugin } from "../features/theme/DefaultThemePlugin";
 import { SelectionExtensionsPlugin } from "../features/selection/SelectionExtensionsPlugin";
 import { IconProviderPlugin } from "../features/icons/IconProviderPlugin";
-import { ConstraintsPlugin } from "../features/constraints/ConstraintsPluginREPLACE";
 import { deleteBackward } from "./Editor";
 import { createLabelsPlugin } from "../features/i18n/LabelsPlugin";
 import { useSpellcheck } from "../features/spellcheck/SpellCheck";
@@ -24,9 +23,9 @@ import { AutoFocusPlugin } from "../features/auto-focus/AutoFocusPlugin";
 import { BackspaceKeyPlugin } from "../features/backspace/BackspaceKeyPlugin";
 import { EnterKeyPlugin } from "../features/enter/EnterKeyPlugin";
 import { PluginActionArgs, PluginAction } from "../plugins/PluginAction";
-import { usePlugin } from "../plugins/usePlugin";
 import { useLastFocused } from "./LastFocusedNode";
 import { createEditorState } from "./EditorState";
+import { ConstraintsPlugin } from "../features/constraints/ConstraintsPlugin";
 
 //Typings do not seem to match exported object :/
 const Stylis: any = StylisDefault;
@@ -37,11 +36,11 @@ const InternalPlugins: Plugin[] = [
   DefaultThemePlugin,
   IconProviderPlugin,
   SelectionExtensionsPlugin,
-  ConstraintsPlugin,
   createLabelsPlugin(),
   AutoFocusPlugin,
   BackspaceKeyPlugin,
   EnterKeyPlugin,
+  ConstraintsPlugin,
 ];
 
 export interface EditorKitValue {
@@ -117,7 +116,7 @@ export const EditorKit = memo((props: EditorKitProps) => {
       throw Error(`No plugin is registered with name ${pluginName}`);
     }
     if (!plugin.actions) {
-      throw Error(`No actions are available on plugin ${pluginName}`);
+      return { plugin };
     }
     let action: PluginAction | undefined = plugin.actions && plugin.actions[0];
 
@@ -136,7 +135,7 @@ export const EditorKit = memo((props: EditorKitProps) => {
     name?: string
   ) => {
     const { plugin, action } = resolveAction(pluginName, name);
-    return action.isActionActive(state, plugin, args);
+    return Boolean(action && action.isActionActive(state, plugin, args));
   };
 
   const executeAction = (
@@ -145,6 +144,9 @@ export const EditorKit = memo((props: EditorKitProps) => {
     name?: string
   ) => {
     const { plugin, action } = resolveAction(pluginName, name);
+    if (!action) {
+      throw Error(`No action found ${pluginName} ${name}`);
+    }
     action.action(state, plugin, args);
   };
 

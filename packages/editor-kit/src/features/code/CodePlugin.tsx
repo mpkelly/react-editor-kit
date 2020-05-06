@@ -12,6 +12,7 @@ import { CodeTabKeyHandler } from "./CodeTabKeyHandler";
 import { CodeBackspaceKeyHandler } from "./CodeBackspaceKeyHandler";
 import { CodeMarkdownTrigger } from "./CodeMarkdownTrigger";
 import { CodeNamedTrigger } from "./CodeNamedTrigger";
+import { InsertCodePluginAction } from "./InsertCodePluginAction";
 
 export const CodePlugin: Plugin = {
   name: "code",
@@ -28,6 +29,7 @@ export const CodePlugin: Plugin = {
     return editor;
   },
   triggers: [CodeMarkdownTrigger, CodeNamedTrigger],
+  actions: [InsertCodePluginAction],
   onKey: [
     CodeTabKeyHandler,
     CodeDeleteKeyHandler,
@@ -45,7 +47,7 @@ export const CodePlugin: Plugin = {
     }
   },
   renderElement: (props: RenderElementProps) => {
-    if (props.element.type === "code-block") {
+    if (props.element.type === "code") {
       return <CodeElement {...props} />;
     }
     return undefined;
@@ -53,7 +55,7 @@ export const CodePlugin: Plugin = {
   decorate: (entry: NodeEntry, editor: ReactEditor) => {
     if (entry[1].length) {
       const [parent] = Editor.parent(editor, entry[1]);
-      if (parent && parent.type === "code-block") {
+      if (parent && parent.type === "code") {
         return highlightCode(entry, parent.lang);
       }
     }

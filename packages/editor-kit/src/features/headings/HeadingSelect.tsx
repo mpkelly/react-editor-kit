@@ -13,18 +13,18 @@ export const HeadingSelect: FunctionComponent<HeadingSelectProps> = (
   props: HeadingSelectProps
 ) => {
   const { types, ...rest } = props;
-
   const { editor } = useEditorKit();
-  const { element: node, selection } = useLastFocused(editor);
+  const { element, selection } = useLastFocused(editor);
 
   const items: SelectItem[] = (types || []).map((type) => ({
     text: type.name,
     value: type,
-    disabled: !editor.isNodeSupported(type.type, node),
+    disabled: !editor.isContentAllowed(type.type),
   }));
 
   const handleChange = (item: SelectItem) => {
-    if (node && item.value.type !== node.type) {
+    console.log(element, item);
+    if (element && item.value.type !== element.type) {
       Transforms.setNodes(
         editor,
         {
@@ -38,8 +38,8 @@ export const HeadingSelect: FunctionComponent<HeadingSelectProps> = (
     }
   };
 
-  const selected = node
-    ? (items.find((item) => item.value.type === node.type) as SelectItem) ||
+  const selected = element
+    ? (items.find((item) => item.value.type === element.type) as SelectItem) ||
       items[0]
     : items[0];
 

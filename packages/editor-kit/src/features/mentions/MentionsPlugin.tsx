@@ -11,19 +11,17 @@ import { MentionElement } from "./MentionElement";
 import { Mention } from "./Mention";
 import { MentionChoice } from "./MentionChoice";
 import { Trigger } from "../../plugins/Trigger";
+import { MentionsTrigger } from "./MentionsTrigger";
 
 export interface StaticMentionOptions {
   mentions: Mention[];
   triggers?: Trigger[];
 }
 
-export const DefaultTriggers: Trigger[] = [
-  { pattern: /@(\w+)$/, range: "line-before" },
-];
-
 export const createStaticMentions = (options: StaticMentionOptions) => {
   const suggestions: Suggestions = {
     getSuggestions: (match: string) => {
+      console.log("Get", match);
       const lower = match.toLowerCase().substring(1);
       return Promise.resolve(
         options.mentions.filter((mention) =>
@@ -34,7 +32,7 @@ export const createStaticMentions = (options: StaticMentionOptions) => {
     renderChoice: (choice: Mention) => {
       return <MentionChoice choice={choice} />;
     },
-    triggers: options.triggers || DefaultTriggers,
+    triggers: options.triggers || [MentionsTrigger],
     renderSuggestion: (props: RenderElementProps) => {
       return <MentionElement {...props} />;
     },

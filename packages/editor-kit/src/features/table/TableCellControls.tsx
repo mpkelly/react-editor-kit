@@ -15,6 +15,7 @@ import { LabelsPlugin } from "../i18n/LabelsPlugin";
 import { TableElementMenuItem } from "./TableElementMenuItem";
 import { useFocused } from "../../editor/Focus";
 import { Icon, EditorIcon } from "../icons/Icon";
+import { blockEvent } from "../../ui/Utils";
 
 //TODO tidy this up!
 export const TableCellControls = (props: RenderElementProps) => {
@@ -75,7 +76,7 @@ export const TableCellControls = (props: RenderElementProps) => {
         <div
           className="rek-table-button"
           contentEditable={false}
-          onClick={toggleTableMenu}
+          onMouseDown={(event) => blockEvent(event) && toggleTableMenu()}
           ref={setTableButton}
         />
         <TableRowInsert
@@ -93,7 +94,9 @@ export const TableCellControls = (props: RenderElementProps) => {
         <div
           className="rek-table-row-button"
           contentEditable={false}
-          onClick={(event) => showToolbar(event, handleDeleteRow)}
+          onMouseDown={(event) =>
+            blockEvent(event) && showToolbar(event, handleDeleteRow)
+          }
         />
         <TableRowInsert icon={icons.plus} onClick={handleAddRow} />
       </Show>
@@ -101,7 +104,9 @@ export const TableCellControls = (props: RenderElementProps) => {
         <div
           className="rek-table-column-button"
           contentEditable={false}
-          onClick={(event) => showToolbar(event, handleDeleteColumn)}
+          onMouseDown={(event) =>
+            blockEvent(event) && showToolbar(event, handleDeleteColumn)
+          }
         />
         <TableColumnInsert icon={icons.plus} onClick={handleAddColumn} />
       </Show>
@@ -113,7 +118,7 @@ export const TableCellControls = (props: RenderElementProps) => {
         location="top"
         offsets={{ v: -16 }}
       >
-        <ElementToolbar>
+        <ElementToolbar className="rek-table-cell-toolbar">
           <Icon icon={icons.delete} onMouseDown={state.handler as any} />
         </ElementToolbar>
       </HtmlElementModalPopup>

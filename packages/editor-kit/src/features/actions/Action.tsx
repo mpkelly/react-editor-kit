@@ -2,6 +2,7 @@ import React, { Fragment, MouseEvent as ReactMouseEvent } from "react";
 import { PluginActionArgs } from "../../plugins/PluginAction";
 import { useEditorKit } from "../../editor/EditorKit";
 import { blockEvent } from "../../ui/Utils";
+import { useLastFocused } from "../../editor/LastFocusedNode";
 
 export interface ActionProps {
   children: React.ReactNode;
@@ -33,17 +34,18 @@ export interface ActionChildProps {
 
 export const Action = (props: ActionProps) => {
   const { children, plugin, action, args } = props;
-  const { executeAction, isActionActive } = useEditorKit();
-
+  const { editor, executeAction, isActionActive } = useEditorKit();
+  const { element: lastElement } = useLastFocused(editor);
+  const enabled = editor.isContentAllowed(plugin, lastElement);
   const buttonProps: ActionChildProps = {
     onMouseDown: (event: ReactMouseEvent<HTMLElement, MouseEvent>) => {
       event.preventDefault();
-      // if (!disabled) {
-      executeAction(plugin, args, action);
-      // }
+      if (enabled) {
+        executeAction(plugin, args, action);
+      }
     },
     active: isActionActive(plugin, args, name),
-    disabled: false,
+    disabled: !enabled,
   };
 
   let element: JSX.Element | null = null;

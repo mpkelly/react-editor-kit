@@ -11,7 +11,7 @@ export interface Icons {
     dropdown: EditorIcon;
     more: EditorIcon;
     moreVert: EditorIcon;
-    checkIcon: EditorIcon;
+    check: EditorIcon;
     date: EditorIcon;
     plus: EditorIcon;
 }

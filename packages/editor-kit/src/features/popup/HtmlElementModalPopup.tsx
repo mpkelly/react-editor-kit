@@ -39,7 +39,7 @@ export const HtmlElementModalPopup = (props: HtmlElementModalPopupProps) => {
 
   return (
     <Portal>
-      <Overlay onClick={onClickOutside}>
+      <Overlay onClick={onClickOutside} onMouseDown={onClickOutside}>
         <ResizeSensor handleWidth onResize={forceUpdate}>
           <PopupContent ref={handleRef} style={style}>
             {children}

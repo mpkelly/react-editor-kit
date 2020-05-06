@@ -4,6 +4,12 @@ import { RenderElementProps } from "slate-react";
 import { Plugin } from "../../plugins/Plugin";
 export interface TablePluginOptions {
     defaultTable: Node[];
+    tableSettings: TableSettings;
+}
+export interface TableSettings {
+    allowHeaderRow: boolean;
+    allowheaderColumn: boolean;
+    allowBorderless: boolean;
 }
 export interface TablePlugin extends Plugin, TablePluginOptions {
 }
@@ -11,7 +17,7 @@ export declare const createTablePlugin: (options: TablePluginOptions) => TablePl
 export declare const cell: (props?: any) => any;
 export declare const DefaultTable: {
     type: string;
-    headerRow: string;
+    headerRow: boolean;
     children: {
         type: string;
         children: any[];

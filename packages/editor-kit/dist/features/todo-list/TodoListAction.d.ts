@@ -1,4 +1,5 @@
 import { PluginAction } from "../../plugins/PluginAction";
+export declare const TodoListAction: PluginAction;
 export declare const defaultTodoItem: (props?: {}) => {
     children: {
         text: string;
@@ -6,4 +7,13 @@ export declare const defaultTodoItem: (props?: {}) => {
     type: string;
     complete: boolean;
 };
-export declare const TodoListAction: PluginAction;
+export declare const defaultTodoList: () => {
+    type: string;
+    children: {
+        children: {
+            text: string;
+        }[];
+        type: string;
+        complete: boolean;
+    }[];
+};

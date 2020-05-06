@@ -21,8 +21,8 @@ export const ListPluginAction: PluginAction = {
       return toggleList(editor, plugin.name);
     }
   },
-  isActionActive: ({ editor, element }, plugin) => {
-    if (!element || element.type !== "list-item") {
+  isActionActive: ({ editor, element, elementType }, plugin) => {
+    if (elementType !== "list-item") {
       return false;
     }
     const parent = getAncestor(editor, element as Element, 1);

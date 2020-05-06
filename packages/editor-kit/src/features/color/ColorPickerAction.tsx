@@ -37,10 +37,6 @@ export const ColorPickerAction: FunctionComponent<ColorPickerActionProps> = (
     toggleShow();
   };
 
-  const isActive = () => {
-    return show;
-  };
-
   const handleColorChange = (color: Color) => {
     editor.addMark("color", getCssColor(color));
     setShow(false);
@@ -64,16 +60,12 @@ export const ColorPickerAction: FunctionComponent<ColorPickerActionProps> = (
     ? backgroundColorMark.value
     : "blue";
 
-  const enabled = editor.isMarkSupported("fontColor");
-
+  const enabled = editor.isContentAllowed("fontColor");
+  const className = !enabled ? "rek-disabled" : "";
   return (
     <Fragment>
       <div ref={handleRef}>
-        <div
-          onMouseDown={handleMouseDown}
-          // isActive={isActive}
-          // disabled={!enabled}
-        >
+        <div onMouseDown={handleMouseDown} className={className}>
           {children}
         </div>
       </div>

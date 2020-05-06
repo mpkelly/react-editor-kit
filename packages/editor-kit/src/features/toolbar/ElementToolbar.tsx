@@ -10,5 +10,9 @@ export const ElementToolbar: FunctionComponent<ElementToolbarProps> = (
   props: ElementToolbarProps
 ) => {
   const { className, ...rest } = props;
-  return <div className="rek-element-toolbar" {...rest} />;
+  return <div className={`rek-element-toolbar ${className}`} {...rest} />;
+};
+
+ElementToolbar.defaultProps = {
+  className: "",
 };

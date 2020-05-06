@@ -30,7 +30,7 @@ export const FontSelect: FunctionComponent<FontSelectProps> = (
     text: font.name,
     value: font,
     style: { fontFamily: font.fontFamily },
-    disabled: !editor.isMarkSupported("fontFamily", node),
+    disabled: !editor.isContentAllowed("fontFamily", node),
   }));
 
   const { selected, current } = getFonts(editor, items);

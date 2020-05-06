@@ -249,16 +249,16 @@ const handleKeyUp = (
         for (let trigger of plugin.triggers) {
           const matches = findMatches(trigger.pattern, editor, trigger.range);
           if (matches.length) {
+            event.preventDefault();
+            if (trigger.clear == undefined || trigger.clear) {
+              const range = matches[0].range;
+              Transforms.delete(editor, { at: range });
+            }
             if (trigger.onMatch) {
               trigger.onMatch(state, matches, plugin);
             } else if (plugin.actions) {
               //If onMatch is not set then execute the default PluginAction
-              plugin.actions[0].action(state, plugin);
-            }
-            if (trigger.clear == undefined || trigger.clear) {
-              const range = matches[0].range;
-              const length = range.focus.offset - range.anchor.offset;
-              deleteBackward(editor, length);
+              plugin.actions[0].action(state, plugin, { matches });
             }
           }
         }
@@ -529,7 +529,7 @@ export const getSelectionRootNodes = (
   editor: ReactEditor
 ) => {
   const anchor = selection.anchor.path.slice();
-  //Selection paths point to text nodes, so move up to parent level
+  //Move to Element
   anchor.pop();
   const focus = selection.focus.path.slice(0, anchor.length);
   const nodes: Node[] = [];

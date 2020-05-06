@@ -47,7 +47,7 @@ export const Icon = forwardRef<HTMLDivElement, ReactIconProps>(
         ref={ref}
         onClick={onClick}
         onMouseDown={onMouseDown}
-        className={`rek-icon ${className}`}
+        className={`${className}`}
         {...rest}
       >
         {body}
