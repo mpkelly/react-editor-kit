@@ -7,5 +7,6 @@ export interface FocusPopupProps {
     children: React.ReactNode;
     offsets?: Offsets;
     fixed?: boolean;
+    show?: boolean;
 }
 export declare const FocusPopup: React.MemoExoticComponent<(props: FocusPopupProps) => JSX.Element>;
