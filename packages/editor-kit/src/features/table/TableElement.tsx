@@ -45,9 +45,16 @@ export const TableElement = (props: RenderElementProps) => {
   if (element.borderless && !isFocusedWithin) {
     classes.push("rek-borderless");
   }
+
+  let focusedClass = "";
+
+  if (isFocusedWithin) {
+    focusedClass = "rek-table-focused";
+  }
+
   return (
     <DeletableElement {...props}>
-      <div className="rek-table-wrapper">
+      <div className={`rek-table-wrapper ${focusedClass}`}>
         <div className="rek-table-wrapper-body">
           <table tabIndex={1} className={classes.join(" ")}>
             <tbody {...attributes}>{children}</tbody>

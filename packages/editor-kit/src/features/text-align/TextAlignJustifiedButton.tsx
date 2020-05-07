@@ -9,7 +9,7 @@ export const TextAlignJustifiedButton = (
   return (
     <ActionButton
       plugin="text-align"
-      args={{ textAlign: "justified" }}
+      args={{ textAlign: "justify" }}
       {...props}
     />
   );

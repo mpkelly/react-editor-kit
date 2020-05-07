@@ -49,7 +49,6 @@ import {
   InlineCodeButton,
   TextAlignPlugin,
   createStaticMentions,
-  createLabelsPlugin,
   FontsPlugin,
   ColorPlugin,
 } from "@mpkelly/react-editor-kit";
@@ -131,7 +130,7 @@ export const IntroEditor = () => {
 
 const IntroEditorPlugin: Plugin = {
   name: "intro-style",
-  globalStyles: () => `
+  globalStyle: `
 
   .rek-editor-toolbar-overflow,
   .rek-editor-toolbar-wrapper  {
@@ -223,6 +222,11 @@ const IntroEditorPlugin: Plugin = {
       color:var(--site-primary-color);
     }
 
+    code > pre {
+      font-size:smaller;
+      padding:16px;
+    }
+
   }
   
   
@@ -252,7 +256,6 @@ const plugins: Plugin[] = [
   VideoPlugin,
   TablePlugin,
   CodePlugin,
-  createLabelsPlugin(),
   FontsPlugin,
   ColorPlugin,
   HistoryPlugin,
@@ -351,7 +354,7 @@ const initialValue: Node[] = [
     children: [{ type: "h3", children: [{ text: "Basic Code Structure" }] }],
   },
   {
-    type: "code-block",
+    type: "code",
     children: [
       {
         text:

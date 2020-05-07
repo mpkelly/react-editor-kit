@@ -12,20 +12,4 @@ export const VideoEditorStyle = `
     margin: 0 auto;
   }
 
-  .rek-video-toolbar {
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-
-  .rek-video-toolbar .settings-icon {
-    cursor:pointer;
-    color: var(--secondary-text-color);
-  }
-  .rek-video-toolbar .settings-icon path {
-    fill: var(--secondary-text-color);
-    :hover {
-      fill: var(--action-color);
-    }
-  }
 `;

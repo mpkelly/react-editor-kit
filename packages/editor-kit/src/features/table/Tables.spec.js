@@ -8,12 +8,12 @@ describe("Tables feature", () => {
   it("Adds and removes columns", () => {
     addTable();
 
-    cy.get(".rek-table-right").click();
+    cy.get(".rek-table-right").click({ force: true });
 
     cy.get("table").find("tr").should("have.length", 3);
     cy.get("table").find("td").should("have.length", 12);
 
-    cy.get("td:first-child .rek-table-column-button").click();
+    cy.get("td:first-child .rek-table-column-button").click({ force: true });
     cy.get(".rek-table-cell-toolbar .rek-icon").trigger("mousedown");
 
     checkInitial();
@@ -33,12 +33,12 @@ describe("Tables feature", () => {
   it("Adds and removes rows", () => {
     addTable();
 
-    cy.get(".rek-table-bottom").click();
+    cy.get(".rek-table-bottom").click({ force: true };
 
     cy.get("table").find("tr").should("have.length", 4);
     cy.get("table").find("td").should("have.length", 12);
 
-    cy.get(".rek-table-row-button").first().click();
+    cy.get(".rek-table-row-button").first().click({ force: true });
     cy.get(".rek-table-cell-toolbar .rek-icon").trigger("mousedown");
 
     checkInitial();

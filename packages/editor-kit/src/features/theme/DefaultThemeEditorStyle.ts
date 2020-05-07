@@ -25,18 +25,8 @@ export const DefaultThemeEditorStyle = `
     align-items:center;    
     position:relative;
     border: 2px solid rgba(0,0,0,0);  
-    
-    .rek-toolbar {
-      position:absolute;
-      bottom:-40px;
-      svg.rek-icon {
-        fill:var(--secondary-text-color);        
-        &:hover {
-          fill:var(--action-color);     
-        }
-      }
-    }
   }
+  
   .rek-element-toolbar {
     display:flex;
     align-items:center;
@@ -82,5 +72,9 @@ export const DefaultThemeEditorStyle = `
   .rek-delete-icon.rek-svg-icon path {
     fill: var(--danger-color);      
   }    
+
+  > *:not(.rek-element-wrapper) {
+    margin: 0 32px;
+  }
 
 `;

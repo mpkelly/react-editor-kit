@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { RenderElementProps } from "slate-react";
 import { useFocused } from "../../editor/Focus";
-import { Show } from "../../ui/Show";
 import { ElementToolbar } from "../toolbar/ElementToolbar";
+import { ModalPopup } from "../popup/ElementModalPopup";
 
 export interface ElementWrapperProps extends RenderElementProps {
   className?: string;
@@ -15,7 +15,6 @@ export const ElementWrapper = (props: ElementWrapperProps) => {
   const { isFocusedWithin } = useFocused(element);
   const [inside, setInside] = useState(false);
   const className = props.className || "";
-  const focusClassName = isFocusedWithin ? "rek-focused" : "";
   const inlineClassName = inline ? "rek-inline" : "";
 
   const handleEnter = () => {
@@ -27,11 +26,17 @@ export const ElementWrapper = (props: ElementWrapperProps) => {
 
   return (
     <div
-      className={`rek-element-wrapper ${inlineClassName} ${focusClassName} ${className}`}
+      className={`rek-element-wrapper ${inlineClassName} ${className}`}
       data-slate-zero-width="z"
     >
       <div className="rek-element-wrapper-content">{children}</div>
-      <Show when={isFocusedWithin || inside}>
+
+      <ModalPopup
+        show={isFocusedWithin || inside}
+        element={element}
+        location={"top"}
+        offsets={{ v: -16 }}
+      >
         <div
           contentEditable={false}
           onMouseEnter={handleEnter}
@@ -39,7 +44,7 @@ export const ElementWrapper = (props: ElementWrapperProps) => {
         >
           <ElementToolbar>{focusToolbar}</ElementToolbar>
         </div>
-      </Show>
+      </ModalPopup>
     </div>
   );
 };

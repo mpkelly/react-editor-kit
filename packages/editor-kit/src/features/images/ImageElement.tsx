@@ -1,4 +1,5 @@
 import React from "react";
+import { Transforms } from "slate";
 import {
   RenderElementProps,
   useSelected,
@@ -7,7 +8,6 @@ import {
 } from "slate-react";
 import { DeletableElement } from "../elements/DeletableElement";
 import { useEditorKit } from "../../editor/EditorKit";
-import { Transforms } from "slate";
 
 export interface ImageElementProps extends RenderElementProps {}
 
@@ -24,7 +24,11 @@ export const ImageElement = (props: RenderElementProps) => {
   return (
     <DeletableElement {...props}>
       <div contentEditable={false} onClick={handleClick} {...rest}>
-        <img src={element.url} className={`rek-image ${focusedClass}`} />
+        <img
+          {...attributes}
+          src={element.url}
+          className={`rek-image ${focusedClass}`}
+        />
       </div>
       {children}
     </DeletableElement>

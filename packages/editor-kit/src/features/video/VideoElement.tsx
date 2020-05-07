@@ -1,4 +1,4 @@
-import React, { useState, useCallback, memo } from "react";
+import React, { useState, useCallback, memo, Fragment } from "react";
 import { RenderElementProps, ReactEditor } from "slate-react";
 import ReactPlayer from "react-player";
 import { DeletableElement } from "../elements/DeletableElement";
@@ -33,7 +33,7 @@ export const VideoElement = memo((props: RenderElementProps) => {
     <DeletableElement
       {...props}
       toolbarContent={
-        <div className="rek-video-toolbar" data-slate-zero-width="z">
+        <Fragment>
           <Icon icon={icons.settings} onClick={handleShowSettings} />
           <div className="rek-v-toolbar-divider" />
           <Icon
@@ -41,7 +41,7 @@ export const VideoElement = memo((props: RenderElementProps) => {
             className="rek-delete"
             onClick={handleDelete}
           />
-        </div>
+        </Fragment>
       }
     >
       <div

@@ -3,8 +3,14 @@ export const TableEditorStyle = `
     padding:20px;
     padding-top: 36px;
     display:flex;
+    justify-content:center;
+    flex-grow:1;
     flex-direction:column;
-    padding-right:0;
+    padding-right:0;          
+  }
+
+  .rek-table-wrapper.rek-table-focused {
+    padding-bottom:4px;
   }
 
   .rek-table-wrapper-body {  
@@ -230,7 +236,9 @@ export const TableEditorStyle = `
     table-layout: fixed;
     border-collapse: collapse;
     border: 1px solid var(--divider-color);
-    :focus {
+    
+    &:active,
+    &:focus {
       outline:none;
     }
   }
@@ -261,6 +269,7 @@ export const TableEditorStyle = `
     padding-right: 24px;
     height:40px;
     width:2%;
+    vertical-align:text-top;
     p {
       margin:0;
     }              
