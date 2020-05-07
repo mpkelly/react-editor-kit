@@ -14,6 +14,12 @@ export const TableKeyDownHandler = (
     return;
   }
 
+  //Block backspace at start of node
+  if (event.keyCode == 8 && isAtStartOfNode(editor)) {
+    event.preventDefault();
+    return true;
+  }
+
   console.log(cell, isDeletingElementContents(editor, cell[0], event));
   // Overrides default behaviour which would some times let the user
   // delete the table-cell and break the table
@@ -21,10 +27,6 @@ export const TableKeyDownHandler = (
     event.preventDefault();
     return true;
   }
-  //Block backspace at start of node
-  if (event.keyCode == 8 && isAtStartOfNode(editor)) {
-    event.preventDefault();
-    return true;
-  }
+
   return false;
 };

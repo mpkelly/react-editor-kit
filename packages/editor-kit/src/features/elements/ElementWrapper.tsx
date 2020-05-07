@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { RenderElementProps } from "slate-react";
 import { useFocused } from "../../editor/Focus";
 import { ElementToolbar } from "../toolbar/ElementToolbar";
-import { ModalPopup } from "../popup/ElementModalPopup";
+import { Show } from "../../ui/Show";
 
 export interface ElementWrapperProps extends RenderElementProps {
   className?: string;
@@ -29,22 +29,17 @@ export const ElementWrapper = (props: ElementWrapperProps) => {
       className={`rek-element-wrapper ${inlineClassName} ${className}`}
       data-slate-zero-width="z"
     >
-      <div className="rek-element-wrapper-content">{children}</div>
-
-      <ModalPopup
-        show={isFocusedWithin || inside}
-        element={element}
-        location={"top"}
-        offsets={{ v: -16 }}
-      >
+      <Show when={isFocusedWithin || inside}>
         <div
           contentEditable={false}
           onMouseEnter={handleEnter}
           onMouseLeave={handleLeave}
+          style={{ position: "absolute", marginTop: -32, zIndex: 2 }}
         >
           <ElementToolbar>{focusToolbar}</ElementToolbar>
         </div>
-      </ModalPopup>
+      </Show>
+      <div className="rek-element-wrapper-content">{children}</div>
     </div>
   );
 };

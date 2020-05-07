@@ -14,10 +14,11 @@ export interface FocusPopupProps {
   children: React.ReactNode;
   offsets?: Offsets;
   fixed?: boolean;
+  show?: boolean;
 }
 
 export const FocusPopup = memo((props: FocusPopupProps) => {
-  const { element, location, children, offsets, fixed } = props;
+  const { element, location, children, offsets, fixed, show } = props;
   const { editor } = useEditorKit();
   const [domElement, setDomElement] = useState<HTMLElement | null>(null);
   const handleRef = useCallback((ref: HTMLElement) => {
@@ -29,7 +30,7 @@ export const FocusPopup = memo((props: FocusPopupProps) => {
   const { isFocusedWithin } = useFocused(element);
   const over = useHover(domElement);
 
-  if (!isFocusedWithin && !over) {
+  if (show || (!isFocusedWithin && !over)) {
     return null;
   }
 

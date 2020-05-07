@@ -23,13 +23,20 @@ export const useLastFocused = (editor: ReactEditor) => {
     if (current) {
       const point = selection.focus;
       const [element] = Editor.parent(editor, point);
+      if (
+        state.element === element &&
+        state.point &&
+        Point.equals(state.point, point)
+      ) {
+        return;
+      }
       setState({
         element: element,
         point,
         selection: clone(selection),
       });
     }
-  }, [current, editor.operations]);
+  }, [current, state, editor.operations]);
 
   return state;
 };

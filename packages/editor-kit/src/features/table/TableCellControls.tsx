@@ -16,6 +16,7 @@ import { TableElementMenuItem } from "./TableElementMenuItem";
 import { useFocused } from "../../editor/Focus";
 import { Icon, EditorIcon } from "../icons/Icon";
 import { blockEvent } from "../../ui/Utils";
+import { Offsets } from "../popup/Popups";
 
 //TODO tidy this up!
 export const TableCellControls = (props: RenderElementProps) => {
@@ -55,8 +56,12 @@ export const TableCellControls = (props: RenderElementProps) => {
     setState(initialState());
   };
 
-  const showToolbar = (event: React.MouseEvent, handler: Function) => {
-    setState({ button: event.currentTarget as HTMLElement, handler });
+  const showToolbar = (
+    event: React.MouseEvent,
+    handler: Function,
+    props: any
+  ) => {
+    setState({ button: event.currentTarget as HTMLElement, handler, props });
   };
 
   const table = getAncestor(editor, element, 2);
@@ -95,7 +100,11 @@ export const TableCellControls = (props: RenderElementProps) => {
           className="rek-table-row-button"
           contentEditable={false}
           onMouseDown={(event) =>
-            blockEvent(event) && showToolbar(event, handleDeleteRow)
+            blockEvent(event) &&
+            showToolbar(event, handleDeleteRow, {
+              location: "inside-start",
+              offsets: { h: 32 },
+            })
           }
         />
         <TableRowInsert icon={icons.plus} onClick={handleAddRow} />
@@ -105,7 +114,11 @@ export const TableCellControls = (props: RenderElementProps) => {
           className="rek-table-column-button"
           contentEditable={false}
           onMouseDown={(event) =>
-            blockEvent(event) && showToolbar(event, handleDeleteColumn)
+            blockEvent(event) &&
+            showToolbar(event, handleDeleteColumn, {
+              location: "inside-top",
+              offsets: { v: 16 },
+            })
           }
         />
         <TableColumnInsert icon={icons.plus} onClick={handleAddColumn} />
@@ -115,11 +128,14 @@ export const TableCellControls = (props: RenderElementProps) => {
         show={Boolean(state.button)}
         element={state.button}
         onClickOutside={hideToolbar}
-        location="top"
-        offsets={{ v: -16 }}
+        {...(state.props as any)}
       >
         <ElementToolbar className="rek-table-cell-toolbar">
-          <Icon icon={icons.delete} onMouseDown={state.handler as any} />
+          <Icon
+            icon={icons.delete}
+            className="rek-delete"
+            onMouseDown={state.handler as any}
+          />
         </ElementToolbar>
       </HtmlElementModalPopup>
 
@@ -161,7 +177,11 @@ export const TableCellControls = (props: RenderElementProps) => {
 const initialState = (): {
   button: HTMLElement | null;
   handler: Function | null;
-} => ({ button: null, handler: null });
+  props: {
+    location: Location;
+    offsets: Offsets;
+  } | null;
+} => ({ button: null, handler: null, props: null });
 
 export interface TableRowInsertProps {
   icon: EditorIcon;

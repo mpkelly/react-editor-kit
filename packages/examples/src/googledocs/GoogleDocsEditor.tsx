@@ -83,6 +83,7 @@ import { createStaticHashtags } from "./HashtagSuggestionPlugin";
 import { createEmoticonSuggestions } from "./EmoticonSuggestions";
 import { InsertContextMenuPlugin } from "./InsertContextMenuPlugin";
 import { FormatContextMenuPlugin } from "./FormatContextMenuPlugin";
+import { EditorContent } from "./EditorContent";
 
 const GoogleDocsStylePlugin: Plugin = {
   name: "google-docs-style",
@@ -153,13 +154,7 @@ const plugins: Plugin[] = [
   // createFixedTitlePlugin(),
 ];
 
-const initialValue = [
-  // createFixedBlock(),
-  {
-    type: "paragraph",
-    children: [{ text: "" }],
-  },
-];
+const initialValue = EditorContent;
 
 const wrapperStyle: CSSProperties = {
   display: "flex",
