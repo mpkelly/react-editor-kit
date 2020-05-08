@@ -226,10 +226,18 @@ const generateStyle = (plugins: Plugin[], id: string) => {
 
   plugins.forEach((plugin) => {
     if (plugin.editorStyle) {
-      editorStyles.push(plugin.editorStyle);
+      let css = plugin.editorStyle;
+      if (typeof plugin.editorStyle === "function") {
+        css = plugin.editorStyle(id);
+      }
+      editorStyles.push(css as string);
     }
     if (plugin.globalStyle) {
-      globalStyles.push(plugin.globalStyle);
+      let css = plugin.globalStyles;
+      if (typeof plugin.globalStyle === "function") {
+        css = plugin.globalStyles(id);
+      }
+      globalStyles.push(css as string);
     }
   });
   let editorStyle = "";
@@ -249,6 +257,7 @@ const generateStyle = (plugins: Plugin[], id: string) => {
 
 const attachEditorStyle = (css: string, id: string) => {
   const linkElement = document.createElement("link");
+  console.log(css);
   const styleId = `rek-styles-${id}`;
   const existing = document.getElementById(styleId);
   if (existing) {

@@ -121,18 +121,19 @@ export interface Plugin {
      *  }
      *
      */
-    editorStyle?: string;
+    editorStyle?: string | StyleFunction;
     /**
      * These styles can target the whole page so be careful. Things like dialogs and toolbars
      * are rendered outside of the Editor and can be targeted here.
      */
-    globalStyle?: string;
+    globalStyle?: string | StyleFunction;
     /**
      * Plugins can act as a data providers and store arbitrary data. Icon are text labels
      * are shared throughout EditorKit in this way.
      */
     [key: string]: any;
 }
+export declare type StyleFunction = (editorId: string) => string;
 export declare const createPlugin: (plugin: Plugin, ...triggers: Trigger[]) => {
     triggers: Trigger[];
     /**
@@ -233,10 +234,10 @@ export declare const createPlugin: (plugin: Plugin, ...triggers: Trigger[]) => {
      *  }
      *
      */
-    editorStyle?: string;
+    editorStyle?: string | StyleFunction;
     /**
      * These styles can target the whole page so be careful. Things like dialogs and toolbars
      * are rendered outside of the Editor and can be targeted here.
      */
-    globalStyle?: string;
+    globalStyle?: string | StyleFunction;
 };

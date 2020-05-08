@@ -142,13 +142,13 @@ export interface Plugin {
    *  }
    *
    */
-  editorStyle?: string;
+  editorStyle?: string | StyleFunction;
 
   /**
    * These styles can target the whole page so be careful. Things like dialogs and toolbars
    * are rendered outside of the Editor and can be targeted here.
    */
-  globalStyle?: string;
+  globalStyle?: string | StyleFunction;
 
   /**
    * Plugins can act as a data providers and store arbitrary data. Icon are text labels
@@ -156,6 +156,8 @@ export interface Plugin {
    */
   [key: string]: any;
 }
+
+export type StyleFunction = (editorId: string) => string;
 
 //Rewrite triggers e.g. const h1Plugin = createPlugin(H1Plugin, { pattern: "#" });
 export const createPlugin = (plugin: Plugin, ...triggers: Trigger[]) => {

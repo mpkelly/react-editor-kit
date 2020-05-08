@@ -1,6 +1,7 @@
 import React from "react";
 import { blockEvent } from "../../ui/Utils";
 import { useEditorKit } from "../../editor/EditorKit";
+import { Action } from "../actions/Action";
 
 export interface ReadOnlyActionProps {
   children: React.ReactNode;
@@ -20,8 +21,8 @@ export const ReadOnlyAction = (props: ReadOnlyActionProps) => {
     }
   };
   return (
-    <div onMouseDown={onMouseDown} className={isActive() ? "rek-active" : ""}>
+    <Action onMouseDown={onMouseDown} active={isActive()}>
       {children}
-    </div>
+    </Action>
   );
 };
