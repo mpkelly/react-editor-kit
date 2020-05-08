@@ -19,7 +19,14 @@ export interface ResizableProps extends Partial<RenderElementProps> {
 }
 
 export const Resizable = (props: ResizableProps) => {
-  const { initialWidth, children, onChange, style, ...rest } = props;
+  const {
+    initialWidth,
+    children,
+    onChange,
+    style,
+    attributes,
+    ...rest
+  } = props;
   const [state, setState] = useState({ width: initialWidth, down: -1 });
   const element = useRef<HTMLElement | null>(null);
   const multiplier = useRef(1);
@@ -69,7 +76,12 @@ export const Resizable = (props: ResizableProps) => {
 
   return (
     <Fragment>
-      <div className="rek-resizable" style={allStyle} ref={handleRef} {...rest}>
+      <div
+        className="rek-resizable"
+        style={allStyle}
+        ref={handleRef}
+        {...attributes}
+      >
         <div
           className="rek-resize-handle rek-resize-handle-start"
           onMouseDown={handleDown}

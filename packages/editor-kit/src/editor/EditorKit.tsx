@@ -157,14 +157,14 @@ export const EditorKit = memo((props: EditorKitProps) => {
     delaySpellCheck,
   } = useSpellcheck(Boolean(props.spellCheck), id, render);
 
-  //TODO remove this hack once workaround is found
-  useEffect(() => {
-    const { onChange } = editor;
-    editor.onChange = () => {
-      onChange();
-      render();
-    };
-  }, []);
+  // //TODO remove this hack once workaround is found
+  // useEffect(() => {
+  //   const { onChange } = editor;
+  //   editor.onChange = () => {
+  //     onChange();
+  //     render();
+  //   };
+  // }, []);
 
   const value = {
     editor,

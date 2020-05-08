@@ -148,7 +148,7 @@ const plugins: Plugin[] = [
   //TODO fix empticons so they work with other :.. triggers
   //createEmoticonSuggestions(),
 
-  //createInitialLetterPlugin(),
+  createInitialLetterPlugin(),
   // InsertContextMenuPlugin,
   // FormatContextMenuPlugin,
   // createFixedTitlePlugin(),

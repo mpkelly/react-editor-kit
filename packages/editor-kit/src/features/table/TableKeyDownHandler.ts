@@ -5,7 +5,7 @@ import { isAtStartOfNode } from "../../editor/Editor";
 
 export const TableKeyDownHandler = (
   event: React.KeyboardEvent,
-  { editor }: EditorState
+  { editor, element }: EditorState
 ) => {
   const [cell] = Editor.nodes(editor, {
     match: (node) => node.type === "table-cell",
@@ -14,13 +14,14 @@ export const TableKeyDownHandler = (
     return;
   }
 
+  const isFirstChild = cell[0].children[0] === element;
+
   //Block backspace at start of node
-  if (event.keyCode == 8 && isAtStartOfNode(editor)) {
+  if (isFirstChild && event.keyCode == 8 && isAtStartOfNode(editor)) {
     event.preventDefault();
     return true;
   }
 
-  console.log(cell, isDeletingElementContents(editor, cell[0], event));
   // Overrides default behaviour which would some times let the user
   // delete the table-cell and break the table
   if (isDeletingElementContents(editor, cell[0], event)) {

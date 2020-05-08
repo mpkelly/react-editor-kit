@@ -21,6 +21,7 @@ import {
   RenderElementProps,
   RenderLeafProps,
   ReactEditor,
+  DefaultElement,
 } from "slate-react";
 import { Plugin } from "../plugins/Plugin";
 import { useEditorKit } from "./EditorKit";
@@ -112,6 +113,7 @@ export const Editor = memo((props: EditorProps) => {
       const items = handleContextMenu(event, plugins, createState());
       const x = event.clientX;
       const y = event.clientY;
+
       if (items.length) {
         event.stopPropagation();
         event.preventDefault();
@@ -133,6 +135,7 @@ export const Editor = memo((props: EditorProps) => {
     }
     editor.insertText(pastedData);
   }, []);
+
   return (
     <Slate editor={editor} value={ensureValue(value)} onChange={onChange}>
       <Fragment>
@@ -187,7 +190,7 @@ const handleRenderElement = (props: RenderElementProps, plugins: Plugin[]) => {
       classes = `${classes} ${plugin.getClasses(props.element)}`;
     }
   }
-  element = element || <p {...props.attributes}>{[props.children]}</p>;
+  element = element || <DefaultElement {...props} />;
   if (Object.keys(style).length || classes) {
     return React.cloneElement(element, { style, className: classes });
   }

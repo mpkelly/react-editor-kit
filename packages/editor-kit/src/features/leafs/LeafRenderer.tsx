@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo, ReactNode } from "react";
 import { RenderLeafProps } from "slate-react";
 
 export const renderLeaf = (
@@ -9,9 +9,19 @@ export const renderLeaf = (
   const { attributes, children, leaf } = props;
   if (leaf[leafType]) {
     return (
-      <span {...attributes}>
+      <Leaf attributes={attributes}>
         {React.createElement(reactType, null, children)}
-      </span>
+      </Leaf>
     );
   }
 };
+
+interface LeafProps {
+  attributes: Object;
+  children: ReactNode;
+}
+
+const Leaf = memo((props: LeafProps) => {
+  const { attributes, children } = props;
+  return <span {...attributes}>{children}</span>;
+});
