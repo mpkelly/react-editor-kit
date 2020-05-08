@@ -233,9 +233,9 @@ const generateStyle = (plugins: Plugin[], id: string) => {
       editorStyles.push(css as string);
     }
     if (plugin.globalStyle) {
-      let css = plugin.globalStyles;
+      let css = plugin.globalStyle;
       if (typeof plugin.globalStyle === "function") {
-        css = plugin.globalStyles(id);
+        css = plugin.globalStyle(id);
       }
       globalStyles.push(css as string);
     }
@@ -257,7 +257,6 @@ const generateStyle = (plugins: Plugin[], id: string) => {
 
 const attachEditorStyle = (css: string, id: string) => {
   const linkElement = document.createElement("link");
-  console.log(css);
   const styleId = `rek-styles-${id}`;
   const existing = document.getElementById(styleId);
   if (existing) {
