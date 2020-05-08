@@ -74,7 +74,7 @@ export const DefaultThemeEditorStyle = `
   }    
 
   > *:not(.rek-element-wrapper) {
-    margin: 0 32px;
+    margin: 0 40px;
   }
 
 `;

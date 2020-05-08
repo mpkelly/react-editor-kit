@@ -22,6 +22,6 @@ interface LeafProps {
 }
 
 const Leaf = memo((props: LeafProps) => {
-  const { attributes, children } = props;
-  return <span {...attributes}>{children}</span>;
+  const { attributes, ...rest } = props;
+  return <span {...attributes} {...rest} />;
 });

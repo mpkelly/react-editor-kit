@@ -190,10 +190,12 @@ const handleRenderElement = (props: RenderElementProps, plugins: Plugin[]) => {
       classes = `${classes} ${plugin.getClasses(props.element)}`;
     }
   }
-  element = element || <DefaultElement {...props} />;
+  element = element || <p {...props.attributes}>{[props.children]}</p>;
+
   if (Object.keys(style).length || classes) {
     return React.cloneElement(element, { style, className: classes });
   }
+
   return element;
 };
 
