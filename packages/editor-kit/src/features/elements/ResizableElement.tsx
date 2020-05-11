@@ -15,6 +15,7 @@ export const ResizableElement = (props: ResizableElementProps) => {
 
   const handleWidthChange = useCallback(
     (resizedWidth: number) => {
+      console.log("C", resizedWidth);
       Transforms.setNodes(
         editor,
         { resizedWidth },

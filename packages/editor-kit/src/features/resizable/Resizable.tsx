@@ -28,12 +28,17 @@ export const Resizable = (props: ResizableProps) => {
     ...rest
   } = props;
   const [state, setState] = useState({ width: initialWidth, down: -1 });
-  const element = useRef<HTMLElement | null>(null);
+  const [element, setElement] = useState<HTMLElement | null>(null);
   const multiplier = useRef(1);
 
-  const handleRef = (ref: HTMLElement | null) => {
-    element.current = ref;
-  };
+  const handleRef = useCallback(
+    (node: HTMLElement | null) => {
+      if (node && !element) {
+        setElement(node);
+      }
+    },
+    [element]
+  );
 
   useEffect(() => {
     const handleUp = () => {
@@ -49,16 +54,15 @@ export const Resizable = (props: ResizableProps) => {
     (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
       if (state.down > -1) {
         const delta = event.clientX - state.down;
-        if (delta !== 0) {
-          const current = element.current?.getBoundingClientRect()
-            .width as number;
+        if (delta !== 0 && element) {
+          const current = element?.getBoundingClientRect().width as number;
           const width = current + delta * multiplier.current;
           onChange && onChange(width);
           setState({ width, down: event.clientX });
         }
       }
     },
-    [state]
+    [state, element]
   );
 
   const handleDown = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -79,8 +83,8 @@ export const Resizable = (props: ResizableProps) => {
       <div
         className="rek-resizable"
         style={allStyle}
-        ref={handleRef}
         {...attributes}
+        ref={handleRef}
       >
         <div
           className="rek-resize-handle rek-resize-handle-start"
