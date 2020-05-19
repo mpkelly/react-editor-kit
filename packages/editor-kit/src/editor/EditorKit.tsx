@@ -54,6 +54,7 @@ export interface EditorKitValue {
   disableSpellCheck(): void;
   enableSpellCheck(): void;
   delaySpellCheck(): void;
+  onClick(): void;
   id: string;
   executeAction(plugin: string, args?: PluginActionArgs, name?: string): void;
   isActionActive(
@@ -88,12 +89,26 @@ export const EditorKit = memo((props: EditorKitProps) => {
   const [, forceUpdate] = useState({});
   const [readOnly, setReadOnly] = useState(Boolean(props.readOnly));
 
+  useEffect(() => {
+    setReadOnly(Boolean(props.readOnly));
+  }, [props.readOnly]);
+
   const last = useLastFocused(editor);
   const state = createEditorState(last, editor);
 
   useEffect(() => {
     generateStyle(plugins, id);
   }, [props.plugins]);
+
+  useEffect(() => {
+    return () => {
+      const styleId = `rek-styles-${id}`;
+      const style = document.getElementById(styleId);
+      if (style) {
+        style.parentElement?.removeChild(style);
+      }
+    };
+  }, []);
 
   const render = useCallback((value = {}) => {
     forceUpdate(value);
@@ -150,21 +165,16 @@ export const EditorKit = memo((props: EditorKitProps) => {
     action.action(state, plugin, args);
   };
 
+  const handleClick = () => {
+    forceUpdate({});
+  };
+
   const {
     spellCheck,
     disableSpellCheck,
     enableSpellCheck,
     delaySpellCheck,
   } = useSpellcheck(Boolean(props.spellCheck), id, render);
-
-  //TODO remove this hack once workaround is found
-  useEffect(() => {
-    const { onChange } = editor;
-    editor.onChange = () => {
-      onChange();
-      render();
-    };
-  }, []);
 
   const value = {
     editor,
@@ -180,8 +190,8 @@ export const EditorKit = memo((props: EditorKitProps) => {
     id,
     executeAction,
     isActionActive,
+    onClick: handleClick,
   };
-
   return (
     <Context.Provider value={value}>
       <Fragment>{children}</Fragment>
@@ -256,20 +266,15 @@ const generateStyle = (plugins: Plugin[], id: string) => {
 };
 
 const attachEditorStyle = (css: string, id: string) => {
-  const linkElement = document.createElement("link");
+  const style = document.createElement("style");
   const styleId = `rek-styles-${id}`;
   const existing = document.getElementById(styleId);
   if (existing) {
     existing.parentElement?.removeChild(existing);
   }
-  linkElement.id = styleId;
-  linkElement.setAttribute("rel", "stylesheet");
-  linkElement.setAttribute("type", "text/css");
-  linkElement.setAttribute(
-    "href",
-    "data:text/css;charset=UTF-8," + encodeURIComponent(css)
-  );
-  document.head.appendChild(linkElement);
+  style.id = styleId;
+  style.innerText = css;
+  document.head.appendChild(style);
 };
 
 const maybeConfigureTesting = (editor: ReactEditor, forceUpdate: Function) => {

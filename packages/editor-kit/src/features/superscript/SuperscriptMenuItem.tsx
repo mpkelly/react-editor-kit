@@ -5,5 +5,5 @@ import { MarkMenuItem } from "../marks/MarkMenuItem";
 export interface SuperscriptMenuItemProps extends Partial<MenuItemProps> {}
 
 export const SuperscriptMenuItem = (props: SuperscriptMenuItemProps) => {
-  return <MarkMenuItem type="super" {...props} />;
+  return <MarkMenuItem type="superscript" {...props} />;
 };

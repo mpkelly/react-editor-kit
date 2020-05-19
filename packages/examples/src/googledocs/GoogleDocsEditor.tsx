@@ -77,6 +77,7 @@ import {
   createClearFormattingPlugin,
   ClearFormattingAction,
   createTodoListPlugin,
+  LayoutPlugin,
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 import { createStaticHashtags } from "./HashtagSuggestionPlugin";
@@ -145,10 +146,11 @@ const plugins: Plugin[] = [
   }),
   createClearFormattingPlugin(),
   createTodoListPlugin(),
+  LayoutPlugin,
   //TODO fix empticons so they work with other :.. triggers
   //createEmoticonSuggestions(),
 
-  createInitialLetterPlugin(),
+  //createInitialLetterPlugin(),
   // InsertContextMenuPlugin,
   // FormatContextMenuPlugin,
   // createFixedTitlePlugin(),

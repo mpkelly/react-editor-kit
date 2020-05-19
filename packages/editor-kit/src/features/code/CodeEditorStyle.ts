@@ -2,6 +2,8 @@ export const CodeEditorStyle = `
   .rek-code-block {
     background-color:var(--input-background-color);
     padding:8px;     
+    white-space:pre-wrap;
+    line-height:1.3;
   }  
 
  .rek-code-block.sql,

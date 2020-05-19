@@ -1,6 +1,6 @@
 import { PluginAction } from "../../plugins/PluginAction";
 
-export const InsertCodePluginAction: PluginAction = {
+export const CodePluginAction: PluginAction = {
   action: ({ editor }) => {
     editor.insertNode({
       type: "code",

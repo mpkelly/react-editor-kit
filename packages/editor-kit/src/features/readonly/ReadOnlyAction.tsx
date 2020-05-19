@@ -5,6 +5,7 @@ import { Action } from "../actions/Action";
 
 export interface ReadOnlyActionProps {
   children: React.ReactNode;
+  onMouseDown?(event: React.MouseEvent): void;
 }
 
 export const ReadOnlyAction = (props: ReadOnlyActionProps) => {
@@ -12,14 +13,17 @@ export const ReadOnlyAction = (props: ReadOnlyActionProps) => {
   const { readOnly, enableReadOnly, disableReadOnly } = useEditorKit();
 
   const isActive = () => readOnly;
-  const onMouseDown = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    blockEvent(event);
-    if (isActive()) {
-      disableReadOnly();
-    } else {
-      enableReadOnly();
-    }
-  };
+  let onMouseDown = props.onMouseDown;
+  if (!onMouseDown) {
+    onMouseDown = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+      blockEvent(event);
+      if (isActive()) {
+        disableReadOnly();
+      } else {
+        enableReadOnly();
+      }
+    };
+  }
   return (
     <Action onMouseDown={onMouseDown} active={isActive()}>
       {children}

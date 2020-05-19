@@ -40,12 +40,7 @@ export const DeletableElement = (props: DeletableElementProps) => {
       element={element}
       {...rest}
     >
-      <Resizable
-        initialWidth={element.resizedWidth || "100%"}
-        onChange={handleWidthChange}
-      >
-        {children}
-      </Resizable>
+      {children}
     </ElementWrapper>
   );
 };

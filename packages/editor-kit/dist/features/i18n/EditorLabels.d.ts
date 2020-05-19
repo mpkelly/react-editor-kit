@@ -15,4 +15,5 @@ export interface EditorLabels {
     removeDueDate: string;
     moveToTop: string;
     delete: string;
+    customLayout: string;
 }

@@ -3,7 +3,7 @@ import { Plugin } from "../../plugins/Plugin";
 export interface BreakoutPluginOptions {
     /**
      * Element that gets padded top and bottom by 1px high paragraphs so
-     * users can 'breakout' of these blocks
+     * users can 'breakout' of these elements
      */
     paddedElements: string[];
 }

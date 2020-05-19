@@ -7,7 +7,7 @@ export const DefaultClearableEditorFormats = [
   "underline",
   "strikethrough",
   "fontSize",
-  "fontColor",
+  "color",
   "backgroundColor",
 ];
 

@@ -73,8 +73,12 @@ export const DefaultThemeEditorStyle = `
     fill: var(--danger-color);      
   }    
 
+  .rek-layout {
+    margin: 0 8px;
+  }
+  
   > *:not(.rek-element-wrapper) {
-    margin: 0 40px;
+    margin: 0 19px;
   }
 
 `;

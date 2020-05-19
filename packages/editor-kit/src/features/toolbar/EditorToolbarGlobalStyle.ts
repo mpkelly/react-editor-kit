@@ -15,7 +15,7 @@ export const EditorToolbarGlobalStyle = `
   }
 
   .rek-editor-toolbar-wrapper.rek-no-overflow {
-    .more-icon {
+    .rek-more-icon {
       display:none;
     }
   }

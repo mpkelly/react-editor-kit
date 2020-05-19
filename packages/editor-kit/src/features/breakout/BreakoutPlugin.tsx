@@ -8,7 +8,7 @@ import { BreakoutDownKeyHandler } from "./BreakoutDownKeyHandler";
 export interface BreakoutPluginOptions {
   /**
    * Element that gets padded top and bottom by 1px high paragraphs so
-   * users can 'breakout' of these blocks
+   * users can 'breakout' of these elements
    */
   paddedElements: string[];
 }
@@ -19,6 +19,7 @@ export const DefaultOptions: BreakoutPluginOptions = {
     "video",
     "image",
     "table",
+    "layout",
     "todo-list",
     "blockquote",
     "code",
@@ -45,7 +46,7 @@ export const createBreakoutPlugin = (options = DefaultOptions): Plugin => {
         (element.breakoutTop || element.breakoutBottom) &&
         Node.string(element).length == 0
       ) {
-        return { height: 1, width: "100%", margin: 0 };
+        return { height: 1, width: "100%", marginTop: 0, marginBottom: 0 };
       }
       return undefined;
     },

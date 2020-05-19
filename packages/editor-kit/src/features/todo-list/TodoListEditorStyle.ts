@@ -18,6 +18,7 @@ export const TodoListEditorStyle = `
 
     .rek-todo-item-content {
       flex-grow:1;
+      position:relative;
     }
   }
   .rek-todo-item-content.rek-empty:before {

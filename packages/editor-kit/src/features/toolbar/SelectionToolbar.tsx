@@ -59,7 +59,10 @@ export const SelectionToolbar = (props: SelectionToolbarProps) => {
       fixed
       delay={delay || 1000}
     >
-      <div className="rek-selection-toolbar" onMouseDown={stopEvent}>
+      <div
+        className="rek-selection-toolbar rek-element-toolbar"
+        onMouseDown={stopEvent}
+      >
         {children}
       </div>
     </CursorPopup>

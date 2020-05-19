@@ -21,8 +21,10 @@ export enum OverflowStrategy {
   Menu,
 }
 
-export const EditorToolbar = (props: EditorToolbarProps) => {
-  const { overflowStrategy } = props;
+export const EditorToolbar: React.FC<EditorToolbarProps> = (
+  props: EditorToolbarProps
+) => {
+  const { overflowStrategy, className } = props;
   const { id } = useEditorKit();
   const array = React.Children.toArray(props.children);
   const total = array.length;
@@ -79,7 +81,7 @@ export const EditorToolbar = (props: EditorToolbarProps) => {
         id={`rek-${id}-toolbar`}
         className={`rek-editor-toolbar-wrapper ${overflowingClass} `}
       >
-        <div className={"rek-editor-toolbar"}>{children}</div>
+        <div className={`rek-editor-toolbar ${className}`}>{children}</div>
 
         <Show when={!isWrapMode}>
           <Overflow maxWidth={maxWidth}>
@@ -100,6 +102,8 @@ export const EditorToolbar = (props: EditorToolbarProps) => {
     </ResizeSensor>
   );
 };
+
+EditorToolbar.defaultProps = { className: "" };
 
 interface OverflowProps {
   children: React.ReactNode;
@@ -124,6 +128,7 @@ const Overflow = (props: OverflowProps) => {
       <div className="rek-icon-button">
         <Icon
           data-id="toolbar-overflow-button"
+          className="rek-more-icon"
           icon={icons.more}
           onClick={toggleShow}
         />

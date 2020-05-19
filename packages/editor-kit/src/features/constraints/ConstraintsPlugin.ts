@@ -11,16 +11,35 @@ export type EditorConstrains = {
   [blockName: string]: string[];
 };
 
+export const Marks = [
+  "bold",
+  "italic",
+  "underline",
+  "strikethrough",
+  "superscript",
+  "subscript",
+  "inline-code",
+  "color",
+  "backgroundColor",
+  "fontSize",
+];
+
 export const DefaultConstraints = {
   //Accept nothing
   code: [],
-  "list-item": ["link", "unordered-list", "ordered-list", "aligned-block"],
+  "list-item": [
+    "link",
+    "unordered-list",
+    "ordered-list",
+    "aligned-block",
+    ...Marks,
+  ],
   //Accept only links
-  blockquote: ["paragraph", "link"],
+  blockquote: ["paragraph", "link", ...Marks],
   //Accept everything except for tables and videos
   "table-cell": ["!table", "!video"],
   "todo-list": ["todo-list-item"],
-  "todo-item": ["paragraph", "mention", "link"],
+  "todo-item": ["paragraph", "mention", "link", ...Marks],
 };
 
 export const createConstrainsPlugin = (constraints: EditorConstrains) => {

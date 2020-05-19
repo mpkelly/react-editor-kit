@@ -6,6 +6,7 @@ export interface Constraints extends Plugin {
 export declare type EditorConstrains = {
     [blockName: string]: string[];
 };
+export declare const Marks: string[];
 export declare const DefaultConstraints: {
     code: any[];
     "list-item": string[];

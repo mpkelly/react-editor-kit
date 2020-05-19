@@ -1,8 +1,8 @@
 import React, { Fragment, MouseEvent as ReactMouseEvent } from "react";
 import { PluginActionArgs } from "../../plugins/PluginAction";
 import { useEditorKit } from "../../editor/EditorKit";
-import { blockEvent } from "../../ui/Utils";
 import { useLastFocused } from "../../editor/LastFocusedNode";
+import { Transforms } from "slate";
 
 export interface ActionProps {
   children: React.ReactNode;
@@ -50,7 +50,7 @@ export const Action = (props: ActionProps) => {
     disabled,
   } = props;
   const { editor, executeAction, isActionActive } = useEditorKit();
-  const { element: lastElement } = useLastFocused(editor);
+  const { element: lastElement, point } = useLastFocused(editor);
   const enabled = editor.isContentAllowed(plugin, lastElement);
   let buttonProps: ActionChildProps | null = null;
 
@@ -58,6 +58,9 @@ export const Action = (props: ActionProps) => {
     buttonProps = {
       onMouseDown: (event: ReactMouseEvent<HTMLElement, MouseEvent>) => {
         event.preventDefault();
+        if (point) {
+          Transforms.select(editor, point);
+        }
         if (enabled) {
           executeAction(plugin, args, action);
         }

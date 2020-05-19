@@ -13,6 +13,7 @@ export interface EditorKitValue {
     disableSpellCheck(): void;
     enableSpellCheck(): void;
     delaySpellCheck(): void;
+    onClick(): void;
     id: string;
     executeAction(plugin: string, args?: PluginActionArgs, name?: string): void;
     isActionActive(plugin: string, args?: PluginActionArgs, name?: string): boolean;

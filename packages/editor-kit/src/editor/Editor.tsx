@@ -21,7 +21,6 @@ import {
   RenderElementProps,
   RenderLeafProps,
   ReactEditor,
-  DefaultElement,
 } from "slate-react";
 import { Plugin } from "../plugins/Plugin";
 import { useEditorKit } from "./EditorKit";
@@ -31,7 +30,8 @@ import { ContextMenu } from "../features/context-menu/ContextMenu";
 import { Show } from "../ui/Show";
 import isHotkey from "is-hotkey";
 import { EditorState, createEditorState } from "./EditorState";
-import { useLastFocused, LastFocusedState } from "./LastFocusedNode";
+import { useLastFocused } from "./LastFocusedNode";
+import { useForceUpdate } from "../ui/ForceUpdate";
 
 export interface EditorProps {
   value: Node[];
@@ -53,13 +53,13 @@ export const Editor = memo((props: EditorProps) => {
     delaySpellCheck,
     readOnly,
     id,
+    onClick,
   } = useEditorKit();
   const [menu, setMenu] = useState<{
     items: ReactNode[];
     x: number;
     y: number;
   }>({ items: [], x: 0, y: 0 });
-
   useLastFocused(editor);
 
   const createState = () => {
@@ -102,6 +102,7 @@ export const Editor = memo((props: EditorProps) => {
 
   const click = useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
+      onClick();
       handleCloseMenu();
       handleClick(event, plugins, createState());
     },
@@ -123,9 +124,11 @@ export const Editor = memo((props: EditorProps) => {
     [plugins]
   );
 
-  const handleCloseMenu = () => {
-    setMenu({ items: [], x: 0, y: 0 });
-  };
+  const handleCloseMenu = useCallback(() => {
+    if (menu.items.length) {
+      setMenu({ items: [], x: 0, y: 0 });
+    }
+  }, [menu]);
 
   const paste = useCallback((event) => {
     const clipboardData = event.clipboardData;

@@ -12,24 +12,28 @@ import { CodeTabKeyHandler } from "./CodeTabKeyHandler";
 import { CodeBackspaceKeyHandler } from "./CodeBackspaceKeyHandler";
 import { CodeMarkdownTrigger } from "./CodeMarkdownTrigger";
 import { CodeNamedTrigger } from "./CodeNamedTrigger";
-import { InsertCodePluginAction } from "./InsertCodePluginAction";
+import { CodePluginAction } from "./CodePluginAction";
+import { getActiveNodeType } from "../../editor/Editor";
 
 export const CodePlugin: Plugin = {
   name: "code",
   withPlugin: (editor) => {
     const { insertData } = editor;
     editor.insertData = (data) => {
-      const text = data.getData("text/plain");
-      if (text) {
-        editor.insertText(text);
-        return;
+      const type = getActiveNodeType(editor);
+      if (type === "code") {
+        const text = data.getData("text/plain");
+        if (text) {
+          editor.insertText(text);
+          return;
+        }
       }
       insertData(data);
     };
     return editor;
   },
   triggers: [CodeMarkdownTrigger, CodeNamedTrigger],
-  actions: [InsertCodePluginAction],
+  actions: [CodePluginAction],
   onKey: [
     CodeTabKeyHandler,
     CodeDeleteKeyHandler,

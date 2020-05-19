@@ -1,8 +1,7 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { RenderElementProps, ReactEditor } from "slate-react";
 import { Languages } from "./Languages";
 import { Select, SelectItem } from "../../ui/Select";
-import { ModalPopup } from "../popup/ElementModalPopup";
 import { useFocused } from "../../editor/Focus";
 import { stopEvent } from "../../ui/Utils";
 import { Transforms } from "slate";
@@ -10,21 +9,28 @@ import { useEditorKit } from "../../editor/EditorKit";
 import { Icon } from "../icons/Icon";
 import { usePlugin } from "../../plugins/usePlugin";
 import { IconProvider } from "../icons/IconProviderPlugin";
+import { ElementToolbar } from "../toolbar/ElementToolbar";
+import { FocusPopup } from "../popup/FocusPopup";
 
 export const CodeElement = (props: RenderElementProps) => {
   const { attributes, element, children } = props;
   const lang = Languages[(element.lang as any) || "JavaScript"];
-  const [showSelect, setShowSelect] = useState(false);
+  const [open, setOpen] = useState(false);
   const { isFocused, isFocusedWithin } = useFocused(element);
-  const show = showSelect || isFocused || isFocusedWithin;
-
+  const show = open || isFocused || isFocusedWithin;
   const handleOpen = () => {
-    setTimeout(() => setShowSelect(true), 300);
+    setTimeout(() => setOpen(true), 300);
   };
 
   const handleClose = () => {
-    setShowSelect(false);
+    setOpen(false);
   };
+
+  useEffect(() => {
+    if (!isFocusedWithin) {
+      setTimeout(handleClose, 1);
+    }
+  }, [isFocusedWithin]);
 
   return (
     <Fragment>
@@ -35,14 +41,9 @@ export const CodeElement = (props: RenderElementProps) => {
       >
         <code>{children}</code>
       </pre>
-      <ModalPopup
-        element={element}
-        show={show}
-        onClickOutside={handleClose}
-        location="bottom"
-      >
+      <FocusPopup element={element} show={show} location="bottom" fixed>
         <Toolbar {...props} onFocus={handleOpen} onClose={handleClose} />
-      </ModalPopup>
+      </FocusPopup>
     </Fragment>
   );
 };
@@ -67,6 +68,7 @@ const Toolbar = (props: ToolbarProps) => {
       { ...element, lang: item.text },
       { at: ReactEditor.findPath(editor, element) }
     );
+    onClose();
   };
   const handleDelete = () => {
     Transforms.delete(editor, { at: ReactEditor.findPath(editor, element) });
@@ -74,10 +76,10 @@ const Toolbar = (props: ToolbarProps) => {
   };
 
   return (
-    <div
-      className="rel-block-toolbar rek-code-block-toolbar rek-panel"
+    <ElementToolbar
       onClick={stopEvent}
       onMouseEnter={onFocus}
+      onMouseLeave={onClose}
     >
       <Select
         items={Items}
@@ -88,8 +90,8 @@ const Toolbar = (props: ToolbarProps) => {
         editable
       />
       <div className="rek-v-toolbar-divider" />
-      <Icon icon={icons.delete} onClick={handleDelete} />
-    </div>
+      <Icon icon={icons.delete} className="rek-delete" onClick={handleDelete} />
+    </ElementToolbar>
   );
 };
 

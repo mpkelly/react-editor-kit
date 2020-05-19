@@ -1,5 +1,10 @@
+import { createLayout } from "@mpkelly/react-editor-kit";
+
 export const EditorContent = [
   { type: "paragraph", breakoutTop: true, children: [{ text: "" }] },
+  createLayout([1, 2, 1]),
+  createLayout([2, 1]),
+  createLayout([2, 1]),
   {
     type: "table",
     headerRow: false,

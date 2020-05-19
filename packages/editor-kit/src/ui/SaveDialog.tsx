@@ -30,7 +30,7 @@ export const SaveDialog: FunctionComponent<SaveDialogProps> = (
 
   return (
     <div
-      className={"rek-panel rek-save-dialog " + className}
+      className={"rek-panel rek-save-dialog rek-element-toolbar " + className}
       onClick={stopEvent}
       data-slate-zero-width="z"
     >

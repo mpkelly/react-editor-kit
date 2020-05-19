@@ -31,4 +31,7 @@ export const EnglishLabels: EditorLabels = {
   headerRow: "Header row",
   headerColumn: "Header column",
   borderless: "Borderless",
+
+  //Layout plugin
+  customLayout: "e.g. 2,1 for 66.66% + 33.33%",
 };

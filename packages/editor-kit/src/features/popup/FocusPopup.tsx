@@ -21,16 +21,20 @@ export const FocusPopup = memo((props: FocusPopupProps) => {
   const { element, location, children, offsets, fixed, show } = props;
   const { editor } = useEditorKit();
   const [domElement, setDomElement] = useState<HTMLElement | null>(null);
-  const handleRef = useCallback((ref: HTMLElement) => {
-    setDomElement(ref);
+  const handleRef = useCallback((element: HTMLElement) => {
+    if (element) {
+      setDomElement(element);
+    }
   }, []);
   useEffect(() => {
-    setDomElement(null);
+    if (!element) {
+      setDomElement(null);
+    }
   }, [element]);
   const { isFocusedWithin } = useFocused(element);
   const over = useHover(domElement);
 
-  if (show || (!isFocusedWithin && !over)) {
+  if (!show && !isFocusedWithin && !over) {
     return null;
   }
 
@@ -39,7 +43,6 @@ export const FocusPopup = memo((props: FocusPopupProps) => {
     return null;
   }
   const anchorBounds = htmlElement.getBoundingClientRect();
-
   const style = getPosition(
     domElement ? domElement.getBoundingClientRect() : anchorBounds,
     anchorBounds,

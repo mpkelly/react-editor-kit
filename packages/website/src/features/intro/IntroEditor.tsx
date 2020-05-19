@@ -51,6 +51,7 @@ import {
   createStaticMentions,
   FontsPlugin,
   ColorPlugin,
+  createBreakoutPlugin,
 } from "@mpkelly/react-editor-kit";
 
 export const IntroEditor = () => {
@@ -192,6 +193,13 @@ const IntroEditorPlugin: Plugin = {
       li 
       {
         color:white;      
+        line-height:1.5;
+      }
+
+      code {
+        padding: 2px 4px;
+        background-color:rgba(255,255,255,.1);
+        font-family: monospace;
       }
 
       blockquote {
@@ -222,9 +230,11 @@ const IntroEditorPlugin: Plugin = {
       color:var(--site-primary-color);
     }
 
-    code > pre {
-      font-size:smaller;
+    pre > code {
+      font-size:smaller;     
       padding:16px;
+      padding: 0 !important;
+      background-color:transparent !important;
     }
 
   }
@@ -234,7 +244,6 @@ const IntroEditorPlugin: Plugin = {
 };
 
 const plugins: Plugin[] = [
-  DefaultThemePlugin,
   BoldPlugin,
   ItalicPlugin,
   LinkPlugin,
@@ -243,7 +252,6 @@ const plugins: Plugin[] = [
   OrderedListPlugin,
   UnorderedListPlugin,
   BlockquotePlugin,
-  IconProviderPlugin,
   H1Plugin,
   H2Plugin,
   H3Plugin,
@@ -265,6 +273,7 @@ const plugins: Plugin[] = [
     mentions: MentionsItems,
   }),
   TextAlignPlugin,
+  createBreakoutPlugin(),
 ];
 
 const initialValue: Node[] = [
@@ -285,7 +294,8 @@ const initialValue: Node[] = [
         type: "list-item",
         children: [
           { text: "Install the NPM Package:\n\n" },
-          { text: "npm i @mpkelly/react-editor-kit\n", "inline-code": true },
+          { text: "npm i @mpkelly/react-editor-kit", "inline-code": true },
+          { text: "\n" },
         ],
       },
       {

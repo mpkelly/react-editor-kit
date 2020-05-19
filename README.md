@@ -4,7 +4,7 @@ A suite of plugins for composing react-based text editors. Editor Kit is built u
 
 [LIVE EXAMPLES](https://codesandbox.io/s/react-editor-kit-examples-0e31g?file=/src/SimpleEditor.tsx)
 
-**NOTE**
+**PLEASE NOTE**
 
 1. The project is currently in beta and you might experience some issues but the editor and most plugins are already usable
 2. Micro-releases are being pushed to NPM frequently - please update often

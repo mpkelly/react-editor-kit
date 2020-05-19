@@ -6,9 +6,11 @@ import { useEditorKit } from "../../editor/EditorKit";
 export interface ReadOnlyButtonProps extends IconButtonProps {
   readOnlyClassName: string;
   readOnlyLigature: string;
+  onMouseDown?(event: React.MouseEvent): void;
 }
 
 export const ReadOnlyButton = (props: ReadOnlyButtonProps) => {
+  const { onMouseDown } = props;
   const { readOnly } = useEditorKit();
   let className = props.className;
   let ligature = props.ligature;
@@ -17,11 +19,11 @@ export const ReadOnlyButton = (props: ReadOnlyButtonProps) => {
     ligature = props.readOnlyLigature || ligature;
   }
   return (
-    <ReadOnlyAction>
+    <ReadOnlyAction onMouseDown={onMouseDown}>
       <IconButton
         className={className}
         ligature={ligature}
-        data-block-button={"read-only"}
+        data-button={"read-only"}
       />
     </ReadOnlyAction>
   );

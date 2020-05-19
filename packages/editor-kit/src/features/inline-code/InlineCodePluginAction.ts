@@ -5,5 +5,5 @@ export const InlineCodePluginAction: PluginAction = {
   action: (state) => {
     toggleMark(state.editor, "inline-code");
   },
-  isActionActive: (state) => isMarkActive(state.editor, "bold"),
+  isActionActive: (state) => isMarkActive(state.editor, "inline-code"),
 };
