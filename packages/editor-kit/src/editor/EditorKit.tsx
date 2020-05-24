@@ -258,11 +258,12 @@ const generateStyle = (plugins: Plugin[], id: string) => {
     }`;
   }
   const globalStyle = globalStyles.join("\n");
-  const css = Stylis.serialize(
-    Stylis.compile(`${globalStyle} ${editorStyle}`),
-    Stylis.stringify
-  );
-  attachEditorStyle(css, id);
+
+  attachEditorStyle(generateCss(`${globalStyle} ${editorStyle}`), id);
+};
+
+export const generateCss = (css: string) => {
+  return Stylis.serialize(Stylis.compile(css), Stylis.stringify);
 };
 
 const attachEditorStyle = (css: string, id: string) => {
