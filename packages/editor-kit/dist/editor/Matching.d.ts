@@ -6,4 +6,4 @@ export interface MatchResult {
     range: Range;
     regexMatch?: RegExpMatchArray;
 }
-export declare const findMatches: (expression: string | RegExp, editor: ReactEditor, range?: EditorRange) => MatchResult[];
+export declare const findMatches: (expression: MatchExpression, editor: ReactEditor, range?: EditorRange) => MatchResult[];

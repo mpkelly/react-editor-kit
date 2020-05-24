@@ -23,9 +23,9 @@ export declare const useSelect: (props: SelectProps, editor: HTMLElement) => {
     show: boolean;
     value: React.Key;
     activeIndex: number;
-    handleRef: (ref: HTMLInputElement) => void;
+    handleRef: (ref: HTMLInputElement | null) => void;
     handleValueChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    handleFocus: (event: React.MouseEvent<Element, MouseEvent>) => void;
+    handleFocus: (event: React.MouseEvent) => void;
     items: ListItem[];
     hideChoices: () => void;
     element: HTMLElement;

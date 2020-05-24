@@ -1,1 +1,1 @@
-export declare const useHover: (element: HTMLElement) => boolean;
+export declare const useHover: (element: HTMLElement | null) => boolean;

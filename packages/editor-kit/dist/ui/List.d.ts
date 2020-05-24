@@ -11,5 +11,5 @@ export interface ListItem {
     style?: CSSProperties;
     disabled?: boolean;
 }
-export declare const ensureInView: (element: HTMLElement) => void;
+export declare const ensureInView: (element: HTMLElement | null) => void;
 export declare const List: (props: ListProps) => JSX.Element;

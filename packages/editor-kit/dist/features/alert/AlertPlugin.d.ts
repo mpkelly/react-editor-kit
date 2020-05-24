@@ -1,4 +1,5 @@
 import { Plugin } from "../../plugins/Plugin";
 import { PluginAction } from "../../plugins/PluginAction";
+import { Icons } from "../icons/Icons";
 export declare const AlertActions: PluginAction[];
-export declare const createAlertPlugin: (icon: "link" | "error" | "date" | "delete" | "unlink" | "openLink" | "warning" | "info" | "settings" | "dropdown" | "more" | "moreVert" | "check" | "plus", name: string, iconColor: string, backgroundColor: string, trigger: string) => Plugin;
+export declare const createAlertPlugin: (icon: keyof Icons, name: string, iconColor: string, backgroundColor: string, trigger: string) => Plugin;

@@ -175,12 +175,12 @@ export declare const createPlugin: (plugin: Plugin, ...triggers: Trigger[]) => {
      * having to create unnecessary wrapper Elements just to change things like
      * text-align of existing Elements.
      */
-    styleElement?: (props: RenderElementProps) => CSSProperties;
+    styleElement?: (props: RenderElementProps) => CSSProperties | undefined;
     /**
      * Contribute classes to an Element without having to render it.
      * Similar to `styleElement` above.
      */
-    getClasses?: (element: Element) => string;
+    getClasses?: (element: Element) => string | undefined;
     /**
      * Render an Element into the Editor. You can output any JSX content you like
      * here according to the `props.element.type`
@@ -189,7 +189,7 @@ export declare const createPlugin: (plugin: Plugin, ...triggers: Trigger[]) => {
      * you spread `props.attributes` on your root element and pass
      * the `props.children` prop to your lowest JSX element.
      */
-    renderElement?: (props: RenderElementProps) => JSX.Element;
+    renderElement?: (props: RenderElementProps) => JSX.Element | undefined;
     /**
      * Render an Leaf into the Editor. You can output any JSX content you like
      * here according to the `props.leaf.type`. This Leaf content will become the
@@ -199,7 +199,7 @@ export declare const createPlugin: (plugin: Plugin, ...triggers: Trigger[]) => {
      * you spread `props.attributes` on your root element and pass
      * the `props.children` prop to your lowest JSX element.
      */
-    renderLeaf?: (props: RenderLeafProps, state: EditorState) => JSX.Element;
+    renderLeaf?: (props: RenderLeafProps, state: EditorState) => JSX.Element | undefined;
     /**
      *
      */
@@ -213,11 +213,11 @@ export declare const createPlugin: (plugin: Plugin, ...triggers: Trigger[]) => {
      * Respond to key down events on the Editor element. Use onKey if you are interested in a certain
      * key or key combo.
      */
-    onKeyDown?(event: import("react").KeyboardEvent<globalThis.Element>, state: EditorState): boolean;
+    onKeyDown?(event: React.KeyboardEvent, state: EditorState): boolean | undefined;
     /**
      * Respond to click events that happen on the Editor element.
      */
-    onClick?(event: import("react").MouseEvent<HTMLElement, MouseEvent>, state: EditorState): void;
+    onClick?(event: React.MouseEvent<HTMLElement>, state: EditorState): void;
     /**
      * Allows contributing to the context menu and overriding the browser's default.
      * See ContextMenuContribution for more info.
