@@ -11,10 +11,13 @@ import { usePlugin } from "../../plugins/usePlugin";
 import { IconProvider } from "../icons/IconProviderPlugin";
 import { ElementToolbar } from "../toolbar/ElementToolbar";
 import { FocusPopup } from "../popup/FocusPopup";
+import { Code } from "./CodePlugin";
+import { Show } from "../../ui/Show";
 
 export const CodeElement = (props: RenderElementProps) => {
   const { attributes, element, children } = props;
   const lang = Languages[(element.lang as any) || "JavaScript"];
+  const { hideToolbar } = usePlugin<Code>("code");
   const [open, setOpen] = useState(false);
   const { isFocused, isFocusedWithin } = useFocused(element);
   const show = open || isFocused || isFocusedWithin;
@@ -41,9 +44,11 @@ export const CodeElement = (props: RenderElementProps) => {
       >
         <code>{children}</code>
       </pre>
-      <FocusPopup element={element} show={show} location="bottom" fixed>
-        <Toolbar {...props} onFocus={handleOpen} onClose={handleClose} />
-      </FocusPopup>
+      <Show when={!hideToolbar}>
+        <FocusPopup element={element} show={show} location="bottom" fixed>
+          <Toolbar {...props} onFocus={handleOpen} onClose={handleClose} />
+        </FocusPopup>
+      </Show>
     </Fragment>
   );
 };
