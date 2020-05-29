@@ -3,11 +3,12 @@ import { Plugin } from "../../plugins/Plugin";
 import { ReactEditor, RenderElementProps } from "slate-react";
 import isUrl from "is-url";
 import { ImageElement } from "./ImageElement";
-import { Transforms } from "slate";
+import { Transforms, Location } from "slate";
 import { ImageExtensions } from "./ImageExtensions";
 import { ImageEditorStyles } from "./ImageEditorStyles";
 import { registerVoid } from "../void/VoidElement";
 import { InsertImagePluginAction } from "./InsertImagePluginAction";
+import { imageDropHandler } from "./ImageDropHandler";
 
 export const ImagePlugin: Plugin = {
   name: "image",
@@ -41,6 +42,9 @@ export const ImagePlugin: Plugin = {
     };
     return editor;
   },
+  onDrop: (event, state) => {
+    return imageDropHandler(event, state);
+  },
   actions: [InsertImagePluginAction],
   renderElement: (props: RenderElementProps) => {
     const { element } = props;
@@ -58,7 +62,11 @@ export const isImageUrl = (url: string, extensions = ImageExtensions) => {
   return extensions.includes(ext);
 };
 //TODO This should be removed and the above code should use the PluginAction
-const insertImage = (editor: ReactEditor, url: string) => {
+export const insertImage = (
+  editor: ReactEditor,
+  url: string,
+  location: Location | undefined = undefined
+) => {
   const image = { type: "image", url, children: [{ text: "" }] };
-  Transforms.insertNodes(editor, image);
+  Transforms.insertNodes(editor, image, { at: location });
 };

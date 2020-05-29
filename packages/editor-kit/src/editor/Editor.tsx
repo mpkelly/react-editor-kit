@@ -124,6 +124,13 @@ export const Editor = memo((props: EditorProps) => {
     [plugins]
   );
 
+  const drop = useCallback(
+    (event: React.DragEvent) => {
+      handleDrop(event, plugins, createState());
+    },
+    [plugins]
+  );
+
   const handleCloseMenu = useCallback(() => {
     if (menu.items.length) {
       setMenu({ items: [], x: 0, y: 0 });
@@ -144,6 +151,7 @@ export const Editor = memo((props: EditorProps) => {
           style={style}
           spellCheck={spellCheck}
           readOnly={readOnly}
+          onDrop={drop}
           id={`${id}`}
           {...rest}
         />
@@ -342,6 +350,18 @@ const handleClick = (
   plugins.forEach((plugin) => {
     if (plugin.onClick) {
       plugin.onClick(event, state);
+    }
+  });
+};
+
+const handleDrop = (
+  event: React.DragEvent,
+  plugins: Plugin[],
+  state: EditorState
+) => {
+  plugins.forEach((plugin) => {
+    if (plugin.onDrop && plugin.onDrop(event, state)) {
+      return;
     }
   });
 };

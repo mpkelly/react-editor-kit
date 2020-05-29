@@ -132,6 +132,11 @@ export interface Plugin {
   onContextMenu?: ContextMenuContribution[];
 
   /**
+   * Respond to drop events that happen on the Editor element.
+   */
+  onDrop?(event: React.DragEvent, state: EditorState): boolean;
+
+  /**
    * Styles that should be applied to the Editor instance. EditorKit uses the npm
    * package stylis and supports nested selectors like:
    *
