@@ -67,6 +67,7 @@ export * from "./features/todo-list/TodoListEditorStyle";
 export * from "./features/todo-list/TodoListGlobalStyle";
 export * from "./features/todo-list/TodoListPlugin";
 export * from "./features/todo-list/TodoListAction";
+export * from "./features/todo-list/TodoListButton";
 export * from "./features/todo-list/TodoListDateTrigger";
 export * from "./features/subscript/SubscriptMenuItem";
 export * from "./features/subscript/SubscriptButton";

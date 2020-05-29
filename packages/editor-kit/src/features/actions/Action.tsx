@@ -26,6 +26,12 @@ export interface ActionProps {
   onMouseDown?(event: ReactMouseEvent<HTMLElement, MouseEvent>): void;
   active?: boolean;
   disabled?: boolean;
+
+  /**
+   * Reselct the Editor at the previous selection. Useful for Actions
+   * that lead to a loss of focus.
+   */
+  restoreSelection?: boolean;
 }
 
 /**
@@ -48,9 +54,10 @@ export const Action = (props: ActionProps) => {
     onMouseDown,
     active,
     disabled,
+    restoreSelection,
   } = props;
   const { editor, executeAction, isActionActive } = useEditorKit();
-  const { element: lastElement, point } = useLastFocused(editor);
+  const { element: lastElement, selection } = useLastFocused(editor);
   const enabled = editor.isContentAllowed(plugin, lastElement);
   let buttonProps: ActionChildProps | null = null;
 
@@ -58,8 +65,8 @@ export const Action = (props: ActionProps) => {
     buttonProps = {
       onMouseDown: (event: ReactMouseEvent<HTMLElement, MouseEvent>) => {
         event.preventDefault();
-        if (point) {
-          Transforms.select(editor, point);
+        if (restoreSelection && selection) {
+          Transforms.select(editor, selection);
         }
         if (enabled) {
           executeAction(plugin, args, action);

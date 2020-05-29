@@ -17,6 +17,11 @@ export interface ActionProps {
     onMouseDown?(event: ReactMouseEvent<HTMLElement, MouseEvent>): void;
     active?: boolean;
     disabled?: boolean;
+    /**
+     * Reselct the Editor at the previous selection. Useful for Actions
+     * that lead to a loss of focus.
+     */
+    restoreSelection?: boolean;
 }
 /**
  * The child is cloned and passed these props. TypeScript users

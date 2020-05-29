@@ -130,15 +130,6 @@ export const Editor = memo((props: EditorProps) => {
     }
   }, [menu]);
 
-  const paste = useCallback((event) => {
-    const clipboardData = event.clipboardData;
-    const pastedData = clipboardData.getData("Text");
-    if (!pastedData) {
-      return;
-    }
-    editor.insertText(pastedData);
-  }, []);
-
   return (
     <Slate editor={editor} value={ensureValue(value)} onChange={onChange}>
       <Fragment>
@@ -146,7 +137,6 @@ export const Editor = memo((props: EditorProps) => {
           renderElement={renderElement}
           renderLeaf={renderLeaf}
           decorate={decorate}
-          onPaste={paste}
           onKeyDown={keyDown}
           onKeyUp={keyUp}
           onClick={click}

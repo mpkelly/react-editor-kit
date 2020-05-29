@@ -472,7 +472,7 @@ input[type=number] {
   .rek-element-toolbar {
     display: flex;
     align-items:center;
-    padding:4px 8px;
+    padding:8px;
     border-radius:4px;
     background-color: var(--content-background);
     color:var(--secondary-text-color);

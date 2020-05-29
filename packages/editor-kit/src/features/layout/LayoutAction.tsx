@@ -1,5 +1,5 @@
 import React from "react";
-import { Action, ActionProps } from "../actions/Action";
+import { Action } from "../actions/Action";
 
 export interface LayoutActionProps {
   children: React.ReactNode;
@@ -8,5 +8,7 @@ export interface LayoutActionProps {
 
 export const LayoutAction = (props: LayoutActionProps) => {
   const { layout, ...rest } = props;
-  return <Action args={{ layout }} plugin="layout" {...rest} />;
+  return (
+    <Action args={{ layout }} plugin="layout" {...rest} restoreSelection />
+  );
 };

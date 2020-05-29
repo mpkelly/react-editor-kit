@@ -8,7 +8,6 @@ export const LayoutPluginAction: PluginAction = {
     if (args && args.layout) {
       layout = args.layout;
     }
-    console.log("Here", layout);
     Transforms.insertNodes(editor, createLayout(layout));
   },
   isActionActive: ({ elementType }) => elementType === "layout-cell",

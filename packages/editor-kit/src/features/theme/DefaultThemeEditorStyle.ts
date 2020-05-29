@@ -27,11 +27,6 @@ export const DefaultThemeEditorStyle = `
     border: 2px solid rgba(0,0,0,0);  
   }
   
-  .rek-element-toolbar {
-    display:flex;
-    align-items:center;
-  }
-
   .rek-element-wrapper:not(.inline) .rek-element-wrapper-content {
     width:100%;
   }
