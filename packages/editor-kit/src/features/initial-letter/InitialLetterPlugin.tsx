@@ -20,6 +20,7 @@ export const InitialLetterDefaultOptions: InitialLetterPluginOptions = {
   style: `
     .rek-initial-letter *{
         line-height:0 !important;
+        margin-right:4px;
       }
     }
   `,
