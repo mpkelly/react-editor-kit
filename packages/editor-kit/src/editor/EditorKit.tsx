@@ -26,6 +26,7 @@ import { PluginActionArgs, PluginAction } from "../plugins/PluginAction";
 import { useLastFocused } from "./LastFocusedNode";
 import { createEditorState } from "./EditorState";
 import { ConstraintsPlugin } from "../features/constraints/ConstraintsPlugin";
+import { HistoryPlugin } from "../features/history/HistoryPlugin";
 
 //Typings do not seem to match exported object :/
 const Stylis: any = StylisDefault;
@@ -41,6 +42,7 @@ const InternalPlugins: Plugin[] = [
   BackspaceKeyPlugin,
   EnterKeyPlugin,
   ConstraintsPlugin,
+  HistoryPlugin,
 ];
 
 export interface EditorKitValue {
