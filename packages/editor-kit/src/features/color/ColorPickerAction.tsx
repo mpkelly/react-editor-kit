@@ -1,16 +1,18 @@
 import React, { Fragment, useState, useRef, FunctionComponent } from "react";
+import { Editor, Range, Transforms } from "slate";
 import { Action } from "../actions/Action";
 import { ColorPicker, getCssColor } from "./ColorPicker";
 import { useEditorKit } from "../../editor/EditorKit";
 import { marks } from "../marks/Marks";
-import { blockEvent } from "../../ui/Utils";
 import { HtmlElementModalPopup } from "../popup/HtmlElementModalPopup";
 import { DefaultColors } from "./ColorPickerButton";
 import { useLastFocused } from "../../editor/LastFocusedNode";
+import { ReactEditor } from "slate-react";
 
 export interface ColorPickerActionProps {
   children: React.ReactNode;
   colors?: Color[][];
+  backgroundElements?: string[];
 }
 
 export type HexColor = string;
@@ -21,7 +23,7 @@ export type Color = HexColor | HslaColor | RgbaColor | "transparent";
 export const ColorPickerAction: FunctionComponent<ColorPickerActionProps> = (
   props: ColorPickerActionProps
 ) => {
-  const { children, colors } = props;
+  const { children, colors, backgroundElements } = props;
   const { editor } = useEditorKit();
   const { element: lastElement } = useLastFocused(editor);
 
@@ -45,7 +47,24 @@ export const ColorPickerAction: FunctionComponent<ColorPickerActionProps> = (
   };
 
   const handleBackgroundColorChange = (color: Color) => {
-    editor.addMark("backgroundColor", getCssColor(color));
+    const { selection } = editor;
+    if (selection && Range.isExpanded(selection)) {
+      editor.addMark("backgroundColor", getCssColor(color));
+    } else {
+      const [nodes] = Editor.nodes(editor, {
+        match: (node) => Boolean(backgroundElements?.includes(node.type)),
+        mode: "lowest",
+      });
+      console.log(nodes);
+      if (nodes) {
+        Transforms.setNodes(
+          editor,
+          { backgroundColor: getCssColor(color) },
+          { at: ReactEditor.findPath(editor, nodes[0]) }
+        );
+      }
+    }
+
     setShow(false);
   };
 
@@ -93,4 +112,5 @@ export const ColorPickerAction: FunctionComponent<ColorPickerActionProps> = (
 
 ColorPickerAction.defaultProps = {
   colors: DefaultColors,
+  backgroundElements: ["table-cell", "layout-cell"],
 };

@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react";
 export interface ColorPickerActionProps {
     children: React.ReactNode;
     colors?: Color[][];
+    backgroundElements?: string[];
 }
 export declare type HexColor = string;
 export declare type HslaColor = {

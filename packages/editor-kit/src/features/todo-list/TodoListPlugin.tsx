@@ -9,6 +9,7 @@ import { TodoListEnterKeyHandler } from "./TodoListEnterKeyHandler";
 import { TodoListMarkdownTrigger } from "./TodoListMarkdownTrigger";
 import { TodoListAction } from "./TodoListAction";
 import { TodoListDateTrigger } from "./TodoListDateTrigger";
+import { TodoListNamedTrigger } from "./TodoListNamedTrigger";
 
 export const createTodoListPlugin = (
   placeholder = "Supports @mentions and dates e.g. {36hours} or {2days} ",
@@ -18,7 +19,11 @@ export const createTodoListPlugin = (
     name: "todo-list",
     placeholder,
     dateFormatter,
-    triggers: [TodoListMarkdownTrigger, TodoListDateTrigger],
+    triggers: [
+      TodoListMarkdownTrigger,
+      TodoListNamedTrigger,
+      TodoListDateTrigger,
+    ],
     actions: [TodoListAction],
     onKey: [TodoListEnterKeyHandler],
     renderElement: (props: RenderElementProps) => {

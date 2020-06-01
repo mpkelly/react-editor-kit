@@ -4,7 +4,6 @@ import { TableCellControls } from "./TableCellControls";
 
 export const TableCellElement = (props: RenderElementProps) => {
   const { attributes, children, element, ...rest } = props;
-
   return (
     <td {...attributes} {...rest} className="rek-td">
       <TableCellControls {...props} />

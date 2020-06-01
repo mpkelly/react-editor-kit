@@ -59,6 +59,7 @@ export * from "./features/spoiler/SpoilerPluginAction";
 export * from "./features/spoiler/SpoilerButton";
 export * from "./features/spoiler/SpoilerEditorStyle";
 export * from "./features/spoiler/SpoilerNamedTrigger";
+export * from "./features/todo-list/TodoListNamedTrigger";
 export * from "./features/todo-list/TodoListMarkdownTrigger";
 export * from "./features/todo-list/TodoListElement";
 export * from "./features/todo-list/TodoListEnterKeyHandler";
