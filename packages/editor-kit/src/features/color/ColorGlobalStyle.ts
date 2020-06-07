@@ -30,6 +30,14 @@ export const ColorGlobalStyle = `
   border: 1px solid transparent;
 }
 
+.rek-color-picker-nocolor {
+  margin:3px;
+  height:18px;
+  width:18px;
+  cursor:pointer;
+  border: 1px solid rgba(255,255,255,.2);
+}
+
 .rek-selected-color {
   border:1px solid var(--focus-color);
 }

@@ -8,7 +8,6 @@ export const ColorPlugin: Plugin = {
   styleElement: (props: RenderElementProps) => {
     const { backgroundColor } = props.element;
     if (backgroundColor) {
-      console.log("F", backgroundColor, props.element);
       return { backgroundColor };
     }
     return undefined;

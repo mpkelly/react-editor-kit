@@ -46,7 +46,6 @@ export const TableEditorStyle = `
     align-items:center;    
     cursor:pointer;
     * {
-      display:none;
       font-size:16px;
       width:18px;
       height:18px;
@@ -54,9 +53,6 @@ export const TableEditorStyle = `
     }
     &:hover {
       background-color: var(--focus-color);
-      * {
-        display:initial;
-      }
     }    
   }
   .rek-table-bottom {
@@ -71,7 +67,6 @@ export const TableEditorStyle = `
     align-items:center;    
     cursor:pointer;
     * {
-      display:none;
       font-size:16px;
       width:18px;
       height:18px;
@@ -79,9 +74,6 @@ export const TableEditorStyle = `
     }
     &:hover {
       background-color: var(--focus-color);
-      * {
-        display:initial;
-      }
     }    
   }
 

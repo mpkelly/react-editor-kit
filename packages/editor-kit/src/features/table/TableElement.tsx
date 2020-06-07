@@ -52,8 +52,6 @@ export const TableElement = (props: RenderElementProps) => {
     focusedClass = "rek-table-focused";
   }
 
-  console.log("T focused", isFocusedWithin);
-
   return (
     <DeletableElement {...props}>
       <div className={`rek-table-wrapper ${focusedClass}`}>
@@ -61,25 +59,21 @@ export const TableElement = (props: RenderElementProps) => {
           <table tabIndex={1} className={classes.join(" ")} id={element.id}>
             <tbody {...attributes}>{children}</tbody>
           </table>
-          <Show when={isFocusedWithin}>
-            <div
-              contentEditable={false}
-              className="rek-table-right"
-              onMouseDown={(event) => blockEvent(event) && handleAddColumn()}
-            >
-              <Icon icon={icons.plus} />
-            </div>
-          </Show>
-        </div>
-        <Show when={isFocusedWithin}>
           <div
             contentEditable={false}
-            className="rek-table-bottom"
-            onMouseDown={(event) => blockEvent(event) && handleAddRow()}
+            className="rek-table-right"
+            onMouseDown={(event) => blockEvent(event) && handleAddColumn()}
           >
             <Icon icon={icons.plus} />
           </div>
-        </Show>
+        </div>
+        <div
+          contentEditable={false}
+          className="rek-table-bottom"
+          onMouseDown={(event) => blockEvent(event) && handleAddRow()}
+        >
+          <Icon icon={icons.plus} />
+        </div>
       </div>
     </DeletableElement>
   );

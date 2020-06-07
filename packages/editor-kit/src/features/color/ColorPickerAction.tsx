@@ -55,7 +55,6 @@ export const ColorPickerAction: FunctionComponent<ColorPickerActionProps> = (
         match: (node) => Boolean(backgroundElements?.includes(node.type)),
         mode: "lowest",
       });
-      console.log(nodes);
       if (nodes) {
         Transforms.setNodes(
           editor,
