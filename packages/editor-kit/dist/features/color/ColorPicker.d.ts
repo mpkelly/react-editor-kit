@@ -3,14 +3,14 @@ import { Color } from "./ColorPickerAction";
 export interface ColorPickerProps {
     color: Color;
     backgroundColor: Color;
-    onColorChange(color: Color): void;
-    onBackgroundColorChange(color: Color): void;
+    onColorChange(color: Color | null): void;
+    onBackgroundColorChange(color: Color | null): void;
     colors?: Color[][];
 }
 export declare const ColorPicker: (props: ColorPickerProps) => JSX.Element;
 export interface ColorPanelProps {
     color: any;
-    onChange(color: Color): void;
+    onChange(color: Color | null): void;
     colors: Color[][];
     title: string;
 }

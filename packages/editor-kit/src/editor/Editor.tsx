@@ -596,3 +596,16 @@ export const getAncestor = (editor: ReactEditor, node: Node, level = 1) => {
   }
   return parent;
 };
+
+export const findAllNodes = (nodes: Node[], type: string): Node[] => {
+  let result: Node[] = [];
+  nodes.forEach((node) => {
+    if (node.type === type) {
+      result.push(node);
+    }
+    if (node.children) {
+      result = result.concat(findAllNodes(node.children, type));
+    }
+  });
+  return result;
+};

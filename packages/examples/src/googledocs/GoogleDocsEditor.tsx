@@ -78,6 +78,7 @@ import {
   ClearFormattingAction,
   createTodoListPlugin,
   LayoutPlugin,
+  createPageDividerPlugin,
 } from "@mpkelly/react-editor-kit";
 import { MentionsItems } from "../Mentions";
 import { createStaticHashtags } from "./HashtagSuggestionPlugin";
@@ -147,6 +148,7 @@ const plugins: Plugin[] = [
   createClearFormattingPlugin(),
   createTodoListPlugin(),
   LayoutPlugin,
+  createPageDividerPlugin(640000),
   //TODO fix empticons so they work with other :.. triggers
   //createEmoticonSuggestions(),
 

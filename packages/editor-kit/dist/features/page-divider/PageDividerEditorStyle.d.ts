@@ -1,0 +1,1 @@
+export declare const PageDividerEditorStyle = "\n  .rek-page-divider {\n    position: absolute;\n    height: 1px;\n    left: 0;\n    right: 0;\n    margin: 0 auto;\n    border-top: 1px dotted var(--divider-color);\n  }\n";

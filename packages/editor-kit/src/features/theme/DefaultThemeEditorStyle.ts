@@ -4,6 +4,7 @@ export const DefaultThemeEditorStyle = `
   font-family: var(--editor-ui-font);
   color: var(--primary-text-color);
   box-sizing: border-box;
+  position:relative;
 
   p
   h1,
