@@ -18,7 +18,6 @@ import { Icon, EditorIcon } from "../icons/Icon";
 import { blockEvent } from "../../ui/Utils";
 import { Offsets } from "../popup/Popups";
 
-//TODO tidy this up!
 export const TableCellControls = (props: RenderElementProps) => {
   const { element } = props;
   const { icons } = usePlugin<IconProvider>("icon-provider");
@@ -71,6 +70,7 @@ export const TableCellControls = (props: RenderElementProps) => {
   const isFirstCell = isFirstRow && isFirstColumn;
 
   const { isFocusedWithin } = useFocused(table as Element);
+
   if (!isFocusedWithin) {
     return null;
   }

@@ -108,7 +108,7 @@ export const renderTable = (props: RenderElementProps) => {
       return <TableElement {...props} />;
     case "table-row":
       return (
-        <tr {...attributes} className="rek-tr">
+        <tr {...attributes} className="rek-tr" id={element.id}>
           {children}
         </tr>
       );

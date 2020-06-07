@@ -4,7 +4,7 @@ export const CodeEditorStyle = `
     padding:8px;     
     white-space:pre-wrap;
     line-height:1.3;
-    tab-size: 4;
+    tab-size: 2;
   }  
 
  .rek-code-block.sql,

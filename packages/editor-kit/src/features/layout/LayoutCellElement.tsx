@@ -10,6 +10,7 @@ export const LayoutCellElement = (props: RenderElementProps) => {
       {...attributes}
       className="rek-layout-cell"
       style={{ width: `${element.width}%`, ...otherStyle }}
+      id={element.id}
     >
       {children}
     </div>
