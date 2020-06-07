@@ -69,12 +69,6 @@ export const TableCellControls = (props: RenderElementProps) => {
   const isFirstColumn = row?.children.indexOf(element) == 0;
   const isFirstCell = isFirstRow && isFirstColumn;
 
-  const { isFocusedWithin } = useFocused(table as Element);
-
-  if (!isFocusedWithin) {
-    return null;
-  }
-
   return (
     <Fragment>
       <Show when={isFirstCell}>

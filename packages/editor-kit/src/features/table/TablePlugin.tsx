@@ -7,7 +7,7 @@ import { TableElement } from "./TableElement";
 import { TabledNamedTrigger } from "./TableNamedTrigger";
 import { TableGlobalStyle } from "./TableGlobalStyle";
 import { TableEditorStyle } from "./TableEditorStyle";
-import { TableEnterKeyHandler } from "./TableEnterKeyHandle";
+import { TableEnterKeyHandler } from "./TableEnterKeyHandler";
 import { TableKeyDownHandler } from "./TableKeyDownHandler";
 import { TablePluginAction } from "./TablePluginAction";
 

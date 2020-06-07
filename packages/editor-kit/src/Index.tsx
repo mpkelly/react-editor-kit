@@ -202,7 +202,7 @@ export * from "./features/table/Tables";
 export * from "./features/table/TableButton";
 export * from "./features/table/TableNamedTrigger";
 export * from "./features/table/TableAction";
-export * from "./features/table/TableEnterKeyHandle";
+export * from "./features/table/TableEnterKeyHandler";
 export * from "./features/table/TablePluginAction";
 export * from "./features/table/TableCellElement";
 export * from "./features/table/TablePlugin";
