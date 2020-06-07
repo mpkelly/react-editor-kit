@@ -6,7 +6,21 @@ export const TableEditorStyle = `
     justify-content:center;
     flex-grow:1;
     flex-direction:column;
-    padding-right:0;          
+    padding-right:0;              
+  }
+
+  .rek-table-wrapper:not(.rek-table-focused) {
+    .rek-table-right,
+    .rek-table-bottom,
+    .rek-table-column-button,
+    .rek-table-row-button,
+    .rek-table-column-insert,
+    .rek-table-row-insert,
+    .rek-table-row-insert-divider,
+    .rek-table-button
+    {
+      display:none;
+    }
   }
 
   .rek-table-wrapper.rek-table-focused {
