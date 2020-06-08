@@ -56,7 +56,6 @@ export const Resizable = (props: ResizableProps) => {
         const delta = event.clientX - state.down;
         if (delta !== 0 && element) {
           const current = element?.getBoundingClientRect().width as number;
-          console.log(current, delta, multiplier.current);
           const width = current + delta * multiplier.current;
           onChange && onChange(width);
           setState({ width, down: event.clientX });
