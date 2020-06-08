@@ -193,7 +193,7 @@ const handleRenderElement = (props: RenderElementProps, plugins: Plugin[]) => {
   }
   element = element || <p {...props.attributes}>{[props.children]}</p>;
 
-  if (Object.keys(style).length || classes) {
+  if (Object.keys(style).length || classes || props.element.id) {
     return React.cloneElement(element, {
       style,
       className: classes,

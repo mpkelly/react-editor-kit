@@ -29,3 +29,4 @@ export declare const deleteBackward: (editor: ReactEditor, length: number, unit?
 export declare const addMarkAtRange: (editor: ReactEditor, range: Range, type: string, value: any) => void;
 export declare const getSelectionRootNodes: (selection: Range, editor: ReactEditor) => Node[];
 export declare const getAncestor: (editor: ReactEditor, node: Node, level?: number) => import("slate").Element | import("slate").Text;
+export declare const findAllNodes: (nodes: Node[], type: string) => Node[];

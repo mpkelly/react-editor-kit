@@ -41,7 +41,6 @@ export const createInitialLetterPlugin = (
     name: "initial-letter",
     ...options,
     actions: [InitialLetterPluginAction],
-    onContextMenu: createInitialLetterContextMenu(options),
     renderLeaf: (props: RenderLeafProps) => {
       const { leaf, children, attributes } = props;
       if (leaf["initial-letter"]) {

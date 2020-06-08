@@ -114,6 +114,7 @@ export * from "./features/alert/AlertPlugin";
 export * from "./features/initial-letter/InitialLetterPlugin";
 export * from "./features/initial-letter/InitialLetterContextMenu";
 export * from "./features/initial-letter/InitialLetterAction";
+export * from "./features/initial-letter/InitialLetterButton";
 export * from "./features/initial-letter/InitialLetterMenuItem";
 export * from "./features/initial-letter/InitialLetterPluginAction";
 export * from "./features/color/ColorPlugin";
