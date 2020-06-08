@@ -56,6 +56,7 @@ export const Resizable = (props: ResizableProps) => {
         const delta = event.clientX - state.down;
         if (delta !== 0 && element) {
           const current = element?.getBoundingClientRect().width as number;
+          console.log(current, delta, multiplier.current);
           const width = current + delta * multiplier.current;
           onChange && onChange(width);
           setState({ width, down: event.clientX });
@@ -67,7 +68,7 @@ export const Resizable = (props: ResizableProps) => {
 
   const handleDown = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const element = event.target as HTMLElement;
-    if (element.classList.contains("rek-resize-handle-start")) {
+    if (element.parentElement?.classList.contains("rek-resize-track-start")) {
       multiplier.current = -1;
     } else {
       multiplier.current = 1;
