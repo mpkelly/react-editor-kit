@@ -6,7 +6,7 @@ export const PageDividerEditorStyle = `
     left: 0;
     right: 0;
     margin: 0 auto;
-    border-top: 1px solid var(--divider-color);
+    border-top: 1px dotted var(--divider-color);
   }
   @media print {
     .rek-page-divider {

@@ -26,6 +26,11 @@ export const CodeEnterKeyHandler: KeyHandler = {
 
 const jsEnterHandler = (editor: ReactEditor) => {
   const range = lineBefore(editor);
+  if (!range) {
+    //At start of block
+    editor.insertText("\n");
+    return;
+  }
   const line = Editor.string(editor, range as Range);
   let tabCount = countTabsAtStart(line);
   editor.insertText("\n");
