@@ -154,7 +154,6 @@ export * from "./features/italic/ItalicPlugin";
 export * from "./features/italic/ItalicPluginAction";
 export * from "./features/italic/ItalicButton";
 export * from "./features/spellcheck/SpellCheckButton";
-export * from "./features/spellcheck/SpellCheckAction";
 export * from "./features/spellcheck/SpellCheck";
 export * from "./features/mentions/MentionElement";
 export * from "./features/mentions/Mention";

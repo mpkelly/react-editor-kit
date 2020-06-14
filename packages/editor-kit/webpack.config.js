@@ -47,6 +47,7 @@ var config = {
       cleanOnceBeforeBuildPatterns: ["**/bundle*.*js"],
     }),
     new HardSourceWebpackPlugin(),
+    //new BundleAnalyzerPlugin(),
   ],
   externals: {
     "react-dom": {

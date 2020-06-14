@@ -17,7 +17,6 @@ export const CodeEnterKeyHandler: KeyHandler = {
         default:
           editor.insertText("\n");
       }
-
       return true;
     }
     return false;
