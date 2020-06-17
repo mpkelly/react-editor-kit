@@ -31,7 +31,6 @@ import { Show } from "../ui/Show";
 import isHotkey from "is-hotkey";
 import { EditorState, createEditorState } from "./EditorState";
 import { useLastFocused } from "./LastFocusedNode";
-import { useForceUpdate } from "../ui/ForceUpdate";
 
 export interface EditorProps {
   value: Node[];

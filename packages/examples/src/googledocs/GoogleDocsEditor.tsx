@@ -317,7 +317,7 @@ export const GoogleDocsEditor = () => {
                 // console.log(JSON.stringify(value));
                 setValue(value);
               }}
-              style={editorStyle}
+              style={editorStyle as any}
               autoFocus
             />
           </Resizable>

@@ -27,9 +27,12 @@ export const Resizable = (props: ResizableProps) => {
     attributes,
     ...rest
   } = props;
-  const [state, setState] = useState({ width: initialWidth, down: -1 });
+  const [state, setState] = useState({
+    width: initialWidth,
+    down: -1,
+    multiplier: 1,
+  });
   const [element, setElement] = useState<HTMLElement | null>(null);
-  const multiplier = useRef(1);
 
   const handleRef = useCallback(
     (node: HTMLElement | null) => {
@@ -53,12 +56,14 @@ export const Resizable = (props: ResizableProps) => {
   const handleMove = useCallback(
     (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
       if (state.down > -1) {
-        const delta = event.clientX - state.down;
+        const x = event.clientX;
+        const delta = x - state.down;
         if (delta !== 0 && element) {
           const current = element?.getBoundingClientRect().width as number;
-          const width = current + delta * multiplier.current;
+
+          const width = current + delta * state.multiplier;
           onChange && onChange(width);
-          setState({ width, down: event.clientX });
+          setState((current) => ({ ...current, width, down: x }));
         }
       }
     },
@@ -67,13 +72,12 @@ export const Resizable = (props: ResizableProps) => {
 
   const handleDown = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const element = event.target as HTMLElement;
-    if (element.parentElement?.classList.contains("rek-resize-track-start")) {
-      multiplier.current = -1;
-    } else {
-      multiplier.current = 1;
+    let multiplier = 1;
+    if (element.hasAttribute("data-start")) {
+      multiplier = -1;
     }
     const down = event.clientX;
-    setState((current) => ({ ...current, down }));
+    setState((current) => ({ ...current, down, multiplier }));
   };
 
   const allStyle = { ...(style || {}), ...{ width: state.width } };
@@ -90,9 +94,10 @@ export const Resizable = (props: ResizableProps) => {
           className="rek-resize-handle rek-resize-handle-start"
           onMouseDown={handleDown}
           contentEditable={false}
+          data-start
         >
-          <div className="rek-resize-track rek-resize-track-start">
-            <div className="rek-resize-handle-grip" />
+          <div className="rek-resize-track rek-resize-track-start" data-start>
+            <div className="rek-resize-handle-grip" data-start />
           </div>
         </div>
         <div
