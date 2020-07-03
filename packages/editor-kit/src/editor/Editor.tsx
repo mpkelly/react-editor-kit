@@ -583,11 +583,15 @@ export const getAncestor = (editor: ReactEditor, node: Node, level = 1) => {
   let count = 0;
   while (node && count !== level) {
     count++;
-    const path = ReactEditor.findPath(editor, node);
-    if (path.length === 0) {
+    try {
+      const path = ReactEditor.findPath(editor, node);
+      if (path.length === 0) {
+        return null;
+      }
+      parent = SlateEditor.parent(editor, path)[0];
+    } catch (Error) {
       return null;
     }
-    parent = SlateEditor.parent(editor, path)[0];
     if (parent === editor) {
       return null;
     }
