@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:packages" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:packages" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:editor-kit" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:packages" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:examples" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:packages" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:website" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5501d965-06df-4205-ba74-1bc052645e52" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/packages/examples/webserver.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/editor-kit/dist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/editor-kit/dist/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/editor-kit/dist/index.js.LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/packages/editor-kit/dist/index.js.LICENSE.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/editor-kit/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/editor-kit/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/editor-kit/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/editor-kit/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/examples/dist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/examples/dist/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/examples/dist/index.js.LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/packages/examples/dist/index.js.LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/examples/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/examples/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/examples/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/examples/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/examples/src/googledocs/EditorContent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/examples/src/googledocs/EditorContent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/examples/src/googledocs/GoogleDocsEditor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/examples/src/googledocs/GoogleDocsEditor.tsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1llcF4XgyLyDICrHCWDZabF58td" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/packages/examples" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/packages/website/node_modules/typescript/lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/packages/examples" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5501d965-06df-4205-ba74-1bc052645e52" name="Default Changelist" comment="" />
+      <created>1608175012310</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1608175012310</updated>
+      <workItem from="1608175013436" duration="4382000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2173" y="261" key="RollbackChangesDialog" timestamp="1608176720916">
+      <screen x="1440" y="23" width="1920" height="1057" />
+    </state>
+    <state x="2173" y="261" key="RollbackChangesDialog/0.23.1440.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1608176720916" />
+    <state x="2101" y="306" width="598" height="550" key="find.popup" timestamp="1608176215802">
+      <screen x="1440" y="23" width="1920" height="1057" />
+    </state>
+    <state x="2101" y="306" width="598" height="550" key="find.popup/0.23.1440.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1608176215802" />
+  </component>
+</project>

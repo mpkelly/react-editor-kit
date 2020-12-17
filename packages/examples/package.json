@@ -26,6 +26,8 @@
     "awesome-typescript-loader": "^5.2.1",
     "clean-webpack-plugin": "*",
     "hard-source-webpack-plugin": "^0.13.1",
+    "internal-ip": "^6.2.0",
+    "live-server": "^1.2.1",
     "react": "16.8.5",
     "react-dom": "^16.8.5",
     "slate": "^0.57.1",
@@ -38,7 +40,8 @@
   },
   "scripts": {
     "watch": "webpack -w --mode=development",
-    "dist": "webpack --mode=production"
+    "dist": "webpack --mode=production",
+    "start": "node webserver.js"
   },
   "bugs": {
     "url": "https://github.com/mpkelly/react-editor-kit/issues"

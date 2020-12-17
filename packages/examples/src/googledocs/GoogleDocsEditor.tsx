@@ -120,9 +120,6 @@ const plugins: Plugin[] = [
   TablePlugin,
   CodePlugin,
   createLabelsPlugin(),
-  createStaticMentions({
-    mentions: MentionsItems,
-  }),
   FontsPlugin,
   ColorPlugin,
   GoogleDocsStylePlugin,
@@ -135,20 +132,9 @@ const plugins: Plugin[] = [
   InfoAlertPlugin,
   WarningAlertPlugin,
   ErrorAlertPlugin,
-  createStaticHashtags({
-    hashtags: [
-      "#twitter",
-      "#hastags",
-      "#orange",
-      "#blue",
-      "turquoise",
-      "#purple",
-    ],
-  }),
   createClearFormattingPlugin(),
   createTodoListPlugin(),
   LayoutPlugin,
-  createPageDividerPlugin(640000),
   //TODO fix empticons so they work with other :.. triggers
   //createEmoticonSuggestions(),
 
