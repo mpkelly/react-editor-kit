@@ -13,3 +13,5 @@ The codebase should serve as a decent example of how to make use of the new Slat
 `npm i @mpkelly/react-editor-kit`
 
 Take a look at the Codesandbox examples above and browse the source code for a better idea of how it works. 
+
+Test. 
